@@ -89,9 +89,9 @@ also you can kill the process by PID number:
 kill [-s sigspec | -n signum | -sigspec] [pid | jobspec] ...
 ```
 But in some cases 'kill' does not work -- for example, if the process is frozen. We can fix this problem by calling another kill, just because kill is actually sending a signal to the process, and we just have to choose a different signal. 
-
+```
 kill -l – list of signals
-
+```
 15) SIGTERM – generic signal used to cause program termination (default kill)
 2) SIGINT – “program interrupt” (INTR key – usually Ctrl-C)
 9) SIGKILL – immediate program termination (cannot be blocked, handled or ignored)
@@ -101,15 +101,17 @@ kill -l – list of signals
 ## Offline execution
 
 When you execute a Unix job in the background ( using &, bg command), and logout from the session, your process will get killed. We can avoid this using nohup command:
-
+```
 nohup – run a command immune to hangups, with output to ‘nohup.out’
-
+```
 Another very useful program is 'screen' – it's screen manager with VT100/ANSI terminal emulation which supports multi-screen session support with offline execution. In fact, you can run some long running commands on multiple screen sessions and after disconnecting from this terminal line with your hands or after breaking connecting. After that, you can reconnect to this screen and you will see that all processes are still running.
 
 ## Later execution and scheduled commands
 
 Another possibility of offline executing commands is later execution and scheduled commands.
-
+```
 at, batch, atq, atrm - queue, examine or delete jobs for later execution
-
+```
+```
 crontab - maintain crontab files for individual users
+```
