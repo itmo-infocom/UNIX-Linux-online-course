@@ -17,7 +17,7 @@ And at first, Microsoft MSDOS operating systems didn't support subdirectories. O
 OK. As we remember, we have a hierarchical file system with a single root directory and for newbies, this file system hierarchy can seem too complex. They say, "When we install some software on Windows, we have separate directories for each product, and it's too easy for us to find something, but on your system we don't know where we can find something."
 
 But in fact, in UNIX-like systems, we have a very clear and stable standard for file system hierarchy, which is reflected, for example, in the corresponding Linux specification:
-https://refspecs.linuxfoundation.org/fhs.shtml
+[https://refspecs.linuxfoundation.org/fhs.shtml](https://refspecs.linuxfoundation.org/fhs.shtml)
 
 In fact, we have three main levels with a repeating directory structure. At the first level, we have directories like this: (5 pr-n slide 3). In the '/usr' and '/local' directories we see again: (slide 4).
 And, as I said, devices in UNIX-like systems look like files, but as special files placed in a special directory '/dev': (slide 5). Usually each such file is just a rabbit hole in the OS kernel. When working with a pseudo-file in this directory, we see this device as a stream of bytes and work with it as with a regular file.
