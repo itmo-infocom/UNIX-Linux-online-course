@@ -1,0 +1,10 @@
+#Literature
+##System tutorials, guides & manuals
+###Main concepts:
+Eric Raymond "The Art of Unix Programming"
+Kernighan & Pike's "The Unix Programming
+Environment"
+Baurn "The UNIX system"
+##System administration:
+Red Book — Nemeth, etc... "UNIX and Linux System Administration Handbook"
+Armadilla Book — Æleen Frisch "Essential System Administration"

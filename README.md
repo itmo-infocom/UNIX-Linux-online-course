@@ -1,2 +1,5 @@
 # UNIX/Linux online course
-UNIX/Linux online course subtitles.
+
+* texts -- texts of lecutres
+* subtitles -- subtitles for video
+* book -- readable form
