@@ -4,6 +4,7 @@ But beginners who are just starting to learn UNIX-like systems for administratio
 1) Users
 2) Files
 3) Processes
+
 3.5) Terminal lines
 
 The first is not very well known to modern users only because we now have a lot of computer devices with personal access. UNIX was created at a time when computers were an expensive rarity and a single computer was used by many users. As a consequence, from the beginning, UNIX had strong security policies and restrictions on permissions for users.
