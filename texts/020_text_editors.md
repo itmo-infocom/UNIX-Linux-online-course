@@ -102,7 +102,7 @@ If you feel overwhelmed by the difficulty of Emaccs, you can see a personal psyc
 ```
 M-x doctor
 ```
-It would spoil the fun and hurt your recovery to say too much here about how the doctor works. But when you're ready, you may try to find the well-known Turing-related AI program ELIZA on WikiPedia.
+It would spoil the fun and hurt your recovery to say too much here about how the doctor works. But when you're ready, you may try to find the well-known Turing-test related AI program ELIZA on WikiPedia.
 
 Also in the UNIX / Linux world, there are many other editors that may be more convenient for you, such as:
 * joe, nano – simple text editors
