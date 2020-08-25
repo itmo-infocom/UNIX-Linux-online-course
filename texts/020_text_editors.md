@@ -105,6 +105,6 @@ M-x doctor
 It would spoil the fun and hurt your recovery to say too much here about how the doctor works. But when you're ready, you may try to find the well-known Turing-test related AI program ELIZA on WikiPedia.
 
 Also in the UNIX / Linux world, there are many other editors that may be more convenient for you, such as:
-* joe, nano – simple text editors
+* joe, nano, mcedit -- simple text editors
 or
 * gedit, kate -- text editors from Gnome and KDE projects
