@@ -26,7 +26,7 @@ In the second case, you first concatenate the streams and then split again by re
 
 So the question is: what are we missing in terms of symmetry? It's obvious - double "less than" sign.
 
-And this combination also exists! But what can this combination mean? Append something to standard input? But this is nonsense. Actually this combination is used for the so-called "Here-document".
+And this combination also exists! But what can this combination means? Append something to standard input? But this is nonsense. Actually this combination is used for the so-called "Here-document".
 ```
 prog <<END_LABEL
 .....
