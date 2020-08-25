@@ -29,7 +29,7 @@ In GNU getopt's long options also may be used the 'equal' sign between option an
 utility_name --option argument --option=argument
 ```
 
-5. When a utility has only a few permissible options, they are sometimes shown individually, as in the example. Utilities with many flags generally show all of the individual flags (that do not take option-arguments) grouped, as in:
+3. When a utility has only a few permissible options, they are sometimes shown individually, as in the example. Utilities with many flags generally show all of the individual flags (that do not take option-arguments) grouped, as in:
 ```
 utility_name [-abcDxyz][-p arg][operand]
 ```
@@ -37,9 +37,9 @@ Utilities with very complex arguments may be shown as follows:
 ```
 utility_name [options][operands]
 ```
-6. Arguments or option-arguments enclosed in the '[' and ']' notation are optional and can be omitted. Conforming applications shall not include the '[' and ']' symbols in data submitted to the utility.
+4. Arguments or option-arguments enclosed in the '[' and ']' notation are optional and can be omitted. Conforming applications shall not include the '[' and ']' symbols in data submitted to the utility.
 
-7. Arguments separated by the '|' ( <vertical-line>) bar notation are mutually-exclusive.
+5. Arguments separated by the '|' ( <vertical-line>) bar notation are mutually-exclusive.
 ```
 utility_name [-a|b] [operand...]
 ```
@@ -49,4 +49,4 @@ For example:
 utility_name [-a] [-b] [operand...]
 utility_name [-a] [-c option_argument] [operand...]
 ```
-8. Ellipses ( "..." ) are used to denote that one or more occurrences of an operand are allowed.
+6. Ellipses ( "..." ) are used to denote that one or more occurrences of an operand are allowed.
