@@ -3,7 +3,7 @@ OK. But you can get useful information not only from the 'info' utility.
 # OS variant
 Ok, we just logged in. First, let's try to determine which part of the UNIX-like universe we are in.
 
-uname -- print system information, in most simple case -- just name of kernel. With "all" flag we will get more inforamtion. And for what needs can such information be used, besides simple curiosity? The answer is simple -- it can be used to create portable applications or some kind of administrative scripts for various types of UNIX-like systems. You can use it in your installation or shell configuration scripts to select different binaries and system utilities according to your specific computer architecture and OS.
+uname -- print system information, in most simple case -- just name of kernel. With "all" flag we will get more information. And for what needs can such information be used, besides simple curiosity? The answer is simple -- it can be used to create portable applications or some kind of administrative scripts for various types of UNIX-like systems. You can use it in your installation or shell configuration scripts to select different binaries and system utilities according to your specific computer architecture and OS.
 
 This works well for good old UNIX systems that are very vendor dependent. But on Linux systems, `uname` will only display the Linux kernel name, possibly with the kernel version. And as we know, we will have many different Linux distributions, which can be very different from each other. And how can we adapt to this diversity?
 
