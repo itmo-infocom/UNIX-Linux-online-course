@@ -17,7 +17,7 @@ GNU, BSD – man [-t] [section] name
 Parts of the man page are more or less the same:
 NAME, SYNOPSIS, DESCRIPTIONS, FILE, SEE ALSO, DIAGNOSTIC, BUGS
 
-The minus S option with some integer parameter of man command in the SYSV variant denotes a section of real paper manuals supplied with the OS by vendor. For GNU/BSD flavors, use only the section number. Section numbers are also different.
+The '-s' option with some integer parameter of man command in the SYSV variant denotes a section of real paper manuals supplied with the OS by vendor. For GNU/BSD flavors, use only the section number. Section numbers are also different.
 ....
 Pres-n p.3
 ....
@@ -25,7 +25,7 @@ Let's look for example to well known C-languge function 'printf' manual page. Bu
 ```
 man printf
 ```
-But "man printf" shows us the man page for the shell command, not the C function. To see the manual for the C printf function, we must run:
+shows us the man page for the shell command, not the C function. To see the manual for the C printf function, we must run:
 ```
 man 3 printf
 ```
