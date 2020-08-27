@@ -27,4 +27,9 @@ Moreover, you can simply use online services to access UNIX or Linux systems, fo
 
 When you log in, you will be asked for a user and password. Depending on your system configuration, after logging in, you will have access to a graphical interface or text console. In both cases, you will have access to the Shell command line interface, which we are most interested in.
 
-The user password is set by the root superuser during installation or system configuration, and this password can be changed by the user himself or by the superuser for any user using the 'passwd' command.
+The user password is set by the root superuser during installation or system configuration, and this password can be changed by the user himself by the command `passwd`. As you can see, this may not be so easy - `passwd` protects us from bad passwords that are easy to crack. A good password should be:
+* long, at least 8 characters long;
+* includes Numbers, Symbols, Capital Letters, and Lower-Case Letters;
+* isn’t a Dictionary Word or Combination of Dictionary Words.
+
+But the superuser can change the password for any user with the same command without any restrictions.
