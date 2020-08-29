@@ -61,6 +61,8 @@ man 5 shadow
 ```
 A password field which starts with an exclamation mark means that the password is locked. The rest of the characters in the string represent the password field before the password was locked, and you can simply remove the exclamation mark to unlock it.
 
+[Under the hood -- special permission bits about `passwd` s-bit](under_the_hood/special_permission_bits.md)
+
 On a multiuser system with many administrators, it is advisable to use the `vipw` and `vigr` commands to avoid conflicts when multiple administrators are editing the same file at the same time:
 ```
 man vipw
