@@ -1,0 +1,24 @@
+# Networking history
+
+## UUCP
+From the very beginning of the development of computer communication technologies, UNIX has been closely associated with them. Historically, the first worldwide network to operate over conventional dial-up telephone lines was created in the late 1970s at At&T and called UUCP -- "UNIX to UNIX copy". And in 1979, two students at Duke University, Tom Truscott and Jim Ellis, originated the idea of using Bourne shell scripts to transfer news and mail messages on a serial line UUCP connection with nearby University of North Carolina at Chapel Hill. Following public release of the software in 1980, the mesh of UUCP hosts  forwarding on the Usenet news rapidly expanded and named UUCPnet. 
+
+Technically, in the beginning, these could be dial-up modems, simply attached to the telephone tubes with suction cups which makes connects on hundreds of bits per second speed with very unstable connection. Even so, on this stage UNIX offered a fully functional network with the ability to remotely execute commands and transfer data over a complex mesh network topology.
+
+UUCP provided just two main utilities:
+* uucp - system-to-system copy
+* uux - remote command execution
+
+It was a very simple addressing scheme with no dynamic routing or anything similar, and the command to do something on a remote machine with files hosted on other machines might look like this:
+```
+uux 'diff sys1!~user1/file1 sys2!~user2/file2 >!file.diff'
+```
+Fetch the two named files from system sys1 and system sys2 and execute diff putting the result in file.diff in the current directory. It's funny, this addressing is still supported, for example, by the `sendmail` mail system, which adds some complexity to MTA.
+
+## TCP/IP
+
+The development of modern networks began with research sponsored by the military Advanced Research Projects Agency (now DARPA) - ARPANET started in the late 1960s. The main goal of the development was systems that could withstand operation if partially destroyed, for example, as a result of a nuclear war. The main idea of the developed theoretical model was distributed adaptive switching of message blocks.
+
+Research was carried out in some universities and companies, and as a result, the TCP / IP protocol was developed in the mid-70s. Its open source implementation on BSD UNIX in June 1989 spread it around the world and made it the backbone of the Internet. And we now have a mature 30-year-old worldwide network with dynamic routing, rich protocol stacks, and ready-to-use applications. The spread of this technology is now so great that the 32-bit address space of Internet Protocol version 4 (IPv4) is not enough now, and we are moving to 128-bit IPv6.
+
+

@@ -1,20 +1,5 @@
-## Basic network utilities
-
-From the very beginning of the development of computer communication technologies, UNIX has been closely associated with them. Historically, the first worldwide network to operate over conventional dial-up telephone lines was created in the late 1970s at At&T and called UUCP -- "UNIX to UNIX copy". And in 1979, two students at Duke University, Tom Truscott and Jim Ellis, originated the idea of using Bourne shell scripts to transfer news and mail messages on a serial line UUCP connection with nearby University of North Carolina at Chapel Hill. Following public release of the software in 1980, the mesh of UUCP hosts  forwarding on the Usenet news rapidly expanded and named UUCPnet. 
-
-Technically, in the beginning, these could be dial-up modems, simply attached to the telephone tubes with suction cups which makes connects on hundreds of bits per second speed with very unstable connection. Even so, on this stage UNIX offered a fully functional network with the ability to remotely execute commands and transfer data over a complex mesh network topology.
-
-UUCP provided just two main utilities:
-* uucp - system-to-system copy
-* uux - remote command execution
-
-It was a very simple addressing scheme with no dynamic routing or anything similar, and the command to do something on a remote machine with files hosted on other machines might look like this:
-```
-uux 'diff sys1!~user1/file1 sys2!~user2/file2 >!file.diff'
-```
-Fetch the two named files from system sys1 and system sys2 and execute diff putting the result in file.diff in the current directory. It's funny, this addressing is still supported, for example, by the `sendmail` mail system, which adds some complexity.
-
 ## Traditional network utilities
+
 In the world of TCP/IP Network, other programs have been developed that are still relevant in some cases, classical Internet programs:
 * telnet - user interface to the TELNET protocol
 * ftp - ARPANET file transfer program
@@ -25,7 +10,7 @@ Generally, telnet just gives us a connection to the TELNET protocol server:
 ```
 man telnet
 ```
-It's just a CLI for another host and this protocol still used for access to some hardware devices. Moreover, you can use it for debugging by connecting to other servers by choosing of TCP server's port. For example HTTP:
+It's just a CLI for another host and this protocol still used for access to some hardware devices. Moreover, you can use it for debugging by connecting to other servers by choosing of TCP server's port. On modern systems, you can use the lighter 'nc' utility, netcat. For example let's try to play with HTTP protocol:
 ```
 $ telnet google.com 80
 Trying 173.194.73.101...
@@ -95,9 +80,9 @@ ftp>
 ```
 We can first determine our current directory, and as we understand it, we have two current directories: remote and local. We can get the remote directory with the standard `pwd` command. To get the current local directory we can use the same command preceded by an exclamation mark. This means - call this command on the local computer. You may change directory remotely by `cd` and local directory by `lcd`.
 
-We can get a list of remote directoriy using the well-known `ls` command. And what about local `ls`? Yes -- just preced it by an exclamation mark. If you have sufficient permissions, you can download file by `get` command and upload by `put`, but only a single file. If you want to work with multiple files, you will need to use the `mget`/`mput` commands.
+We can get a list of remote directoriy using the well-known `ls` command. And what about local `ls`? Yes -- just preced it by an exclamation mark. This means - run the program locally. If you have sufficient permissions, you can download file by `get` command and upload by `put`, but only a single file. If you want to work with multiple files, you will need to use the `mget`/`mput` commands.
 
-In this case, it makes sense to disable the questions about confirming operations using the prompt command. Also switching to binary mode using the bin command can be important for the Microsoft client system. Otherwise, you may receive a corrupted file.
+In this case, it makes sense to disable the questions about confirming operations using the `prompt` command. Also switching to binary mode using the `bin` command can be important for the Microsoft client system. Otherwise, you may receive a corrupted file.
 
 Finally, you can use the `reget` command to try to continue downloading the file after an interrupted transfer. And the `hash` command toggle the 'hash' printing for each transmitted data block, which can be informative if the connection to the server is poor.
 

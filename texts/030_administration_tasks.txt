@@ -1,0 +1,21 @@
+## UNIX/Linux administration
+
+By installing the system on your computer, you become more or less an administrator and you need to have some basic administration skills. The most important tasks:
+* Users and groups management;
+* Working with repositories and packages;
+* Devices and drivers handling;
+* File systems configuring;
+* Archiving and backups;
+* Network administration.
+
+Typically, system administration in different UNIX-like systems is the most different part of the system, although the general approaches to administration are more or less the same everywhere. On some systems, you have tools that can help you perform some of the administrative tasks. For example:
+* gnome-control-center in systems with GNOME UI
+* RHEL: simple text config -- setup, GUI-configs -- system-config-*
+* commercial systems provide their own more or less administrator-friendly tools
+
+As we understand it, we need superuser rights to perform such tasks. Some systems may require stricter restrictions where system administration tasks can be decoupled from those of a security officer using mandatory access control (MAC) systems, such as those developed by the National Security Agency (NSA) SELinux subsystem in the Linux kernel.
+
+Let's take a look at the RH `setup` tool. For this, we must switch to superuser.
+
+
+
