@@ -46,6 +46,18 @@ man su
 ```
 su - run a command with substitute user and group ID, bu default -- to 'root' superuser. For such a switch, we need to say the password of this user. When called without arguments `su` defaults to running an interactive shell as 'root'. A very important option is just a 'dash', it's mean -- starts the shell as login shell with an environment similar to a real login.
 
+After switching to superuser "root" your prompt will change from a dollar sign to a hash sign:
+```
+$ id
+...
+$ su -
+Password: 
+# id
+...
+# logname
+...
+```
+
 On BSD systems, for security reasons, only users in the 'wheel' group (group 0) can use `su` as 'root', even with the 'root' password. In many UNIXes and Linux the Plugin Authentication Module (PAM) is now being used to fine tune the privilege change. The settings for this subsystem are located in the /etc/pam.d/ directory.
 ```
 $ ls /etc/pam.d/
