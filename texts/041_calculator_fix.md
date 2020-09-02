@@ -1,6 +1,7 @@
  Let's move on to the next tag:
 ```
 $ git checkout Example_3
+HEAD is now at d7f58c6... Shell spec. symbols escaping and input formatting for 'expr'.
 $ git diff Example_2 Example_3
 ...
 ```
