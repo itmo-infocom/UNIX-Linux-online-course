@@ -1,6 +1,7 @@
 As we remember, UNIX was originally created to automate the work of the patent office, has a rich set of tools for working with text data. But what is text? Generally it is just a collection of bytes encoded according to some encoding table, originally ASCII. In a text file, you will not see any special formatting like bold text, italics, images, etc. -- just text data. And this is the main communication format for UNIX utilities since the 1970s.
 
-As you know, Microsoft operating systems have different modes of working with files - text and binary. In UNIX, all files are the same, and we have no difference between text and binary data. See details in ["Under the Hood"](under_the_hood/pipelining_Windows.txt).
+As you know, Microsoft operating systems have different modes of working with files - text and binary. In UNIX, all files are the same, and we have no difference between text and binary data..
+["Under the Hood" -- Text handling in Windows](under_the_hood/text_in_Windows.md)
 
 ## Concatenating and spliting
 
