@@ -5,7 +5,7 @@ A few words about keyboard shortcuts. They are actually very useful for command 
 * kill – erase complete line: [Ctrl]-[U]. This can be very useful when you enter something wrong on an invisible line, such as when entering a password.
 * rprnt – renew the output: [Ctrl]-[R]
 * intr – [Ctrl]-[C] or [Delete]. Kill current process. In fact, these strange settings for the [Delete] key were used by some older UNIX. And many were very confused when, when trying to delete incorrectly entered characters, they killed the executable application. 
-* quit – [Ctrl]-[\]. Kill the current process, but with a memory dump. Such a dump can be used to analyze the internal state of programs by the debugger. It can be created in the system automatically during a program crash, if you have configured your system accordingly, or like this -- by [Ctrl]-[\] keystroke to analyze state, for example, a frozen program.
+* quit – [Ctrl]-[\]. Kill the current process, but with a memory dump. Such a dump can be used to analyze the internal state of programs by the debugger. It can be created in the system automatically during a program crash, if you have configured your system accordingly, or like this -- by [Ctrl]-[\] keystroke to analyze state, for example, a frozen program.["Under the Hood"](under_the_hood/core_dump.md)
 * stop – [Ctrl]-[S]. Stop a current process.
 * start – [Ctrl]-[Q]. Continue a previously paused process. And if the program seems to be frozen, first try pressing [Ctrl]-[Q] to resume the process. Perhaps you accidentally pressed [Ctrl]-[S].
 * eof – [Ctrl]-[D]. End of file mark. Can be used to complete input of something.
