@@ -12,6 +12,7 @@ And finally, such a magic formula:
 ```
 prog 2>&1
 ```
+[Under the hood -- about streams numbers](under_the_hood/streams_numbers.md)
 This means stdout and stderr are combined into one stream. You may use it with other redirection, for example:
 ```
 prog > file 2>&1
@@ -21,8 +22,6 @@ This means to redirect standard output to one "file", both standard output and s
 prog > file 2>&1 != prog 2>&1 > file
 ```
 In the second case, you first concatenate the streams and then split again by redirecting stdout to the selected file. In this case, only the stdout file will be put into the file, stderr will be displayed on the screen. The order of the redirection operations is important!
-
-***Under the hood -- about streams numbers***
 
 So the question is: what are we missing in terms of symmetry? It's obvious - double "less than" sign.
 
