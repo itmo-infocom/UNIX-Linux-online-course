@@ -6,11 +6,11 @@ Bell Labs pulled out of the project in 1969; but some of the people who worked o
 
 It's funny, but the history of Unix systems is closely related to computer games. It started in 1969 when Ken Thompson discovered an old PDP-7 computer in a dark corner of the lab and wanted to use it to play Space Travel game. There was little to do — an operating system had to be written to run it. And he did it -- at midnight on January 1, 1970, the Unix epoch began. From this time on, all clocks in UNIX-like systems count down the time, including your mobile phone. Originally it was a single-tasking OS written in assembly language that was loaded from paper tapes and called UNICS as opposed to the complexity of MULTICS.
 
-[http://www.levenez.com/unix/](http://www.levenez.com/unix/)
+[Unix History Timeline](http://www.levenez.com/unix/)
 
 And then the team of Ken Thompson and Dennis Ritchie received a new DEC PDP11 computer to develop a word processing system for the Bell Labs patent department. For the first three months the machine sat in a corner, enumerating all the closed Knight's tours on a 6×8 chess board — just because the hard drive wasn't shipped with a super new computer. This time could be used to choose a programming language, because it was a computer with a completely new architecture and programs written on PDP7 assembler was not useful for it. And most interesting was the concept of another project used in some R&D projects including MULTICS -- BCPL. It was a high-level programming language focused on portability. Most of this language was written in the language itself, and only a small machine-dependent part was written in assembly. To support a new machine, only 1/5 of the compiler code needed to be rewritten, which usually took 2-5 man-months.
 
-[http://www.levenez.com/lang/](http://www.levenez.com/lang/)
+[Computer Languages History Timeline](http://www.levenez.com/lang/)
 
 Thompson used the same concept when writing his simplified successor to BCPL, language B. This language was not very expressive and effective on the PDP11. In 1971, Ritchie started to improve B, which resulted in creating a new language C. In 1973, the UNIX kernel was refactored in C language to follow the same concept of portability -- most of the code was machine independent.
 
