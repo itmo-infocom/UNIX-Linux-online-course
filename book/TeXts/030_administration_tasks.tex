@@ -1,0 +1,116 @@
+\section*{UNIX/Linux administration} % ## UNIX/Linux administration
+
+By installing the system on your computer, you become more or less
+an administrator and you need to have some basic administration skills.
+The most important tasks:
+\begin{itemize}
+\item \struct{Users and groups management};
+\item \struct{Working with repositories and packages};
+\item \struct{Devices and drivers handling};
+\item \struct{File systems configuring};
+\item \struct{Archiving and backups};
+\item \struct{Network administration}.
+\end{itemize}
+
+Typically, system administration in different UNIX-like systems is the most
+different part of the system, although the general approaches to administration
+are more or less the same everywhere. On some systems, you have tools that can
+help you perform some of the \emph{adminisconsolehelpertrative} tasks.
+For example:
+\begin{itemize}
+\item \cmd{gnome-control-center} in systems with GNOME UI
+\item RHEL: simple text config~--- \cmd{setup}, GUI-configs~--- \cmd{system-config-*}
+\item commercial systems provide their own more or less administrator-friendly tools
+\end{itemize}
+
+As we understand it, we need superuser rights to perform such tasks.
+Some systems may require stricter restrictions where system administration
+tasks can be decoupled from those of a security officer using mandatory
+access control (MAC) systems, such as those developed by the National
+Security Agency (NSA) \struct{SELinux} subsystem in the Linux kernel.
+
+Let's take a look at the RH `\cmd{setup}' tool:
+\begin{code}{mverb}
+$ setup
+You are attempting to run "setup" which requires administrative
+privileges, but more information is needed in order to do so.
+Authenticating as "root"
+Password: 
+\end{code} % $
+We have to enter the root password and after that we can do some settings:
+\begin{itemize}
+\item Authentication configuration
+\item Keyboard configuration
+\item System services
+\end{itemize}
+
+But when we run `\cmd{system-config-date}', the system asks for the user's
+password. This is because these programs use different machinery for increasing
+privileges:
+\begin{code}{mverb}
+$ ls -l /usr/bin/setup
+lrwxrwxrwx. 1 root root 13 Nov  9  2019 /usr/bin/setup
+                                                    -> consolehelper
+\end{code} % $
+The \cmd{setup} program is just a symbolic link to `\cmd{consolehelper}',
+a tool that allows console users to easily run system programs.
+And the \cmd{pkexec} runner is used to execute `\cmd{system-config-date}':
+\begin{code}{mverb}
+$ cat /usr/bin/system-config-date 
+#!/bin/sh
+
+exec /usr/bin/pkexec \
+            /usr/share/system-config-date/system-config-date.py
+\end{code} % $
+A more general way is to just switch to the `\struct{root}' superuser,
+and the first way to do this is with the \cmd{su} command:
+\begin{code}{mverb}
+man su
+\end{code} % $
+\cmd{su}~--- run a command with substitute user and group ID, by default~---
+to `\struct{root}' superuser. For such a switch, we need to say the password of
+this user. When called without arguments `\cmd{su}' defaults to running
+an interactive shell as `\struct{root}'. A very important option is just
+a `\cmd{dash}', it's mean~--- starts the shell as login shell with
+an environment similar to a real login.
+
+After switching to superuser ``\struct{root}'' your prompt will change from
+a dollar sign to a hash sign:
+\begin{code}{mverb}
+$ id
+...
+$ su -
+Password:
+# id
+...
+# logname
+...
+\end{code} % $
+
+On BSD systems, for security reasons, only users in the `\struct{wheel}' group
+(group 0) can use `\cmd{su}' as `\struct{root}', even with the `\struct{root}'
+password. In many UNIXes and Linux the Plugin Authentication Module (PAM) is
+now being used to fine tune the privilege change. The settings for this
+subsystem are located in the \cmd{/etc/pam.d/} directory.
+\begin{code}{mverb}
+$ ls /etc/pam.d/
+\end{code} % $
+And one of the applications whose config files we can find in this directory is
+the `\cmd{sudo}' command. The default PAM security policy allows users
+configured appropriately in `\cmd{/etc/sudoers}' to run commands with
+`\struct{root} privileges. And you don't need to know the password of
+`\struct{root}' user to do this.
+
+Also, by default only one command is executed with `\cmd{sudo}', instead of
+`\cmd{su}' where we have to use the `\cmd{-c}' option to run one command.
+This reduces the chances of an unexpected error for an inexperienced user.
+And this is, for example, the default policy for Ubuntu systems. When Ubuntu is
+installed, a standard root account is created, but no password is assigned to it.
+You cannot log in as root until you assign a password for the root account.
+Only `\cmd{sudo}' may be used with such default settings.
+
+To allow a regular user to run `\cmd{sudo}' this way on RH based systems
+such as Fedora, RHEL, CentOS, our NauLinux, you must add this user to
+the `\cmd{wheel}' group (as in BSD). And the easiest way to get
+a `\struct{root}' shell session like in `\struct{su}' with `\struct{sudo}'
+in Ubuntu is to just run it `\cmd{sudo -i}' (interactive).

@@ -1,0 +1,112 @@
+Now let's try to localize our program.
+\begin{code}{mverb}
+$ git checkout Example_8
+\end{code} % $
+What is it "localize"? The locale is the primary mechanism for supporting the native languages in UNIX-like systems, and we have a few strange abbreviations that describe it: I18N, L10N, and even M17N. What does this mean? This means that English does not like long words, but the terminology associated with supporting native languages is too many letters. Such as -- Multilingualization for application software consisting of 17 letters between "M" and "N" and abbreviated to M17N. M17N is performed in 2 stages:
+\begin{itemize}
+\item Internationalization (18 letters between ``I'' and ``N''~--- I18N):
+      To make a software potentially handle multiple locales.
+\item Localization (10 letters between ``L'' and ``N''~--- L10N):
+      To make a software handle an specific locale.
+\end{itemize}
+
+OK. Let's take a look at our current locale settings:
+\begin{code}{mverb}
+$ locale
+...
+\end{code} % $
+As we can see, there are lot of environment variables associated with this:
+\begin{itemize}
+\item \cmd{LANG} and \cmd{LC\_ALL}~--- General language setting.
+      These settings can be separated to:
+\item \cmd{LC\_CTYPE}~--- Controls the behavior of character handling functions.
+\item \cmd{LC\_TIME}~--- Specifies date and time formats, including month names,
+      days of the week, and common full and abbreviated representations.
+\item \cmd{LC\_MONETARY}~--- Specifies monetary formats, including the currency
+      symbol for the locale, thousands separator, sign position, the number of
+      fractional digits, and so forth.
+\item \cmd{LC\_NUMERIC}~--- Specifies the decimal delimiter (or radix character),
+      the thousands separator, and the grouping.
+\item \cmd{LC\_COLLATE}~--- Specifies a collation order and regular expression
+      definition for the locale.
+\item \cmd{LC\_MESSAGES}~--- Specifies the language in which the localized
+      messages are written, and affirmative and negative responses of the locale
+      (yes and no strings and expressions).
+\item \cmd{LO\_LTYPE}~--- Specifies the layout engine that provides information
+      about language rendering. Language rendering (or text rendering)
+      depends on the shape and direction attributes of a script.
+\end{itemize}
+
+In the C programming language, the locale name C ``specifies the minimal
+environment for C translation'' (C99 \S7.11.1.1; the principle has been
+the same since at least the 1980s). As most operating systems are written in C,
+especially the Unix-inspired ones where locales are set through the \cmd{LANG}
+and \cmd{LC\_xxx} environment variables, C ends up being the name of
+a ``safe'' locale everywhere
+
+On POSIX platforms such as Unix, Linux and others, locale identifiers are
+defined by \struct{ISO} standard and consists from:
+`\verb|[language[_territory][.codeset][@modifier]]|'. For example, Australian
+English dialect using the UTF-8 encoding is \struct{en\_AU.UTF-8}.
+
+As we can see, our application already has l10n.
+\begin{code}{mverb}
+$ LANG=C calc_ui
+$ LANG=en_US.UTF-8 calc_ui
+\end{code}
+
+As we can see, our application looks the same in base C and American
+English locales. In Russian we see the Russian title and buttons:
+\begin{code}{mverb}
+$ LANG=ru_RU.UTF-8 calc_ui
+\end{code} % $
+In Continental Simplified and Traditional Taiwanese Chinese, we can see
+different hieroglyphs sets on the title:
+\begin{code}{mverb}
+$ LANG=zh_CN.UTF-8 calc_ui
+$ LANG=zh_TW.UTF-8 calc_ui
+\end{code}
+And for the Arabic language, the title is written from right to left:
+\begin{code}{mverb}
+$ LANG=ar_SY.UTF-8 calc_ui
+\end{code} % $
+Looks good, but this is just a basic localization of the `\cmd{zenity}' utility
+used by `\cmd{gdialog}'. We need to translate our text strings in the program.
+And for that we can use the standard `\cmd{gettext}' machinery that was first
+implemented by Sun Microsystems in 1993. To work with this, we need
+a `\cmd{gettext}' utilities set:
+\begin{code}{mverb}
+# yum install gettext
+# apt install gettext
+\end{code}
+We have a utility `\cmd{gettext}' that translates the text messages passed to it
+as arguments according to the settings of the locale's environment variables:
+\begin{code}{mverb}
+$ man gettext
+\end{code} % $
+As we can see, for this we just need to add a call to the `\cmd{gettext}'
+utility in all places where we used a text string as a parameter
+to `\cmd{gettext}', and insert the result of execution into command lines
+by quoting the command with ``back apostrophes'':
+\begin{code}{mverb}
+$ git diff Example_7 Example_8
+\end{code} % $
+And now we can fetch the gettext strings from the source using
+the \cmd{xgettext} utility:
+\begin{code}{mverb}
+$ make calc_ui.pot
+xgettext -o calc_ui.pot -L Shell calc_ui
+\end{code} % $
+
+We got the portable object template file `\cmd{calc\_ui.pot}' that we will use
+as a basis for translation:
+\begin{code}{mverb}
+$ cat calc_ui.pot
+...
+\end{code} % $
+For example to Russian language:
+\begin{code}{mverb}
+$ msginit --locale=ru --input=calc_ui.pot
+...
+$ cat ru.po
+\end{code}

@@ -1,0 +1,95 @@
+Let's add some networking to our design:
+\begin{code}{mverb}
+$ git checkout Example_6
+Previous HEAD position was f266a24... GUI
+HEAD is now at d3e5228... Network server
+$ git diff Example_5 Example_6
+...
+$ ls
+Makefile  README.md  calc  calc.services  calc.xinetd  calc_ui  gdialog
+\end{code} % $
+As you can see, just two new files are \cmd{calc.services} and \cmd{calc.xinetd}.
+Because we will go the easy way~--- we will create a service for the \cmd{xinetd}
+superserver. As we recall, for this we just need a program that reads standard
+input and writes to standard output. And we also have such a program~---
+this is our `\cmd{calc}' script!
+
+To start our own network service, we just need to create the correct
+configuration for the \cmd{xinetd} server and we have to extend our `\cmd{install}'
+target in the Mnetcatakefile:
+\begin{code}{mverb}
+$ cat Makefile
+...
+\end{code} % $
+We check the `\cmd{/etc/services}' configuration file for a `\cmd{calc}' service
+port definition and if it doesn't exist, add it:
+\begin{code}{mverb}
+$ cat calc.services
+calc            1234/tcp
+\end{code} % $
+As we can see, we are configuring our service on \struct{TCP port 1234}.
+
+And finally we install calc xinetd config file a \cmd{/etc/xinetd.d/calc}:
+\begin{code}{mverb}
+$ sudo yum install xinetd
+\end{code} % $
+or in Ubuntu:
+\begin{code}{mverb}
+$ sudo apt install xinetd
+\end{code} % $
+and then:
+\begin{code}{mverb}
+$ sudo make install
+install calc calc_ui /usr/local/bin
+which gdialog >/dev/null 2>&1 || install gdialog /usr/local/bin
+grep -q "`cat calc.services`" /etc/services || cat calc.services >> /etc/services
+install calc.xinetd /etc/xinetd.d/calc
+\end{code} % $
+Let's restart `\cmd{xinetd}' after installing of our service:
+\begin{code}{mverb}
+$ sudo service xinetd restart
+\end{code} % $
+We can use `\cmd{telnet}' or the lighter `\cmd{netcat}' to test our server~---
+this is the `\cmd{nc}' package on RH-like distributions:
+\begin{code}{mverb}
+$ sudo yum install nc
+$ nc localhost 1234
+Ncat: Connection refused.
+\end{code}
+or `\cmd{netcat}' on Ubuntu:
+\begin{code}{mverb}
+$ sudo apt install netcat
+$ nc localhost 1234
+$
+\end{code} % $
+Does not work\ldots Let's understand the problem~--- look in the system log.
+As we recall, we can find it in `\cmd{/var/log/syslog}' on Debian-based Ubuntu
+and `\cmd{/var/log/messages}' on RH-like systems.
+And on any `\cmd{systemd}' based system we can use `\cmd{journalctl}' for this:
+\begin{code}{mverb}
+$ sudo journalctl
+...
+... xinetd[4449]: Server /data/home/sadov/works/courses/calc is not executable 
+... xinetd[4449]: Error parsing attribute server - DISABLING SERVICE [file=/et
+\end{code} % $
+Well. We found the root of the problem: this is another mistake of mine~---
+I did not change my experimental ``\cmd{calc}'' script path to our standard
+``\cmd{/usr/local/bin/calc}''. Let's fix it:
+\begin{code}{mverb}
+$ sudo vim /etc/xinetd.d/calc
+...
+        server          = /usr/local/bin/calc
+...
+\end{code} % $
+And restart `\cmd{xinetd}' service:
+\begin{code}{mverb}
+$ sudo service   restart
+\end{code} % $
+Redirecting to \cmd{/bin/systemctl} restart xinetd.service
+\begin{code}{mverb}
+$ nc localhost 1234
+2+3
+5
+^C
+\end{code} % $
+Great - we're in the network now!

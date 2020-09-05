@@ -1,0 +1,125 @@
+\section*{Shell programming} % ## Shell programming
+
+Now it's time to start programming, Shell programming. As far as we understand,
+the shell works like a normal program and has several options that can be
+useful for debugging: 
+\begin{tabular}{ll}
+\cmd{-v}       &Print shell input lines as they are read.\\
+\cmd{-x}       &Print commands and their arguments as they are executed.\\
+\cmd{-c STRING}&Read and execute commands from STRING after processing the options, then exit.
+\end{tabular}
+If your shell is Bash, you may get some help:
+\begin{code}{mverb}
+bash -c help
+bash -c 'help set'
+\end{code}
+Let's follow the good tradition started by the classic book of Kernighan
+and Ritchie ``The C Programming Language'' and write a standard program
+``Hello World'':
+\begin{code}{mverb}
+$ cat > hello
+echo Hello word!
+^D
+\end{code} % $
+We complete the input with the EOF Ctrl-D character. Let's try to run now:
+\begin{code}{mverb}
+$ sh hello
+Hello word!
+\end{code} % $
+Good.
+
+And now let's turn our script into a real executable program:
+\begin{code}{mverb}
+$ chmod +x hello
+$ ./hello
+Hello word!
+\end{code}
+Excellent! Now we will talk about the arguments. Let's look at our first
+positional parameter:
+\begin{code}{mverb}
+$ vi hello
+echo Hello $1!
+$ ./hello
+Hello !
+\end{code} % $
+
+We called our script without parameters and got nothing.
+Let's add some parameter:
+\begin{code}{mverb}
+$ ./hello world
+Hello world!
+\end{code} % $
+
+But for several parameters it does not work:
+\begin{code}{mverb}
+$ ./hello world and universe
+Hello world!
+\end{code} % $
+
+Let's fix it:
+\begin{code}{mverb}
+$ vi hello
+echo Hello $*!
+$ ./hello world and universe
+Hello world and universe!
+\end{code} %$
+
+Excellent! As we can see, there is some difference between different shells
+in the use of some special variable names associated with script parameters
+%[Pr-n 9 slide 4]
+(url{http://sdn.ifmo.ru/education/courses/free-libre-and-open-source-software/lectures/lecture-9}).
+
+The main advantage of the latest shells over the classic Bourne Shell shells is
+the ability to use more than 9 parameters. Because in the Bourne Shell we only
+have one digit for the parameter number. In newer shells, we can use longer
+numbers in square brackets.
+
+A very important thing in the UNIX world is the zero-numbered positional
+parameter. Let's try to look at this:
+\begin{code}{mverb}
+$ vi hello
+echo \$0: $0
+echo Hello $*!
+$ ./hello 
+$0: ./hello
+Hello !
+\end{code} % $
+It's just the name of the script. And if you are familiar with the C language,
+you probably know~--- the same is in argv[0]. For what needs can such
+a parameter be used? The most obvious answer seems to be to write
+a nice 'Usage' error message:
+\begin{code}{mverb}
+$ vi hello
+if [ $# -lt 1 ]
+then
+        echo Usage: $0 who...
+        exit
+fi
+echo Hello $*!
+\end{code}
+But on UNIX-like systems we can use a very interesting trick~--- linking files.
+Take a look at this super-nano-notebook. It runs on OpenWRT, a Linux
+distribution that you can find on your home internet router, for example.
+We have a fully functional set of Linux utilities, but if we take a closer look,
+we can see that all common UNIX utilities are just symbolic links to
+a single ``busybox'' binary.
+\begin{code}{mverb}
+# ls -l /bin
+\end{code}
+Busybox just looks at the name it is running under and performs the appropriate
+functions from the busybox library. This technique can reduce the memory
+consumption of the embedded system. Let's try to use this feature on our script:
+\begin{code}{mverb}
+$ vi hello
+if [ $# -lt 1 ]
+then
+     echo Usage: $0 who...
+     exit
+fi
+echo $0 $*!
+$ ln -s hello bye
+$ /hello world
+./hello world!
+$ ./bye bye
+./bye bye!
+\end{code}

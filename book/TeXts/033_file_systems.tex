@@ -1,0 +1,183 @@
+\section*{File systems} % ## File systems
+
+And now that our partitioning is complete, it's time to see how we can use
+our disk space. As mentioned earlier, UNIX-like systems can treat disks or
+disk partitions as files. And some databases, for example, can use raw disk
+partitions to store data with higher performance.
+
+But most of the time, disk space is used in file systems. UNIX-like systems
+and especially Linux support many different file systems. All the details of
+their implementation are reduced to a common denominator~--- the VFS abstraction.
+Then we can mount them in a single directory tree, navigate through
+the hierarchy, read, write, work with owners and permissions, according to
+the restrictions imposed by the original file systems.
+
+The standard tool for creating a new filesystem is `\cmd{mkfs}':
+\begin{code}{mverb}
+man mkfs
+\end{code}
+We can choose the type of filesystem and some parameters to create.
+But it's actually just a wrapper around the real mkfs tools for different
+types of filesystems:
+\begin{code}{mverb}
+# ls /sbin/mkfs*
+/sbin/mkfs        /sbin/mkfs.cramfs  /sbin/mkfs.ext4  /sbin/mkfs.xfs
+/sbin/mkfs.btrfs  /sbin/mkfs.ext3    /sbin/mkfs.vfat
+\end{code}
+and they all support their own set of options:
+\begin{code}{mverb}
+# man mkfs.ext4
+\end{code}
+The most commonly used file systems in Linux right now are:
+\begin{itemize}
+\item \struct{EXT4} is the Linux journaling file system, or the Fourth
+      Extended File System, which is the successor to the extended file system
+      line originally created in 1992 by R\'{e}my Card to overcome certain
+      limitations of the \struct{MINIX} file system. The \struct{ext4} filesystem
+      can support files up to 16TB and volumes with sizes up to 1 exbibyte (EiB),
+      but this may be limited for certain system versions.
+      For example for RHEL 7/8~--- 50TB.
+\item \struct{XFS} is a high performance 64-bit journaling file system created
+      by Silicon Graphics, Inc (SGI) in 1993 for their UNIX called \struct{IRIX}.
+      Although XFS scales to exabytes, the host operating system limits can
+      reduce this limit. For example~--- 500~TB for the maximum file size and
+      file system size for RHEL7 and 1PB/8EB for RHEL8.
+\end{itemize}
+Typically \struct{ext4} provides better performance for small filesystems on
+machines with limited I/O capabilities, while \struct{XFS} provides better
+performance for large filesystems on machines with high-performance
+parallel I/O. Also in XFS it is more difficult to reduce the size of the
+filesystem.
+
+With the `\cmd{mkfs}' options, you can set various parameters for creating
+the filesystem, for example, optimize it for storing large files or for more
+smaller files.
+
+Once the filesystem is created, we can ``\cmd{mount}'' it. In most cases,
+this happens automatically when you insert a flash drive or SD card into
+your computer. But in some cases it needs to be done manually, and you can do
+it by running the `\cmd{mount}' command.
+\begin{code}{mverb}
+man mount
+\end{code}
+You just need to specify the device and directory~--- mount point, and
+after mounting you will see the contents of the file system from this
+device or pseudo device in this directory. And also you can choose
+the ``\cmd{mount}'' \struct{options}. For example, we can mount
+the ISO image with the `\cmd{loop}' option:
+\begin{code}{mverb}
+ls /mnt
+mount -o loop ...iso /mnt
+ls /mnt
+\end{code}
+And then we can `\cmd{unmount}' it:
+\begin{code}{mverb}
+umount /mnt
+ls /mnt
+\end{code}
+by setting the device or the mount directory as an argument:
+\begin{code}{mverb}
+man umount
+\end{code}
+But Linux/UNIX will not allow you to unmount a device that is busy.
+There are many reasons for this (such as program accessing partition or
+open file), but the most important one is to prevent the data loss.
+You can use the `\cmd{fuser}' and `\cmd{lsof}' commands to find
+the processes that are loading your filesystems:
+\begin{code}{mverb}
+man fuser
+...
+-k, --kill
+...
+\end{code}
+
+Finally, we can check our filesystem. For journaled file systems, recovering
+from a power outage is not as relevant, but in some cases it may be useful.
+In a difficult situation, such as a damaged hard disk, during system boot,
+you may receive an error message recommending that you run
+the `\cmd{fsck}' command to check the file system:
+\begin{code}{mverb}
+man fsck - check and repair a Linux file system
+\end{code}
+As we can see, we have many options for the `\cmd{fsck}' command, but the main
+one is `\cmd{y}'~--- `\cmd{yes}'. This means~--- always try to fix any file
+system corruption you find automatically, otherwise you could get a zillion
+troubleshooting questions during the fixup.
+
+After completing the repair, you can find some lost data in a special directory
+``\cmd{/lost+found}'' in the root of the damaged filesystem, which consists of
+many directories and files whose names contain only numbers~--- so called
+`\cmd{i-nodes}'.
+
+And then you can rename them manually~--- for example, you found some
+directory with the files:
+\begin{itemize}
+\item `\cmd{passwd}', `\cmd{group}' and `\cmd{shadow}'~--- this means
+      that this is `\cmd{/etc}'
+\item or `\cmd{sh}', `\cmd{ls}' and `\cmd{cp}'~--- this means `\cmd{/bin}'
+\end{itemize}
+and so on\ldots
+
+\subsection*{Swapping} % ## Swapping
+
+And finally, a few words about swapping. \struct{Swapping} or  \struct{paging}
+is a memory management scheme by which a computer stores and retrieves data
+from secondary storage for use in main memory. It is an MMU-driven virtual
+memory mechanism that is used in modern operating systems to use secondary
+storage in order for programs to exceed the amount of available physical memory.
+
+\href{under_the_hood/virtual_memory.md}{Under the Hood~--- Virtual Memory}
+
+This means you can run applications with a total memory usage that exceeds
+the physical RAM on your system. The scheduler sends inactive processes
+to disk swap and loads active tasks from disk into memory. This can reduce
+overall system performance, but it will increase the ability to run applications.
+
+The main program for creating of swapping area is `mkswap`:
+\begin{code}{mverb}
+man mkswap
+\end{code}
+You just need to specify the device as an argument. Or a file if you need
+temporary swap space like Microsoft does on Windows.
+
+Then you can enable swap space with the command `\cmd{swapon}':
+\begin{code}{mverb}
+man swapon
+\end{code}
+After that, you will see additional swap space using the `\cmd{free}' command or
+in the pseudo file `\cmd{/proc/meminfo}'. You can also turn off the swap area
+with the `\cmd{swapoff}' command.
+
+OK. But all these mounts and swaps will be connected to our system only
+until the reboot. To automatically mount them at boot time, we must write
+them to the filesystems table in the file `\cmd{/etc/fstab}':
+\begin{code}{mverb}
+cat /etc/fstab
+\end{code}
+In this text file, we can place static information about connecting file
+systems and enabling swapping areas:
+\begin{code}{mverb}
+man fstab
+\end{code}
+
+Each  filesystem  is  described on a separate line; fields on each line
+are separated by tabs or spaces.
+
+\begin{itemize}
+\item The first field (fs\_spec) describes the block special device or
+      remote filesystem to be mounted.
+\item The second field (fs\_file) describes the mount point for the filesystem.
+      For swap partitions, this field should be specified as `none'.
+\item The third field (fs\_vfstype) describes the type of the filesystem.
+      An entry `\struct{swap}' denotes a file or partition to be used
+      for swapping.
+\item The fourth field (fs\_mntops) describes the mount options associated
+      with the filesystem.
+\item The fifth field (fs\_freq) is used for these filesystems by the dump
+      command to determine which filesystems need to be backuped.
+\item The sixth field (fs\_passno) is used by the fsck(8) program to determine
+      the order in which filesystem checks are done at reboot time.
+\end{itemize}
+
+After putting some entry in the fstab file, you can run the `\cmd{mount}'
+command with only one of them: device or mount point.

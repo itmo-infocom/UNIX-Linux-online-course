@@ -1,0 +1,129 @@
+\section*{Introduction to development} % ## Introduction to development
+
+And now we are ready to do some kind of development project. We will try
+to implement the following traditional task for novice developers~---
+a calculator. And finally, we will get a network client-server application
+with a graphical user interface localized into Russian. We can find the code
+for this project on github:
+
+\href{https://github.com/itmo-infocom/calc\_examples}%
+     {https://github.com/itmo-infocom/calc\_examples}
+%[https://github.com/itmo-infocom/calc_examples](https://github.com/itmo-infocom/calc_examples)
+
+Github supports hosting for software development and version control with \struct{Git}.
+
+\struct{Version control} (also known as \struct{revision control},
+\struct{source control}, or \struct{source code management}) is a class of
+systems responsible for managing changes to computer programs, documents,
+large web sites, or other collections of information. Version control is
+a component of software configuration management.
+
+\href{https://initialcommit.com/blog/Technical-Guide-VCS-Internals}%
+     {VCS Release History Timeline}
+%[VCS Release History Timeline](https://initialcommit.com/blog/Technical-Guide-VCS-Internals)
+
+The \struct{first generation} VCS were intended to track changes for individual
+files and checked-out files could only be edited locally by one user at a time.
+They were built on the assumption that all users would log into the same shared
+Unix host with their own accounts. The \struct{second generation} VCS introduced
+networking which led to centralized repositories that contained
+the `\struct{official}' versions of their projects. This was good progress,
+since it allowed multiple users to checkout and work with the code at the same
+time, but they would all be committing back to the same central repository.
+Furthermore, network access was required to make commits. The \struct{third generation}
+comprises the distributed VCS. In a distributed VCS, all copies of
+the repository are created equal~--- generally there is no central copy of
+the repository. This opens the path for commits, branches, and merges to be
+created locally without network access and pushed to other repositories
+as needed.
+
+There are many VCS systems developed and used on UNIX-like systems: \struct{SCCS},
+\struct{RCS}, \struct{CVS}, \struct{SVN}, \struct{Mercurial}, \struct{Bazzar},
+etc., and \struct{Git} is now the most popular. \struct{Git} is a distributed
+version-control system for tracking changes in source code during software
+development. It was created by Linus Torvalds in 2005 for development of
+the Linux kernel, with other kernel developers contributing to its initial
+development.
+
+\subsection*{Devlopment tools} % ## Devlopment tools
+
+The basic tool for working with Git repositories is the `\cmd{git}' utility:
+\begin{code}{mverb}
+man git
+\end{code}
+First we have to `\cmd{clone}' our repository:
+\begin{code}{mverb}
+$ git clone https://github.com/itmo-infocom/calc_examples
+$ ls calc_examples/
+calc           calc_ui      calc_ui-ru.po  gdialog   README.md
+calc.services  calc_ui.pot  calc.xinetd    Makefile
+\end{code}
+Ok~--- we now have our own local copy. Let's go inside:
+\begin{code}{mverb}
+$ cd calc_examples/
+\end{code} % $
+Now let's take a look at the tags that indicate different stages of
+development~--- tags:
+\begin{code}{mverb}
+$ git tag
+Example_1
+Example_2
+Example_3
+Example_4
+Example_5
+Example_6
+Example_7
+Example_8
+Example_9
+\end{code} % $
+Let's move on to the initial stage now:
+\begin{code}{mverb}
+$ git checkout Example_1
+Note: checking out 'Example_1'.
+...
+$ ls
+Makefile  README.md
+\end{code}
+As we can see, most of the files have disappeared and now we only have
+a README and a Makefile. Let's take a look at the README:
+\begin{code}{mverb}
+$ cat README.md 
+calc_examples
+...
+\end{code} % $
+and at the Makefile:
+\begin{code}{mverb}
+$ cat Makefile 
+clone:
+...
+\end{code} % $
+A \cmd{Makefile} is a file containing a set of directives used by a `\cmd{make}'
+build automation tool to generate a target/goal. Make is the oldest and most
+widely used dependency-tracking tool for building software projects.
+It is used to build large projects such as the Linux kernel with tens of
+millions of source code lines. Usually, using make is pretty simple:
+you just run make with no arguments:
+\begin{code}{mverb}
+man make
+\end{code}
+In this case, the utility tries to find a makefile that starts with a lowercase
+letter and then with a capital letter. Usually the second Makefile with
+an uppercase letter is used, the lowercase version is often used for some local
+changes while testing and customizing the Makefile of an upstream project.
+
+The makefile format is pretty simple~--- It's just a lot of rules
+for building projects:
+\begin{code}{mverb}
+$ cat Makefile 
+\end{code} % $
+In the first position we see the `\cmd{target}', after the semicolon,
+dependencies can be placed, which are just other targets. Lines following
+the description of targets and dependencies must start with a TAB character,
+and there are commands that must be executed to complete this target.
+If the dependencies are files, make checks the modification times of
+those files and recursively rebuilds those dependency targets.
+
+The current Makefile just includes a few targets for working with
+the \struct{Git} repository. The first will start by default. If we want to run
+another target, we must pass it as a parameter when running
+the `\cmd{make}' utility.

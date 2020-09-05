@@ -1,0 +1,60 @@
+Well. Let's go back to the fifth example:
+\begin{code}{mverb}
+$ git checkout Example_5
+Previous HEAD position was d7f58c6...
+Shell spec. symbols escaping and input formatting for 'expr'.
+HEAD is now at f266a24... GUI
+$ git diff d6453c0c41548a55e3249ea8c3b788c71cb76f7 Example_5 | less
+...
+\end{code}
+Looks too long, but let's take a closer look~--- actaully added only
+the gdialog file:
+\begin{code}{mverb}
+$ ls
+Makefile  README.md  calc  calc_ui  gdialog
+\end{code} % $
+This is not our development~--- it's just a GTK+ graphical analogue of
+the `\cmd{dialog}' text program. Our changes simply add an install command
+for \struct{gdialog} if not already installed:
+\begin{code}{mverb}
+cat Makefile
+\end{code}
+and change four lines in `\cmd{calc\_ui}':
+\begin{code}{mverb}
+cat calc_ui
+\end{code}
+We first check for the existence of the `\cmd{gdialog}' program, and if it
+exists on our system, we set the \cmd{DIALOG} environment variable as
+`\cmd{gdialog}', if not, we set it as `\cmd{dialog}'. And then just we replaced
+all the places where the `\cmd{dialog}' is used with the environment variable
+\cmd{DIALOG}.
+
+OK. Install the new version:
+\begin{code}{mverb}
+$ sudo make install
+[sudo] password for liveuser: 
+install calc calc_ui /usr/local/bin
+which gdialog >/dev/null 2>&1 || install gdialog /usr/local/bin
+\end{code} % $
+and start our script again:
+\begin{code}{mverb}
+$ calc_ui
+\end{code} % $
+It works. But remember, the only thing used to communicate between the XWindow
+server and the client is the \cmd{DISPLAY} environment variable:
+\begin{code}{mverb}
+$ echo $DISPLAY
+:0
+\end{code}
+Let's unset it and try to run our UI again:
+\begin{code}{mverb}
+$ unset DISPLAY
+$ calc_ui
+\end{code}
+Tadaam -- we've got a text interface again! Simply because the `\cmd{gdialog}'
+script automagically switches to the text `\cmd{dialog}' if we are working in
+text mode. Just set \cmd{DISPLAY} and we get the GUI again:
+\begin{code}{mverb}
+$ export DISPLAY=:0
+$ calc_ui
+\end{code}

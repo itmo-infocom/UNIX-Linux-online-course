@@ -1,0 +1,174 @@
+\section*{Processes}
+%by Oleg Sadov — last modified Aug 21, 2020 05:00 PM
+
+\subsection*{Process}
+
+We've discussed the users, and then it's appropriate to talk about
+another of the three whales of UNIX-like systems~--- processes. We can get
+information about the processes by running the ``\cmd{ps}'' (process status)
+command. In this case, we again see two worlds~--- two systems SYSV and BSD:
+\begin{code}{mverb}
+SYSV:  ps [-efl]
+BSD:   ps [-][alx]
+\end{code}
+
+What about GNU? As we can see, GNU ps supports both sets of options with
+some long options.
+
+By default \cmd{ps} without options shows only process started by me and
+connected to my current terminal line.
+
+To get the status for all processes, we must use:
+\begin{code}{mverb}
+SYSV:  ps -ef
+BSD:   ps ax
+\end{code}
+
+And we can get more information about the processes using the ``long'' options:
+\begin{code}{mverb}
+SYSV:  ps -l
+BSD:   ps l
+\end{code}
+
+What information about the processes can we see?
+\begin{description}
+\item[\cmd{UID}]~--- effective user ID. A process can have a different
+identifier than the user running the application because, as we will see
+later, there is a mechanism in UNIX-like systems to change the identifier
+on the run.
+\item[\cmd{PID}]~--- a number representing the unique identifier of the process.
+\item[\cmd{PPID}]~--- parent process ID. As we remember, we have
+a hierarchical system of processes, and each process has its own parent.
+We can see this hierarchy for example by such options set:
+\begin{code}{mverb}
+ps axjf | less
+\end{code}
+or just by command:
+\begin{code}{mverb}
+pstree
+\end{code}
+\item[\cmd{PRI}]~--- priority of the process. Higher number means lower
+priority. But, as we will discuss later, we cannot change the priority,
+because this value is dynamically changed by the process scheduler. And
+we can only send recommendations to the scheduler using the 'nice' (NI)
+parameter:
+\item[\cmd{NI}]~--- can be set with 'nice' and 'renice' commands
+\item[\cmd{TTY}]~--- controlling tty (terminal).
+\item[\cmd{CMD}]~--- and the command.
+\end{description}
+
+And also a very useful (especially if the system hangs) command `\cmd{top}',
+which dynamically displays information about processes, sorted
+accordingly by the use of system resources~--- memory and CPU time.
+
+{\bf\cmd{nice}}~--- run a program with modified scheduling priority.
+`\struct{Nice}' value is just an integer. The smallest number means
+the highest priority. The nice's range can be different on different systems
+and you should look at the ``\cmd{man nice}'' on your system. In the case of
+Linux nice value~--- between -20 and 19. Only the superuser can increase
+the priority, the normal user can just decrease the default, which can be seen
+by invoking the ``\cmd{nice}'' command with no arguments.
+
+For example:
+\begin{code}{mverb}
+nice -n 19 command args...
+\end{code}
+means execution of the command with the lowest priority. This can be useful
+for reducing the activity of non-interactive applications, such as the backup
+process, which can slow down the interactive response of the system.
+
+{\bf\cmd{renice}}~--- alter priority of running processes by PID. In this
+case, you may not use the `\cmd{-n}' option~--- just a `nice' number.
+For example:
+\begin{code}{mverb}
+renice 19 PID...
+\end{code}
+
+\subsection*{Jobs}
+
+At the Shell level, we can use the `jobs' mechanism.
+
+The easiest way to start a new background job is to use the ampersand (\cmd{\&}):
+\begin{code}{mverb}
+gedit &
+xeyes
+\end{code}
+
+Once the command is running, we can disconnect from the terminal line and
+pause it by pressing '\cmd{\^{}Z}'. As we can see, the eyes do not move now.
+
+We can see background and suspended jobs using the jobs command:
+\begin{code}{mverb}
+jobs
+\end{code}
+
+In the first position of the jobs list, we see the job number. We can use
+this job number with a percent sign in front of it.
+
+A suspended task, we can switch it to the background execution mode. By
+default~--- current job:
+\begin{code}{mverb}
+bg [%jobN] - resume suspended job jobN in the background
+\end{code}
+and reattach the background job to the terminal line by bringing it to
+the foreground:
+\begin{code}{mverb}
+fg [%jobN] - resume suspended job jobN in the foreground
+\end{code}
+After that we can interrupt the foreground job by pressing `\cmd{\^{}C}'.
+
+\subsection*{Signals}
+
+Another way to terminate a process is with the `\cmd{kill}' command:
+\begin{code}{mverb}
+kill %job
+\end{code}
+also you can kill the process by PID number:
+\begin{code}{mverb}
+kill [-s sigspec | -n signum | -sigspec] [pid | jobspec] ...
+\end{code}
+
+But in some cases `\cmd{kill}' does not work~--- for example, if the process is
+frozen. We can fix this problem by calling another kill, just because
+kill is actually sending a signal to the process, and we just have to
+choose a different signal.
+\begin{code}{mverb}
+kill -l -- list of signals
+\end{code}
+
+\begin{itemize}
+\item[15)] \cmd{SIGTERM}~-- generic signal used to cause program termination
+(default kill)\\
+\item[2)] \cmd{SIGINT}~--- ``program interrupt'' (INTR key~--- usually Ctrl-C)
+\item[9)] \cmd{SIGKILL}~--- immediate program termination (cannot be blocked,
+handled or ignored)
+\item[1)] \cmd{SIGHUP}~--- terminal line is disconnected (often used for daemons
+config rereading)
+\item[3)] \cmd{SIGQUIT}~--- core dump process (QUIT key -- usually C-\textbackslash)
+\end{itemize}
+
+\subsection*{Offline execution}
+
+When you execute a Unix job in the background ( using \cmd{\&}, \cmd{bg} command),
+and logout from the session, your process will get killed.
+We can avoid this using nohup command:
+
+\cmd{nohup}~--- run a command immune to hangups,
+with output to `{\tt nohup.out}'
+
+Another very useful program is `\cmd{screen}'~--- it's screen manager with
+VT100/ANSI terminal emulation which supports multi-screen session support
+with offline execution. In fact, you can run some long running commands
+on multiple screen sessions and after disconnecting from this terminal
+line with your hands or after breaking connecting. After that, you can
+reconnect to this screen and you will see that all processes are still running.
+
+\subsection*{Later execution and scheduled commands}
+
+Another possibility of offline executing commands is later execution and
+scheduled commands.
+
+\cmd{at}, \cmd{batch}, \cmd{atq}, \cmd{atrm}~--- queue, examine or delete jobs
+for later execution
+
+\cmd{crontab}~--- maintain crontab files for individual users

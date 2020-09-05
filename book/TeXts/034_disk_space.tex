@@ -1,0 +1,67 @@
+\section*{Disk space} % ## Disk space
+
+Another important task with data in your file system is \struct{archiving} and
+\struct{backing up}. It's wise to look into your filesystems first to analyze
+disk usage. In case your file system is full on many systems, some graphical
+disk analysis program will run and you can detect problems visually. But we can
+also do this job using command line tools that can help you automate some of
+the admin tasks.
+
+The main tool for reporting file system disk space usage is the `\cmd{df}'
+utility:
+\begin{code}{mverb}
+man df
+\end{code}
+The most useful option is ``\cmd{-h, --human-readable}'' for human readable
+print sizes in kilobytes, megabytes, gigabytes.
+
+For a more accurate analysis, you can use the `\cmd{du}' utility to estimate
+the file space usage of directories and files:
+\begin{code}{mverb}
+man du
+\end{code}
+So, we can get the size of some directory:
+\begin{code}{mverb}
+# du -hs /tmp/
+136K	/tmp/
+\end{code}
+And the most commonly used options are ``\cmd{-k}'', which displays sizes in
+kilobytes, and ``\cmd{-x}'', which means that it will scan only this file system
+and skip directories on other file systems. Let's take a look at an example of
+using the command line tools to find the largest directories and files:
+\begin{code}{mverb}
+$ du -kx /tmp | sort -rn | less
+\end{code} % $
+We examine the directory `\cmd{/tmp}', perform a numeric sorting of the sizes of
+directories and files, and redirect the result to the viewer `\cmd{less}'
+for analysis.
+
+And after finding the largest files and directories, we can clean up our file
+system and before this archive and back up some data. The easiest way is
+to simply copy using the `\cmd{cp -a}' command to some external drive, or
+using `\cmd{scp -rC}' or `\cmd{rsync -avz}' to a remote host.
+
+Also, using the `\cmd{cp}' or `\cmd{scp}' commands, you can copy any partition
+or the entire disk, because for us they are just files. But a more efficient way
+to do this is with the `\cmd{dd}' command:
+\begin{code}{mverb}
+man dd
+\end{code}
+
+By default, it just copies stdin to stdout, perhaps with some re-coding.
+But the most interesting options for us are: `\cmd{if}', `\cmd{of}', `\cmd{bs}',
+`\cmd{count}', `\cmd{seek}' and `\cmd{skip}'. With a combination of these
+options, we can select the input and output files, choose the block size
+to increase speed of I\&O, the number of blocks we want to copy, and seek/skip
+on output/input. Thus, we can cut and paste any fragment from one device or
+file to another.
+
+We can also use the `\cmd{od}' command to low-level view of a file or device
+in different formats:
+\begin{code}{mverb}
+man od
+\end{code}
+For example~--- to our hard drive:
+\begin{code}{mverb}
+# od -bc /dev/sda1 | less
+\end{code}

@@ -1,0 +1,48 @@
+\subsection*{Shell Settings}
+
+The shell is customizable.
+
+As you will see, most UNIX commands have very short names~--- just two
+characters for the most common commands. This is because the developers
+wanted to shorten the printing time on TTYs, but are still very useful
+for the CLI work with nowadays. And we have a very useful tool for making
+shorter commands from long sentences~--- it's called \struct{aliases}:
+\begin{code}{mverb}
+alias ll='ls -al'
+alias
+\end{code}
+
+Et voila~--- now you only have a two letter command that runs
+the longer command.
+
+And you can `\cmd{unalias}' this:
+\begin{code}{mverb}
+unalias ll
+alias
+\end{code}
+But after logging out of the shell session or restarting the system,
+all these settings and variable settings will be lost.
+
+But you can put these settings in init files. These are common shell
+scripts where you may setup what you want:
+\begin{code}{mverb}
+/etc/profile - system defaults
+\end{code}
+
+Files for the first shell session that starts at login:\\
+%\begin{description}
+\begin{tabular}{ll}
+{\tt Bourne shell}:&\struct{$\tilde{\mbox{}}$/.profile}\\ % $
+{\tt Bash}:        &\struct{$\tilde{\mbox{}}$/.bash\_profile}\\ % $
+{\tt C-Shell}:     &\struct{$\tilde{\mbox{}}$/.login} % $
+\end{tabular}
+%\end{description}
+
+And initialization files for secondary shells:
+%\begin{description}
+\begin{tabular}{ll}
+{\tt /etc/bashrc}: &\struct{system defaults}\\
+{\bf Bash}:        &\struct{$\tilde{\mbox{}}$/.bashrc}\\ % $
+{\bf C-Shell}:     &\struct{$\tilde{\mbox{}}$/.cshrc} % $
+\end{tabular}
+%\end{description}

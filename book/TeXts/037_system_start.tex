@@ -1,0 +1,119 @@
+\section*{Booting and services starting/stopping} % ## Booting and services starting/stopping
+
+All right. But how does our system get started? In fact, when you turn on
+the computer, a special piece of code is launched, built into the hardware~--
+firmware. There are many such firmware: \struct{legacy PC BIOS}, \struct{UEFI},
+\struct{Uboot}, \struct{OpenBoot}, \struct{Coreboot}, etc. The firmware reads
+the main bootloader from disk: \struct{BIOS} from \struct{MBR},
+\struct{UEFI} from \struct{EFI system partition}, and so on.
+
+Then the secondary bootloader started. This loader can be more or less complex
+and customizable. The most commonly used Linux bootloaders currently are
+lightweight boot system \cmd{SYSLINUX} for \struct{FAT} file system and
+\cmd{ISOLINUX} for \struct{ISO} images, which is mainly used to boot
+installation or live images, and the general purpose \struct{Grub bootloader}.
+
+Usually Grub is installed during system installation, including configuring
+the boot of other operating systems installed on your computer. But in some
+cases MS Windows can reinstall the bootloader without asking you, in which case
+you may lose your boot settings. To restore it, you need to boot from
+the installation media in repair mode and run the `\cmd{grub2-install}' program
+for your system storage. For example:
+\begin{code}{mverb}
+grub2-install /dev/sda
+\end{code}
+
+After the kernel is loaded, a special process called `\cmd{init}` is started.
+In original UNIX, as well as BSD `\cmd{init}', just run the script `\cmd{/etc/rc}',
+which completely determines the further behavior of the system.
+
+A different `\cmd{init}' machinery is implemented for SYSV systems. On such
+systems, you can invoke the `\cmd{init}' program at any time by setting
+the runlevel as a parameter. Runlevels defined in the `\cmd{init}' configuration
+is located in the \href{https://manpages.debian.org/unstable/sysvinit-core/inittab.5.en.html}%
+{`\cmd{/etc/inittab}' file}.
+%['/etc/inittab' 
+%file](https://manpages.debian.org/unstable/sysvinit-core/inittab.5.en.html).
+Each line in the \cmd{inittab} file consists of four colon-delimited fields and
+describes:
+\begin{itemize}
+\item what processes to start, monitor, and restart if they terminate
+\item what actions to take when the system enters a new runlevel
+\item the default runlevel
+\end{itemize}
+
+Inittab's fields:
+\begin{code}{mverb}
+id:runlevels:action:process
+\end{code}
+
+\struct{id} (identification code)~--- consists of a sequence of one to four
+characters that identifies its function.
+\begin{itemize}
+\item runlevels~--- lists the run levels to which this entry applies.
+\item action~--- specific codes in this field tell init how to treat
+      the process. Possible values include: \struct{initdefault},
+      \struct{sysinit}, \struct{boot}, \struct{bootwait}, \struct{wait},
+      and \struct{respawn}.
+\item process~--- defines the command or script to execute.
+\end{itemize}
+
+The line `\cmd{initdefault}' defines the default runlevel. Different systems
+define different init level hierarchies, but some of them have the same
+meaning:
+\begin{itemize}
+\item Runlevel 0 is \struct{halt}.
+\item Runlevel 6 is \struct{reboot}.
+\item Runlevel 1 is \struct{single-user}.
+\item \struct{2--5} are most often some multiuser runlevels.
+\end{itemize}
+
+Most often, the executable scripts in `\cmd{inittab}' are just some `\cmd{rc}'
+scripts that go through the appropriate \cmd{/etc/rc<runlevel>.d/} directories
+and run the stop scripts first, starting with a big \cmd{K} (kill) with
+a `\cmd{stop}' parameter, and then starting the scripts that start
+with large \cmd{S} with a `\cmd{start}' parameter:
+\begin{code}{mverb}
+$ ls -l /etc/rc.d/rc5.d/
+\end{code} % $
+
+And, as we can see, this script is simply symbolic links to scripts from
+`\cmd{/etc/init.d/}', moreover, the Kill scripts and the Start scripts can be
+linked to the same file. If we look at them, we will see~--- there are just
+scripts that do something according to the start or stop parameter:
+\begin{code}{mverb}
+$ less /etc/init.d/network
+\end{code} % $
+And if you want to implement our own service script, you just have to support
+the `\cmd{start}' and `\cmd{stop}' parameters. To configure your own policy
+for stopping and starting services at any level, you simply have to link
+the scripts which you need from `\cmd{/etc/init.d/}' to the appropriate
+runlevel directories. The order in which scripts are run is determined by
+the numbers at the beginning of the filenames.
+
+Some commands that can help you with this work:
+\begin{itemize}
+\item `\cmd{service}'~-- run a System V init script
+\item `\cmd{setup}' and `\cmd{chkconfig}'~--- updates and queries runlevel
+       information for system services
+\end{itemize}
+
+The most commonly used Linux distributions now use `\cmd{systemd}' instead of
+such systems. The main advantage of this system is faster parallel launch of
+services at system startup, as well as unification of services and work with
+devices. These utilities and scripts are still present for compatibility,
+but now the main tool is `\cmd{systemctl}':
+\begin{code}{mverb}
+man systemctl
+\end{code}
+We can list system services, start, stop and get their status, enable and
+disable them to automatically start at boot time.
+
+To find out the log messages about boot startup and system operation,
+we can look at the system log files:
+\begin{itemize}
+\item \cmd{/var/log/messages}~--- RH-like Linuxes
+\item \cmd{/var/log/syslog}~--- Debian, Ubuntu
+\end{itemize}
+In modern Linux based on `\cmd{systemd}' we have `\cmd{journalctl}'
+to work with the `\cmd{systemd}' journal system.

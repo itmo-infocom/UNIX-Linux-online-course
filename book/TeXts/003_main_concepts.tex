@@ -1,0 +1,96 @@
+\section*{Main Concepts}
+
+At the top level, UNIX-like systems can be very convenient for common
+users, and they may not even know they are using this type of OS.
+For example, currently the most commonly used operating systems are
+Linux-based Android systems and UNIX-based Apple systems, in which
+the user only sees the user friendly graphical UI.
+
+But beginners who are just starting to learn UNIX-like systems
+for administration or development sometimes complain about their complexity.
+Don't be afraid~--- actually such systems are based on fairly simple concepts.
+There are only three things (three and a half to be exact) you
+need to know to be comfortable with any UNIX-like system:
+\begin{itemize}
+\item[1)] \struct{Users}
+\item[2)] \struct{Files}
+\item[3)] \struct{Processes}
+\item[3.5)] \struct{Terminal lines}
+\end{itemize}
+
+The \struct{users} is not very well known to modern users only because we now
+have a lot of computer devices with personal access. UNIX was created at a time
+when computers were an expensive rarity and a single computer was used
+by many users. As a consequence, from the beginning, \struct{UNIX} had
+\struct{strong security policies} and \struct{restrictions on permissions}
+for users.
+
+And now on UNIX-like systems, we have dozens of users and groups,
+even if hidden by an autologin machinery. And most of them are so-called
+\struct{pseudo-users}, which are needed to start system services. As we will see
+later, they are required by architecture, since it is on the permissions
+of users and groups that the system is built to control access to system
+resources (processes and files).
+
+If we are talking about ordinary users, they can log in with a \struct{username}
+and \struct{password} and interact with the applications installed on the system.
+Each user has full permissions only in their home directory and limited
+access rights to files and directories outside of it. This can be viewed
+as foolproof~--- common users cannot destroy anything on the system just
+because they do not have such permissions. Moreover, they \struct{cannot view}
+another user's home directory or protected system files and directories.
+To perform system administration tasks, the system has a special
+\struct{superuser} (generally called ``\struct{root}'') with extra-permissions.
+
+At the system level, each user or group looks like an integer number:
+a~user identifier (\struct{UID}) and a group identifier (\struct{GID}).
+
+\struct{Files} are the next important thing for UNIX-like systems. Almost
+all system resources look like files, including devices and even
+processes on some systems. And the basic concepts have been the same
+since the beginning of the UNIX era. We have a hierarchical file system
+with a single root directory. All resources, including file systems
+existing on devices or external network resources, are attached to this
+file system in separate directories~--- this operation is called
+``mount''. On the other hand, you can access a device (real or virtual)
+as a stream of bytes and work with it like a regular file. All files and
+directories are owned by users (real or pseudo) and groups, and read,
+write, and execute access to them is controlled by permissions.
+
+A \struct{process} is a program launched from an executable file. Each process
+belongs to a user and a group. The relationship between the owners of
+processes and resources determines the access rights according to
+the resource permissions. All processes live in a hierarchical system based
+on parent-child relationships. There is an initial process on the system
+called ``\cmd{init}'' that is started at boot. All system services are started
+from this initial process.
+
+There are fundamentally two types of processes in Linux~--- foreground and
+background:
+\begin{itemize}
+\item \struct{Foreground processes} (also referred to as interactive processes)~---
+      these are initialized and controlled through a terminal session.
+      In other words, there has to be a user connected to the system to start
+      such processes; they haven’t started automatically as part of the system
+      functions/services.
+\item \struct{Background processes} (also referred to as non-interactive/automatic
+      processes)~--- are processes not connected to a terminal; they don’t
+      expect any user input. System services are always background processes.
+\end{itemize}
+
+And finally~--- interactive foreground processes must be attached to
+the terminal session through the terminal line. At the time of the creation of
+UNIX, a TTY (teletype) device (originally developed in the 19th century),
+was the primary communication channel between the user and the computer.
+It was a very simple interface that worked with a stream of bytes encoded
+according to the ASCII character set. The connection is made via a serial
+interface (for example RS232) with a fixed set of connection speeds.
+
+%This interface is still the main user interface for UNIX-like systems.
+This interface is still the main user interface for UNIX-like systems.
+The implementation of each new form of user interaction, such as
+full-screen terminals, graphics systems, and network connections, all
+started with the implementation of a simple TTY command line interface.
+Moreover, as we will see, this interface abstraction gives us a very
+powerful and flexible mechanism for communication between programs,
+possibly without human intervention.

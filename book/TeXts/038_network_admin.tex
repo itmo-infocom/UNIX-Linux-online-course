@@ -1,0 +1,139 @@
+\section*{Network configuration} % ## Network configuration
+
+Finally, let's discuss the administrative tasks associated with the network.
+In most cases, after installing the system, you have a more or less configured
+network in accordance with the \struct{DHCP} settings of your local network.
+The most you need is to set a password for your \struct{WiFi}.
+
+But in some cases it would be helpful to have some utilities to view and
+manage network settings. Unlike other devices, network interfaces do not
+have their own representations in the device files in the \cmd{/dev} directory.
+You can work with them only with the help of special utilities.
+Traditional set of utilities for network configuration:
+\begin{itemize}
+\item \cmd{ifconfig}~--- configure a network interface
+\item \cmd{route}~-- show/manipulate the IP routing table
+\end{itemize}
+
+With no arguments, \cmd{ifconfig} just shows us the current state of enabled
+network interfaces. By pointing to a network interface, we can ``\struct{up}''
+and ``\struct{down}'' them, we can also manually set the \struct{IP address}
+and \struct{netmask}:
+\begin{code}{mverb}
+man ifconfig
+\end{code}
+
+You can use the `\cmd{route}' utility to work with the routing table.
+To view the route table we may run command:
+\begin{code}{mverb}
+route -n
+\end{code}
+The option `\cmd{-n}' show  numerical  addresses instead of trying to determine
+symbolic host names. This can be useful if you are having problems accessing
+the DNS server.
+\begin{code}{mverb}
+man route
+\end{code}
+With this command we can add and remove routes to hosts and networks.
+We can set gateways to them.
+
+In modern Linux distributions, these `\cmd{net-tools}' are outdated and are not
+installed by default. They are migrating to the more versatile `\cmd{ip}'
+utility, which also supports more advanced networking options than
+`\cmd{net-tools}':
+\begin{code}{mverb}
+man ip
+\end{code}
+You can use `\cmd{ip link}' to perform the same tasks as `\cmd{ifconfig}' and
+`\cmd{ip route}' to replace `\cmd{route}':
+\begin{code}{mverb}
+$ ip link help 2>&1 | less
+$ ip route help 2>&1 | less
+\end{code}
+The next important task when setting up your network is setting up \struct{DNS
+resolving}. This configuration is placed in `\cmd{/etc/resolv.conf}':
+\begin{code}{mverb}
+$ cat /etc/resolv.conf
+\end{code} % $
+Here we can configure up to 3 nameservers.
+\begin{code}{mverb}
+man resolv.conf
+\end{code}
+Also, using the `\cmd{search}' configuration option, we can configure
+the domains in which short names will be searched.
+
+\subsection*{Network access} % ## Network access
+
+And finally, a few words about regulating network access to your computer.
+As we understand, network attacks are currently the most dangerous.
+And the most famous tool for restricting access is a firewall.
+
+At its deep level, the firewall in Linux is controlled by the `\cmd{iptables}'
+utility and moving to `\cmd{nftables}'. But at a higher level, different
+systems manage it in different distributions:
+\begin{itemize}
+\item Canonical’s Uncomplicated Firewall (`\cmd{ufw}') to configure the iptables
+      on every Ubuntu and Debian system I’ve used in recent years.
+      The firewall isn’t enabled by default in Ubuntu nor installed by default
+      in Debian. As its name suggests, it’s fairly uncomplicated to set up and
+      maintain. It has an easy to remember syntax that’s more friendly to human
+      users than the underlying iptables rules.
+\item Fedora and Red Hat Enterprise Linux enables \struct{FirewallD} by default.
+      Its `\cmd{firewall-cmd}' front-end has almost the same feature set for
+      basic firewall management as `\cmd{ufw}', and adds network zone management
+      to the mix. Zone management allows you to set up presets with rules for
+      different network conditions/locations. For example ``\struct{Home}'' and
+      ``\struct{Office}'' where all communications with local machines are allowed,
+      and ``\struct{Public Wi-Fi}'' where no communication with the same subnet
+      would be allowed. Rules can be applied automatically per network interface,
+      or used through \struct{NetworkManager} and the \struct{GNOME network GUI}
+      `\cmd{system-config-firewall}'.
+\end{itemize}
+
+Both front-ends come with pre-defined rules for common server services and
+protocols. These rules include a keyword/name and associated industry standards
+and default ports for running services publicly. They each come in their own
+formats that aren’t interoperable with each other, of course. \cmd{ufw} uses
+service-named files containing one line with port and protocol, and
+\struct{FirewallD} uses six lines of XML to create the same profile.
+
+The best policy is to simply close all services from the Internet that
+you do not need on your computer, and only open those that you need
+for remote access. For example~--- \struct{SSH}.
+
+And then just use the lighter tweak tool~--- host access control files:
+\begin{code}{mverb}
+/etc/hosts.deny:
+          ALL: ALL
+/etc/hosts.allow:
+          ALL: LOCAL @some_netgroup
+          ALL: .foo.bar EXCEPT hacker.foo.bar
+\end{code}
+This is the configuration for the so-called \struct{tcp wrapper}, which was
+originally developed as a `\cmd{tcpd}' service for the `\cmd{inetd}' superserver,
+and now its functionality is included in the `\cmd{libwrap}' library
+that is used by several network services such as NFS.
+
+Again, the easiest way is to disable everything in the configuration file
+`\cmd{/etc/hosts.deny}' and allow only a fixed list of hosts to access your
+computer, for example, via SSH in `\cmd{/etc/hosts.allow}'. Using this
+mechanism is easier than using a firewall because all changes are made
+immediately after saving the configuration file~--- you don't need to
+reconfigure and reload any services.
+
+\subsection*{Network services} % ## Network services
+
+And if we talk about older classical systems, then tcp\_wrapper `\cmd{tcpd}' is
+configured through the `\cmd{inetd}' service. As we'll see, this is a so-called
+superserver designed to make the life of network developers easier. To create
+the server side of a network application, you just need to develop
+an application that reads stdin and writes to stdout, and write the service
+configuration to the `\cmd{inetd}' configuration file. All the work of
+listening on network sockets and maintaining the connection makes
+a super-server for you.
+
+Classic services such as \struct{FTP}, \struct{POP3}, and \struct{telnet} were
+designed to work with `\cmd{inetd}'. It is also possible to configure
+an \struct{HTTP} server for access via `\cmd{inetd}'. Newer systems have
+replaced `\cmd{inetd}' with `\cmd{xinetd}', which provides better protection
+against DOS attacks, and replaced with `\cmd{systemd}' in newest systems.

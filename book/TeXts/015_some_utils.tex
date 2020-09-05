@@ -1,0 +1,142 @@
+\section*{Some utils}
+%by Oleg Sadov — last modified Aug 21, 2020 05:00 PM
+
+OK. But you can get useful information not only from the `info' utility.
+
+\subsection*{OS variant}
+
+Ok, we just logged in. First, let's try to determine which part of
+the UNIX-like universe we are in.
+
+\subsection*{Uname}
+
+\cmd{uname}~--- print system information, in most simple case~---
+just name of kernel. With ``\cmd{all}'' flag we will get more information.
+And for what needs can such information be used, besides simple curiosity?
+The answer is simple~--- it can be used to create portable applications or
+some kind of administrative scripts for various types of UNIX-like systems.
+You can use it in your installation or shell configuration scripts to select
+different binaries and system utilities according to your specific computer
+architecture and OS.
+
+This works well for good old UNIX systems that are very vendor dependent.
+But on Linux systems, `\cmd{uname}' will only display the Linux kernel name,
+possibly with the kernel version. And as we know, we will have many
+different Linux distributions, which can be very different from each other.
+And how can we adapt to this diversity?
+
+One of the possibilities is the lsb\_release command:\\
+\cmd{lsb\_release}~--- provides certain \struct{LSB} (Linux Standard Base)
+and distribution-specific information. The Linux Standard Base (LSB) is a joint
+project by several Linux distributions under the organizational structure of
+the Linux Foundation to standardize the software system structure, including
+the Filesystem Hierarchy Standard used in the Linux kernel. The LSB is based on
+the POSIX specification, the Single UNIX Specification (SUS),
+and several other open standards, but extends them in certain areas.
+
+\subsection*{Date}
+
+Good. We get information about ``where''. Let's try to figure out ``when''.
+
+\cmd{date}~--- print the system date and time. What time?
+The current time of our time zone. We can check the time in a different time
+zone, for example, Greenwich Mean Time (GMT):
+\begin{code}{mverb}
+$ TZ=GMT date
+\end{code} % $
+We can also set the current computer time:
+\begin{code}{mverb}
+$ man date
+...
+date [-u|--utc|--universal] [MMDDhhmm[[CC]YY][.ss]]
+...
+\end{code} % $
+
+Also you can choose a different output format for time and date using
+the `\cmd{+}' option:
+\begin{code}{mverb}
+date [OPTION]... [+FORMAT]
+\end{code}
+and use this command to convert from different time representations using
+the `\cmd{--date}' option. You can find more details on the man page.
+
+And of course we can see the calendar:
+\begin{code}{mverb}
+$ man cal
+...
+cal - displays a calendar
+...
+\end{code} % $
+
+For example, the calendar for the first year of the UNIX epoch:
+\begin{code}{mverb}
+$ cal 1970
+\end{code} % $
+
+\subsection*{Users information commands}
+
+Okay~--- `what', `when', but what about `who'? As we discussed earlier~---
+we know that users and groups are just some magic numbers. Let's look at
+the user's info:
+\begin{code}{mverb}
+id - print real and effective user and group IDs
+\end{code}
+But also we have yet another command:
+\begin{code}{mverb}
+logname - print user's login name
+\end{code}
+For what needs can we use this command if we already have an `\cmd{id}' command?
+First of all: as far as we remember, we have different users, moreover,
+different types of users. Let's look\ldots This is a regular user session.
+The username is ``user''. Let's look to `\cmd{id}' command. And this is
+the session of the root user. He, as we remember, is the superuser.
+And we see absolutely another result of the id command. But ``\cmd{logname}''
+will show the same result in both cases, just because we are logged in with
+the user named ``\struct{user}'' in both sessions, and then switched
+to superuser with the ``\cmd{sudo}'' or ``\cmd{su}'' command.
+This can be important in some cases, and you can use this command
+to determine the real user \struct{ID}.
+
+\subsection*{Multiuser environment}
+
+As we recall, a UNIX-like system is a multi-user environment,
+and we have many utilities for working with such a system.
+
+\cmd{who}~--- show who is logged on
+
+\cmd{finger}~--- user information lookup program~--- more informative
+command including user downtime. At this point, it can be understood that
+a particular user is still sitting at his workplace or has left for coffee.
+Moreover, we can see the user's status on other computers. But in this case,
+you must understand that this is a client-server application.
+You must have a server part on the computer that you requested,
+and you need the appropriate privileges.
+
+If you find the required user in the list of computer users, you can send
+him a message manually or from the program using the ``\cmd{write}'' command:
+\begin{code}{mverb}
+write - send a message to another user
+\end{code}
+Just enter something and finish your message with EOF (\struct{\^{}D} as we
+remember). In this command, we can select the terminal line to write.
+
+\subsection*{Terminal line control}
+
+And we can get our current terminal line using the `\cmd{tty}' command:
+\begin{code}{mverb}
+tty - print the file name of the terminal connected
+       to standard input
+\end{code}
+
+We also have `\cmd{stty}' command to print and change terminal line settings.
+With the option `\cmd{-a|--all}' we can get all the current driver settings of
+this terminal line. And then we can change these settings with this command.
+For example, the previously discussed setting of the Delete key
+to interrupt a program on some older UNIX systems.
+
+Another note about older UNIX systems is that stty on such systems may not
+have the `\cmd{-F}' option. But we still have the option to select
+the device~--- just by redirecting stdin:
+\begin{code}{mverb}
+stty < /dev/tty0
+\end{code}

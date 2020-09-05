@@ -1,0 +1,61 @@
+Ok, we have a working network service, and it's time to change our user
+interface to network communication with it.
+\begin{code}{mverb}
+$ git checkout Example_7
+$ git diff Example_6 Example_7 | less
+\end{code}
+The main changes are made in the `\cmd{calc\_ui}' script. At the beginning of
+the script, as you can see, added some default definitions: \cmd{HOST},
+\cmd{PORT} for calc-server connection and \cmd{CALC} script name.
+
+Then we can see added support for configuration files. First, we check
+the user's personal configuration in the home directory~--- this is a hidden
+file starting with a ``dot'' \cmd{calc.conf}. If such a file exists, we load it
+as a Shell library file. If we do not find this file, we check the system-wide
+configuration `\cmd{/etc/calc.conf}' and load it if it exists.
+You can put your own connection variable definitions in these files.
+
+We see a new `\cmd{help}' function for displaying a help message and some logic
+for processing script parameters. We now handle the `\cmd{-\mbox{}-help}'
+parameter and the optional host/port positional parameters. As we can see,
+we can only set the host or both the host and port using the script arguments.
+
+And finally~--- we check the name of the script by stripping it with
+the `\cmd{basename}' function from the current path to the script. If the script
+is called `\cmd{ncalc\_ui}', we change the \cmd{CALC} variable to `\cmd{netcat}'
+with the host access parameters. If such parameters are not specified,
+we display an error message. In the line where we called the `\cmd{calc}' script,
+we replace it with the \cmd{CALC} variable.
+
+That's it~--- we just changed the UI file without changing the main logic.
+Let's install it:
+\begin{code}{mverb}
+$ sudo make install
+[sudo] password for liveuser: 
+install calc calc_ui /usr/local/bin
+which gdialog >/dev/null 2>&1 || install gdialog /usr/local/bin
+grep -q "`cat calc.services`" /etc/services || cat calc.services >> /etc/services
+install calc.xinetd /etc/xinetd.d/calc
+ln -s /usr/local/bin/calc_ui /usr/local/bin/ncalc_ui
+\end{code} % $
+As we can see, there is a symbolic link from `\cmd{calc\_ui}' to `\cmd{ncalc\_ui}'.
+
+OK. Let's test it:
+\begin{code}{mverb}
+$ ncalc_ui 
+\end{code} % $
+It works! But maybe we're wrong and this is just our old local calculator?
+Let's check by stoping the `\cmd{xinetd}' service:
+\begin{code}{mverb}
+# systemctl stop xinetd
+\end{code}
+Our calculation ended with an error. And what about a non-networked `\cmd{calc\_ui}'?
+\begin{code}{mverb}
+$ calc_ui 
+\end{code} % $
+Still works. Let's run `\cmd{xinetd}' again:
+\begin{code}{mverb}
+# systemctl start xinetd
+\end{code}
+Networked `\cmd{ncalc\_ui}' works again! Quod erat demonstrandum~---
+the networked version of the calculator created!

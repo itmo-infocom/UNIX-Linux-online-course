@@ -1,0 +1,60 @@
+\begin{code}{mverb}
+$ git checkout Example_9
+error: The following untracked working tree files would be overwritten by checkout:
+        calc_ui.pot
+Please move or remove them before you can switch branches.
+\end{code} % $
+Ok. Let's delete this file~--- in the next example we already have it:
+\begin{code}{mverb}
+$ rm calc_ui.pot
+$ git checkout Example_9
+Previous HEAD position was 156bba2... L10N enabling for calc_ui
+HEAD is now at b24e4a1... Fixed linking ncalc_ui
+$ git diff Example_8 Example_9 | less
+\end{code} % $
+As you can see, we just made a translation into Russian of the corresponding
+PO file and added installation steps to the Makefile. Let's look at the PO file
+with Russian translation:
+\begin{code}{mverb}
+$ cat calc_ui-ru.po
+\end{code} % $
+First we have the metadata and then the pairs of translation strings:
+`\cmd{msgid}' with the source and `\cmd{msgstr}' with the translation.
+This is not a good translation strategy because, for example, some messages
+in one language may have different meanings in other languages in a different
+context. And in larger software projects like Firefox or Open/LibreOffice,
+other localization engines have been used in which each line from the user
+interface has its own unique identifier and translation for each one.
+And to simplify and unify the translation process, they use such complex tools
+as editors with support for the translation memory mechanism.
+
+But gettext is widely used in the UNIX-like world, and that's enough
+for our purposes. Let's compile and install our translation now:
+\begin{code}{mverb}
+$ sudo make install
+[sudo] password for liveuser: 
+msgfmt -o calc_ui-ru.mo calc_ui-ru.po
+install calc calc_ui /usr/local/bin
+which gdialog >/dev/null 2>&1 || install gdialog /usr/local/bin
+grep -q "`cat calc.services`" /etc/services || cat calc.services >> /etc/services
+install calc.xinetd /etc/xinetd.d/calc
+ln -sf /usr/local/bin/calc_ui /usr/local/bin/ncalc_ui
+install calc_ui-ru.mo /usr/share/locale/ru/LC_MESSAGES/calc_ui.mo
+\end{code} % $
+As we can see, we compile our translation file `\cmd{calc\_ui-ru.po}' into
+`\cmd{calc\_ui-ru.mo}' and install the resulting binary localization file into
+the \cmd{LC\_MESSAGES} locale directory. Let's check the result:
+\begin{code}{mverb}
+$ LANG=ru_RU.UTF-8 calc_ui
+\end{code} % $
+Great! We have a calculator in Russian now! Let's switch to English again:
+\begin{code}{mverb}
+$ LANG=en_US.UTF-8 calc_ui
+\end{code} % $
+In English again. For other languages, we still have the same interface
+because we didn't translate the messages for them:
+\begin{code}{mverb}
+$ LANG=zh_CN.UTF-8 calc_ui
+\end{code} % $
+And maybe it's a good time to translate our application into your favorite
+language\ldots
