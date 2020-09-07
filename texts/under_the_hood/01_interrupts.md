@@ -1,8 +1,8 @@
 We talked about the kernel as some kind of magic program that loads at boot and keeps running while your computer is on. But what exactly does this program do? To understand this, we need to look at the evolution of software in computer systems. At the beginning, when they had just created computer programs, the question quickly arose - how to reuse what was written?
 
-***So, the well-known Pareto law works - when you need something new, most likely, it is already 80% written by someone, and you only need to complete or redo only 20%. You can of course use the good old "cut and paste" method, but this is often a source of errors and bugs, especially on large and complex systems.
+So, the well-known Pareto law works - when you need something new, most likely, it is already 80% written by someone, and you only need to complete or redo only 20%. You can of course use the good old "cut and paste" method, but this is often a source of errors and bugs, especially on large and complex systems.
 
-***To solve this problem, some of the most commonly used functions have been compiled into so-called software libraries, which are usually just archives of object files of such compiled programs. You can then link some of these object files to your executable and use functions developed and tested by others in your program.
+To solve this problem, some of the most commonly used functions have been compiled into so-called software libraries, which are usually just archives of object files of such compiled programs. You can then link some of these object files to your executable and use functions developed and tested by others in your program.
 
 But with the development of the computer industry and the widespread use of computer systems, the question arises about a more stable software core for working with external devices and system resources, for regulating access to them for programs and users. And the solution came in the form of interrupts.
 
