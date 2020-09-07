@@ -1,0 +1,1 @@
+To understand the relationship between priority and goodness, we must turn to the UNIX process scheduler. The main task of the scheduler is to regulate the access of processes to the main computing resource -- the processor.

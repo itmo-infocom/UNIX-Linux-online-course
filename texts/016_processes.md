@@ -32,7 +32,7 @@ pstree
 ```
 PRI -- priority of the process. Higher number means lower priority. But, as we will discuss later, we cannot change the priority, because this value is dynamically changed by the process scheduler. And we can only send recommendations to the scheduler using the 'nice' (NI) parameter:
 NI -- can be set with 'nice' and 'renice' commands
-["Under the Hood" -- Process scheduler](under_the_hood/scheduler..md)
+["Under the Hood" -- Process scheduler](under_the_hood/scheduler.md)
 TTY -- controlling tty (terminal).
 CMD -- and the command.
 
