@@ -36,6 +36,6 @@ You can find descriptions of the repositories in:
 
 You can see the [Table of equivalent commands for package management on both Ubuntu/Debian and Red Hat/Fedora systems](https://help.ubuntu.com/community/SwitchingToUbuntu/FromLinux/RedHatEnterpriseLinuxAndFedora)
 
-[Under the hood -- Devices and drivers](under_the_hood/devices_and_drivers.md)
+[Under the hood -- Devices and drivers](under_the_hood/11_devices_and_drivers.md)
 
 CPAN, PyPi, NPM, static binaries, docker containers

@@ -72,7 +72,7 @@ And we can restore access to the content for the symbolic link by simply recreat
 ln b a
 cat c
 ```
-Another difference between them is the impossibility of creating a hard link between different file systems and the possibility of such a linking for soft links. For more details on internal linking details, see the corresponding ["Under the Hood"](under_the_hood/links.md) lecture.
+Another difference between them is the impossibility of creating a hard link between different file systems and the possibility of such a linking for soft links. For more details on internal linking details, see the corresponding ["Under the Hood"](under_the_hood/07_links.md) lecture.
 
 ##Permissions
 
@@ -80,7 +80,7 @@ And finally, let's discuss file permissions. As we remember, we have the owner u
 ```
 chmod [-R] [ugoa][-+=](rwx) 
 ```
-And as we understand it, permissions are just a bit field. As far as we understand, permissions are just a bitfield and in some cases it might be more useful to set them in octal mode - see ["Under the Hood"](under_the_hood/octal_mode.md) for information on this.
+And as we understand it, permissions are just a bit field. As far as we understand, permissions are just a bitfield and in some cases it might be more useful to set them in octal mode - see ["Under the Hood"](under_the_hood/08_octal_mode.md) for information on this.
 
 You can also change the owner and group for a file or directory by command `chown`. 
 ```
