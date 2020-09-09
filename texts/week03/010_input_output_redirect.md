@@ -12,7 +12,7 @@ And finally, such a magic formula:
 ```
 prog 2>&1
 ```
-[Under the hood -- about streams numbers](under_the_hood/03_streams_numbers.md)
+[Under the hood -- about streams numbers](../under_the_hood/03_streams_numbers.md)
 This means stdout and stderr are combined into one stream. You may use it with other redirection, for example:
 ```
 prog > file 2>&1
@@ -43,5 +43,5 @@ prog1 args1... < file1 | prog2 args2... | ... | progN argsN... > file2
 ```
 The first program receives data from the file by redirecting stdin, sends the result of the work to the pipeline through stdout and after a long way through the chain of filters in the end the last command sends the results to stdout which is redirected to the result file.
 
-["Under the Hood" -- Text handling in Windows](under_the_hood/04_text_in_Windows.md)
+["Under the Hood" -- Text handling in Windows](../under_the_hood/04_text_in_Windows.md)
 

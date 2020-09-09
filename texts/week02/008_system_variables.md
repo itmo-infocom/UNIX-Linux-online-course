@@ -39,7 +39,7 @@ TERM is the type of terminal used. The environment variable TERM should normally
 
 It doesn't look very important now, but in some cases, when you use one or another tool to access a UNIX / Linux system remotely, you may have strange problems. In most cases, access to the text interface is used, for example, via SSH, telnet or serial line, since it requires less traffic. But in some combinations of client programs and server operating systems, you may see completely inappropriate behavior of full-screen text applications such as a text editor. This could be incorrect display of the editor screen or incorrect response to keystrokes. And this is a consequence of incorrect terminal settings. The easiest way to solve this problem is to set the TERM variable. Just try setting them to type "ansi" or "vt100", because these are the most commonly used types of terminal emulation in these clients.
 
-["Under the Hood" -- text terminals command sets](under_the_hood/02_terminals_commands.md)
+["Under the Hood" -- text terminals command sets](../under_the_hood/02_terminals_commands.md)
 
 Other variables related to terminal settings:
 * LINES is the number of lines to fit on the screen.

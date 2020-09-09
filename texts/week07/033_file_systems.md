@@ -70,7 +70,7 @@ and so on...
 
 And finally, a few words about swapping. Swapping or  paging is a memory management scheme by which a computer stores and retrieves data from secondary storage for use in main memory. It is an MMU-driven virtual memory mechanism that is used in modern operating systems to use secondary storage in order for programs to exceed the amount of available physical memory.
 
-[Under the Hood -- Virtual Memory](under_the_hood/10_virtual_memory.md)
+[Under the Hood -- Virtual Memory](../under_the_hood/10_virtual_memory.md)
 
 This means you can run applications with a total memory usage that exceeds the physical RAM on your system. The scheduler sends inactive processes to disk swap and loads active tasks from disk into memory. This can reduce overall system performance, but it will increase the ability to run applications.
 
