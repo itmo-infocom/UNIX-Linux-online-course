@@ -1,4 +1,4 @@
-The operating system supports a special kind of resource called environment variables. These variables are a NAME/VALUE pair. The name can start with a letter and be composed of letters, numbers, and underscores. Variable values have only one type -- character strings. Names and values are case sensitive. And, as we'll see, variables can be global and local, just like in regular programming languages.
+The operating system supports a special kind of resource called environment variables. These variables are a NAME/VALUE pair. The name can start with a letter and be composed of letters, numbers, and underscores. Variable values have only one type -- character strings. Names and values are case sensitive. And, as we'll see, variables can be global and local, just like in common programming languages.
 
 To get the value of a variable on the Shell, precede the variable name with a dollar sign:
 ```
@@ -6,7 +6,11 @@ $ echo $USER
 guest
 ```
 
-If the variable is not set, an empty string is returned.
+If the variable is not set, an empty string is returned:
+```
+$ echo $TEST
+$
+```
 
 The assignment operator is used to set the value of a variable (in the case of Bourne-like shells):
 ```
@@ -16,11 +20,12 @@ or the built-in 'set' operator (in the case of C-like Shells):
 ```
 $ set TEST=123
 ```
-You can check your settings by calling the 'echo' command, which simply sends its own arguments to stdout.
-```$ echo $TEST
+You can check your settings by calling the `echo` command, which simply sends its own arguments to stdout.
+```
+$ echo $TEST
 123
 ```
-The 'set' command with no arguments lists the values of all variables set in the environment:
+The `set` command with no arguments lists the values of all variables set in the environment:
 ```
 $ set
 COLUMNS=197
@@ -30,6 +35,7 @@ DIRSTACK=()
 ```
 Shell commands can be combined into command files called scripts, where the first line, in a special kind of comment, specifies the shell to execute the set. For example, let's create a file called test in a text editor or just by command 'cat' with the following content:
 ```
+$ sh > test
 #!/bin/sh
 
 echo TEST:
@@ -52,7 +58,7 @@ And, as we can see, the value of the variable in our current SHELL has also chan
 $ echo $TEST
 456
 ```
-The export operation is the globalization of our variable. You can get the settings for such global exported variables for a session by calling the interpreter builtin command 'env', in the case of Bourne-like interpreters (sh, ksh, bash, zsh, pdksh ...), and 'printenv' in the case of the C-Shell style (csh, tcsh. ..):
+The export operation is the globalization of our variable. You can get the settings for such global exported variables for a session by calling the interpreter builtin command `env`, in the case of Bourne-like interpreters (sh, ksh, bash, zsh, pdksh ...), and `printenv` in the case of the C-Shell style (csh, tcsh. ..):
 ```
 $ env
 HOSTNAME=myhost
@@ -60,7 +66,7 @@ TERM=xterm
 SHELL=/bin/bash
 ...
 ```
-And this is our first example of using the command pipeline -- we just look at only the TEST variable in the full set:
+And this is our first example of using the command pipeline machinery -- we just look at only the TEST variable in the full set:
 ```
 $ env | grep TEST
 TEST=456
@@ -91,9 +97,9 @@ TEST:
 $ env | grep TEST
 $
 ```
-And there is no "unexport" command -- just only "unset" command.
+And there is no "unexport" command -- just only `unset`command.
 
-Finally, as with traditional programming languages, we can use shell scripts such as libraries that can be run from an interactive shell session or from another shell script to set variables for top-level processes. Let's try to write another script in which we simply set the TEST variable.
+Finally, as with traditional programming languages, we can use shell scripts such as libraries that can be run from an interactive shell session or from another shell script to set variables or functions for top-level processes. Let's try to write another script in which we simply set the TEST variable.
 ```
 $ cat > /tmp/test_set
 TEST=qwe
