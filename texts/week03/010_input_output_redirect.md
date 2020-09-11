@@ -12,12 +12,14 @@ And finally, such a magic formula:
 ```
 prog 2>&1
 ```
-[Under the hood -- about streams numbers](../under_the_hood/03_streams_numbers.md)
-This means stdout and stderr are combined into one stream. You may use it with other redirection, for example:
+This means stdout and stderr are combined into one stream. You can know more about the meaning of this combination of symbols from our
+[Under the hood -- about streams numbers](../under_the_hood/03_streams_numbers.md) material.
+
+You may use it with other redirection, for example:
 ```
 prog > file 2>&1
 ```
-This means to redirect standard output to one "file", both standard output and standard error streams. But keep in mind - such combinations are not equivalent:
+This means to redirect standard output to one "file", both standard output and standard error streams. But keep in mind -- such combinations are not equivalent:
 ```
 prog > file 2>&1 != prog 2>&1 > file
 ```
@@ -43,5 +45,5 @@ prog1 args1... < file1 | prog2 args2... | ... | progN argsN... > file2
 ```
 The first program receives data from the file by redirecting stdin, sends the result of the work to the pipeline through stdout and after a long way through the chain of filters in the end the last command sends the results to stdout which is redirected to the result file.
 
-["Under the Hood" -- Text handling in Windows](../under_the_hood/04_text_in_Windows.md)
+Interestingly, some I/O redirection is supported in MS OSes, but with some unexpected specifics. See details in ["Under the Hood" -- Text handling in Windows](../under_the_hood/04_text_in_Windows.md)
 
