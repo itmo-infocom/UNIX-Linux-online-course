@@ -1,4 +1,4 @@
-All commands typed on the command line or executed in a command file are either commands built into the interpreter or external executable files. The set of built-in commands is quite small, which is determined by the basic concept of UNIX - the system should consist of small programs that perform fairly simple well-defined functions that communicate with each other via a standard interface.
+All commands typed on the command line or executed in a command file are either commands built into the interpreter or external executable files. The set of built-in commands is quite small, which is determined by the basic concept of UNIX -- the system should consist of small programs that perform fairly simple well-defined functions that communicate with each other via a standard interface.
 
 A rich set of standard utilities is a good old tradition for UNIX-like systems. The shell and the traditional set of UNIX utilities, is a POSIX standard.
 
@@ -22,7 +22,7 @@ The GNU getopt() function supports so-called long parameters, which start with t
 utility_name --help
 ```
 
-2. Option-arguments are shown separated from their options by <blank> characters, except when the option-argument is enclosed in the '[' and ']' notation to indicate that it is optional.
+2. Option-arguments are shown separated from their options by <blank> characters, except when the option-argument is enclosed in the 'square brackets' notation to indicate that it is optional.
 
 In GNU getopt's long options also may be used the 'equal' sign between option and option-argument:
 ```
@@ -37,9 +37,7 @@ Utilities with very complex arguments may be shown as follows:
 ```
 utility_name [options][operands]
 ```
-4. Arguments or option-arguments enclosed in the '[' and ']' notation are optional and can be omitted. Conforming applications shall not include the '[' and ']' symbols in data submitted to the utility.
-
-5. Arguments separated by the '|' ( <vertical-line>) bar notation are mutually-exclusive.
+4. Arguments separated by the '|' ('vertical bar') notation are mutually-exclusive.
 ```
 utility_name [-a|b] [operand...]
 ```
@@ -49,4 +47,4 @@ For example:
 utility_name [-a] [-b] [operand...]
 utility_name [-a] [-c option_argument] [operand...]
 ```
-6. Ellipses ( "..." ) are used to denote that one or more occurrences of an operand are allowed.
+5. Ellipses ( "..." ) are used to denote that one or more occurrences of an operand are allowed.
