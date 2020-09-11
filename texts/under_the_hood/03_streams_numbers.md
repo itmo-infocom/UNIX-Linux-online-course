@@ -6,8 +6,7 @@ What do these numbers mean? To understand this, we need to know one more thing -
 
 In Unix and related computer operating systems, a file descriptor is an abstract indicator (handle) used to access a file or other input/output resource, such as a pipe or network socket. File descriptors form part of the POSIX application programming interface. A file descriptor is a non-negative integer, generally represented in the C programming language as the type int (negative values being reserved to indicate "no value" or an error condition).
 
-Every process on a UNIX-like system has an associated open files table — a table of file descriptors. Each Unix process (except perhaps a daemon) should expect to have three standard POSIX file descriptors, corresponding to the three [standard streams](https://en.wikipedia.org/wiki/Standard_streams):
-
+Every started process on a UNIX-like system has an associated open files table — a table of file descriptors. Each Unix process (except perhaps a daemon) should expect to have three standard POSIX file descriptors, corresponding to the three [standard streams](https://en.wikipedia.org/wiki/Standard_streams):
 * 0 -- stdin
 * 1 -- stdout
 * 2 -- stderr
