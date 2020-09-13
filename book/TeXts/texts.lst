@@ -1,50 +1,50 @@
 under_the_hood/                                 7 hours ago
-000_intro.md          admin lectures            4 days ago   W1
+000_intro.md          admin lectures            4 days ago   W01
 001_history.md        history                  13 days ago
 002_open_free.md                               13 days ago
 003_main_concepts.md                           13 days ago
-004_components.md     admin lectures            4 days ago   W2
+004_components.md     admin lectures            4 days ago
 004_literature.txt                             13 days ago
-005_your_system.md                              8 days ago
+005_your_system.md                              8 days ago   W02
 006_command_inerpreter.md                      13 days ago
-007_environment_variables.md                   13 days ago   W3
+007_environment_variables.md                   13 days ago
 008_system_variables.md                        13 days ago
 009_special_symbols.md                         13 days ago
-010_input_output_redirect.md                    7 hours ago
+010_input_output_redirect.md                    7 hours ago  W03
 011_shell_settings.md                          13 days ago
 012_keystrokes.md                               8 hours ago
-013_utilities.md                               10 days ago   W4
+013_utilities.md                               10 days ago
 014_manuals.md                                 10 days ago
-015_some_utils.md                              10 days ago
+015_some_utils.md                              10 days ago   W04
 016_processes.md                               13 days ago
 017_files.md                                   12 days ago
-018_file_commands.md                           12 days ago   W5
+018_file_commands.md                           12 days ago
 019_text_viewers.md                            11 days ago
-020_text_editors.md                            10 days ago
+020_text_editors.md                            10 days ago   W05
 021_adv_text_utils.md                          10 days ago
-022_networking_history.md                       7 days ago   W6
+022_networking_history.md                       7 days ago
 023_network_utils.md                            7 days ago
 024_Internet_tools.md                           7 days ago
-025_x_window-concepts.md                        7 days ago
+025_x_window-concepts.md                        7 days ago   W06
 026_x_window-progs.md                           7 days ago
-027_shell_programming.md                        7 days ago   W7
+027_shell_programming.md                        7 days ago
 028_shell_controls.md                           7 days ago
 029_shell_functions.md                          7 days ago
-030_administration_tasks.txt                    4 days ago
-031_users_groups.txt                            6 days ago   W8
+030_administration_tasks.txt                    4 days ago   W07
+031_users_groups.txt                            6 days ago
 032_partitions.md                               4 days ago
 033_file_systems.md                             4 days ago
 034_disk_space.md                               4 days ago
-035_arch_backup.md                              4 days ago
+035_arch_backup.md                              4 days ago   W08
 036_repositories_and_packages.md                4 days ago
 037_system_start.md                             4 days ago
 038_network_admin.md                            3 days ago
-039_progams_devlopment.md Calculator Example_3  2 days ago   W9
-040_calculator.md         Calculator            3 days ago
+039_progams_devlopment.md Calculator Example_3  2 days ago
+040_calculator.md         Calculator            3 days ago   W09
 041_calculator_fix.md     Calculator UIs        2 days ago
 042_calculator_tui.md     Calculator UIs        2 days ago
 043_calculator_gui.md     Calculator UIs        2 days ago
 044_calculator_nw_srv.md  Networked calculator  2 days ago
-045_calculator_nw_ui.md   Networked calculator  2 days ago
+045_calculator_nw_ui.md   Networked calculator  2 days ago   W10
 046_calculator_l10n.md    Clacutlator l10n      yesterday
 047_calculator_russian.md Clacutlator l10n      yesterday

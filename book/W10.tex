@@ -1,0 +1,104 @@
+\documentclass[12pt]{report}
+\usepackage{cmap}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+
+\usepackage[english]{babel}
+%\usepackage[english,russian]{babel}
+
+\usepackage{hyperref}
+
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage{enumerate}
+%\usepackage{enumitem}
+\usepackage{tikz}
+\usepackage{xcolor}
+\usepackage{textcomp}
+
+\usepackage{listings}
+
+\usepackage{comment}
+
+\newcommand{\struct}[1]{\textcolor{blue}{#1}}
+\newcommand{\Rim}[1]{\uppercase\expandafter{\romannumeral#1}}
+\newcommand{\cmd}[1]{\textcolor{blue}{\tt #1}}
+
+\definecolor{mverb}{HTML}{C0E8F8}
+
+\lstnewenvironment{code}[1]{%
+  \lstset{backgroundcolor=\color{#1},
+  tabsize=10,
+  frame=single,
+  showlines=true,
+  framerule=0pt,
+  basicstyle=\ttfamily,
+  columns=fullflexible}}{}
+
+\parskip5pt
+\parindent0pt
+
+\title% (optional, use only with long paper titles)
+{UNIX AND LINIX\\IN INFOCOMMUNICATION\\Week 9}
+
+\author % (optional, use only with lots of authors)
+{O.~Sadov%,\\ \texttt{tit@astro.spbu.ru}
+}
+% - Give the names in the same order as the appear in the paper.
+% - Use the \inst{?} command only if the authors have different
+%   affiliation.
+
+%%%\institute{ITMO}
+%  Университет Информационных Технологий, Механики и Оптики\\
+%  кафедра Телекоммуникационных Систем
+
+% - Use the \inst command only if there are several affiliations.
+% - Keep it simple, no one is interested in your street address.
+
+\date% (optional, should be abbreviation of conference name)
+{}
+%{Aug 23, 2020 10:33 PM}
+
+
+\begin{document}
+\maketitle
+%\input{../039_progams_devlopment}
+%\input{../040_calculator}
+%\input{../041_calculator_fix}
+%\input{../042_calculator_tui}
+%\input{../043_calculator_gui}
+%\input{../044_calculator_nw_srv}
+\input{../TeXts/045_calculator_nw_ui}
+\input{../TeXts/046_calculator_l10n}
+\input{../TeXts/047_calculator_russian}
+\end{document}
+
+000_intro.tex                  024_Internet_tools.md
+001_history.tex                025_x_window-concepts.md
+002_open_free.tex              026_x_window-progs.md
+003_main_concepts.tex          027_shell_programming.md
+004_components.tex             028_shell_controls.md
+005_your_system.md             029_shell_functions.md
+006_command_inerpreter.md      030_administration_tasks.txt
+007_environment_variables.md   031_users_groups.txt
+008_system_variables.md        032_partitions.md
+009_special_symbols.md         033_file_systems.md
+010_input_output_redirect.md   034_disk_space.md
+011_shell_settings.md          035_arch_backup.md
+012_keystrokes.md              036_repositories_and_packages.md
+013_utilities.md               037_system_start.md
+014_manuals.md                 038_network_admin.md
+015_some_utils.md              039_progams_devlopment.md
+016_processes.md               040_calculator.md
+017_files.md                   041_calculator_fix.md
+018_file_commands.md           042_calculator_tui.md
+019_text_viewers.md            043_calculator_gui.md
+020_text_editors.md            044_calculator_nw_srv.md
+021_adv_text_utils.md          045_calculator_nw_ui.md
+022_networking_history.md      046_calculator_l10n.md
+023_network_utils.md           047_calculator_russian.md
+
