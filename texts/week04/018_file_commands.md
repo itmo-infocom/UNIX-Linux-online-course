@@ -26,6 +26,7 @@ ls -l
 ```
 We see a table with information about the file/directory in the corresponding lines.
 - The first column is the file attribute. The first letter is the file type: "dash" is a regular file, "d" is a directory, and so on. Then we can see read, write, and execute permissions for three user groups: owner, owner group, and others. Once again, we see the difference between UNIX and Microsoft. In the first case it is an attribute, in the second case executability is just a naming convention: '.com', '.exe', '.bat'.
+- The second -- Some mystery column "file's link counter" that we will discuss later in relation to "links".
 - Then we can see owner and owner group, size of file, time (by default -- of modification) and the name of file. 
 
 * pwd - print name of current/working directory
