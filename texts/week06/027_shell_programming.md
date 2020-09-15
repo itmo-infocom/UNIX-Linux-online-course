@@ -14,44 +14,44 @@ bash -c 'help set'
 Let's follow the good tradition started by the classic book of Kernighan and Ritchie "The C Programming Language" and write a standard program "Hello World":
 ```
 $ cat > hello
-echo Hello word!
+echo Hello word
 ^D
 ```
 We complete the input with the EOF Ctrl-D character. Let's try to run now:
 ```
 $ sh hello
-Hello word!
+Hello word
 ```
 Good.
 And now let's turn our script into a real executable program:
 ```
 $ chmod +x hello
 $ ./hello 
-Hello word!
+Hello word
 ```
 Excellent! Now we will talk about the arguments. Let's look at our first positional parameter:
 ```
 $ vi hello
-echo Hello $1!
+echo Hello $1
 $ ./hello 
-Hello !
+Hello
 ```
 We called our script without parameters and got nothing. Let's add some parameter:
 ```
 $ ./hello world
-Hello world!
+Hello world
 ```
 But for several parameters it does not work:
 ```
 $ ./hello world and universe
-Hello world!
+Hello world
 ```
 Let's fix it:
 ```
 $ vi hello
-echo Hello $*!
+echo Hello $*
 $ ./hello world and universe
-Hello world and universe!
+Hello world and universe
 ```
 Excellent! As we can see, there is some difference between different shells in the use of some special variable names associated with script parameters [Pr-n 9 slide 4](http://sdn.ifmo.ru/education/courses/free-libre-and-open-source-software/lectures/lecture-9).
 
@@ -61,12 +61,12 @@ A very important thing in the UNIX world is the zero-numbered positional paramet
 ```
 $ vi hello
 echo \$0: $0
-echo Hello $*!
+echo Hello $*
 $ ./hello 
 $0: ./hello
-Hello !
+Hello
 ```
-It's just the name of the script. And if you are familiar with the C language, you probably know - the same is in argv[0]. For what needs can such a parameter be used? The most obvious answer seems to be to write a nice 'Usage' error message:
+It's just the name of the script. And if you are familiar with the C language, you probably know -- the same is in argv[0]. For what needs can such a parameter be used? The most obvious answer seems to be to write a nice 'Usage' error message:
 ```
 $ vi hello
 if [ $# -lt 1 ]
@@ -74,9 +74,9 @@ then
 	echo Usage: $0 who...
 	exit
 fi
-echo Hello $*!
+echo Hello $*
 ```
-But on UNIX-like systems we can use a very interesting trick - linking files. Take a look at this super-nano-notebook. It runs on OpenWRT, a Linux distribution that you can find on your home internet router, for example. We have a fully functional set of Linux utilities, but if we take a closer look, we can see that all common UNIX utilities are just symbolic links to a single "busybox" binary.
+But on UNIX-like systems we can use a very interesting trick -- linking files. Take a look at this super-nano-notebook. It runs on OpenWRT, a Linux distribution that you can find on your home internet router, for example. We have a fully functional set of Linux utilities, but if we take a closer look, we can see that all common UNIX utilities are just symbolic links to a single "busybox" binary.
 ```
 # ls -l /bin
 ```
@@ -92,9 +92,9 @@ fi
 echo $0 $*!
 $ ln -s hello bye
 $ /hello world
-./hello world!
+./hello world
 $ ./bye bye
-./bye bye!
+./bye bye
 ```
 
 
