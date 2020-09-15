@@ -4,20 +4,20 @@ The history of the UNIX graphics system goes back to the 1984 MIT Athena educati
 
 In collaboration with DEC and IBM, the project developed a platform-independent graphics system to link together different systems from multiple vendors through a protocol that can both run local and remote applications. This system was the basis of the X-Window System, which began its growth in 1985 and was ported to various UNIX and not just UNIX platforms.
 
-We now have several successors to the classic X-Window system, the most famous being the Android or Wayland graphics system on Linux desktops, but X-Windows is still relevant today. And we will discuss some non-trivial concepts related to this. To see them just look into:
+We now have several successors to the classic X-Window system, the most famous being the Android on mobile devices or Wayland graphics system on Linux desktops, but X-Windows is still relevant today. And we will discuss some non-trivial concepts related to this. To see them just look into:
 ```
 man X
 ```
 
-First of all, the X-Window System is a network oriented client-server architecture. But the relationship between the client and the server doesn't seem very clear at first glance. Generally, the X server simply accepts requests from various client programs to display graphics (application windows) and sends back user input (from keyboard, mouse, or touchscreen). And the server will run on your tablet, and the apps that run on the supercomputer are just clients.
+First of all, the X-Window System is a network oriented client-server architecture. But the relationship between the client and the server doesn't seem very clear at first glance. Generally, the X server simply accepts requests from various client programs to display graphics (application windows) and sends back user input (from keyboard, mouse, or touchscreen). And the server for ex. will run on your tablet, and the apps that run on the supercomputer are just clients.
 
-The main principle of X-Window: “Provide mechanism rather than policy. In particular, place user interface policy in the clients' hands."
+The main principle of X-Window: “Provide mechanism rather than policy. In particular, place user interface policy in the client's hands."
 
 And the main locator for the X server is the DISPLAY environment variable:
 * DISPLAY=hostname:displaynumber.screennumber
 Hostname is optional. Its absence means localhost. The display number is a unique identifier for this X server and should always appear in the display specification. And the screen number is an optional parameter for multi-screen X server configuration.
 
-Let's try to play with this. First, we will switch to another virtual console, for example to second one by 'Ctrl+Alt+F2'. Actually, in Linux we have twelve virtual consoles in terms of the number of function keys on keyboard. And we can switch between them using 'Ctrl+Alt+function key'. On some of them, we see a login prompt and can log in here. Now let's run X server:
+Let's try to play with this. First, we will switch to another virtual console, for example to second one by 'Ctrl+Alt+F2'. Actually, in Linux we have twelve virtual consoles by number of function keys on keyboard. And we can switch between them using 'Ctrl+Alt+function key'. On some of them, we see a login prompt and can log in here. Now let's run X server:
 ```
 $ X
 (EE)
@@ -61,13 +61,13 @@ It looks like a black screen without any graphic elements. Something is wrong? O
 ```
 $ export DISPLAY=:1
 ```
-Now let's start the good old terminal interface - the `xterm` application:
+Now let's start the good old terminal interface -- the `xterm` application:
 ```
 $ xterm
 ```
-OK. Let's go to the third virtual console, where we left our X server. Great - we see the terminal window! But this is strange - we can only print something while staying in the terminal window, we cannot move or resize it, moreover, we do not have a button to destroy it!
+OK. Let's go to the third virtual console, where we left our X server. Great -- we see the terminal window! But this is strange -- we can only print something while staying in the terminal window, we cannot move or resize it, moreover, we do not have a button to destroy it!
 
-It's just because we have a developed system based on the KISS paradigm -- xterm simply emulates a terminal. If we want to move or resize windows (for example, we don't need this for an information kiosk), we need a special program for this -- a window manager. Let's run it on `xterm` by starting one of the graphical user environments - GNOME:
+It's just because we have a developed system based on the KISS paradigm -- `xterm` simply emulates a terminal. If we want to move or resize windows (for example, we don't need this for an information kiosk), we need a special program for this -- a window manager. Let's run it on `xterm` by starting one of the graphical user environments - GNOME:
 ```
 $ gnome-session &
 ```
@@ -99,25 +99,26 @@ In the font specification, we see the manufacturer's name, type, variety, size, 
 ```
 -adobe-courier-medium-?-normal--10-100-75-75-m-60-iso8859-*
 ```
-Font names tend to be fairly long as they contain all of the information needed to uniquely  identify individual fonts. However, the X server supports wildcarding of font names, so the full specification. 
+Font names tend to be fairly long as they contain all of the information needed to uniquely identify individual fonts. However, the X server supports wildcarding of font names, so the full specification. 
 
-This is good, but not good enough for the modern WYSIWYG world. The standard XWindow paradigm knows nothing about presentation on paper, only on screen. All documents are executed by applications creating PostScript language output for high quality printing.
+This is good, but not good enough for the modern WYSIWYG (What You See Is What You Get) world. The standard XWindow paradigm knows nothing about presentation on paper, only on screen. All documents are executed by applications creating PostScript language output for high quality printing.
 
-And with the widespread distribution of office suites, this paradigm turns out to be insufficient. For the modern WYSIWYG graphical interfaces, a new font engine has been developed -- FontConfig, which which works with PostScript and TrueType fonts and is processed by utilities: fc-cache, fc-list, fc-cat and fc-match. 
+And with the widespread distribution of office suites, this paradigm turns out to be insufficient. For the modern WYSIWYG graphical interfaces, a new font engine has been developed -- FontConfig, which works with PostScript and TrueType fonts and is processed by utilities: `fc-cache`, `fc-list`, `fc-cat` and `fc-match`. 
 
 ## X-Window options
-Classic XWindow applications are built using the XToolkit library and generally support a standard set of options:
+Classic XWindow applications are built using the XToolkit library and generally support a standard set of options. The most commonly used:
 * -display – name of the X server to use
 * -geometry – initial size and location of the window
 * -title – window title
-* -bg, -background, -fg color, -foreground – window background/foreground color
+* -bg, -background, -fg, -foreground – window background/foreground color
 * -fn, -font – font to use for displaying text
+and some resources related options:
 * -name – name under which resources for the application should be found
 * -xrm – resource name and value to override any defaults
 
 ## X-Window resources
 
-Finally, the so-called resources described in the manual pages for such applications can be used to customize the default settings for XWindow applications. Resources must be located in the `.Xdefaults` or `.Xresources` file in the $HOME directory and can be processed by the `xrdb` utility on the fly.
+What is it XWindow resources? They described in the manual pages for such applications can be used to customize the default settings for XWindow applications. Resources must be located in the `.Xdefaults` or `.Xresources` file in the $HOME directory and can be processed by the `xrdb` utility on the fly.
 
 The description looks like this:
 ```
@@ -133,4 +134,4 @@ XTerm*Font:  6x10
 emacs*Background:  rgb:5b/76/86
 ```
 
-GNOME user interface uses its own resource management -- Gconf (gconf-editor, gconftool-2).
+GNOME user interface uses its own resource management -- Gconf and tools for working with it: `gconf-editor` and `gconftool-2`.
