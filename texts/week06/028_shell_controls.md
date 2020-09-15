@@ -18,13 +18,14 @@ And if we have successful and unsuccessful results, we can operate on those resu
 * prog1 || prog2 -- means start prog2 if prog1 failed (exited with code other than 0)
 
 Our programming language also has the good old "if":
+```
 B: if list; then list; [ elif list; then list; ] ... [ else list; ] fi
 C: if (list) then list; [ else if (list) then list; ] ... [ else list; ] endif
-
-And what is this “list” in this case? These are just a few commands. The exit code of the command will determine the behavior of the `if`.
+```
+And what is this “list” in this case? These are just a command. The exit code of the command will determine the behavior of the `if`.
 
 ## Test
-And the most commonly used command in `if` statements is` test`. And the most commonly used command in statements is `if` -` test` or just an opening square bracket. It is often just a link to the executable `test`. Be aware that if you use a square bracket, you must close the expression with a closing square bracket. And the space before that is important.
+And the most commonly used command in `if` statements is` test`. And the most commonly used command in statements is `if` -- the `test` command or just an opening square bracket (it is often just a link to the executable `test`). Be aware that if you use a square bracket, you must close the expression with a closing square bracket. And the space before that is important, because it's just command's arguments.
 ```
 test EXPR or [ EXPR ]
 
@@ -53,12 +54,12 @@ and `until`, executing until the statement command fails.
 ```
 B: until list; do list; done
 ```
-We also have a `loop` construct, which may not seem very familiar to programmers from classical programming languages such as C:
+We also have a `for` loop construct, which may not seem very familiar to programmers from classical programming languages such as C:
 ```
 B: for name in word ...; do list ; done
 C: foreach name (word ...) list ; end
 ```
-The source of the values that are set for the loop variable is simply a string of words, separated by spaces. The source of the values that are set for the loop variable is simply a string of words, separated by spaces. To emulate the classic number cycles, we have to use special commands that will generate sequences of numbers for us. Like `seq` command:
+The source of the values that are set for the loop variable is simply a string of words, separated by spaces. To emulate the classic number cycles, we have to use special commands that will generate sequences of numbers for us. Like `seq` command:
 ```
 $ man seq
 $ for i in `seq 5`; do echo $i; done
@@ -80,11 +81,11 @@ break [n], continue [n]
 ```
 
 ## Case switch
-A case command first expands word, and tries to match it against each pattern in turn, using  the  same matching rules as for pathname expansion:
+A `case` command first expands word, and tries to match it against each pattern in turn, using the same matching rules as for pathname expansion:
 ```
 case word in [ [(] pattern [ | pattern ] ... ) list ;; ] ... esac
 ```
-If the ;; operator is used, no subsequent matches are attempted after the first pattern match.
+If the "double semicolon" operator is used, no subsequent matches are attempted after the first pattern match. Let's try to play with our `hello` program again:
 ```
 $ vim hello 
 if [ $# -lt 1 ]
