@@ -1,9 +1,10 @@
 ## Functions
 
-This defines a function named name. The reserved word `function` is optional.
 ```
 [function] name () {list}
 ```
+This defines a function named name. The reserved word `function` is optional.
+
 And we can `return` some exit code from the function.
 ```
 return [n]
@@ -68,7 +69,7 @@ readonly -- variables are marked readonly
 shift – shift parameters
 sleep – delay execution for a specified amount of time
 ```
-And it would be helpful to be able to understand what exactly we are running when we run the command. And we have the following commands:
+And it would be helpful to be able to understand what exactly we are running when we call the command. And we have the following commands:
 ```
 which, type – which command?
 ```
