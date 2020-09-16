@@ -14,18 +14,18 @@ and in our repository -- we can see the `calc` script:
 $ ls
 calc  Makefile  README.md
 ```
-This means - we can mark some stages of our development with tags. And then, using the "checkout" operation, we can switch between them at any time. OK - let's look at our calculator:
+This means -- we can mark some stages of our development with tags. And then, using the `checkout` operation, we can switch between them at any time. OK -- let's look at our calculator:
 ```
 $ cat calc 
 #!/bin/sh
 
 expr $*
 ```
-Wow - looks pretty simple! We simply call the expr program with the arguments passed to our script. And as we can see, `expr` is just an expression evaluator:
+Wow -- looks pretty simple! We jus call the `expr` program with the arguments passed to our script. And as we can see, `expr` is just an expression evaluator:
 ```
 man expr
 ```
-And this is the usual way of UNIX development - not reinvent the wheel, but just take parts of them and glue them with a Shell. OK -- let's try to test:
+And this is the usual way of UNIX development -- not reinvent the wheel, but just take parts of them and glue them with a Shell. OK -- let's try to test:
 ```
 $ ./calc 1 + 2
 3
@@ -37,7 +37,7 @@ $ ./calc 5 - 7
 $ ./calc 6 / 3
 2
 ```
-Looks good - let's try divide:
+Looks good -- let's try divide:
 ```
 $ ./calc 6 / 3
 2
@@ -62,4 +62,4 @@ $ sh -x ./calc 2 * 2
 + expr 2 Makefile README.md calc 2
 expr: syntax error
 ```
-Oh yeah - the asterisk are just special Shell matching characters, in this case meaning - all files in the current directory! And it is replaced by all files from the current directory. We need to fix it.
+Oh yeah -- the asterisk are just special Shell matching characters, in this case meaning -- all files in the current directory! And it is replaced by all files from the current directory. We need to fix it.
