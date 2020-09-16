@@ -24,4 +24,6 @@ There are fundamentally two types of processes in Linux -- foreground and backgr
 
 And finally -- interactive foreground processes must be attached to the terminal session through the terminal line. At the time of the creation of UNIX, a TTY (teletype) device (originally developed in the 19th century), was the primary communication channel between the user and the computer. It was a very simple interface that worked with a stream of bytes encoded according to the ASCII character set. The connection is made via a serial interface (for example RS232) with a fixed set of connection speeds.
 
+[LOGGING INTO LINUX WITH A 1930S TELETYPE](https://hackaday.com/2020/04/15/logging-into-linux-with-a-1930s-teletype/)
+
 This interface is still the main user interface for UNIX-like systems. The implementation of each new form of user interaction, such as full-screen terminals, graphics systems, and network connections, all started with the implementation of a simple TTY command line interface. Moreover, as we will see, this interface abstraction gives us a very powerful and flexible mechanism for communication between programs, possibly without human intervention.
