@@ -1,3 +1,5 @@
+Historically, we have had many flavors of UNIX-like systems, and some of them are still alive today. And most of them are opensorce and free: [Unix History Timeline](http://www.levenez.com/unix/)
+
 The best advantage of free systems is their availability. You can download many kinds of Linux or UNIX systems for free. You can distribute such systems, downloaded from the Internet, and use them to create your own customized solutions using a huge number of already existing components.
 
 For example, for educational purposes we use our own Linux distribution called NauLinux. This title is the abbreviated title of the Russian translation of the original Scientific Linux project -- "Nauchnyi Linux". We are adding some software packages for working software-defined networks and quantum cryptography emulating and are using this new distributions to simulate various complex systems in educational or research projects. This distribution is free and is used by students to create their own solutions.
