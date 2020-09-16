@@ -1,6 +1,6 @@
 ## Archiving and backups
 
-Historically the archiver, also known simply as `ar`, is a first Unix utility developed at 1971 in AT&T that maintains groups of files as a single archive file. Today, ar is generally used only to create and update static library files that the link editor or linker uses. An implementation of `ar` is included as one of the GNU Binutils.
+Historically the first Unix archiver utility, also known simply as `ar`, developed at 1971 in AT&T that maintains groups of files as a single archive file. Today, `ar` is generally used only to create and update static library files (which internally are simply archive with object files, which compiled from source files). That libraries the link editor or linker uses. An implementation of `ar` is included as one of the GNU Binutils.
 
 But the most widely used archiving tools are `tar` and `cpio`.
  
@@ -17,10 +17,10 @@ Useful options:
 * 'f' -- file or device file with archive. "Dash" means standard input or output.
 The GNU version also supports compressing/decompressing archives:
 * -a, --auto-compress -- use archive suffix to determine the compression program
-* -z, --gzip, --gunzip, --ungzip
-* -Z, --compress, --uncompress
-* -j, --bzip2
-* -J, --xz
+* -Z, --compress, --uncompress -- the oldest UNIX `compress` program, archive suffix is `.tar.Z`
+* -z, --gzip, --gunzip, --ungzip -- archive suffix is `.tar.gz` or just `.tgz`
+* -j, --bzip2 -- archive suffix is `.tar.bz2` or `.tbz2` or just `.tbz`
+* -J, --xz  -- archive suffix is `.tar.xz` or '.txz'
 ```
 tar cvzf arch.tar.gz some_files...
 tar tvzf arch.tar.gz
@@ -42,19 +42,19 @@ Basic operations with it:
 * -o|--create
 * -t|--list: Print a table of contents of the input.
 * -i|--extract
-* also -p|--pass-through is so-called copy-pass mode, cpio copies files from one directory tree to another, combining  the  copy-out  and  copy-in steps  without  actually  using  an  archive.
+* and also -p|--pass-through is so-called copy-pass mode, cpio copies files from one directory tree to another, combining the copy-out and copy-in steps without actually using an archive.
 
 Unlike `tar`, which works with files, `cpio` works with stdin/stdout.
 
-This is good, but such an archive may contain some special fil es that are not properly processed. For example, you can get hard links split across multiple files. And for real backup in UNIX-like systems, special programs have been developed that know about the internal structure of the file system, for example:
-* dump/restore - ext2/3/4 filesystem backup/retore.
+This is good, but such an archive may contain some special files that are not properly processed. For example, you can get hard links split across multiple files. And for real backup in UNIX-like systems, special programs have been developed that know about the internal structure of the file system, for example:
+* dump/restore -- ext2/3/4 filesystem backup/retore.
 * xfsdump/xfsrestore -- XFS filesystems backup/retore.
 The main arguments are: the list of files and directories for dump and '-f dump_file'. But we can also choose the "dump level", which is just an integer. A level 0, full backup, specified by -0 guarantees the entire file system is copied. A level number above 0, is so-called "incremental backup", tells `dump` to copy all files new or modified since the last dump of a lower level. The default level is 0.
  
 And this makes it possible to implement various "backup strategies". For example, you can create a full backup at the end of the week and then make incremental backups every day of the week. Then at the end of the week for new full backup, you can use the oldest backup storage from the full backup pool. This way, you will have weekly full backups for a specific period and daily saved states in incremental backups for a week or two.
 
-And then you can extract the full dump or individual files or directories from the saved dump using the restore utility:
+And then you can extract the full dump or individual files or directories from the saved dump using the `restore` utility:
 ```
 man restore
 ```
-You can also do this interactively (-i).
+You can also do this interactively with `-i` option.
