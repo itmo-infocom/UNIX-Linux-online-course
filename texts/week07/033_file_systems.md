@@ -2,7 +2,9 @@
 
 And now that our partitioning is complete, it's time to see how we can use our disk space. As mentioned earlier, UNIX-like systems can treat disks or disk partitions as files. And some databases, for example, can use raw disk partitions to store data with higher performance.
 
-But most of the time, disk space is used in file systems. UNIX-like systems and especially Linux support many different file systems. All the details of their implementation are reduced to a common denominator -- the VFS abstraction. Then we can mount them in a single directory tree, navigate through the hierarchy, read, write, work with owners and permissions, according to the restrictions imposed by the original file systems.
+But most of the time, disk space is used in file systems. UNIX-like systems and especially Linux support many different file systems. All the details of their implementation are reduced to a common denominator -- the VFS abstraction. One of the first virtual file system mechanisms on Unix-like systems was introduced by Sun Microsystems in 1985. It allowed Unix system calls to access local UFS file systems and remote NFS file systems transparently. For this reason, Unix vendors who licensed the NFS code from Sun often copied the design of Sun's VFS.
+
+Once the filesystem has been created, we can mount it in a single directory tree, navigate through the hierarchy, read, write, work with owners and permissions, according to the restrictions imposed by the this file systems internals.
 
 The standard tool for creating a new filesystem is `mkfs`:
 ```
@@ -42,7 +44,7 @@ And then we can `unmount` it:
 umount /mnt
 ls /mnt
 ```
- by setting the device or the mount directory as an argument:
+by setting the device or the mount directory as an argument:
 ```
 man umount
 ```
@@ -50,16 +52,16 @@ But Linux/UNIX will not allow you to unmount a device that is busy. There are ma
 ```
 man fuser
 ...
--k, --kill
-...
 ```
+The `-k, --kill` option can help with this.
+
 Finally, we can check our filesystem. For journaled file systems, recovering from a power outage is not as relevant, but in some cases it may be useful. In a difficult situation, such as a damaged hard disk, during system boot, you may receive an error message recommending that you run the `fsck` command to check the file system:
 ```
 man fsck - check and repair a Linux file system
 ```
-As we can see, we have many options for the `fsck` command, but the main one is 'y' -- 'yes'. This means - always try to fix any file system corruption you find automatically, otherwise you could get a zillion troubleshooting questions during the fixup.
+As we can see, we have many options for the `fsck` command, but the main one is 'y' -- 'yes'. This means -- always try to fix any file system corruption which you find automatically, otherwise you could get a zillion troubleshooting questions during the fixup.
 
-After completing the repair, you can find some lost data in a special directory "/lost+found" in the root of the damaged filesystem, which consists of many directories and files whose names contain only numbers -- so called 'i-nodes'.
+After completing the repair, you can find some lost data in a special directory "/lost+found" in the root of the damaged filesystem, which consists of many directories and files whose names contain only numbers -- 'i-nodes'. About this matter see our ["Under the Hood" -- links and file system internals](../under_the_hood/07_links.md) material.
 
 And then you can rename them manually - for example, you found some directory with the files:
 * 'passwd', 'group' and 'shadow' - this means that this is '/etc'
@@ -68,11 +70,9 @@ and so on...
 
 ## Swapping
 
-And finally, a few words about swapping. Swapping or  paging is a memory management scheme by which a computer stores and retrieves data from secondary storage for use in main memory. It is an MMU-driven virtual memory mechanism that is used in modern operating systems to use secondary storage in order for programs to exceed the amount of available physical memory.
+And finally, a few words about swapping. Swapping or paging is a memory management scheme by which a computer stores and retrieves data from secondary storage for use in main memory. It is an MMU-driven virtual memory mechanism that is used in modern operating systems to use secondary storage in order for programs to exceed the amount of available physical memory. For more information look at [Under the Hood -- Virtual Memory](../under_the_hood/10_virtual_memory.md) material.
 
-[Under the Hood -- Virtual Memory](../under_the_hood/10_virtual_memory.md)
-
-This means you can run applications with a total memory usage that exceeds the physical RAM on your system. The scheduler sends inactive processes to disk swap and loads active tasks from disk into memory. This can reduce overall system performance, but it will increase the ability to run applications.
+This means you can run applications with a total memory usage that exceeds the physical RAM on your system. The scheduler sends inactive processes to disk swap and loads active tasks from disk into memory. This can reduce overall system performance, but increase the ability to run applications.
 
 The main program for creating of swapping area is `mkswap`:
 ```
@@ -86,6 +86,8 @@ man swapon
 ```
 After that, you will see additional swap space using the `free` command or in the pseudo file `/proc/meminfo`. You can also turn off the swap area with the `swapoff` command.
 
+## Mounting on boot
+
 OK. But all these mounts and swaps will be connected to our system only until the reboot. To automatically mount them at boot time, we must write them to the filesystems table in the file `/etc/fstab`:
 ```
 cat /etc/fstab
@@ -96,11 +98,11 @@ man fstab
 ```
 Each  filesystem  is  described on a separate line; fields on each line are separated by tabs or spaces.
 * The first field (fs_spec) describes the block special device or remote filesystem to be mounted.
-*  The second field (fs_file) describes the mount point for the filesystem.  For swap partitions, this field should be specified as `none'.
+* The second field (fs_file) describes the mount point for the filesystem.  For swap partitions, this field should be specified as `none'.
 * The third field (fs_vfstype) describes the type of the filesystem. An entry `swap` denotes a file or partition to be used for swapping.
 * The fourth field (fs_mntops) describes the mount options associated with the filesystem.
-* The fifth field (fs_freq) is used for these filesystems by the dump command to determine which filesystems  need  to be backuped.
+* The fifth field (fs_freq) is used for these filesystems by the dump command to determine which filesystems need to be backuped.
 * The sixth field (fs_passno) is used by the fsck(8) program to determine the order in which filesystem checks are done at reboot  time.
 
-After putting some entry in the fstab file, you can run the `mount` command with only one of them: device or mount point.
+After putting some entry in the fstab file, you can run the `mount` command with only one of arguments: device or mount point.
 
