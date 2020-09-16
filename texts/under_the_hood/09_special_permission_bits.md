@@ -1,13 +1,13 @@
-As we recall, we have the passwd utility that any user can call to change the password. But on the other hand, we did not have permissions not only to write to the file in which the password hashes are `/etc/shadow`, but also to read. How can a simple user change his password?
+As we recall, we have the `passwd` utility that any user can call to change the password. But on the other hand, we did not have permissions not only to write to the file in which the password hashes are `/etc/shadow`, but also to read. How can a simple user change his password?
 
 And on UNIX-like systems, there is a special trick for this. Let's take a look at the permissions of the `passwd` utility:
 ```
 $ ls -l /bin/passwd 
 -rwsr-xr-x 1 root root 68208 May 28 09:37 /bin/passwd
 ```
-At the place of execution permissions for the owner, we see the letter 's' instead of 'x'. Actually it is just a special kind of executable permission that can be set for owner and group. But when we run such files, our initial UID or GID is changed to the UID or GID of the file. The process will start with a new effective UID or GID equal to the file parameter.
+At the place of execution permissions for the owner, we see the letter 's' instead of 'x'. Actually it is just a special kind of executable permission that can be set for owner and group. But when we run such files, our initial UID or GID is changed to the ID of the file. The process will start with a new effective UID or GID equal to the file parameter.
 
-And if we run the `passwd` command, we become the` root` user while this program is running. In this state, we can read and write to `/etc/shadow`. We can set or disable suid and sgid in symbolic mode using the 's' character. In the [binary mode](under_the_hood/octal_mode.md) of the file, it looks like this:
+And if we run the `passwd` command, we become the` root` user while this program is running. In this state, we can read and write to `/etc/shadow`. We can set or unset suid and sgid in symbolic mode using the 's' character. In the [binary mode](under_the_hood/octal_mode.md) of the file, it looks like this:
 ```
 $ stat -c "%a %A %n" /bin/passwd 
 4755 -rwsr-xr-x /bin/passwd
@@ -15,7 +15,7 @@ $ stat -c "%a %A %n" /bin/crontab
 2755 -rwxr-sr-x /bin/crontab
 ```
 
-Another question -- do you have any ideas about the implementation of the `ps` utility? Actually it seems pretty simple - we just need to open the special file '/dev/mem', read the current process table from it and print it to stdout. But for this we do not have permission to read memory:
+Another question -- do you have any ideas about the implementation of the `ps` utility? Actually it seems pretty simple - we just need to open the special file '/dev/mem', read the current process table from it and pretty print it to stdout. But for this we do not have permission to read memory:
 ```
 $ ls -l /dev/mem
 crw-r----- 1 root kmem 1, 1 Sep  1 21:39 /dev/mem
@@ -42,5 +42,7 @@ $ ls -l /
 drwxrwxrwt  25 root root      20480 Sep  6 21:23 tmp
 ...
 ```
-So we can see the executable permissions for the owner and group. By the way, what does "executable" mean for a directory? Strange, but this permission means - you can change to this directory, for example, with the command `cd`. And file permission 1000 or 't' in character mode means - only the owner of something can delete it in a directory with this bit. Otherwise, although in a publicly accessible `/ tmp` directory, we cannot modify files or directories owned by others if we do not have such permissions, but we can delete them, because everyone has all the permissions to changing of that directory.
+So we can see the executable permissions for the owner and group. By the way, what does "executable" mean for a directory? Strange, but this permission means - you can change to this directory, for example, with the command `cd`.
+
+And also we see permission 't' for directory '/tmp'. Generally `/tmp` directory is a publicly accessible -- all users have all permissions to it. Of course, they cannot modify files or directories owned by others if we do not have such permissions, but they can delete them, because everyone has all the permissions to changing of that directory. And the file permission 1000 or 't' in character mode means -- only the owner of something can delete it in a directory with this bit.
 
