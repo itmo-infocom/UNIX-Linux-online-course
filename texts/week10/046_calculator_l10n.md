@@ -52,11 +52,11 @@ We have a utility `gettext` that translates the text messages passed to it as ar
 ```
 $ man gettext
 ```
-As we can see, for this we just need to add a call to the `gettext` utility in all places where we used a text string as a parameter to` gettext`, and insert the result of execution into command lines by quoting the command with "back apostrophes":
+As we can see, for this we just need to add a call to the `gettext` utility in all places where we used a text string as a parameter to `gettext`, and insert the result of execution into command lines by quoting the command with "back apostrophes":
 ```
 $ git diff Example_7 Example_8
 ```
-And now we can fetch the gettext strings from the source using the xgettext utility:
+And now we can fetch the gettext strings from the source using the `xgettext` utility:
 ```
 $ make calc_ui.pot
 xgettext -o calc_ui.pot -L Shell calc_ui
