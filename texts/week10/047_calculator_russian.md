@@ -4,7 +4,7 @@ error: The following untracked working tree files would be overwritten by checko
         calc_ui.pot
 Please move or remove them before you can switch branches.
 ```
-Ok. Let's delete this file - in the next example we already have it:
+Ok. Let's delete this file -- in the next example we already have it:
 ```
 $ rm calc_ui.pot
 $ git checkout Example_9
@@ -16,9 +16,9 @@ As you can see, we just made a translation into Russian of the corresponding PO 
 ```
 $ cat calc_ui-ru.po
 ```
-First we have the metadata and then the pairs of translation strings: `msgid` with the source and `msgstr` with the translation. This is not a good translation strategy because, for example, some messages in one language may have different meanings in other languages in a different context. And in larger software projects like Firefox or Open/LibreOffice, other localization engines have been used in which each line from the user interface has its own unique identifier and translation for each one. And to simplify and unify the translation process, they use such complex tools as editors with support for the translation memory mechanism.
+First we have the metadata and then the pairs of translation strings: `msgid` with the source and `msgstr` with the translation. This is not a best translation strategy because, for example, some messages in one language may have different meanings in other languages in a different context. And in larger software projects like Firefox or Open/LibreOffice, other localization engines have been used in which each line from the user interface has its own unique identifier and translation for each one. And to simplify and unify the translation process, they use such complex tools as specialized editors with support for the translation memory mechanism.
 
-But gettext is widely used in the UNIX-like world, and that's enough for our purposes. Let's compile and install our translation now:
+But `gettext` is widely used in the UNIX-like world, and that's enough for our purposes. Let's compile and install our translation now:
 ```
 $ sudo make install
 [sudo] password for liveuser: 
@@ -38,7 +38,7 @@ Great! We have a calculator in Russian now! Let's switch to English again:
 ```
 $ LANG=en_US.UTF-8 calc_ui
 ```
-In English again. For other languages, we still have the same interface because we didn't translate the messages for them:
+In works. For other languages, we still have the same interface because we didn't translate the messages for them:
 ```
 $ LANG=zh_CN.UTF-8 calc_ui
 ```
