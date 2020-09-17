@@ -13,7 +13,7 @@ And finally, such a magic formula:
 prog 2>&1
 ```
 This means stdout and stderr are combined into one stream. You can know more about the meaning of this combination of symbols from our
-[Under the hood -- about streams numbers](../under_the_hood/03_streams_numbers.md) material.
+[Under the hood -- about streams numbers](../under_the_hood/03_streams_numbers.md) lecture.
 
 You may use it with other redirection, for example:
 ```
@@ -25,7 +25,7 @@ prog > file 2>&1 != prog 2>&1 > file
 ```
 In the second case, you first concatenate the streams and then split again by redirecting stdout to the selected file. In this case, only the stdout file will be put into the file, stderr will be displayed on the screen. The order of the redirection operations is important!
 
-So the question is: what are we missing in terms of symmetry? It's obvious - double "less than" sign.
+So the question is: what are we missing in terms of symmetry? It's obvious -- double "less than" sign.
 
 And this combination also exists! But what can this combination means? Append something to standard input? But this is nonsense. Actually this combination is used for the so-called "Here-document".
 ```
@@ -35,7 +35,7 @@ END_LABEL
 ```
 After the double "less than" some label is placed (END_LABEL in our case) and all text from the next line to END_LABEL is sent to the program's standard input, as if from the keyboard.
 
-Be careful, in some older shells this sequence of commands expects exactly what you wrote. And if you just wrote a space before END_LABEL for beauty, the shell will only wait for the same character string with a leading space. And if this line is not found, the redirection from "here document" continues to the end of file and may be the source of some unclear errors.
+Be careful, in some older shells this sequence of commands expects exactly what you wrote. And if you wrote a space before END_LABEL just for beauty, the shell will only wait for the same character string with a leading space. And if this line is not found, the redirection from "here document" continues to the end of file and may be the source of some unclear errors.
 
 And finally, the pipelines. They are created with a pipe symbol placed between commands. This means connecting the standard output from the first command to the standard input of the second command. After that, all the data that the first command by default sending to the screen will be sent to the pipe, from which the second command will be read as from the keyboard.
 
@@ -45,5 +45,5 @@ prog1 args1... < file1 | prog2 args2... | ... | progN argsN... > file2
 ```
 The first program receives data from the file by redirecting stdin, sends the result of the work to the pipeline through stdout and after a long way through the chain of filters in the end the last command sends the results to stdout which is redirected to the result file.
 
-Interestingly, some I/O redirection is supported in MS OSes, but with some unexpected specifics. See details in ["Under the Hood" -- Text handling in Windows](../under_the_hood/04_text_in_Windows.md)
+Interestingly, some I/O redirection is supported in MS OSes, but with some unexpected specifics. See details in ["Under the Hood" -- Text handling in Windows](../under_the_hood/04_text_in_Windows.md) lecture.
 
