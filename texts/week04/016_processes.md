@@ -104,7 +104,7 @@ kill -l
 2) SIGINT – “program interrupt” (INTR key -- usually Ctrl-C)
 9) SIGKILL – immediate program termination (cannot be blocked, handled or ignored)
 1) SIGHUP – terminal line is disconnected (often used for daemons config rereading, just because daemons not connected to TTYs)
-3) SIGQUIT – core dump process (QUIT key, as we remeber -- usually C-\)
+3) SIGQUIT – core dump process (QUIT key, as we remeber -- usually C-\\)
 
 ## Offline execution
 
