@@ -1,19 +1,19 @@
 OK. But you can get useful information not only from the 'info' utility.
 
 # OS variant
-Ok, we just logged in. First, let's try to determine which part of the UNIX-like universe we are in.
+Ok, we just logged in. But now we want to try to determine which part of the UNIX-like universe we are in.
 
 `uname` -- print system information, in most simple case -- just name of kernel. With "all" flag we will get more information. And for what needs can such information be used, besides simple curiosity? The answer is simple -- it can be used to create portable applications or some kind of administrative scripts for various types of UNIX-like systems. You can use it in your installation or shell configuration scripts to select different binaries and system utilities according to your specific computer architecture and OS.
 
 This works well for good old UNIX systems that are very vendor dependent. But on Linux systems, `uname` will only display the Linux kernel name, possibly with the kernel version. And as we know, we will have many different Linux distributions, which can be very different from each other. And how can we adapt to this diversity?
 
-One of the possibilities is the lsb_release command:
-`lsb_release` – provides certain LSB (Linux Standard Base) and distribution-specific information. The Linux Standard Base (LSB) is a joint project by several Linux distributions under the organizational structure of the Linux Foundation to standardize the software system structure, including the Filesystem Hierarchy Standard used in the Linux kernel. The LSB is based on the POSIX specification, the Single UNIX Specification (SUS), and several other open standards, but extends them in certain areas.
+One of the possibilities is the `lsb_release` command:
+`lsb_release` -- provides certain LSB (Linux Standard Base) and distribution-specific information. The Linux Standard Base (LSB) is a joint project by several Linux distributions under the organizational structure of the Linux Foundation to standardize the software system structure, including the Filesystem Hierarchy Standard. The LSB is based on the POSIX specification, the Single UNIX Specification (SUS), and several other open standards, but extends them in certain areas.
 
 ## Date
 Good. We get information about "where". Let's try to figure out "when".
 
-date - print the system date and time. What time? The current time of our time zone. We can check the time in a different time zone, for example, Greenwich Mean Time (GMT):
+`date` -- print the system date and time. What time? The current time of our time zone. We can check the time in a different time zone, for example, Greenwich Mean Time (GMT):
 ```
 $ TZ=GMT date
 ```
@@ -26,7 +26,7 @@ $ man date
 ```
 Also you can choose a different output format for time and date using the '+' option:
 ```
-date [OPTION]... [+FORMAT]
+date +%F_%T_%Z
 ```
 and use this command to convert from different time representations using the '--date' option. You can find more details on the man page.
 
@@ -81,7 +81,7 @@ $ who
 ```
 $ finger
 ```
-At this point, it can be understood that a particular user is still sitting at his workplace or has left for coffee. Moreover, we can see the user's status on other computers. But in this case, you must understand that this is a client-server application. You must have a server part on the computer that you requested, and you need the appropriate privileges for that. 
+At this point, it can be understood that a particular user is still sitting at his workplace or has left for coffee. Moreover, we can see the user's status on other computers. But as a client-server application, it needs a server side on the computer you requested and the ability to connect to it.
 
 If you find the required user in the list of computer users, you can send him a message manually or from the program using the `write` command:
 ```
@@ -113,4 +113,4 @@ Another note about older UNIX systems is that `stty` on such systems may not hav
 ```
 stty < /dev/tty0
 ```
-It seems a little strange, but it was a good old UNIX developer's decision.
+It seems a little unusual, but it was a good old UNIX developer's decision.
