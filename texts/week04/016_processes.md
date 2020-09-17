@@ -1,6 +1,6 @@
 ## Process
 
-We've discussed the users, and then it's appropriate to talk about another of the three whales of UNIX-like systems -- processes. We can get information about the processes by running the `ps` (process status) command. In this case, we again see two worlds -- two systems SYSV and BSD:
+We've discussed the users, and then it's appropriate to talk about another of the three whales that UNIX-like systems rest on -- processes. We can get information about the processes by running the `ps` (process status) command. In this case, we again see two worlds, two systems -- SYSV and BSD:
 ```
 SYSV – ps [-efl]
 BSD – ps [-][alx]
@@ -9,7 +9,7 @@ What about GNU?
 ```
 man ps
 ```
-As we can see, GNU ps supports both sets of options with some long options.
+As we can see, GNU `ps` supports both sets of options with some long options.
 
 By default `ps` without options shows only processes started by me and connected to my current terminal line.
 
@@ -35,11 +35,11 @@ or just by command:
 $ pstree
 ```
 * PRI -- priority of the process. Higher number means lower priority. But, as we will discuss later, we cannot change the priority, because this value is dynamically changed by the process scheduler. And we can only send recommendations to the scheduler using the `nice` (NI) parameter:
-* NI -- can be set with `nice` and `renice` commands. More information about priorities and nices you can find in  ["Under the Hood" -- Process scheduler](../under_the_hood/06_scheduler.md) material.
+* NI -- can be set with `nice` and `renice` commands. More information about priorities and nices you can find in  ["Under the Hood" -- Process scheduler](../under_the_hood/06_scheduler.md) lecture.
 * TTY -- controlling tty (terminal).
 * CMD -- and the command.
 
-And also a very useful (especially if the system hangs) command `top`, which dynamically displays information about processes, sorted accordingly by the use of system resources -- memory and CPU time.
+And also a very useful (especially if the system slows down) command `top`, which dynamically displays information about processes, sorted accordingly by the use of system resources -- memory and CPU time.
 
 `nice` -- run a program with modified scheduling priority:
 ```
@@ -96,7 +96,7 @@ also you can kill the process by PID number:
 ```
 kill [-s sigspec | -n signum | -sigspec] [pid | jobspec] ...
 ```
-But in some cases `kill` does not work -- for example, if the process is frozen. We can fix this problem by calling another `kill`, just because `kill` is actually sending a signal to the process, and we just have to choose a different signal. This is the list of signals:
+But in some cases `kill` does not work -- for example, if the process is frozen. But even so, we can kill the process, just because `kill` is actually sending a signal to the process, and we just have to choose a different signal. This is the list of signals:
 ```
 kill -l
 ```
@@ -112,7 +112,7 @@ When you execute a Unix job in the background ( using &, `bg` command), and logo
 ```
 nohup – run a command immune to hangups, with output to 'nohup.out'
 ```
-Another very useful program is `screen` – it's screen manager with VT100/ANSI terminal emulation which supports multi-screen sessions support with offline execution. In fact, you can run some long running commands on multiple screen sessions and after disconnecting from this terminal line with your hands or after breaking connecting. After that, you can reconnect to this screen and you will see that all processes are still running.
+Another very useful program is `screen` – it's screen manager with VT100/ANSI terminal emulation which supports multi-screen sessions support with offline execution. In fact, you can run some long running commands on multiple screen sessions and after disconnecting from this terminal line with your hands or after breaking connecting. And then, you can reconnect to this screen and you will see that all processes are still running.
 
 ## Later execution and scheduled commands
 
