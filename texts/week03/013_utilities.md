@@ -11,11 +11,11 @@ Some command syntax was changed by the USL with the introduction of SYSV, but on
 
 Executable files on UNIX-like systems do not have any file name extension requirements as they do on Windows. The utility executable can have any name, but must have execute permission for the user who wants to run it.
 
-A standard utility can have options, argument of options, and operands. Command line arguments of programs are mainly parsed by the getopt() function, which actually determines the form of the parameters when the command is invoked. This is an example of utility's synopsys description:
+A standard utility can have options, arguments of options, and operands. Command line arguments of programs are mainly parsed by the `getopt()` function, which actually determines the form of the parameters when the command is invoked. This is an example of utility's synopsys description:
 ```
 utility_name[-a][-b][-c option_argument] [-d|-e][-f[option_argument]][operand...]
 ```
-1. The utility in the example is named utility_name. It is followed by options, option-arguments, and operands. The arguments that consist of <hyphen-minus> characters and single letters or digits, such as 'a', are known as "options" (or, historically, "flags"). Certain options are followed by an "option-argument", as shown with [-c option_argument]. The arguments following the last options and option-arguments are named "operands".
+1. The utility in the example is named utility_name. It is followed by options, option-arguments, and operands. The arguments that consist of <dash/hyphen/minus> characters and single letters or digits, such as 'a', are known as "options" (or, historically, "flags"). Certain options are followed by an "option-argument", as shown with [-c option_argument]. The arguments following the last options and option-arguments are named "operands".
 
 The GNU getopt() function supports so-called long parameters, which start with two dashes and can use the full or abbreviated parameter name:
 ```
