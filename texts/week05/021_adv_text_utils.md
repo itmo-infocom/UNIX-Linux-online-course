@@ -49,4 +49,8 @@ More that,  from text lines you can cut some fields, separated by some kind of s
 
 Also you can join lines of two files on a common field by `join` utility and merge lines of files by `paste`.
 
-And finally, we have `awk`, a scanning and templating language that can do this and other complex work on text files or streams.
+And finally, we have `awk`:
+```
+man awk
+```
+a scanning and templating language that can do this and other complex work on text files or streams.
