@@ -14,7 +14,7 @@ We see some directories, but we don't see, for example, shell startup files. No 
 ```
 ls -a
 ```
-We can see the shell startup files and more -- the directories "dot" (current) and "double dor" (top level) are also visible. Because that means "all" files and directories, including hidden ones. Hidden files in UNIX are just a naming convention -- names must begin with a "dot". It is not an attribute as it is on Microsoft systems. Initially it was just a trick in the `ls` utility to hide the current and top directories, and then it came to be used as a naming convention to hide any file or directory.
+We can see the shell startup files and more -- the directories "dot" (current) and "double dot" (upper level) are also visible. Because that means "all" files and directories, including hidden ones. Hidden files in UNIX are just a naming convention -- names must begin with a "dot". It is not an attribute as it is on Microsoft systems. Initially it was just a trick in the `ls` utility to hide the current and top directories, and then it came to be used as a naming convention to hide any file or directory.
 
 Also we can see directory listing recursively:
 ```
@@ -25,35 +25,35 @@ Another very important option is the "long list":
 ls -l
 ```
 We see a table with information about the file/directory in the corresponding lines.
-- The first column is the file attribute. The first letter is the file type: "dash" is a regular file, "d" is a directory, and so on. Then we can see read, write, and execute permissions for three user groups: owner, owner group, and others. Once again, we see the difference between UNIX and Microsoft. In the first case it is an attribute, in the second case executability is just a naming convention: '.com', '.exe', '.bat'.
+- The first column is the file attribute. The first letter is the file type: "dash" is a regular file, "d" is a directory, and so on. Then we can see read, write, and execute permissions for three user groups: owner, owner group, and others. Once again, we see the difference between UNIX and Microsoft. In the first case executability is an attribute, in the second case it is just a naming convention: '.com', '.exe', '.bat'.
 - The second -- Some mystery column "file's link counter" that we will discuss later in relation to "links".
-- Then we can see owner and owner group, size of file, time (by default -- of modification) and the name of file. 
+- Then we can see owner and owner group, size of file, time (by default -- time of modification) and the name of file. 
 
-* pwd - print name of current/working directory
-* cd – change directory. Without arguments -- to home firectory.
-* cp - copy files and directories
+* `pwd` -- print name of current/working directory
+* `cd` -- change directory. Without arguments -- to home firectory.
+* `cp` -- copy files and directories
 ```
 man cp
 ```
 Most interesting option is '-a|--archive' with create recursive archive copy with preserving of permissions, timestamps, etc... 
-* mv - move (rename) files and directories.
-* rm - remove files or directories.
+* `mv` -- move (rename) files and directories.
+* `rm` -- remove files or directories.
 ```
 rm -rf ...
 ```
 means recursive delete without asking for confirmation.
-* mkdir - make directories. If any parent directory does not exist, you will receive an error message:
+* `mkdir` -- make directories. If any parent directory does not exist, you will receive an error message:
 ```
 mkdir a/b/c
 mkdir: cannot create directory 'a/b/c': No such file or directory
 ```
-To avoid this, use the -p option:
+To avoid this, use the `-p` option:
 ```
 mkdir -p a/b/c
 ```
 No error if existing, make parent directories as needed.
-* rmdir - remove empty directories. If directory is not empty, you will receive an error message. Nowadays, running 'rm -rf something...' is sufficient in this case. But in the old days, when 'rm' did not have a recursive option, to clean up non-empty directories, you had to create a shell script with 'rm's in each subdirectory and the corresponding 'rmdir's.
-* ln - make links between files. Links are a very specific file type in UNIX and we will discuss them in more detail. If we look at the man page for the 'ln' command:
+* `rmdir` -- remove empty directories. If directory is not empty, you will receive an error message. Nowadays, running `rm -rf something...` is sufficient in this case. But in the old days, when `rm` did not have a recursive option, to clean up non-empty directories, you had to create a shell script with `rm`s in each subdirectory and the corresponding `rmdir`s.
+* `ln` -- make links between files. Links are a very specific file type in UNIX and we will discuss them in more detail. If we look at the `man` page for the `ln` command:
 ```
 man ln
 ```
@@ -74,7 +74,7 @@ Wow, all the other linked files have changed too! We are just looking at the sam
 rm a
 cat b; cat c
 ```
-In the first case, we can still see the contents of the original file, but in the second case, we see an error message. Simply because the first is a so-called hard link and the second is soft or symbolic link. We can see the difference between the two in the long `ls` list:
+In the first case, we can still see the contents of the original file, but in the second case, we see an error message. Just because the first is a so-called hard link and the second is soft or symbolic link. We can see the difference between the two in the long `ls` list:
 ```
 ls -l ?
 ```
@@ -91,7 +91,7 @@ And finally, let's discuss file permissions. As we recall, we have read, write, 
 ```
 chmod [-R] [ugoa][-+=](rwx) 
 ```
-As far as we understand, permissions are just a bitfield and in some cases it might be more useful to set them in octal mode - see our ["Under the Hood"](../under_the_hood/08_octal_mode.md) for information on this.
+As far as we understand, permissions are just a bitfield and in some cases it might be more useful to set them in octal mode - see our ["Under the Hood"](../under_the_hood/08_octal_mode.md) lecture for information on this.
 
 You can also change the owner and group for a file or directory by command `chown`. 
 ```
