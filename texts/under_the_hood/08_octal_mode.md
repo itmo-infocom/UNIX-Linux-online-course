@@ -3,6 +3,7 @@ Numeric octal mode for file permissions settings may not seem very familiar to n
 The decimal system has historically been most widely used only because we have ten fingers on our hands. Binary representation of numbers is closest to computing equipment. And hexadecimal is the most compact -- each byte is encoded with just two hexadecimal numbers.
 
 But what about octal numbering? Oddly enough, but the octal numbering is closest to the human perception of computer data. Octal numerals can be made from binary numerals by grouping consecutive binary digits into groups of three (starting from the right). We just need to sum the powers of two in the corresponding positions:
+
 0) two to the zero power equals one
 1) two to the power of one equals two
 2) two to the power of two equals four
