@@ -4,7 +4,7 @@ The history of the UNIX graphics system goes back to the 1984 MIT Athena educati
 
 In collaboration with DEC and IBM, the project developed a platform-independent graphics system to link together different systems from multiple vendors through a protocol that can both run local and remote applications. This system was the basis of the X-Window System, which began its growth in 1985 and was ported to various UNIX and not just UNIX platforms.
 
-We now have several successors to the classic X-Window system, the most famous being the Android on mobile devices or Wayland graphics system on Linux desktops, but X-Windows is still relevant today. And we will discuss some non-trivial concepts related to this. To see them just look into:
+We now have several successors to the classic X-Window system, the most famous being the Android on mobile devices or Wayland graphics system on Linux desktops, but X-Windows is still widely used today. And we will discuss some non-trivial concepts related to this. To see them just look into:
 ```
 man X
 ```
@@ -67,7 +67,7 @@ $ xterm
 ```
 OK. Let's go to the third virtual console, where we left our X server. Great -- we see the terminal window! But this is strange -- we can only print something while staying in the terminal window, we cannot move or resize it, moreover, we do not have a button to destroy it!
 
-It's just because we have a developed system based on the KISS paradigm -- `xterm` simply emulates a terminal. If we want to move or resize windows (for example, we don't need this for an information kiosk), we need a special program for this -- a window manager. Let's run it on `xterm` by starting one of the graphical user environments - GNOME:
+It's just because we have a system developed on the KISS paradigm -- `xterm` simply emulates a terminal. If we want to move or resize windows (for example, we don't need this for an information kiosk), we need a special program for this -- a window manager. Let's run it on `xterm` by starting one of the graphical user environments - GNOME:
 ```
 $ gnome-session &
 ```
