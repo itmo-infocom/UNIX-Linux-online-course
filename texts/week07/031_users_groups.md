@@ -7,11 +7,9 @@ You can use some graphical interfaces to manage users and groups, but simple CLI
 * `groupadd` -- create a new group
 * and `passwd` -- update user’s authentication tokens
 
-To create a new user, we (as 'root') simply have to run the program `adduser` and set a password with `passwd`. The `passwd` command is not so simple and you can look into [Under the hood -- special permission bits about `passwd` s-bit](../under_the_hood/09_special_permission_bits.md) material.
+To create a new user, we (as 'root') simply have to run the program `adduser` and set a password with `passwd`. The `passwd` command is not so simple and you can look into [Under the hood -- special permission bits about `passwd` s-bit](../under_the_hood/09_special_permission_bits.md) lecture.
 
-But it's not over yet!
-
-Actually, `adduser` is also black magic -- actully, all data related to users and groups is placed in common text files that can only be modified with ordinary text editors:
+But, `adduser` is also black magic -- actually, all data related to users and groups is placed in common text files that can only be modified with ordinary text editors:
 ```
 less /etc/passwd
 ```
