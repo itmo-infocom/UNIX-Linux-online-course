@@ -3,14 +3,14 @@ OK. Let's look to some classical XWindow applications.
 
 The first one as we know is a X server:
 ```
-man X
+man Xserver
 ```
 Most important options:
 * `:displaynumber` -- default is 0
 * `-fp fontPath` -- search path for fonts
 * `-s minutes` -- screen-saver timeout time in minutes
 
-And some options that can help organize a local XWindow network with low-cost X terminals and application servers:
+And some interestng options that can help organize a local XWindow network with low-cost X terminals and application servers:
 * `-query hostname` -- enables XDMCP and sends Query packets to the specified hostname on which this or that display manager is running;
 * `-broadcast` -- enables XDMCP and broadcasts BroadcastQuery packets to the network. In this way, simple load balancing between application servers can be organized;
 * `-indirect hostname` -- enables XDMCP and send IndirectQuery packets to the specified hostname. In this case, you will see a list of available application servers that you can select.
