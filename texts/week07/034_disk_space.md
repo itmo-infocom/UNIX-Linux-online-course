@@ -1,12 +1,12 @@
 ## Disk space
 
-Another important task with data in your file system is archiving and backing up. In case your file system is full, it's wise to look into your filesystems first to analyze disk usage. On many systems some graphical disk analysis program will run and you can detect problems visually. But we can also do this job using command line tools that can help you automate some of the admin tasks.
+Another important thing for your filesystem is the availability of data space. In case your file system is full, it's wise to analyze disk usage. On many systems some graphical disk analysis program will run and you can detect problems visually. But we can also do this job using command line tools that can help you automate some of the admin tasks.
 
 The main tool for reporting file system disk space usage is the `df` utility:
 ```
 man df
 ```
-The most useful option is "-h, --human-readable" for human readable print sizes in kilobytes, megabytes, gigabytes.
+The most useful option is "-h, --human-readable" for human readable print sizes in kilobytes, megabytes, gigabytes, and so on.
 
 For a more accurate analysis, you can use the `du` utility to estimate the file space usage of directories and files:
 ```
@@ -25,7 +25,7 @@ We examine the directory '/tmp', perform a numeric sorting of the sizes of direc
 
 And after finding the largest files and directories, we can clean up our file system and before this archive and back up some data. The easiest way is to simply copy using the `cp -a` command to some external drive, or using `scp -rC` or `rsync -avz` to a remote host.
 
-Also, using the `cp` or` scp` commands, you can copy any partition or the entire disk, because for us they are just files. But a more efficient way to do this is with the `dd` (disk dump) command:
+Also, using the `cp` or` scp` commands, you can just copy any partition or the entire disk, because for us they are just files. But a more efficient way to do this is with the `dd` (disk dump) command:
 ```
 man dd
 ```
