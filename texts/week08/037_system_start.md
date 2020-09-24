@@ -39,7 +39,7 @@ And, as we can see, this script is simply symbolic links to scripts from `/etc/i
 ```
 $ less /etc/init.d/network 
 ```
-And if you want to implement our own service script, you just have to support the 'start' and 'stop' parameters. To configure your own policy for stopping and starting services at any level, you simply have to link the scripts which you need from `/etc/init.d/` to the appropriate runlevel directories. The order in which scripts are run is determined by the numbers at the beginning of the filenames.
+And if you want to implement your own service script, you just have to support the 'start' and 'stop' parameters on this. To configure your own policy for stopping and starting services at any level, you simply have to link the scripts which you need from `/etc/init.d/` to the appropriate runlevel directories. The order in which scripts are run is determined by the numbers at the beginning of the filenames.
 
 Some commands that can help you with this work:
 * `service` - run a System V service script
@@ -51,7 +51,7 @@ man systemctl
 ```
 We can list system services, start, stop and get their status, enable and disable them to automatically start at boot time.
 
-To find out the log messages about boot startup and system operation, we can look at the system log files:
+To find out the log messages about boot startup and system operation, we can look at the system log files. For example:
 * `/var/log/messages` -- in RH-like Linuxes
 * and `/var/log/syslog` -- in Debian and Ubuntu
 
