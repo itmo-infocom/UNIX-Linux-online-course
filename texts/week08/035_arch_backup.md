@@ -12,9 +12,11 @@ Basic operations with a tar archive:
 * 'c' -- create archive
 * 't' -- list files in archive
 * and 'x' -- extract files from archive
+
 Useful options:
 * 'v' -- verbose
 * 'f' -- file or device file with archive. "Dash" means standard input or output.
+
 The GNU version also supports compressing/decompressing archives:
 * -a, --auto-compress -- use archive suffix to determine the compression program
 * -Z, --compress, --uncompress -- the oldest UNIX `compress` program, archive suffix is `.tar.Z`
@@ -26,7 +28,7 @@ tar cvzf arch.tar.gz some_files...
 tar tvzf arch.tar.gz
 tar xvzf arch.tar.gz some_file
 ```
-For standard UNIX `tar`, external compression / decompression programs should be used:
+For standard UNIX `tar`, external compression/decompression programs should be used:
 ```
 tar cvf - some_files... | gzip -c > arch.tar.gz
 gunzip -c arch.tar.gz | tar tvf -
@@ -42,13 +44,14 @@ Basic operations with it:
 * -o|--create
 * -t|--list: Print a table of contents of the input.
 * -i|--extract
-* and also -p|--pass-through is so-called copy-pass mode, cpio copies files from one directory tree to another, combining the copy-out and copy-in steps without actually using an archive.
+* and also -p|--pass-through is so-called copy-pass mode, `cpio` copies files from one directory tree to another, combining the copy-out and copy-in steps without actually using an archive.
 
 Unlike `tar`, which works with files, `cpio` works with stdin/stdout.
 
 This is good, but such an archive may contain some special files that are not properly processed. For example, you can get hard links split across multiple files. And for real backup in UNIX-like systems, special programs have been developed that know about the internal structure of the file system, for example:
 * dump/restore -- ext2/3/4 filesystem backup/retore.
 * xfsdump/xfsrestore -- XFS filesystems backup/retore.
+
 The main arguments are: the list of files and directories for dump and '-f dump_file'. But we can also choose the "dump level", which is just an integer. A level 0, full backup, specified by -0 guarantees the entire file system is copied. A level number above 0, is so-called "incremental backup", tells `dump` to copy all files new or modified since the last dump of a lower level. The default level is 0.
  
 And this makes it possible to implement various "backup strategies". For example, you can create a full backup at the end of the week and then make incremental backups every day of the week. Then at the end of the week for new full backup, you can use the oldest backup storage from the full backup pool. This way, you will have weekly full backups for a specific period and daily saved states in incremental backups for a week or two.
