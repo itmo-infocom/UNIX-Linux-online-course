@@ -1,3 +1,5 @@
+# Internet tools
+
 OK. But what about modern Internet world?
 
 The main problem with these classic `telnet` and `ftp` tools is insecurity: the user and password are transmitted over the network in plain text and can be hijacked by an evil hacker. Today they have practically been replaced by the Secure Shell utilities. Secure Shell provides secure, encrypted communication between untrusted hosts on an unsecured network. And again we have a remote Shell and transfer tool:
