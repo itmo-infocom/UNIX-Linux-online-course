@@ -1,3 +1,5 @@
+# Command inerpreter
+
 The first characters that you can see at the beginning of a line when you log in and access the command line interface is the so-called Shell prompt. This prompt asks you to enter the commands. In the simplest case, in the Bourne shell, it's just a dollar sign for a regular user and a hash sign for a superuser. In modern shells, this can be a complex construct with host and user names, current directory, and so on. But the meaning of the dollar and hash signs is still the same.
 
 The Shell as a command interpreter that provides a compact and powerful means of interacting with the kernel and utilities. Despite the many powerful graphical interfaces provided on UNIX-like systems, the command line is still the most important communication channel for interacting with them.
