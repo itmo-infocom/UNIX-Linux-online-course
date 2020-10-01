@@ -1,3 +1,5 @@
+# Terminal's commands
+
 As we discussed, the main channel of communication between a computer and a person was the teletype. But once upon a time, CRT terminals were invented. The first CRT displays were on the mainframes. These were block-oriented complex devices with their own interfaces (often proprietary). Actually they was micro-computers that supported inline editing. And only after pressing a special button, the data buffers are exchanged between the terminal and the mainframe. Some of terminals supported the vector graphics.
 
 But in the late 1960s, a cheaper type of terminal was developed, the character terminal, which supported serial lines such as TTY and worked with streams of characters. At first they were just "glass teletypes". But it was understandable -- in CRT there are more possibilities for redrawing the screen compared to simple printing on TTY.
