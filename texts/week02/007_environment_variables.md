@@ -1,3 +1,5 @@
+# Environment variables
+
 The operating system supports a special kind of resource called environment variables. These variables are a NAME/VALUE pair. The name can start with a letter and be composed of letters, numbers, and underscores. Variable values have only one type -- character strings. Names and values are case sensitive. And, as we'll see, variables can be global and local, just like in common programming languages.
 
 To get the value of a variable on the Shell, precede the variable name with a dollar sign:
