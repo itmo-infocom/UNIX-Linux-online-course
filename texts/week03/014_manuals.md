@@ -1,3 +1,5 @@
+# Manuals
+
 The easiest way to get information about the use of a command is the -h option or --help for GNU long options.
 
 Also since its inception, UNIX has come with an large set of documentation. Some information is often found in the `/usr/doc` or `/usr/local/doc` directories as text files.
