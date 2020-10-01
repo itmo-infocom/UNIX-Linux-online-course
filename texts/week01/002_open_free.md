@@ -1,3 +1,5 @@
+# Open and Free
+
 Initially, when computer R&D projects were mostly just university research, they were open source and free of charge as a common scientific research result. In addition, scientists were very interested in widespread dissemination of this result, because their reputation directly depended on the prominence of their scientific work.
 
 Commercialization has changed this world to a closed and paid model. Not completely closed, because standardization is very important for government agencies and corporate consumers to protect investments and prevent vendor locking. As a consequence, many open standards have been created by committees and organizations: POSIX, ANSI, ISO.
