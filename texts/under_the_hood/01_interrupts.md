@@ -1,3 +1,5 @@
+# Interrupts
+
 We talked about the kernel as some kind of magic program that loads at boot and keeps running while your computer is on. But what exactly does this program do? To understand this, we need to look at the evolution of software in computer systems. At the beginning, when they had just created computer programs, the question quickly arose -- how to reuse what was written?
 
 So, the well-known Pareto law works -- when you need something new, most likely, it is already 80% written by someone, and you only need to complete or redo only 20%. You can of course use the good old "cut and paste" method, but this is often a source of errors and bugs, especially on large and complex systems.
