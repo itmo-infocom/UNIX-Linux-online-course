@@ -1,4 +1,4 @@
-## UNIX/Linux administration
+# UNIX/Linux administration tasks
 
 By installing the system on your computer, you become more or less an administrator and you need to have some basic administration skills. The most important tasks:
 * Users and groups management;
