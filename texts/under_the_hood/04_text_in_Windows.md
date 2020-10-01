@@ -1,4 +1,4 @@
-## Text handling in Windows
+# Text handling in Windows
 
 The format of text data at first glance seems to be quite simple and versatile -- in the simplest case, we just have a set of bytes encoded by the standard ASCII character table. But if you look at the C language specification of the `fopen` function in UNIX-like and MS OSs, you will see an interesting difference. On MS systems, you will find the translation mode for newlines (https://docs.microsoft.com/en-us/cpp/c-runtime-library/reference/fopen-wfopen):
 * `t` -- Open in text (translated) mode.
