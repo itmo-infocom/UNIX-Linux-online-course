@@ -1,3 +1,5 @@
+# Calculator
+
 OK, let's take a step forward:
 ```
 $ git checkout Example_2
