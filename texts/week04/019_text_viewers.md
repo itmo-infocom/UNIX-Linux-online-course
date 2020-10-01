@@ -1,3 +1,5 @@
+# Text viewers
+
 As we remember, UNIX was originally created to automate the work of the patent office. For this reason, it has a rich set of tools for working with text data. But what is text? Generally it is just a collection of bytes encoded according to some encoding table, in most simple case -- [ASCII](https://en.wikipedia.org/wiki/ASCII). And in a text file, you will not see any special formatting like bold text, italics, images, etc. -- just text data. And this is the main communication format for UNIX utilities since the 1970s.
 
 As you know, Microsoft operating systems have different modes of working with files - text and binary. In UNIX, all files are the same, and we have no difference between text and binary data. We remember our ["Under the Hood" -- Text handling in Windows](../under_the_hood/04_text_in_Windows.md) lecture.
