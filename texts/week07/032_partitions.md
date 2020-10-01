@@ -1,4 +1,4 @@
-## Partitions
+# Partitions
 
 As storage systems grow, they need to be separated to store different data. And for this the partitioning was invented. There are different partition schemes developed by different vendors like IBM, Apple, Microsoft, etc.
 
