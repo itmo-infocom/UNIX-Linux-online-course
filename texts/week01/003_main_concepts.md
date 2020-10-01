@@ -1,3 +1,5 @@
+# Main concepts
+
 At the top level, UNIX-like systems can be very convenient for common users, and they may not even know they are using this type of OS. For example, currently the most commonly used operating systems are Linux-based Android systems and UNIX-based Apple systems, in which the user only sees the user friendly graphical UI.
 
 But beginners who are just starting to learn UNIX-like systems for administration or development sometimes complain about their complexity. Don't be afraid -- actually such systems are based on fairly simple concepts. There are only three things (three and a half to be exact) you need to know to be comfortable with any UNIX-like system:
