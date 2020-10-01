@@ -1,3 +1,5 @@
+# Core dump
+
 Core dump consists of the recorded state of the working memory of a computer program at a specific time, generally when the program has crashed or otherwise terminated abnormally. The name comes from [magnetic core memory](https://en.wikipedia.org/wiki/Magnetic-core_memory), the principal form of random access memory from the 1950s to the 1970s. The name has remained long after magnetic core technology became obsolete.
 
 Modern operating systems typically generate a file containing an image of the memory belonging to the crashed process, or the memory images of parts of the address space related to that process, along with other information such as the values of processor registers, program counter, system flags, and other information useful in determining the root cause of the crash. These files can be viewed as text, printed, or analysed with specialised tools such as elfdump on Unix and Unix-like systems, objdump and kdump on Linux. 
