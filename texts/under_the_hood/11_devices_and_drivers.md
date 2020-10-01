@@ -1,4 +1,4 @@
-## Devices and drivers
+# Devices and drivers
 
 A few words about devices and drivers. In the classic Unix driver model, devices belong to one of three categories: character devices, block devices and network devices  associated driver types. Under Unix, drivers are code units linked into the kernel that run in privileged kernel mode. Generally, driver code runs on behalf of a user-mode application. Access to Unix drivers from user-mode applications is provided via the file system. In other words, devices appear to the applications as special device files that can be opened.
 
