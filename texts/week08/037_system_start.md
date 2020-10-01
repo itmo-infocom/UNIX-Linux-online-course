@@ -1,4 +1,4 @@
-## Booting and services starting/stopping
+# Booting and services starting/stopping
 
 All right. But how does our system get started? In fact, when you turnon the computer, a special piece of code is launched, built into the hardware -- firmware. There are many such firmwares: legacy PC BIOS, UEFI, Uboot, OpenBoot, Coreboot, etc. The firmware reads the main bootloader from disk: BIOS from MBR, UEFI from EFI system partition, and so on.
 
