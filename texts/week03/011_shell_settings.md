@@ -1,3 +1,5 @@
+# Shell settings
+
 The shell is customizable.
 
 As you will see, most UNIX commands have very short names -- just two characters for the most common commands. This is because the developers wanted to shorten the printing time on TTYs, but are still very useful for the CLI work with nowadays. And we have a very useful tool for making shorter commands from long sentences -- it's called aliases:
