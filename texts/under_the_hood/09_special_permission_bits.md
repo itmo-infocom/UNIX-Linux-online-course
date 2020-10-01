@@ -1,3 +1,5 @@
+# Special permission bits
+
 As we recall, we have the `passwd` utility that any user can call to change the password. But on the other hand, we did not have permissions not only to write to the file in which the password hashes are `/etc/shadow`, but also to read. How can a simple user change his password?
 
 And on UNIX-like systems, there is a special trick for this. Let's take a look at the permissions of the `passwd` utility:
