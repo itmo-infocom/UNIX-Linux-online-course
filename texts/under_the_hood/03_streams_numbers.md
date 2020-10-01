@@ -1,3 +1,5 @@
+# Streams and numbers
+
 As we remember, the connection between stdout and stderr looks like this:
 ```
 prog 2>&1
