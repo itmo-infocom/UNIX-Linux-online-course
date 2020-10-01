@@ -1,4 +1,4 @@
-## Archiving and backups
+# Archiving and backups
 
 Historically the first Unix archiver utility, also known simply as `ar`, developed at 1971 in AT&T that maintains groups of files as a single archive file. Today, `ar` is generally used only to create and update static library files (which internally are simply archive with object files, which compiled from source files). That libraries the link editor or linker uses. An implementation of `ar` is included as one of the GNU Binutils.
 
