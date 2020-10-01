@@ -1,3 +1,5 @@
+# Files
+
 Finally, let's discuss the third pillar that holds the whole UNIX world -- files.
 
 To simplify the work of users who are not familiar to working with the command line, there are a number of free file management interfaces, for example, Midnight Commander (mc), reminiscent of Norton Commander, or graphical file managers, more or less looks like Windows Explorer. But we'll see how we can work with files and directories from the CLI or scripts.
