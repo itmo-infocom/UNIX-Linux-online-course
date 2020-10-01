@@ -1,3 +1,5 @@
+# Octal mode
+
 Numeric octal mode for file permissions settings may not seem very familiar to newbies, but it can be very convenient if we understand the principle. As you probably know, our widely used 0-9 numbering system is not the only one in the world. It is base ten positional decimal system. But we can use number systems with other bases. For example, we know a binary system with only two digits in the base -- 0 and 1. Or the hexadecimal system with numbers from 0 to 9 and letters from A to F for the missing 6 numbers. Or the Sumerian-Babylonian Sexagesimal number system with sixty in the base and we still use it in time measuring for example.
 
 The decimal system has historically been most widely used only because we have ten fingers on our hands. Binary representation of numbers is closest to computing equipment. And hexadecimal is the most compact -- each byte is encoded with just two hexadecimal numbers.
