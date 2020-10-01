@@ -1,3 +1,5 @@
+# Text editors
+
 OK. We can create a file using the `cat` utility and view the file using a viewer. But what if we need to change something, especially if we only have a TTY interface? And it is possible -- we have a so-called line editor named `ed`. The only interface for such an editor is the command line: [Pr-n 6 slide 5](http://sdn.ifmo.ru/education/courses/free-libre-and-open-source-software/lectures/lecture-6).
 
 So let's try to edit new file.
