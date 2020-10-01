@@ -1,3 +1,5 @@
+# Calculator's network enabled UI
+
 Ok, we have a working network service, and it's time to change our user interface to network communication with it.
 ```
 $ git checkout Example_7
