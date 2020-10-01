@@ -1,3 +1,5 @@
+# Calculator network server
+
 Let's add some networking to our design:
 ```
 $ git checkout Example_6
