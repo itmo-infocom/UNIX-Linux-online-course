@@ -1,3 +1,5 @@
+# Utilities
+
 All commands typed on the command line or executed in a command file are either commands built into the interpreter or external executable files. The set of built-in commands is quite small, which is determined by the basic concept of UNIX -- the system should consist of small programs that perform fairly simple well-defined functions that communicate with each other via a standard interface.
 
 A rich set of standard utilities is a good old tradition for UNIX-like systems. The shell and the traditional set of UNIX utilities, is a POSIX standard.
