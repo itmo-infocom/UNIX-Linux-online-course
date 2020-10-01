@@ -1,3 +1,5 @@
+# Shell functions
+
 ## Functions
 
 ```
