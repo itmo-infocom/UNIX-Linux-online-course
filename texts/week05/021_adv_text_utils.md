@@ -1,3 +1,5 @@
+# Advanced text utilities
+
 ## Searching
 If we are talking about text data, finding some text is a common task. And in fact, these are two separate tasks -- to find some text inside a file or text stream and to find a file, for example, by name in some directories.
 
