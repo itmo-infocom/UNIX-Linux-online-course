@@ -1,4 +1,4 @@
-## Users and groups
+# Users and groups
 
 As we remember, users are one of the three pillars on which the UNIX world stands.
 
