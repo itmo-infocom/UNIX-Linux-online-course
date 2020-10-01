@@ -1,3 +1,5 @@
+# Keystrokes
+
 A few words about keyboard shortcuts. They are actually very useful for command line work. Let's take a look at them:
 
 * erase – erase single character: [Backspace] or [Ctrl]-[H], [Delete] or [Ctrl]-[?]
