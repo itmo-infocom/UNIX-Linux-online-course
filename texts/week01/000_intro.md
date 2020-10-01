@@ -1,3 +1,5 @@
+# Introduction
+
 Hi! My name is Oleg Sadov. I'm going to be your instructor for this course. I've been involved in the Unix world more than 30 years ago and have been working with Linux systems almost from the very beginning.
 
 This is an Unix and Linux introductory course. This course isn't about memorizing countless definitions and specifications or endlessly learning how to keystroke. Instead, we will try to understand the philosophy of systems and the reasons why existing technical solutions were developed.
