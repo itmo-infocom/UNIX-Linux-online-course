@@ -1,4 +1,4 @@
-## MMU, Virtual Memory and shared libraries
+# MMU, Virtual Memory and shared libraries
 
 As we remember, we have a hardware mechanism for defining a virtual set of instructions -- interrupts
 ["Under the Hood" -- kernel as a set of interrupt handlers](under_the_hood/interrupts.md). But we also have some machinery for memory virtualization at the hardware level -- so-called [Memory Management Unit (MMU)](https://en.wikipedia.org/wiki/Memory_management_unit).
