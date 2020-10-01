@@ -1,3 +1,5 @@
+# Input/output redirect
+
 The standard design pattern for UNIX commands is to read information from the standard input stream (by default -- the keyboard of the current terminal), write to standard output (by default -- terminal screen), and redirect errors to standard error stream (also the terminal screen), unless specified in the command parameters anything else. These defaults settings can be changed by the shell.
 
 The command ends with a sign "greater than" and the file name, means redirecting standard output to that file. The application code does not change, but the data it sends to the screen will be placed in this file.
