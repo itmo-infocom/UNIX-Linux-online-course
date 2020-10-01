@@ -1,3 +1,5 @@
+# Special symbols
+
 In addition to the "dollar" sign, which was used to retrieve a value from a variable by name, we have seen some other special characters earlier: "space" and "tab" as word separators, "hash" as a line comment. We also have many other special characters.
 
 "Newline" and "semicolon" are command separators.
