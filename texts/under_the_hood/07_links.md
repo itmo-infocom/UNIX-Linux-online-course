@@ -1,3 +1,5 @@
+# Links and file system internals
+
 To understand what these hard and soft links are, we need a brief introduction to the file system structure of UNIX-like systems. We have many different file systems on UNIX world. But the basic idea of all of them has remained unchanged from the very beginning, since the days of PDP7.
 
 Typically, we can have a boot block at the beginning of a device or filesystem partition, then we have a so-called superblock with filesystem metadata, and then a data space with data blocks that make up the files.
