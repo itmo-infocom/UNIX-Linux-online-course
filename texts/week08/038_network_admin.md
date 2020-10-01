@@ -1,3 +1,5 @@
+# Network administration
+
 ## Network configuration
 
 Finally, let's discuss the administrative tasks associated with the network. In most cases, after installing the system, you have a more or less configured network in accordance with the DHCP settings of your local network. The most you need is to set a password for your WiFi.
