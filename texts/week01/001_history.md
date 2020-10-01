@@ -1,3 +1,5 @@
+# History
+
 Speaking about the history of Linux we can recall the well-known saying - we make our inventions stand on the shoulders of giants.But we must understand that many of these giants have failed. But such fails can be a good lesson for new developers.
 
 One such giant was the MULTICS project. The development of Multics began in 1965 as a research project by MIT, General Electric and  Bell Labs to create a time-sharing, multiprocessing and multiuser interactive operating system. After several years of development, the enthusiasm of the developers decreased more and more as the system became more and more complex and the prospects for completion of development became less and less.
