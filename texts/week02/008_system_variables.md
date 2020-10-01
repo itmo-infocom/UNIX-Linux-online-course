@@ -1,3 +1,5 @@
+# System variables
+
 Environment variables are one of the simplest mechanisms for interprocess communication. Let's discuss some of the most commonly used system variables that are predefined for use by many programs.
 
 The most basic ones are:
