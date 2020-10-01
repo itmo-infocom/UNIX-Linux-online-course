@@ -1,4 +1,4 @@
-## Process
+# Processes
 
 We've discussed the users, and then it's appropriate to talk about another of the three whales that UNIX-like systems rest on -- processes. We can get information about the processes by running the `ps` (process status) command. In this case, we again see two worlds, two systems -- SYSV and BSD:
 ```
