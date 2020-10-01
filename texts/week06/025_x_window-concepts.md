@@ -1,4 +1,4 @@
-## X-Window concepts
+# X-Window concepts
 
 The history of the UNIX graphics system goes back to the 1984 MIT Athena education project. Athena was not a research project, and the development of new models of computing was not a primary objective of the project. Indeed, quite the opposite was true. MIT wanted a high-quality computing environment for education. 
 
