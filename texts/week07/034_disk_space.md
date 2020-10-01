@@ -1,4 +1,4 @@
-## Disk space
+# Disk space
 
 Another important thing for your filesystem is the availability of data space. In case your file system is full, it's wise to analyze disk usage. On many systems some graphical disk analysis program will run and you can detect problems visually. But we can also do this job using command line tools that can help you automate some of the admin tasks.
 
