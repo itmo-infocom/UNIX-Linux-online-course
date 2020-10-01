@@ -1,4 +1,4 @@
-## File systems
+# File systems
 
 And now that our partitioning is complete, it's time to see how we can use our disk space. As mentioned earlier, UNIX-like systems can treat disks or disk partitions as files. And some databases, for example, can use raw disk partitions to store data with higher performance.
 
