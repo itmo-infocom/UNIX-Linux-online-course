@@ -1,4 +1,4 @@
-## Shell programming
+# Shell programming
 
 Now it's time to start programming, Shell programming.  As far as we understand, the shell works like a normal program and has several options that can be useful for debugging: 
 ```
