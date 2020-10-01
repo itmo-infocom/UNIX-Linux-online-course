@@ -1,6 +1,8 @@
+# Some utilities
+
 OK. But you can get useful information not only from the 'info' utility.
 
-# OS variant
+## OS variant
 Ok, we just logged in. But now we want to try to determine which part of the UNIX-like universe we are in.
 
 `uname` -- print system information, in most simple case -- just name of kernel. With "all" flag we will get more information. And for what needs can such information be used, besides simple curiosity? The answer is simple -- it can be used to create portable applications or some kind of administrative scripts for various types of UNIX-like systems. You can use it in your installation or shell configuration scripts to select different binaries and system utilities according to your specific computer architecture and OS.
