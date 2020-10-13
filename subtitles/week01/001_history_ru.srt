@@ -1,352 +1,273 @@
 1
 00:00:11,120 --> 00:00:20,740
-Speaking about the history of Linux we can
-recall the well-known saying - we make our
+Говоря об истории UNIX и Linux мы можем вспомнить известное изречение --
 
 2
-00:00:20,740 --> 00:00:30,869
-inventions stand on the shoulders of giants.But
-we must understand that many of these giants
+00:00:20,740 --> 00:00:25,020
+мы делаем открытия, стоя на плечах гигантов.
 
 3
-00:00:30,869 --> 00:00:33,010
-have failed.
+00:00:25,020 --> 00:00:33,000
+Но мы должны понимать, что хотя многие из этих гигантов пали,
 
 4
 00:00:33,010 --> 00:00:39,690
-But such fails can be a good lesson for new
-developers.
+их неудачи могут быть хорошим уроком для новых разработчиков.
 
 5
 00:00:39,690 --> 00:00:48,170
-One such giant was the MULTICS project.
+Одним из таких гигантов был проект MULTICS.
 
 6
 00:00:48,170 --> 00:00:58,460
-The development of Multics began in 1965 as
-a research project by MIT, General Electric
+Разработка MULTICS началась в 1965 как исследовательский проект MIT, General Electric и Bell Labs
 
 7
 00:00:58,460 --> 00:01:08,740
-and Bell Labs to create a time-sharing, multiprocessing
-and multiuser interactive operating system.
+по созданию многозадачной и многопользовательской интерактивной операционной системы разделяемого времени.
 
 8
 00:01:08,740 --> 00:01:17,890
-After several years of development, the enthusiasm
-of the developers decreased more and more
+После нескольких лет разработки энтузиазм разработчиков падал всё больше и больше,
 
 9
 00:01:17,890 --> 00:01:26,640
-as the system became more and more complex
-and the prospects for completion of development
+так как система становилась всё более и более сложной,
 
 10
 00:01:26,640 --> 00:01:29,610
-became less and less.
+а перспективы завершения разработки всё уменьшались и уменьшались.
 
 11
 00:01:29,610 --> 00:01:40,780
-Bell Labs pulled out of the project in 1969;
-but some of the people who worked on it got
+Bell Labs покинула проект в 1969,
+но некоторые её сотрудники, работавшие в проекте,
 
 12
 00:01:40,780 --> 00:01:43,230
-a lot of experience.
+ получили определённый опыт.
 
 13
 00:01:43,230 --> 00:01:53,290
-Among them were Ken Thompson and Dennis Ritchie
-of Bell Labs, the inventors of the UNIX OS.
+Среди них были Кен Томпсон и Денис Ритчи из Bell Labs, создатели операционной системы UNIX.
 
 14
 00:01:53,290 --> 00:02:03,690
-It's funny, but the history of Unix systems
-is closely related to computer games.
+Это занятно, но история Unix-систем тесно связана с компьютерными играми.
 
 15
 00:02:03,690 --> 00:02:19,000
-It started in 1969 when Ken Thompson discovered
-an old PDP-7 computer in a dark corner of
+Она началась в 1969, когда Кен Томпсон в тёмном углу лаборатории нашёл старый компьютер PDP7
 
 16
 00:02:19,000 --> 00:02:24,760
-the lab and wanted to use it to play Space
-Travel game.
+и захотел использовать его для того что бы играть в "Космическое путешествие".
 
 17
 00:02:24,760 --> 00:02:32,530
-There was little to do — an operating system
-had to be written to run it.
+Дело за малым -- написать операционку для запуска.
 
 18
 00:02:32,530 --> 00:02:44,370
-And he did it -- at midnight on January 1,
-1970, the Unix epoch began.
+И он сделал это -- и в полночь 1 января 1970 началась эпоха Unix.
 
 19
 00:02:44,370 --> 00:02:54,840
-From this time on, all clocks in UNIX-like
-systems count down the time, including your
+С этого момента все часы в UNIX-подобных системах ведут отсчёт времени,
 
 20
 00:02:54,840 --> 00:02:56,999
-mobile phone.
+включая ваш мобильный телефон.
 
 21
 00:02:56,999 --> 00:03:05,150
-Originally it was a single-tasking OS written
-in assembly language that was loaded from
+Исходно это была однозадачная операционная система, написанная на ассемблере,
 
 22
 00:03:05,150 --> 00:03:17,920
-paper tapes and called UNICS as opposed to
-the complexity of MULTICS.
+загружавшаяся с перфоленты и называвшаяся UNICS в противоположность сложности MULTICS.
 
 23
-00:03:17,920 --> 00:03:19,620
-[Unix History Timeline](http://www.levenez.com/unix/)
+00:03:19,620 --> 00:03:29,900
+А затем группа Кена Томпсон и Дениса Ритчи получила новый компьютер PDP11 Digital Equipment Corporation
 
 24
-00:03:19,620 --> 00:03:29,900
-And then the team of Ken Thompson and Dennis
-Ritchie received a new DEC PDP11 computer
+00:03:29,900 --> 00:03:37,510
+для разработки системы обработки текстов для патентного департамента Bell Labs.
 
 25
-00:03:29,900 --> 00:03:37,510
-to develop a word processing system for the
-Bell Labs patent department.
+00:03:37,510 --> 00:03:54,020
+В течение первых трех месяцев машина стояла в углу и перебирала варианты перемещений коня на шахматном поле 6×8 --
 
 26
-00:03:37,510 --> 00:03:47,569
-For the first three months the machine sat
-in a corner, enumerating all the closed Knight's
+00:03:54,020 --> 00:03:59,380
+просто потому что жесткий диск ещё не был поставлен вместе с сверхновым компьютером.
 
 27
-00:03:47,569 --> 00:03:57,389
-tours on a 6×8 chess board — just because
-the hard drive wasn't shipped with a super
+00:03:59,499 --> 00:04:08,209
+И это время можно было использовать для выбора языка программирования, поскольку это был компьютер с
 
 28
-00:03:57,389 --> 00:03:59,499
-new computer.
+00:04:08,209 --> 00:04:17,190
+совершенно новой архитектурой и программы, написанные на ассемблере PDP7, для него не годились.
 
 29
-00:03:59,499 --> 00:04:08,209
-This time could be used to choose a programming
-language, because it was a computer with a
+00:04:17,190 --> 00:04:28,259
+Наиболее интересной показалась концепция другого проекта, использовавшегося в некоторых исследовательских проектах,
 
 30
-00:04:08,209 --> 00:04:17,190
-completely new architecture and programs written
-on PDP7 assembler was not useful for it.
+00:04:28,259 --> 00:04:30,729
+включая MULTICS -- BCPL.
 
 31
-00:04:17,190 --> 00:04:28,259
-And most interesting was the concept of another
-project used in some R&D projects including
+00:04:30,729 --> 00:04:39,400
+Главный фокус этого язык программирования высокого уровня был на переносимости.
 
 32
-00:04:28,259 --> 00:04:30,729
-MULTICS -- BCPL.
+00:04:39,400 --> 00:04:48,020
+Большая часть этого языка была написана на нём самом,
 
 33
-00:04:30,729 --> 00:04:39,400
-It was a high-level programming language focused
-on portability.
+00:04:48,020 --> 00:04:55,090
+и только небольшая машинно-зависимая часть была написана на ассемблере.
 
 34
-00:04:39,400 --> 00:04:51,340
-Most of this language was written in the language
-itself, and only a small machine-dependent
+00:04:55,090 --> 00:05:04,180
+Для добавления поддержки новой машины требовалось переписать только 1/5 кода компилятора,
 
 35
-00:04:51,340 --> 00:04:55,090
-part was written in assembly.
+00:05:04,180 --> 00:05:08,840
+что обычно занимало 2-5 человеко-месяцев.
 
 36
-00:04:55,090 --> 00:05:04,180
-To support a new machine, only 1/5 of the
-compiler code needed to be rewritten, which
+00:05:10,800 --> 00:05:22,620
+Томпсон использовал ту же концепцию при написании своего упрощенного преемника BCPL, языка "B".
 
 37
-00:05:04,180 --> 00:05:08,840
-usually took 2-5 man-months.
+00:05:22,629 --> 00:05:29,770
+Этот язык оказался не слишком выразительным и эффективным на PDP11.
 
 38
-00:05:08,840 --> 00:05:10,800
-[Computer Languages History Timeline](http://www.levenez.com/lang/)
+00:05:29,770 --> 00:05:41,920
+И в 1971 году Ричи начал совершенствовать "B", что в результате привело к созданию нового языка -- "C".
 
 39
-00:05:10,800 --> 00:05:22,620
-Thompson used the same concept when writing
-his simplified successor to BCPL, language B.
+00:05:41,920 --> 00:05:54,570
+В 1973 году ядро UNIX было переписано на языке "C", согласно той же концепции переносимости -- 
 
 40
-00:05:22,629 --> 00:05:29,770
-This language was not very expressive and
-effective on the PDP11.
+00:05:54,570 --> 00:06:00,150
+большая часть кода была машинно независимой.
 
 41
-00:05:29,770 --> 00:05:41,920
-In 1971, Ritchie started to improve B, which
-resulted in creating a new language C.
+00:06:00,150 --> 00:06:10,560
+Система распространялась в исходных кодах среди университетов за символическую плату,
 
 42
-00:05:41,920 --> 00:05:54,570
-In 1973, the UNIX kernel was refactored in C
-language to follow the same concept of portability
+00:06:10,560 --> 00:06:18,310
+что послужило взрывному росту ее популярности в 80-е гг.
 
 43
-00:05:54,570 --> 00:06:00,150
--- most of the code was machine independent.
+00:06:18,310 --> 00:06:27,169
+Практически все разработчики новых компьютерных систем с этого момента времени использовали UNIX
 
 44
-00:06:00,150 --> 00:06:10,560
-The system was distributed in source code
-among universities for a nominal fee, which
+00:06:27,169 --> 00:06:32,130
+в качестве базовой платформы для своих новых разработок.
 
 45
-00:06:10,560 --> 00:06:18,310
-served as an explosive growth in its popularity
-in the 80s.
+00:06:32,130 --> 00:06:47,949
+Одним из самых известных из них является дистрибутив Berkeley Software Distribution (BSD), разработанный
 
 46
-00:06:18,310 --> 00:06:27,169
-Almost all the developers of new computer
-systems since this period have used UNIX as
+00:06:47,949 --> 00:07:02,400
+в Калифорнийском университете Беркли на основе Unix версии 6 с собственной копилефт-лицензией.
 
 47
-00:06:27,169 --> 00:06:32,130
-the base platform for their new developments.
+00:07:02,400 --> 00:07:15,060
+И большинство производителей оборудования 1980-х годов использовали BSD в качестве базовой операционной системы для своих новых компьютеров.
 
 48
-00:06:32,130 --> 00:06:47,949
-One of the most famous of these is the Berkeley
-Software Distribution (BSD) developed at the
+00:07:15,060 --> 00:07:28,740
+Unix не был значительной частью бизнеса Bell Laboratories, и это не было проблемой для них.
 
 49
-00:06:47,949 --> 00:07:02,400
-University of California, Berkeley and based on
-Unix version 6 with its own copyleft license.
+00:07:28,750 --> 00:07:41,300
+Но в 1980-х годах Bell Labs была разделена на несколько компаний в результате антимонопольного иска против AT&T.
 
 50
-00:07:02,400 --> 00:07:15,060
-And most of the hardware vendors of the 1980s
-used BSD as the base OS for their new computers.
+00:07:41,300 --> 00:07:52,160
+Была создана новая компания UNIX System Laboratories и разработана новая спецификация UNIX System V.
 
 51
-00:07:15,060 --> 00:07:23,439
-UNIX was not a significant part of AT&T Bell
-Laboratories' business, and it was not a problem
+00:07:52,160 --> 00:08:03,300
+UNIX был основным бизнесом этой компании, и они очень агрессивно продвигали новый стандарт на рынке.
 
 52
-00:07:23,439 --> 00:07:28,750
-for them.
+00:08:03,300 --> 00:08:12,599
+И это стало причиной UNIX-войн против некоммерческих разработчиков, включая BSD.
 
 53
-00:07:28,750 --> 00:07:37,960
-But in the 1980s Bell Labs split into several
-companies as a result of an antitrust lawsuit
+00:08:12,599 --> 00:08:21,039
+Коммерциализация рынка систем UNIX и переход к закрытой модели разработки и распространения
 
 54
-00:07:37,960 --> 00:07:41,300
-against AT&T.
+00:08:21,039 --> 00:08:27,990
+привели к созданию альтернативного движения -- GNU.
 
 55
-00:07:41,300 --> 00:07:50,189
-The new UNIX System Laboratories company was
-created and the new UNIX System V specification
+00:08:27,990 --> 00:08:29,210
+Что такое GNU?
 
 56
-00:07:50,189 --> 00:07:52,160
-was developed.
+00:08:29,210 --> 00:08:36,000
+Ну, как вы знаете -- это такое африканское животное.
 
 57
-00:07:52,160 --> 00:08:00,400
-UNIX was the main business of this company,
-and they were very aggressive in pushing the
+00:08:36,000 --> 00:09:03,800
+Но также это -- самоссылающаяся аббревиатура
 
 58
-00:08:00,400 --> 00:08:03,300
-new standard in the market.
+00:09:03,800 --> 00:09:19,230
+"GNU is Not Unix" (GNU это не Unix).
 
 59
-00:08:03,300 --> 00:08:12,599
-And that has been the cause of UNIX wars against
-non-commercial developers including BSD.
+00:09:19,230 --> 00:09:26,820
+Ричард Столлман основал этот проект в 1978 в MIT.
 
 60
-00:08:12,599 --> 00:08:21,039
-The commercialization of the UNIX system market
-and the move to a closed development and distribution
+00:09:26,820 --> 00:09:34,500
+GNU-проект -- это это массовая общественная инициатива по разработке свободного программного обеспечения.
 
 61
-00:08:21,039 --> 00:08:27,990
-model has led to an alternative movement -- the
-GNU.
+00:09:34,500 --> 00:09:42,950
+Первой целью этого проекта было создание набора программ,
 
 62
-00:08:27,990 --> 00:08:29,210
-What is GNU?
+00:09:42,950 --> 00:09:47,940
+аналогичного стандартному набору утилит UNIX.
 
 63
-00:08:29,210 --> 00:08:36,000
-You know, it's such an African animal.
+00:09:47,940 --> 00:10:00,470
+А в 1991 году финский студент Линус Торвальдс создал собственное ядро операционной системы,
 
 64
-00:08:36,000 --> 00:09:09,800
-But also it is a self-referential abbreviation
-"GNU is 
+00:10:00,470 --> 00:10:09,380
+совместимое с ОС UNIX, получившее название Linux.
 
 65
-00:09:09,800 --> 00:09:19,230
-Not Unix".
+00:10:09,380 --> 00:10:13,990
+Как он говорил потом "Просто для удовольствия".
 
 66
-00:09:19,230 --> 00:09:26,820
-Richard Stallman founded the project in 1978
-at MIT.
+00:10:13,990 --> 00:10:22,389
+Ядро Linux в сочетании с набором утилит из проекта GNU послужило
 
 67
-00:09:26,820 --> 00:09:34,500
-The GNU project is a mass collaborative initiative
-for the development of free software.
+00:10:22,389 --> 00:10:29,720
+основой для создания полноценной операционной системы, сравнимой по возможностям с коммерческими
 
 68
-00:09:34,500 --> 00:09:42,950
-The first goal of this project was to develop
-a set of programs similar to the standard
-
-69
-00:09:42,950 --> 00:09:47,940
-set of utilities in UNIX.
-
-70
-00:09:47,940 --> 00:10:00,470
-In 1991, a Finnish student Linus Torvalds
-created his own operating system kernel, which
-
-71
-00:10:00,470 --> 00:10:09,380
-is compatible with the UNIX OS, called Linux.
-
-72
-00:10:09,380 --> 00:10:13,990
-As he said later, "Just for fun."
-
-73
-00:10:13,990 --> 00:10:22,389
-The Linux kernel, combined with the set of
-utilities from the GNU project, served as
-
-74
-00:10:22,389 --> 00:10:29,720
-the basis for creating a complete operating
-system, comparable in capabilities to commercial
-
-75
 00:10:29,720 --> 00:10:33,690
-UNIX systems, and usually even superior to
-them.
+UNIX-системами, а подчас даже превосходящей их.
 
