@@ -1,0 +1,352 @@
+1
+00:00:11,120 --> 00:00:20,740
+Speaking about the history of Linux we can
+recall the well-known saying - we make our
+
+2
+00:00:20,740 --> 00:00:30,869
+inventions stand on the shoulders of giants.But
+we must understand that many of these giants
+
+3
+00:00:30,869 --> 00:00:33,010
+have failed.
+
+4
+00:00:33,010 --> 00:00:39,690
+But such fails can be a good lesson for new
+developers.
+
+5
+00:00:39,690 --> 00:00:48,170
+One such giant was the MULTICS project.
+
+6
+00:00:48,170 --> 00:00:58,460
+The development of Multics began in 1965 as
+a research project by MIT, General Electric
+
+7
+00:00:58,460 --> 00:01:08,740
+and Bell Labs to create a time-sharing, multiprocessing
+and multiuser interactive operating system.
+
+8
+00:01:08,740 --> 00:01:17,890
+After several years of development, the enthusiasm
+of the developers decreased more and more
+
+9
+00:01:17,890 --> 00:01:26,640
+as the system became more and more complex
+and the prospects for completion of development
+
+10
+00:01:26,640 --> 00:01:29,610
+became less and less.
+
+11
+00:01:29,610 --> 00:01:40,780
+Bell Labs pulled out of the project in 1969;
+but some of the people who worked on it got
+
+12
+00:01:40,780 --> 00:01:43,230
+a lot of experience.
+
+13
+00:01:43,230 --> 00:01:53,290
+Among them were Ken Thompson and Dennis Ritchie
+of Bell Labs, the inventors of the UNIX OS.
+
+14
+00:01:53,290 --> 00:02:03,690
+It's funny, but the history of Unix systems
+is closely related to computer games.
+
+15
+00:02:03,690 --> 00:02:19,000
+It started in 1969 when Ken Thompson discovered
+an old PDP-7 computer in a dark corner of
+
+16
+00:02:19,000 --> 00:02:24,760
+the lab and wanted to use it to play Space
+Travel game.
+
+17
+00:02:24,760 --> 00:02:32,530
+There was little to do — an operating system
+had to be written to run it.
+
+18
+00:02:32,530 --> 00:02:44,370
+And he did it -- at midnight on January 1,
+1970, the Unix epoch began.
+
+19
+00:02:44,370 --> 00:02:54,840
+From this time on, all clocks in UNIX-like
+systems count down the time, including your
+
+20
+00:02:54,840 --> 00:02:56,999
+mobile phone.
+
+21
+00:02:56,999 --> 00:03:05,150
+Originally it was a single-tasking OS written
+in assembly language that was loaded from
+
+22
+00:03:05,150 --> 00:03:17,920
+paper tapes and called UNICS as opposed to
+the complexity of MULTICS.
+
+23
+00:03:17,920 --> 00:03:19,620
+[Unix History Timeline](http://www.levenez.com/unix/)
+
+24
+00:03:19,620 --> 00:03:29,900
+And then the team of Ken Thompson and Dennis
+Ritchie received a new DEC PDP11 computer
+
+25
+00:03:29,900 --> 00:03:37,510
+to develop a word processing system for the
+Bell Labs patent department.
+
+26
+00:03:37,510 --> 00:03:47,569
+For the first three months the machine sat
+in a corner, enumerating all the closed Knight's
+
+27
+00:03:47,569 --> 00:03:57,389
+tours on a 6×8 chess board — just because
+the hard drive wasn't shipped with a super
+
+28
+00:03:57,389 --> 00:03:59,499
+new computer.
+
+29
+00:03:59,499 --> 00:04:08,209
+This time could be used to choose a programming
+language, because it was a computer with a
+
+30
+00:04:08,209 --> 00:04:17,190
+completely new architecture and programs written
+on PDP7 assembler was not useful for it.
+
+31
+00:04:17,190 --> 00:04:28,259
+And most interesting was the concept of another
+project used in some R&D projects including
+
+32
+00:04:28,259 --> 00:04:30,729
+MULTICS -- BCPL.
+
+33
+00:04:30,729 --> 00:04:39,400
+It was a high-level programming language focused
+on portability.
+
+34
+00:04:39,400 --> 00:04:51,340
+Most of this language was written in the language
+itself, and only a small machine-dependent
+
+35
+00:04:51,340 --> 00:04:55,090
+part was written in assembly.
+
+36
+00:04:55,090 --> 00:05:04,180
+To support a new machine, only 1/5 of the
+compiler code needed to be rewritten, which
+
+37
+00:05:04,180 --> 00:05:08,840
+usually took 2-5 man-months.
+
+38
+00:05:08,840 --> 00:05:10,800
+[Computer Languages History Timeline](http://www.levenez.com/lang/)
+
+39
+00:05:10,800 --> 00:05:22,620
+Thompson used the same concept when writing
+his simplified successor to BCPL, language B.
+
+40
+00:05:22,629 --> 00:05:29,770
+This language was not very expressive and
+effective on the PDP11.
+
+41
+00:05:29,770 --> 00:05:41,920
+In 1971, Ritchie started to improve B, which
+resulted in creating a new language C.
+
+42
+00:05:41,920 --> 00:05:54,570
+In 1973, the UNIX kernel was refactored in C
+language to follow the same concept of portability
+
+43
+00:05:54,570 --> 00:06:00,150
+-- most of the code was machine independent.
+
+44
+00:06:00,150 --> 00:06:10,560
+The system was distributed in source code
+among universities for a nominal fee, which
+
+45
+00:06:10,560 --> 00:06:18,310
+served as an explosive growth in its popularity
+in the 80s.
+
+46
+00:06:18,310 --> 00:06:27,169
+Almost all the developers of new computer
+systems since this period have used UNIX as
+
+47
+00:06:27,169 --> 00:06:32,130
+the base platform for their new developments.
+
+48
+00:06:32,130 --> 00:06:47,949
+One of the most famous of these is the Berkeley
+Software Distribution (BSD) developed at the
+
+49
+00:06:47,949 --> 00:07:02,400
+University of California, Berkeley and based on
+Unix version 6 with its own copyleft license.
+
+50
+00:07:02,400 --> 00:07:15,060
+And most of the hardware vendors of the 1980s
+used BSD as the base OS for their new computers.
+
+51
+00:07:15,060 --> 00:07:23,439
+UNIX was not a significant part of AT&T Bell
+Laboratories' business, and it was not a problem
+
+52
+00:07:23,439 --> 00:07:28,750
+for them.
+
+53
+00:07:28,750 --> 00:07:37,960
+But in the 1980s Bell Labs split into several
+companies as a result of an antitrust lawsuit
+
+54
+00:07:37,960 --> 00:07:41,300
+against AT&T.
+
+55
+00:07:41,300 --> 00:07:50,189
+The new UNIX System Laboratories company was
+created and the new UNIX System V specification
+
+56
+00:07:50,189 --> 00:07:52,160
+was developed.
+
+57
+00:07:52,160 --> 00:08:00,400
+UNIX was the main business of this company,
+and they were very aggressive in pushing the
+
+58
+00:08:00,400 --> 00:08:03,300
+new standard in the market.
+
+59
+00:08:03,300 --> 00:08:12,599
+And that has been the cause of UNIX wars against
+non-commercial developers including BSD.
+
+60
+00:08:12,599 --> 00:08:21,039
+The commercialization of the UNIX system market
+and the move to a closed development and distribution
+
+61
+00:08:21,039 --> 00:08:27,990
+model has led to an alternative movement -- the
+GNU.
+
+62
+00:08:27,990 --> 00:08:29,210
+What is GNU?
+
+63
+00:08:29,210 --> 00:08:36,000
+You know, it's such an African animal.
+
+64
+00:08:36,000 --> 00:09:09,800
+But also it is a self-referential abbreviation
+"GNU is 
+
+65
+00:09:09,800 --> 00:09:19,230
+Not Unix".
+
+66
+00:09:19,230 --> 00:09:26,820
+Richard Stallman founded the project in 1978
+at MIT.
+
+67
+00:09:26,820 --> 00:09:34,500
+The GNU project is a mass collaborative initiative
+for the development of free software.
+
+68
+00:09:34,500 --> 00:09:42,950
+The first goal of this project was to develop
+a set of programs similar to the standard
+
+69
+00:09:42,950 --> 00:09:47,940
+set of utilities in UNIX.
+
+70
+00:09:47,940 --> 00:10:00,470
+In 1991, a Finnish student Linus Torvalds
+created his own operating system kernel, which
+
+71
+00:10:00,470 --> 00:10:09,380
+is compatible with the UNIX OS, called Linux.
+
+72
+00:10:09,380 --> 00:10:13,990
+As he said later, "Just for fun."
+
+73
+00:10:13,990 --> 00:10:22,389
+The Linux kernel, combined with the set of
+utilities from the GNU project, served as
+
+74
+00:10:22,389 --> 00:10:29,720
+the basis for creating a complete operating
+system, comparable in capabilities to commercial
+
+75
+00:10:29,720 --> 00:10:33,690
+UNIX systems, and usually even superior to
+them.
+

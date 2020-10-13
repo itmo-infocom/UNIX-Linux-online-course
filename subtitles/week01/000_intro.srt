@@ -1,0 +1,112 @@
+2
+00:00:11,139 --> 00:00:12,139
+Hi!
+
+3
+00:00:12,139 --> 00:00:13,269
+My name is Oleg Sadov.
+
+4
+00:00:13,269 --> 00:00:18,439
+I'm going to be your instructor for this course.
+
+5
+00:00:18,439 --> 00:00:26,980
+I've been involved in the Unix world more
+than 30 years ago and have been working with
+
+6
+00:00:26,980 --> 00:00:31,320
+Linux systems almost from the very beginning.
+
+7
+00:00:31,320 --> 00:00:36,280
+This is an Unix and Linux introductory course.
+
+8
+00:00:36,280 --> 00:00:44,670
+This course isn't about memorizing countless
+definitions and specifications or endlessly
+
+9
+00:00:44,670 --> 00:00:47,480
+learning how to keystroke.
+
+10
+00:00:47,480 --> 00:00:58,879
+Instead, we will try to understand the philosophy
+of systems and the reasons why existing technical
+
+11
+00:00:58,879 --> 00:01:01,960
+solutions were developed.
+
+12
+00:01:01,960 --> 00:01:09,750
+This course will provide you with a fundamentals
+of Unix and Linux operating systems.
+
+13
+00:01:09,750 --> 00:01:18,750
+It will show you how such systems are organized,
+and demonstrate how to use them at an advanced
+
+14
+00:01:18,750 --> 00:01:24,000
+level, which you will be able to practice
+on your own.
+
+15
+00:01:24,000 --> 00:01:32,820
+In addition to the usual lectures, we have added
+ additional materials called "Under the Hood".
+
+16
+00:01:32,820 --> 00:01:42,360
+This is not required for graduation checks,
+but understanding it does matter when interviewing
+
+17
+00:01:42,360 --> 00:01:48,750
+for a well-known company like Google or Facebook.
+
+18
+00:01:48,750 --> 00:02:01,130
+In this course you will be introduced to reasons
+why open standards and the open source development
+
+19
+00:02:01,130 --> 00:02:06,570
+model are so important in today's computing
+environment.
+
+20
+00:02:06,570 --> 00:02:13,000
+After completing this course, you will have
+a solid introduction to working with Unix/Linux
+
+21
+00:02:13,000 --> 00:02:21,730
+from the command line and a good understanding
+of principles how these systems work.
+
+22
+00:02:21,730 --> 00:02:30,220
+In applying these skills, you will be able
+to perform fundamental operational tasks,
+
+23
+00:02:30,220 --> 00:02:38,840
+whether your Unix/Linux machine is in your
+hands or on a remote system across the Internet.
+
+24
+00:02:38,840 --> 00:02:50,510
+And you will be ready to work with any UNIX-like
+system with an experienced user and move on
+
+25
+00:02:50,510 --> 00:02:58,240
+to learning the problems solved by the administrators,
+developers or DevOps.
+
