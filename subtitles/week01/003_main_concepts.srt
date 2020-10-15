@@ -1,0 +1,335 @@
+1
+00:00:06,089 --> 00:00:12,679
+At the top level, UNIX-like systems can be
+very convenient for common users, and they
+
+2
+00:00:12,679 --> 00:00:18,109
+may not even know they are using this type
+of OS.
+
+3
+00:00:18,109 --> 00:00:29,800
+For example, currently the most commonly used
+operating systems are Linux-based Android
+
+4
+00:00:29,800 --> 00:00:45,900
+systems and UNIX-based Apple systems, in which
+the user only sees the user friendly graphical UI.
+
+5
+00:00:45,910 --> 00:00:55,610
+But beginners who are just starting to learn
+UNIX-like systems for administration or development
+
+6
+00:00:55,610 --> 00:01:00,670
+sometimes complain about their complexity.
+
+7
+00:01:00,670 --> 00:01:09,079
+Don't be afraid -- actually such systems are
+based on fairly simple concepts.
+
+8
+00:01:09,079 --> 00:01:21,950
+There are only three things (three and a half
+to be exact) you need to know to be comfortable
+
+9
+00:01:21,950 --> 00:01:25,460
+with any UNIX-like systems:
+
+10
+00:01:25,460 --> 00:01:35,080
+Users, Files, Processes and Terminal lines.
+
+11
+00:01:35,099 --> 00:01:46,820
+The first is not very well known to modern users only because
+we now have a lot of computer devices with personal access.
+
+12
+00:01:46,829 --> 00:01:57,329
+UNIX was created at a time when computers
+were an expensive rarity and a single computer
+
+13
+00:01:57,329 --> 00:01:59,829
+was used by many users.
+
+14
+00:01:59,829 --> 00:02:07,799
+As a consequence, from the beginning, UNIX
+had strong security policies and restrictions
+
+15
+00:02:07,799 --> 00:02:11,660
+on permissions for users.
+
+16
+00:02:11,660 --> 00:02:25,380
+And now on UNIX-like systems, we have dozens of users
+and groups, even if hidden by an autologin machinery.
+
+17
+00:02:25,390 --> 00:02:32,409
+And most of them are so-called pseudo-users,
+which are needed to start system services.
+
+18
+00:02:32,409 --> 00:02:43,650
+As we will see later, they are required by
+architecture, since it is on the permissions
+
+19
+00:02:43,650 --> 00:02:54,659
+of users and groups that the system is built
+to control access to system resources (processes
+
+20
+00:02:54,659 --> 00:02:55,659
+and files).
+
+21
+00:02:55,659 --> 00:03:04,390
+If we are talking about ordinary users, they
+can log in with a username and password and
+
+22
+00:03:04,390 --> 00:03:08,510
+interact with the applications installed on
+the system.
+
+23
+00:03:08,510 --> 00:03:17,719
+Each user has full permissions only in their
+home directory and limited access rights to
+
+24
+00:03:17,719 --> 00:03:21,879
+files and directories outside of it.
+
+25
+00:03:21,879 --> 00:03:33,330
+This can be viewed as foolproof - common users
+cannot destroy anything on the system just
+
+26
+00:03:33,330 --> 00:03:37,840
+because they do not have such permissions.
+
+27
+00:03:37,840 --> 00:03:45,409
+Moreover, they cannot view another user's
+home directory or protected system files and
+
+28
+00:03:45,409 --> 00:03:46,409
+directories.
+
+29
+00:03:46,409 --> 00:03:53,739
+To perform system administration tasks, the
+system has a special superuser (generally
+
+30
+00:03:53,739 --> 00:03:57,670
+called "root") with extra permissions.
+
+31
+00:03:57,670 --> 00:04:07,480
+At the system level, each user or group looks
+like an integer number: a user identifier
+
+32
+00:04:07,480 --> 00:04:11,540
+(UID) and a group identifier (GID).
+
+33
+00:04:11,540 --> 00:04:18,120
+Files are the next important thing for UNIX-like
+systems.
+
+34
+00:04:18,120 --> 00:04:26,650
+Almost all system resources look like files,
+including devices and even processes on some
+
+35
+00:04:26,650 --> 00:04:27,650
+systems.
+
+36
+00:04:27,650 --> 00:04:35,460
+And the basic concepts have been the same
+since the beginning of the UNIX era.
+
+37
+00:04:35,460 --> 00:04:40,400
+We have a hierarchical file system with a
+single root directory.
+
+38
+00:04:40,400 --> 00:04:47,500
+All resources, including file systems existing
+on devices or external network resources,
+
+39
+00:04:47,500 --> 00:04:54,389
+are attached to this file system in separate
+directories -- this operation is called “mount”.
+
+40
+00:04:54,389 --> 00:05:02,020
+On the other hand, you can access a device
+(real or virtual) as a stream of bytes and
+
+41
+00:05:02,020 --> 00:05:06,740
+work with it like a regular file.
+
+42
+00:05:06,740 --> 00:05:14,750
+All files and directories are owned by users
+(real or pseudo) and groups, and read, write,
+
+43
+00:05:14,750 --> 00:05:20,910
+and execute access to them is controlled by
+permissions.
+
+44
+00:05:20,910 --> 00:05:28,000
+A process is a program launched from an executable
+file.
+
+45
+00:05:28,000 --> 00:05:32,750
+Each process belongs to a user and a group.
+
+46
+00:05:32,750 --> 00:05:39,389
+The relationship between the owners of processes
+and resources determines the access rights
+
+47
+00:05:39,389 --> 00:05:43,069
+according to the resource permissions.
+
+48
+00:05:43,069 --> 00:05:54,699
+All processes live in a hierarchical system
+based on parent-child relationships.
+
+49
+00:05:54,699 --> 00:06:02,190
+There is an initial process on the system
+called 'init' that is started at boot up.
+
+50
+00:06:02,190 --> 00:06:06,990
+All system services are started from this
+initial process.
+
+51
+00:06:06,990 --> 00:06:15,940
+There are fundamentally two types of processes
+in Linux -- foreground and background:
+
+52
+00:06:15,940 --> 00:06:23,110
+Foreground processes (also referred to as
+interactive processes) – these are initialized
+
+53
+00:06:23,110 --> 00:06:25,879
+and controlled through a terminal session.
+
+54
+00:06:25,879 --> 00:06:36,479
+In other words, there has to be a user connected
+to the system to start such processes; they
+
+55
+00:06:36,479 --> 00:06:45,280
+haven’t started automatically as part of
+the system functions/services.
+
+56
+00:06:45,280 --> 00:06:52,330
+Background processes (also referred to as
+non-interactive/automatic processes) – are
+
+57
+00:06:52,330 --> 00:07:01,360
+processes not connected to a terminal; they
+don’t expect any user input.
+
+58
+00:07:01,360 --> 00:07:04,889
+System services are always background processes.
+
+59
+00:07:04,889 --> 00:07:15,030
+And finally -- interactive foreground processes
+must be attached to the terminal session through
+
+60
+00:07:15,030 --> 00:07:17,280
+the terminal line.
+
+61
+00:07:17,280 --> 00:07:23,949
+At the time of the creation of UNIX, a TTY
+(teletype) device (originally developed in
+
+62
+00:07:23,949 --> 00:07:31,379
+the 19th century), was the primary communication
+channel between the user and the computer.
+
+63
+00:07:31,379 --> 00:07:39,849
+It was a very simple interface that worked
+with a stream of bytes encoded according to
+
+64
+00:07:39,849 --> 00:07:42,050
+the ASCII character set.
+
+65
+00:07:42,050 --> 00:07:53,540
+The connection is made via a serial interface (for example
+RS232) with a fixed set of connection speeds.
+
+66
+00:07:54,939 --> 00:08:01,750
+This interface is still the main user interface
+for UNIX-like systems.
+
+67
+00:08:01,750 --> 00:08:10,740
+The implementation of each new form of user
+interaction, such as full-screen terminals,
+
+68
+00:08:10,740 --> 00:08:19,090
+graphics systems, and network connections,
+all started with the implementation of a simple
+
+69
+00:08:19,090 --> 00:08:22,150
+TTY command line interface.
+
+70
+00:08:22,150 --> 00:08:29,640
+Moreover, as we will see, this interface abstraction
+gives us a very powerful and flexible mechanism
+
+71
+00:08:29,640 --> 00:08:35,349
+for communication between programs, possibly
+without human intervention.
+

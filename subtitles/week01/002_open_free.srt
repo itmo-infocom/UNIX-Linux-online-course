@@ -1,0 +1,309 @@
+1
+00:00:05,290 --> 00:00:13,970
+Initially, when computer R&D projects were
+mostly just university research, they were
+
+2
+00:00:13,970 --> 00:00:19,320
+open source and free of charge as a common
+scientific research result.
+
+3
+00:00:19,320 --> 00:00:32,689
+In addition, scientists were very interested
+in widespread dissemination of this result,
+
+4
+00:00:32,689 --> 00:00:45,730
+because their renommée, their reputation directly depended
+on the prominence of their scientific work.
+
+5
+00:00:45,730 --> 00:00:55,010
+Commercialization has changed this world to
+a closed and paid model.
+
+6
+00:00:55,010 --> 00:01:02,440
+Not completely closed, because standardization
+is very important for government agencies
+
+7
+00:01:02,440 --> 00:01:11,510
+and corporate consumers to protect investments
+and prevent vendor locking.
+
+8
+00:01:11,510 --> 00:01:18,510
+As a consequence, many open standards have
+been created by committees and organizations:
+
+9
+00:01:18,510 --> 00:01:20,650
+POSIX, ANSI, ISO.
+
+10
+00:01:20,650 --> 00:01:32,480
+And openness was a serious weapon in business competition.
+
+11
+00:01:32,480 --> 00:01:35,000
+For example, some well-known companies.
+
+12
+00:01:35,000 --> 00:01:43,440
+including Bull, DEC, IBM, HP, Hitachi, Philips,
+Siemens and others, created the 
+
+13
+00:01:43,440 --> 00:01:56,490
+Open Software Foundation (OSF) to fight SUN and AT&T during
+the so-called "Unix wars".
+
+14
+00:01:56,490 --> 00:02:04,070
+The POSIX subsystem (which was actually just
+a description of UNIX-like systems standards)
+
+15
+00:02:04,070 --> 00:02:14,489
+was included in Microsoft Windows NT because
+in the 1980s the US federal government required
+
+16
+00:02:14,489 --> 00:02:20,959
+compatibility with this open standard for
+government contracts.
+
+17
+00:02:20,959 --> 00:02:27,810
+This openness is very important because we
+get more compatible systems from different
+
+18
+00:02:27,810 --> 00:02:30,569
+vendors, ideally without undocumented features.
+
+19
+00:02:30,569 --> 00:02:37,250
+As a result, we have a computing infrastructure
+with higher efficiency and lower cost of ownership.
+
+20
+00:02:37,250 --> 00:02:44,059
+But for some people, especially in the scientific
+world, this is not enough.
+
+21
+00:02:44,059 --> 00:02:53,519
+And in 1985, Richard Stallman from MIT published
+the GNU Manifesto where he announced the GNU
+
+22
+00:02:53,519 --> 00:02:55,049
+Project.
+
+23
+00:02:55,049 --> 00:03:05,299
+The main goal of this project was to create
+a UNIX-like OS with a full set of UNIX utilities
+
+24
+00:03:05,299 --> 00:03:08,260
+from completely free software.
+
+25
+00:03:08,260 --> 00:03:14,299
+The Free Software Foundation (FSF) was formed
+to support these activities.
+
+26
+00:03:14,299 --> 00:03:27,000
+But what is this freedom in the computer world
+and how is it different from openness?
+
+27
+00:03:27,000 --> 00:03:33,049
+This difference is most accurately described
+in licenses.
+
+28
+00:03:33,049 --> 00:03:41,439
+In the proprietary world, the most widely
+used are so-called copyright licenses, which
+
+29
+00:03:41,439 --> 00:03:43,870
+usually restrict certain user rights.
+
+30
+00:03:43,870 --> 00:03:52,290
+Even with legal access to the source code,
+the copyright holder can harass the consumer,
+
+31
+00:03:52,290 --> 00:04:03,939
+as we saw in the USL versus BSD or SCO versus
+IBM lawsuits.
+
+32
+00:04:03,939 --> 00:04:04,949
+https://www.gnu.org/philosophy/free-software-for-freedom.en.html
+
+33
+00:04:04,949 --> 00:04:14,479
+In contrast, the free software world uses
+copyleft licenses.
+
+34
+00:04:14,479 --> 00:04:22,050
+The most famous permissive licenses for free
+software were published in the late 1980s.
+
+35
+00:04:22,050 --> 00:04:36,200
+Two of them, named BSD and MIT - the educational
+institutions in which they were created - look
+
+36
+00:04:36,200 --> 00:04:46,180
+almost the same and give us the following
+basic rights:
+
+37
+00:04:46,180 --> 00:04:54,360
+* The freedom to run the program as you wish,
+for any purpose (freedom 0).
+
+38
+00:04:54,360 --> 00:05:02,620
+* The freedom to study how the program works,
+and change it so it does your computing as
+
+39
+00:05:02,620 --> 00:05:06,680
+you wish (freedom 1).
+
+40
+00:05:06,680 --> 00:05:10,810
+Access to the source code is a precondition
+for this.
+
+41
+00:05:10,810 --> 00:05:18,380
+* The freedom to redistribute copies so you
+can help others (freedom 2).
+
+42
+00:05:18,380 --> 00:05:26,580
+* The freedom to distribute copies of your
+modified versions to others (freedom 3).
+
+43
+00:05:26,580 --> 00:05:34,640
+By doing this you can give the whole community
+a chance to benefit from your changes.
+
+44
+00:05:34,640 --> 00:05:37,750
+Access to the source code is a precondition
+for this.
+
+45
+00:05:37,750 --> 00:05:49,740
+The most famous projects released under these licenses
+are BSD Unix and the MIT X-Window graphics system.
+
+46
+00:05:49,750 --> 00:05:59,950
+Such licenses do not restrict the use of closed
+derivative projects and their proprietarization.
+
+47
+00:05:59,950 --> 00:06:11,740
+To avoid this, the GNU General Public License
+(GNU GPL or GPL) was developed.
+
+48
+00:06:11,740 --> 00:06:20,150
+One important limitation added to the fundamental
+freedoms of this license (run, learn, share
+
+49
+00:06:20,150 --> 00:06:26,320
+and modify software) is the limitation for
+closing.
+
+50
+00:06:26,320 --> 00:06:34,940
+Any derivative work must be distributed under
+the same or equivalent license terms.
+
+51
+00:06:34,940 --> 00:06:47,090
+And the main difference between open-specification
+software and truly free software is that we
+
+52
+00:06:47,090 --> 00:06:55,180
+actually have a de facto standard, not a de
+jure standard.
+
+53
+00:06:55,180 --> 00:07:01,240
+In free and open source software, we have
+working reference implementations that can
+
+54
+00:07:01,240 --> 00:07:06,930
+be used as a basis for future development
+and cross-testing.
+
+55
+00:07:06,930 --> 00:07:15,060
+It's interesting, but this license does not
+completely restrict the creation of proprietary
+
+56
+00:07:15,060 --> 00:07:20,900
+closed applications using GPL licensed software.
+
+57
+00:07:20,900 --> 00:07:30,380
+For example, the OS kernel or shared libraries,
+simply because they are not included directly
+
+58
+00:07:30,380 --> 00:07:34,450
+in the proprietary application code.
+
+59
+00:07:34,450 --> 00:07:44,990
+We now have many free and open source licenses
+approved by the Open Source Initiative.
+
+60
+00:07:44,990 --> 00:07:52,910
+Another challenge for the free and open world
+is patent lawsuits.
+
+61
+00:07:52,910 --> 00:08:04,900
+For example, in 2007, Microsoft threatened to sue
+Linux companies like Red Hat over patent violations.
+
+62
+00:08:04,900 --> 00:08:16,110
+To solve this problem GPLv3 license has been
+created, along with some activities such as
+
+63
+00:08:16,110 --> 00:08:25,250
+the Open Invention Network (OIN), which have
+a defensive patent pool and community of patent
+
+64
+00:08:25,250 --> 00:08:32,390
+non-aggression which enables freedom of action
+in Linux.
+

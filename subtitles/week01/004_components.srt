@@ -1,0 +1,322 @@
+1
+00:00:06,130 --> 00:00:14,120
+The main design principle used in UNIX-like
+systems is the "KISS" principle.
+
+2
+00:00:14,120 --> 00:00:28,750
+KISS, an acronym for "keep it stupid simple"
+or more officially "keep it short and simple",
+
+3
+00:00:28,750 --> 00:00:33,801
+is a design principle noted by the U.S. Navy
+in 1960.
+
+4
+00:00:33,801 --> 00:00:46,800
+The KISS principle states that most systems
+work best if they are kept simple rather than
+
+5
+00:00:46,800 --> 00:00:54,540
+made complicated; therefore, simplicity should
+be a key goal in design, and unnecessary complexity
+
+6
+00:00:54,540 --> 00:00:56,579
+should be avoided.
+
+7
+00:00:56,579 --> 00:01:01,190
+And from the very beginning UNIX was a very
+flexible modular system.
+
+8
+00:01:01,190 --> 00:01:09,810
+The basic set of components from which UNIX-like
+systems are built is:
+
+9
+00:01:09,810 --> 00:01:18,020
+Kernel, Shell, Libraries and Utilities.
+
+10
+00:01:18,030 --> 00:01:27,219
+The kernel is the first bunch of OS code that
+is loaded onto your computer's memory and
+
+11
+00:01:27,219 --> 00:01:29,509
+run for execution.
+
+12
+00:01:29,509 --> 00:01:34,979
+This program launches all processes on the
+system, handles interactions between system
+
+13
+00:01:34,979 --> 00:01:42,139
+resources, and still live while your system
+is running.
+
+14
+00:01:42,139 --> 00:01:48,299
+The kernel runs with the highest privileges
+and has access to all system resources.
+
+15
+00:01:48,299 --> 00:01:56,509
+All processes in the system operate in user
+space and interact with such resources and
+
+16
+00:01:56,509 --> 00:02:04,139
+among themselves, sending requests to the
+kernel using special software functions named
+
+17
+00:02:04,139 --> 00:02:05,619
+"system calls".
+
+18
+00:02:05,619 --> 00:02:13,150
+And the kernel handles such requests according
+to the permissions between the processes and
+
+19
+00:02:13,150 --> 00:02:14,150
+resources.
+
+20
+00:02:14,150 --> 00:02:24,690
+You can find more information on the role
+of the OS kernel in the "Under the hood -- kernel
+
+21
+00:02:24,690 --> 00:02:29,720
+as a set of interrupt handlers" lecture.
+
+22
+00:02:29,720 --> 00:02:40,610
+But if we have a kernel, it seems reasonable
+to have a shell around it.
+
+23
+00:02:40,610 --> 00:02:44,220
+And we have this one.
+
+24
+00:02:44,220 --> 00:02:55,400
+Oh, sorry, not one -- now there are many shells
+dating back to the first Unix shell by Ken
+
+25
+00:02:55,400 --> 00:02:59,390
+Thompson, introduced in 1971.
+
+26
+00:02:59,390 --> 00:03:09,980
+Actually, the shell is the first and most
+important communicator between human, programs,
+
+27
+00:03:09,980 --> 00:03:10,980
+and kernel.
+
+28
+00:03:10,980 --> 00:03:16,600
+Generally it's just a program that is launched
+when the user logs in.
+
+29
+00:03:16,600 --> 00:03:22,970
+It listens for standard input (usually from
+the keyboard) and sends the output of commands
+
+30
+00:03:22,970 --> 00:03:30,240
+to standard output (usually to the screen).
+
+31
+00:03:30,240 --> 00:03:36,270
+The best-known implementation of the UNIX
+shell is the Bourne shell, developed by Stephen
+
+32
+00:03:36,270 --> 00:03:47,900
+Bourne at Bell Labs in 1979 and included as
+the default interpreter for the Unix version
+
+33
+00:03:47,900 --> 00:03:52,230
+7 release distributed to colleges and universities.
+
+34
+00:03:52,230 --> 00:04:02,800
+Supported environment variables, redirecting
+input/output streams, program pipes and powerful scripting.
+
+35
+00:04:02,819 --> 00:04:11,630
+All modern shells (and not only UNIX shells)
+inherit these capabilities from this implementation.
+
+36
+00:04:11,630 --> 00:04:21,480
+The shell is a very effective glue for utilities
+in multitasking operating systems.
+
+37
+00:04:21,480 --> 00:04:29,870
+The most commonly used utilities were developed
+early in the life of UNIX.
+
+38
+00:04:29,870 --> 00:04:36,800
+There are tools for working with users, groups,
+files and processes.
+
+39
+00:04:36,800 --> 00:04:44,880
+Since UNIX was originally created to automate
+the work of the patent department, it has
+
+40
+00:04:44,880 --> 00:04:51,630
+a rich set of tools for processing text files
+and streams.
+
+41
+00:04:51,630 --> 00:04:59,460
+The most commonly used design pattern for
+UNIX utilities is the filter between standard
+
+42
+00:04:59,460 --> 00:05:01,970
+input and standard output.
+
+43
+00:05:01,970 --> 00:05:10,190
+An arbitrary number of such programs can be
+combined into a so-called software pipeline
+
+44
+00:05:10,190 --> 00:05:15,910
+that uses Shell program pipes for interprocess
+communication.
+
+45
+00:05:15,910 --> 00:05:26,900
+Each such utility can be very simple, but
+together they can be a very powerful compound
+
+46
+00:05:26,900 --> 00:05:32,330
+program that fits on a single command line.
+
+47
+00:05:32,330 --> 00:05:39,380
+Doug McIlroy, head of the Bell Labs Computing
+Sciences Research Center, and the inventor
+
+48
+00:05:39,380 --> 00:05:50,240
+of Unix pipes, described the Unix philosophy
+as follows: "Write programs that do one thing
+
+49
+00:05:50,240 --> 00:05:52,910
+and do it well.
+
+50
+00:05:52,910 --> 00:05:56,120
+Write programs to work together.
+
+51
+00:05:56,120 --> 00:06:03,240
+Write programs to handle text streams, because
+that is a universal interface."
+
+52
+00:06:03,240 --> 00:06:14,150
+Currently, the most commonly used utilities
+are those of the GNU project, which were created
+
+53
+00:06:14,150 --> 00:06:17,220
+after the commercialization of UNIX.
+
+54
+00:06:17,220 --> 00:06:28,310
+In most cases, they are richer in their capabilities
+and more complex parameters than the classic
+
+55
+00:06:28,310 --> 00:06:36,760
+SYSV set of utilities that you see in commercial
+UNIXes.
+
+56
+00:06:36,760 --> 00:06:44,910
+On small embedded systems, you might see a
+system like 'busybox' that looks like a single
+
+57
+00:06:44,910 --> 00:06:50,770
+binary with many faces built from a configurable
+modular library.
+
+58
+00:06:50,770 --> 00:07:00,090
+It may look like a fully featured set of UNIX-style
+utilities, including a shell and a text editor.
+
+59
+00:07:00,090 --> 00:07:08,440
+And during the build phase, you can choose
+exactly the features you need to reduce the
+
+60
+00:07:08,440 --> 00:07:11,440
+size of the application.
+
+61
+00:07:11,440 --> 00:07:20,540
+All utilities and shells are built on top
+of software libraries.
+
+62
+00:07:20,540 --> 00:07:27,460
+They can be dynamically or statically linked.
+
+63
+00:07:27,460 --> 00:07:35,270
+In the first case, we have more flexibility
+for updates and customization and we get a
+
+64
+00:07:35,270 --> 00:07:44,440
+set of applications that take up less disk/memory
+space in total.
+
+65
+00:07:44,440 --> 00:07:53,229
+In the second case, we have a solid state
+application that is less dependent on the
+
+66
+00:07:53,229 --> 00:08:00,669
+overall system configuration and can be more
+platform independent.
+
+67
+00:08:00,669 --> 00:08:16,690
+And as I said earlier in the first case, you
+can use libraries with "viral licenses" (like
+
+68
+00:08:16,690 --> 00:08:25,680
+the GPL) to write proprietary applications,
+but in the second case, you cannot.
+
