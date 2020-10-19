@@ -1,0 +1,211 @@
+1
+00:00:06,160 --> 00:00:17,070
+The first characters that you can see at the
+beginning of a line when you log in and access
+
+2
+00:00:17,070 --> 00:00:24,019
+the command line interface is the so-called
+Shell prompt.
+
+3
+00:00:24,019 --> 00:00:28,840
+This prompt asks you to enter the commands.
+
+4
+00:00:28,840 --> 00:00:38,649
+In the simplest case, in the Bourne shell,
+it's just a dollar sign for a regular user
+
+5
+00:00:38,649 --> 00:00:44,120
+and a hash sign for a superuser.
+
+6
+00:00:44,120 --> 00:00:53,980
+In modern shells, this can be a complex construct
+with host and user names, current directory,
+
+7
+00:00:53,980 --> 00:00:55,649
+and so on.
+
+8
+00:00:55,649 --> 00:01:01,300
+But the meaning of the dollar and hash signs
+is still the same.
+
+9
+00:01:01,300 --> 00:01:10,000
+The Shell as a command interpreter that provides
+a compact and powerful means of interacting
+
+10
+00:01:10,000 --> 00:01:12,890
+with the kernel and utilities.
+
+11
+00:01:12,890 --> 00:01:18,690
+Despite the many powerful graphical interfaces
+provided on UNIX-like systems, the command
+
+12
+00:01:18,690 --> 00:01:24,000
+line is still the most important communication
+channel for interacting with them.
+
+13
+00:01:24,000 --> 00:01:36,460
+All commands typed on a line can be used in
+command files executed by the shell, and vice versa.
+
+14
+00:01:36,470 --> 00:01:44,660
+Actions performed in the command interpreter
+can then be surrounded by a graphical UI,
+
+15
+00:01:44,660 --> 00:01:52,819
+and the details of their execution, thus,
+will be hidden from the end user.
+
+16
+00:01:52,819 --> 00:02:01,890
+Each time a user logs into the system, he
+finds himself in the environment of the so-called
+
+17
+00:02:01,890 --> 00:02:10,860
+"home interpreter" of the user, which performs
+configuration actions for the user session
+
+18
+00:02:10,860 --> 00:02:16,440
+and subsequently carries out interactive communication
+with the user.
+
+19
+00:02:16,440 --> 00:02:25,340
+Leaving the user session ends the work of the
+interpreter and processes spawned from it.
+
+20
+00:02:25,350 --> 00:02:34,850
+Any user can be assigned any of the interpreters
+existing in the system, or an interpreter
+
+21
+00:02:34,850 --> 00:02:36,890
+of his own design.
+
+22
+00:02:36,890 --> 00:02:50,380
+At the moment, there is a lot of command interpreters
+that can be a user shell and a command files
+
+23
+00:02:50,380 --> 00:02:57,030
+executor:
+* sh is the Bourne-Shell, the historical and
+
+24
+00:02:57,030 --> 00:03:07,160
+conceptual ancestor of all other shells, developed
+by Stephen Bourne at AT&T Bell Labs and included
+
+25
+00:03:07,160 --> 00:03:17,190
+as the default shell for Version 7 of Unix.
+* csh -- C-Shell, an interpreter developed
+
+26
+00:03:17,190 --> 00:03:27,020
+at the University of Berkeley by Bill Joy
+for the 3BSD system with a C-like control
+
+27
+00:03:27,020 --> 00:03:30,940
+statement syntax.
+
+28
+00:03:30,940 --> 00:03:42,709
+It has advanced interactive tools, task management
+tools, but the command file syntax was different
+
+29
+00:03:42,709 --> 00:03:43,910
+from Bourne-Shell.
+
+30
+00:03:43,910 --> 00:03:56,319
+* ksh -- Korn-Shell, an interpreter developed
+by David Korn and comes standard with SYSV.
+
+31
+00:03:56,319 --> 00:04:00,410
+Compatible with Bourne-Shell, includes command
+line editing tools.
+
+32
+00:04:00,410 --> 00:04:11,880
+The toolkit provided by Korn-Shell has been
+fixed as a command language standard in POSIX.
+
+33
+00:04:11,880 --> 00:04:20,090
+In addition to the above shells that were
+standardly supplied with commercial systems,
+
+34
+00:04:20,090 --> 00:04:28,509
+a number of interpreters were developed, which
+are freely distributed in source codes:
+
+35
+00:04:28,509 --> 00:04:34,820
+* bash -- Bourne-Again-Shell, quite compatible
+with Bourne-Shell, including both interactive
+
+36
+00:04:34,820 --> 00:04:41,580
+tools offered in C-Shell and command line
+editing.
+
+37
+00:04:41,580 --> 00:04:50,810
+* tcsh -- Tenex-C-Shell, a further development
+of the C-Shell with an extended interactive
+
+38
+00:04:50,810 --> 00:04:54,720
+interface and slightly improved script
+machinery.
+
+39
+00:04:54,720 --> 00:05:04,210
+* zsh -- Z-Shell, includes all the developments
+of Bourne-Again-Shell and Tenex-C-Shell, as
+
+40
+00:05:04,210 --> 00:05:15,850
+well as some of their significant extensions
+(however, not as popular as bash and tcsh).
+
+41
+00:05:15,850 --> 00:05:24,250
+* pdksh - Public-Domain-Korn-Shell, freely
+redistributable analogue of Korn-Shell with
+
+42
+00:05:24,250 --> 00:05:25,320
+some additions.
+
+43
+00:05:25,320 --> 00:05:34,520
+There are many "small" shells often used in
+embedded or mobile systems such as ash, dash,
+
+44
+00:05:34,520 --> 00:05:35,669
+busybox, etc.
+
