@@ -1,0 +1,147 @@
+1
+00:00:06,490 --> 00:00:14,570
+In addition to the "dollar" sign, which was
+used to retrieve a value from a variable by
+
+2
+00:00:14,570 --> 00:00:24,119
+name, we have seen some other special characters
+earlier: "space" and "tab" as word separators,
+
+3
+00:00:24,119 --> 00:00:27,849
+"hash" as a line comment.
+
+4
+00:00:27,849 --> 00:00:32,509
+We also have many other special characters.
+
+5
+00:00:32,509 --> 00:00:39,380
+"Newline" and "semicolon" are command separators.
+
+6
+00:00:39,380 --> 00:00:44,470
+The "ampersand" can also look like a command
+separator.
+
+7
+00:00:44,470 --> 00:00:52,400
+But if you use this sign, the command written
+before it will run in the background (that
+
+8
+00:00:52,400 --> 00:01:00,800
+is, asynchronously as a separate process),
+so the next command does not wait for completion.
+
+9
+00:01:00,800 --> 00:01:05,860
+"Double quote"d string means partial quoting.
+
+10
+00:01:05,860 --> 00:01:15,079
+This disables the interpretation of word separator
+characters within STRING - the entire string
+
+11
+00:01:15,079 --> 00:01:21,659
+with spaces appears as one parameter to the
+command.
+
+12
+00:01:21,659 --> 00:01:27,799
+"Single quote"d string interpreted as a full
+quoting.
+
+13
+00:01:27,799 --> 00:01:34,700
+Such quoting preserves all special characters
+within STRING.
+
+14
+00:01:34,700 --> 00:01:40,350
+This is a stronger form of quoting than double
+quoting.
+
+15
+00:01:40,350 --> 00:01:48,240
+"Backslash" is a quoting for single characters.
+
+16
+00:01:48,240 --> 00:01:55,369
+The "backquotes" indicates command substitution.
+
+17
+00:01:55,369 --> 00:02:04,359
+This construct makes the output of the command
+available as part of the command line.
+
+18
+00:02:04,359 --> 00:02:07,979
+For example to assign to a variable.
+
+19
+00:02:07,979 --> 00:02:17,770
+In POSIX-compliant environments, another form
+of command ("dollar" and "round brackets")
+
+20
+00:02:17,770 --> 00:02:18,770
+can be used.
+
+21
+00:02:18,770 --> 00:02:26,060
+And in the special characters of the shell,
+we can see some of the characters that we
+
+22
+00:02:26,060 --> 00:02:30,220
+will see in the regular expressions.
+
+23
+00:02:30,220 --> 00:02:37,310
+They are used to compose a query
+to find text data.
+
+24
+00:02:37,310 --> 00:02:44,700
+It is a very important part of the UNIX culture,
+borrowed by many programming languages to
+
+25
+00:02:44,700 --> 00:02:48,010
+form such search patterns.
+
+26
+00:02:48,010 --> 00:02:53,330
+These are "asterisk" and a "question" signs.
+
+27
+00:02:53,330 --> 00:02:57,910
+"Asterisk" used when a filename is expected.
+
+28
+00:02:57,910 --> 00:03:07,900
+It matches any filename except those starting
+with a "dot" (or any part of a filename, except
+
+29
+00:03:07,900 --> 00:03:10,010
+the initial "dot").
+
+30
+00:03:10,010 --> 00:03:18,720
+"Question" symbol used when a filename is
+expected, it matches any single character.
+
+31
+00:03:18,720 --> 00:03:27,980
+The set of characters in "square brackets"
+means -- any of this set.
+
+32
+00:03:27,980 --> 00:03:35,010
+The same with an "exclamation" sign --
+none of this set.
+

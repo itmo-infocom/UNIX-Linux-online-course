@@ -4,7 +4,7 @@
 
 2
 00:00:14,850 --> 00:00:21,220
-Давйте обсудим некоторые наиболее часто используемые системные переменные, которые предопределены
+Давайте обсудим некоторые наиболее часто используемые системные переменные, которые предопределены
 
 3
 00:00:21,220 --> 00:00:22,750
@@ -12,380 +12,329 @@
 
 4
 00:00:22,750 --> 00:00:36,180
-The most basic ones are:
-* USER is user name.
+Наиболее важные из них:
+* USER -- имя пользователя.
 
 5
 00:00:36,180 --> 00:00:41,519
-* HOME is the home directory.
+* HOME -- домашний каталог.
 
 6
 00:00:41,519 --> 00:00:51,469
-* SHELL is the user's home shell.
+* SHELL -- домашний shell пользователя.
 
 7
 00:00:51,469 --> 00:01:09,180
-* PS1 for shell-like or cshell-like shells
-is the primary shell prompt, printed interactively
+* PS1 -- это первичная подсказка для shell-подобных или cshell-подобных оболочек которая выводится
 
 8
 00:01:09,180 --> 00:01:11,520
-to standard output.
+на стандартный вывод.
 
 9
 00:01:11,520 --> 00:01:20,610
-* PS2 is a secondary prompt that is issued
-interactively to standard output when a line
+* PS2 -- это вторичная подсказка, которая интерактивно отображается
 
 10
 00:01:20,610 --> 00:01:27,160
-feed is entered in an incomplete command.
+в случае перевода строки в незавершённой команде.
 
 11
 00:01:27,160 --> 00:01:39,670
-All of these variables are more or less self-explanatory,
-but some commonly used variables are not that
+Названия этих переменных более или менее говорят сами за себя, но некоторые часто используемые переменные не так очевидны,
 
 12
 00:01:39,670 --> 00:01:44,610
-simple, especially in terms of security and
-usability:
+ особенно если их рассматривать с точки зрения безопасности и юзабилити:
 
 13
 00:01:45,610 --> 00:02:02,300
-PATH is a list of directories to look for when
-executable files searching.
+PATH -- это список каталогов в которых осуществляется поиск исполняемых файлов.
 
 14
 00:02:02,300 --> 00:02:05,840
-The origin of this idea comes from the Multics
-project.
+Идея эта зародилась в проекте Multics.
 
 15
 00:02:05,840 --> 00:02:14,010
-This is a colon-separated list of directories.
+Это список каталогов разделённых двоеточиями.
 
 16
 00:02:14,010 --> 00:02:21,510
-The csh path is initialized by setting the
-variable PATH with a list of space-separated
+В csh переменная PATH представляется в виде списка каталогов разделённых пробелами 
 
 17
 00:02:21,510 --> 00:02:26,939
-directory names enclosed in parentheses.
+и заключённых в круглые скобки.
 
 18
 00:02:26,939 --> 00:02:36,340
-As you probably know, on Windows you have
-the same environment variable but with fields
+Как вы может быть знаете, в Windows имеется такая же переменная окружения но с полями
 
 19
 00:02:36,340 --> 00:02:40,099
-separated by semicolons.
+разделёнными точкой с запятой.
 
 20
 00:02:40,099 --> 00:02:47,730
-But this is not only the difference between
-UNIX-like and Windows PATHes.
+И это не единственное различие между UNIX и Windows PATH.
 
 21
 00:02:47,730 --> 00:02:57,760
-On Windows, you have a default directory to
-search for executable files -- the current directory.
+В Windows у вас есть каталог в котором производится поиск исполняемых файлов -- текущий каталог.
 
 22
 00:02:57,769 --> 00:03:02,549
-But on UNIX or Linux, not.
+Но в UNIX или Linux это не так.
 
 23
 00:03:02,549 --> 00:03:03,799
-But why?
+Но почему?
 
 24
 00:03:03,799 --> 00:03:08,099
-It seems so useful.
+Вроде это так удобно...
 
 25
 00:03:08,099 --> 00:03:18,909
-And long long ago it was normal to have a
-PATH that started with dot, the current directory.
+И в давние, давние времена норамльной ситуацией было когда PATH начинался с точки -- текущего каталога.
 
 26
 00:03:18,909 --> 00:03:28,440
-But let's imagine this situation: a user with
-a name, for ex. "badguy", 
+Но давайте представим себе ситуацию: пользователь по прозванию, например "badguy" (плохиш), 
 
 27
 00:03:28,440 --> 00:03:35,980
-has downloaded many movies in his
-home directory to your university lab computer
+загрузил кучу кинофильмов в свой домашний каталог вашего лабораторного компьютера 
 
 28
 00:03:35,980 --> 00:03:40,689
-and filled up an entire disk.
+и забил весь диск.
 
 29
 00:03:40,689 --> 00:03:52,469
-You are a very novice sysadmin and do not
-know about disk quotas or any another magic
+Вы пока новичок в системном администрировании и ещё не знаете о дисковых квотах и прочей магии
 
 30
 00:03:52,469 --> 00:04:02,540
-for limiting disk space usage, but you know
-how to run disk analyzer to find the source
+позволяющей ограничить использование дискового пространства, но вы знаете как запустить анализатор дискового пространства
 
 31
 00:04:02,540 --> 00:04:04,469
-of the problem.
+для того что бы найти источник проблемы.
 
 32
 00:04:04,469 --> 00:04:14,459
-You found this guy's home directory as the
-primary eater of disk space and changed directory
+Вы опознали домашний его каталог в качестве главного пожирателя дискового протсранства
 
 33
 00:04:14,459 --> 00:04:33,500
-to this one to look inside.
+и переходите в этот каталог что бы поглядеть что внутри.
 
 34
 00:04:33,500 --> 00:04:47,890
-You call the standard command 'ls' for listing
-of files or directories in badguy's home directory:
+Вы запускаете стандартную программу 'ls' для получения списка файлов и каталогов в домашнем каталоге badguy'я.
 
 35
 00:04:49,100 --> 00:05:02,380
-But he's a really bad guy -- he created an
-executable named 'ls' in his home directory
+Но он таки настоящий плохиш -- он в своём домашнем каталоге смастерил исполняемый файл с названием 'ls'
 
 36
 00:05:02,380 --> 00:05:08,870
-and wrote in it only one command:
+и в нём написал только одну команду.
 
 37
 00:05:16,350 --> 00:05:28,370
-Which means - delete all files and directories
-in the entire file system, starting from the
+Что означает -- удалить все файлы и каталоги во всей файловой системе начиная
 
 38
 00:05:28,370 --> 00:05:35,350
-root directory, without any questions or confirmations.
+с корневого каталога, без каких-либо вопросов и подтверждений.
 
 39
 00:05:35,350 --> 00:05:47,560
-This guy cannot do it himself, since he, as
-an ordinary user, has no rights to do this,
+Этот парень не может этого сделать сам -- ведь он же обычный пользователь и у него на это просто нет прав,
 
 40
 00:05:47,560 --> 00:05:57,940
-but he destroys the entire file system with your hands --
-the superuser's hands of the sysadmin.
+но он угробил целую файловую систему вашими руками -- суперюзеровскими руками сисадмина.
 
 41
 00:05:57,950 --> 00:06:06,660
-Because of this, it is a bad idea to include
-a dot in your search PATH, especially if you
+Посему, это плохая идея включать точку в ваш PATH, особенно если вы
 
 42
 00:06:06,660 --> 00:06:09,190
-are a superuser.
+являетесь суперпользователем.
 
 43
 00:06:10,190 --> 00:06:12,700
-IFS - Input field Separators.
+IFS -- разделитель полей при вводе.
 
 44
 00:06:12,700 --> 00:06:22,440
-The IFS variable can be set to indicate what
-characters separate input words -- by default space,
+Переменная IFS может устанавливаться для разделения слов при вводе. По умолчанию -- пробелы,
 
 45
 00:06:22,440 --> 00:06:26,420
-tab or new line.
+табуляции или новая строка.
 
 46
 00:06:26,420 --> 00:06:31,560
-This feature can be useful for some tricky
-shell scripts.
+Эта возможность может быть полезна для некоторых хитрых shell-скриптов.
 
 47
 00:06:31,560 --> 00:06:37,310
-However, the feature can cause unexpected
-damage.
+Однако, она может быть и причиной неожиданных неприятностей.
 
 48
 00:06:37,310 --> 00:06:48,460
-By setting IFS to use slash sign as a separator,
-an attacker could cause a shell file or program
+Установив в переменной IFS символ слэша как разделителя, злоумышленник может заставить файл оболочки или программу
 
 49
 00:06:48,460 --> 00:06:50,810
-to execute unexpected commands.
+выполнить команды которых мы не ожидаем.
 
 50
 00:06:50,810 --> 00:06:58,740
-Fortunately, most modern versions of the shell
-will reset their IFS value to a normal set
+По счастью, большинство современных shell-интерпретаторов при вызове сбрасывают значение IFS
 
 51
 00:06:58,740 --> 00:07:01,380
-of characters when invoked.
+на стандартный набор символов.
 
 52
 00:07:01,380 --> 00:07:08,800
-So, the TERM variable.
+Итак -- переменная TERM.
 
 53
 00:07:08,800 --> 00:07:13,860
-TERM is the type of terminal used.
+TERM -- это тип используемого терминала.
 
 54
 00:07:13,860 --> 00:07:24,030
-The environment variable TERM should normally
-contain the type name of the terminal, console
+Переменная окружения TERM обычно содержит имя типа терминала, консоли
 
 55
 00:07:24,030 --> 00:07:29,680
-or display-device type you are using.
+или устройства вывода, которое вы используете.
 
 56
 00:07:29,680 --> 00:07:37,360
-This information is critical for all text
-screen-oriented programs, for example text editor.
+Эта информация критически важна для всех полноэкранных программ , например для текстового редактора.
 
 57
 00:07:37,370 --> 00:07:45,990
-There are many types of terminals developed
-by different vendors, from the invention of
+Существует множество типов терминалов, разработанных разными поставщиками, от изобретения
 
 58
-00:07:45,990 --> 00:07:52,650
-full screen text terminals in the late 1960s
-to the era of graphical interfaces in the
-
-59
-00:07:52,650 --> 00:07:57,680
-mid 1980s.
+00:07:45,990 --> 00:07:57,680
+полноэкранных текстовых терминалов в конце 1960-х годов до эпохи графических интерфейсов в середине 1980-х.
 
 60
 00:07:57,680 --> 00:08:04,130
-It doesn't look very important now, but in
-some cases, when you use one or another tool
+Сейчас это может быть выглядит не столь важным, но в некоторых случаях, когда вы используете тот или иной инструмент
 
 61
 00:08:04,130 --> 00:08:12,120
-to access a UNIX/Linux system remotely, you
-may have strange problems.
+для удаленного доступа к системе UNIX/Linux, у вас могут возникнуть странные проблемы.
 
 62
 00:08:12,120 --> 00:08:21,000
-In most cases, access to the text interfaces
-is used, for example, via SSH, telnet or serial
+В большинстве случаев доступ к текстовым интерфейсам используется, например, через SSH, telnet или через
 
 63
 00:08:21,000 --> 00:08:26,140
-line, since it requires less traffic.
+последовательный порт, поскольку для это требует меньше трафика.
 
 64
 00:08:26,140 --> 00:08:32,780
-But in some combinations of client programs
-and server operating systems, you may see
+Но в некоторых комбинациях клиентских программ и серверных операционных систем вы можете
 
 65
 00:08:32,780 --> 00:08:43,259
-completely inappropriate behavior of full-screen
-text applications such as a text editor.
+увидеть совершенно неадекватное поведение полноэкранных текстовых приложений, таких как текстовый редактор.
 
 66
 00:08:43,259 --> 00:08:55,440
-This could be incorrect display of the editor
-screen or incorrect response to keystrokes.
+Это может проявляться как неправильное отображение экрана редактора или неправильная реакция на нажатия клавиш.
 
 67
 00:08:55,440 --> 00:08:59,240
-And this is a consequence of incorrect terminal
-settings.
+И это следствие неправильной настройки терминала.
 
 68
 00:08:59,240 --> 00:09:06,800
-The easiest way to solve this problem is to
-set the TERM variable.
+Самый простой способ решить эту проблему -- установить переменную TERM.
 
 69
 00:09:06,800 --> 00:09:29,889
-Just try setting them to type "ansi" or "vt100",
-because these are the most commonly used types
+Просто попробуйте установить для них тип «ansi» или «vt100», потому что это наиболее часто используемые типы
 
 70
 00:09:29,889 --> 00:09:34,750
-of terminal emulation in these clients.
+эмуляции терминала в этих клиентах.
 
 71
 00:09:34,750 --> 00:09:40,210
-More information about terminal's screen handling
-machinery you can find in the "Under the
+Более подробную информацию о механизмах работы с экранами терминала вы можете найти в лекции
 
 72
 00:09:40,210 --> 00:09:43,680
-Hood -- text terminals command sets" lecture.
+«Под капотом - наборы команд текстовых терминалов».
 
 73
 00:09:43,680 --> 00:09:55,240
-Other variables related to terminal settings -- LINES and COLUMNS
-* LINES is the number of lines to fit on the
+Другие переменные, связанные с настройками терминала -- LINES и COLUMNS
+* LINES -- это количество строк, которые уместятся
 
 74
 00:09:55,240 --> 00:09:56,240
-screen.
+на экране.
 
 75
 00:09:56,240 --> 00:09:59,430
-* COLUMNS -- the number of characters that
-fit in the column.
+* COLUMNS -- количество символов, которые помещаются в столбце.
 
 76
 00:09:59,430 --> 00:10:07,639
-And the variables related to editing:
-* EDITOR is the default editor because there
+И переменные, связанные с редактированием:
+* EDITOR -- редактор по умолчанию, потому что в UNIX-подобных системах
 
 77
 00:10:07,639 --> 00:10:12,129
-are many editors for UNIX-like systems.
+существует множество редакторов.
 
 78
 00:10:12,129 --> 00:10:17,759
-* VISUAL -- command line editing mode.
+* VISUAL -- режим редактирования командной строки.
 
 79
 00:10:17,759 --> 00:10:28,339
-Some settings to personalize your environment:
-* LANG is the language setting.
+Некоторые настройки для персонализации вашей среды:
+* LANG -- это настройка языка.
 
 80
 00:10:28,339 --> 00:10:33,069
-* TZ is the time zone.
+* TZ -- временнАя зона.
 
 81
 00:10:33,069 --> 00:10:40,970
-And some examples of application specific
-settings:
+И несколько примеров настроек для конкретных приложений:
 
 82
 00:10:40,970 --> 00:10:49,800
-* DISPLAY points to an X-Window Server for connecting
- graphical applications to the user interface.
+* DISPLAY указывает на сервер X-Window для подключения графических приложений к пользовательскому интерфейсу.
 
 83
 00:10:49,800 --> 00:10:56,540
-* LPDEST is the default printer, if this variable
-is not set, system settings are used.
+* LPDEST -- это принтер по умолчанию, если эта переменная не задана, используются системные настройки.
 
 84
 00:10:56,540 --> 00:11:02,120
-* MANPATH is a list of directories to look
-for when searching for system manual files
+* MANPATH -- это список каталогов, в которых производится поиск файлов системного руководства.
 
 85
 00:11:02,120 --> 00:11:13,740
-* PAGER is the command used by 'man' program to view
-something, manual pages for example. And many others.
+* PAGER это команда, используемая программой man для просмотра чего-либо, например страниц руководства. И многие другие.
 
