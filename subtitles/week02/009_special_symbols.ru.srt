@@ -1,147 +1,135 @@
 1
 00:00:06,490 --> 00:00:14,570
-In addition to the "dollar" sign, which was
-used to retrieve a value from a variable by
+Помимо знака «доллар», который использовался для извлечения значения из переменной
 
 2
-00:00:14,570 --> 00:00:24,119
-name, we have seen some other special characters
-earlier: "space" and "tab" as word separators,
+00:00:15,140 --> 00:00:16,570
+по имени, ранее мы видели некоторые другие специальные символы: «пробел» и «табуляция» в качестве разделителей слов,
 
 3
 00:00:24,119 --> 00:00:27,849
-"hash" as a line comment.
+ «хэш» (диез, решётка) в качестве строчного комментария.
 
 4
 00:00:27,849 --> 00:00:32,509
-We also have many other special characters.
+Имеется также много других специальных символов.
 
 5
 00:00:32,509 --> 00:00:39,380
-"Newline" and "semicolon" are command separators.
+Новая строка или точка с запятой -- разделители команд.
 
 6
 00:00:39,380 --> 00:00:44,470
-The "ampersand" can also look like a command
-separator.
+"Амперсанд" тоже может рассматриваться как разделители команд.
 
 7
 00:00:44,470 --> 00:00:52,400
-But if you use this sign, the command written
-before it will run in the background (that
+Но если вы используете этот знак, команда, написанная до нее,
+ будет выполняться в фоновом режиме
 
 8
 00:00:52,400 --> 00:01:00,800
-is, asynchronously as a separate process),
-so the next command does not wait for completion.
+(то есть асинхронно как отдельный процесс),
+ поэтому следующая команда не ждет завершения.
 
 9
 00:01:00,800 --> 00:01:05,860
-"Double quote"d string means partial quoting.
+Строка в двойных кавычках означает частичное закавычивание.
 
 10
 00:01:05,860 --> 00:01:15,079
-This disables the interpretation of word separator
-characters within STRING - the entire string
+Таким образом отключается интерпретация
+ символов разделителей слов в строке --
 
 11
 00:01:15,079 --> 00:01:21,659
-with spaces appears as one parameter to the
-command.
+вся строка с пробелами воспринимается командой как один параметр.
 
 12
 00:01:21,659 --> 00:01:27,799
-"Single quote"d string interpreted as a full
-quoting.
+Полное закавычивание достигается при помощи одиночных кавычек.
 
 13
 00:01:27,799 --> 00:01:34,700
-Such quoting preserves all special characters
-within STRING.
+Оно отключает интерпретацию любых специальных символов в строке.
 
 14
 00:01:34,700 --> 00:01:40,350
-This is a stronger form of quoting than double
-quoting.
+Это более сильная форма закавычивания, чем та,
+ что достигается при помощи двойных кавычек.
 
 15
 00:01:40,350 --> 00:01:48,240
-"Backslash" is a quoting for single characters.
+Обратный слэш отключает интерпретацию одиночного спец. символа.
 
 16
 00:01:48,240 --> 00:01:55,369
-The "backquotes" indicates command substitution.
+Обратные кавычки -- это подстановка команды.
 
 17
 00:01:55,369 --> 00:02:04,359
-This construct makes the output of the command
-available as part of the command line.
+Эта конструкция подставляет вывод команды как часть командной строки.
 
 18
 00:02:04,359 --> 00:02:07,979
-For example to assign to a variable.
+Например, для установки значения переменной.
 
 19
-00:02:07,979 --> 00:02:17,770
-In POSIX-compliant environments, another form
-of command ("dollar" and "round brackets")
+00:02:07,979 --> 00:02:18,770
+В POSIX-совместимых окружениях может использоваться
+ другая форма команды -- доллар и команда в круглых скобках.
 
 20
-00:02:17,770 --> 00:02:18,770
-can be used.
+00:02:18,770 --> 00:02:26,060
+И, наконец, среди специальных символов оболочки
+ мы можем видеть некоторые символы,
 
 21
-00:02:18,770 --> 00:02:26,060
-And in the special characters of the shell,
-we can see some of the characters that we
+00:02:26,060 --> 00:02:30,220
+которые мы увидим также и в регулярных выражениях.
 
 22
-00:02:26,060 --> 00:02:30,220
-will see in the regular expressions.
+00:02:30,220 --> 00:02:37,310
+Они используются для составления поискового запроса
+ для текстовых данных.
 
 23
-00:02:30,220 --> 00:02:37,310
-They are used to compose a query
-to find text data.
+00:02:37,310 --> 00:02:44,700
+Это очень важная часть культуры UNIX,
+ заимствованная многими языками программирования
 
 24
-00:02:37,310 --> 00:02:44,700
-It is a very important part of the UNIX culture,
-borrowed by many programming languages to
+00:02:44,700 --> 00:02:48,010
+для формирования таких поисковых шаблонов.
 
 25
-00:02:44,700 --> 00:02:48,010
-form such search patterns.
+00:02:48,010 --> 00:02:53,330
+Это "звездочка" и знак вопроса.
 
 26
-00:02:48,010 --> 00:02:53,330
-These are "asterisk" and a "question" signs.
+00:02:53,330 --> 00:02:57,910
+"Звездочка" используется, когда ожидается имя файла.
 
 27
-00:02:53,330 --> 00:02:57,910
-"Asterisk" used when a filename is expected.
+00:02:57,910 --> 00:03:07,900
+Этот символ соответствует любому имени файла, кроме тех,
+ которые начинаются с «точки» (или любой части имени файла,
 
 28
-00:02:57,910 --> 00:03:07,900
-It matches any filename except those starting
-with a "dot" (or any part of a filename, except
+00:03:07,900 --> 00:03:10,010
+кроме начальной «точки»).
 
 29
-00:03:07,900 --> 00:03:10,010
-the initial "dot").
+00:03:10,010 --> 00:03:18,720
+Знак вопроса используется, когда ожидается имя файла.
+ Он соответствует любому одиночному символу.
 
 30
-00:03:10,010 --> 00:03:18,720
-"Question" symbol used when a filename is
-expected, it matches any single character.
+00:03:18,720 --> 00:03:27,980
+Набор символов в квадратных скобках означает --
+ любой из этого набора.
 
 31
-00:03:18,720 --> 00:03:27,980
-The set of characters in "square brackets"
-means -- any of this set.
-
-32
 00:03:27,980 --> 00:03:35,010
-The same with an "exclamation" sign --
-none of this set.
+То же с восклицательным знаком -- ничего из этого набора.
 
