@@ -1,0 +1,228 @@
+1
+00:00:05,200 --> 00:00:12,240
+All commands typed on the command line 
+or executed in a command file are either  
+
+2
+00:00:13,440 --> 00:00:25,440
+commands built into the interpreter or external 
+executable files. The set of built-in commands  
+
+3
+00:00:25,440 --> 00:00:32,320
+is quite small, which is determined by 
+the basic concept of UNIX -- the system  
+
+4
+00:00:33,120 --> 00:00:37,760
+should consist of small programs 
+that perform fairly simple  
+
+5
+00:00:37,760 --> 00:00:45,280
+well-defined functions that communicate 
+with each other via a standard interfaces.
+
+6
+00:00:47,040 --> 00:00:52,000
+A rich set of standard utilities is 
+a good old tradition for UNIX-like  
+
+7
+00:00:52,000 --> 00:00:59,040
+systems. The shell and the traditional set 
+of UNIX utilities, is a POSIX standard.
+
+8
+00:01:00,400 --> 00:01:08,240
+As we discussed earlier, we have different 
+branches of development of UNIX-like systems  
+
+9
+00:01:08,800 --> 00:01:14,600
+with different types of utilities:
+
+10
+00:01:18,880 --> 00:01:25,840
+* BSD-like dating back to the 
+original UNIX implementations; 
+
+11
+00:01:25,840 --> 00:01:39,840
+* SYSV based systems;
+* GNU utilities.
+
+12
+00:01:42,160 --> 00:01:51,440
+Some command syntax was changed by 
+the USL with the introduction of SYSV,  
+
+13
+00:01:52,480 --> 00:01:54,640
+but on most commercial UNIX  
+
+14
+00:01:57,920 --> 00:02:08,240
+a set of older commands was still included for 
+compatibility with earlier BSD-based versions  
+
+15
+00:02:08,240 --> 00:02:18,960
+of UNIX from the same vendor. GNU utilities 
+often combine both syntaxes and add their own  
+
+16
+00:02:18,960 --> 00:02:29,280
+enhancements to traditional utilities. And now 
+the GNU toolkit has become the de facto standard.
+
+17
+00:02:30,240 --> 00:02:40,320
+Executable files on UNIX-like systems do not have 
+any file name extension requirements as they do on  
+
+18
+00:02:40,320 --> 00:02:53,280
+Windows. The utility executable can have any 
+name, but must have execute permissions for the  
+
+19
+00:02:55,760 --> 00:02:58,280
+user who wants to run it.
+
+20
+00:02:58,280 --> 00:03:06,240
+A standard utility can have options, 
+arguments of options, and operands.  
+
+21
+00:03:12,080 --> 00:03:17,600
+Command line arguments of 
+programs are mainly parsed by  
+
+22
+00:03:32,880 --> 00:03:40,240
+the `getopt()` function, which actually 
+determines the form of the parameters  
+
+23
+00:03:40,240 --> 00:03:48,080
+when the command is invoked. This is an example  
+
+24
+00:03:48,720 --> 00:03:51,520
+of utility's synopsys description:
+
+25
+00:03:51,200 --> 00:03:53,440
+ The utility in the  
+
+26
+00:03:53,440 --> 00:03:56,000
+example is named utility_name.  
+
+27
+00:03:57,600 --> 00:04:08,240
+It is followed by options, option-arguments, 
+and operands. The arguments that consist of  
+
+28
+00:04:10,640 --> 00:04:23,640
+<dash/hyphen/minus> character and single 
+letters or digits, such as 'a', are  
+
+29
+00:04:26,640 --> 00:04:32,160
+known as "options" (or, historically, "flags").  
+
+30
+00:04:32,800 --> 00:04:41,680
+Certain options are followed by an 
+"option-argument", as shown with "c"  
+
+31
+00:04:43,440 --> 00:04:52,720
+option_argument. The arguments following the last 
+options and option-arguments are named "operands".
+
+32
+00:04:54,160 --> 00:05:07,840
+The GNU getopt() function supports so-called long 
+parameters, which start with two dashes and can  
+
+33
+00:05:07,840 --> 00:05:11,669
+use the full or abbreviated parameter name:
+
+34
+00:05:12,171 --> 00:05:18,560
+2. Option-arguments are shown separated 
+from their options by <blank> characters,  
+
+35
+00:05:19,360 --> 00:05:24,960
+except when the option-argument is 
+enclosed in the 'square brackets'  
+
+36
+00:05:26,560 --> 00:05:31,440
+notation to indicate that it is optional.
+
+37
+00:05:32,160 --> 00:05:39,760
+In GNU getopt's long options also 
+may be used the 'equal' sign between  
+
+38
+00:05:42,000 --> 00:05:44,059
+option and option-argument.
+
+39
+00:05:46,421 --> 00:05:54,720
+3. When a utility has only a few permissible 
+options, they are sometimes shown individually, as  
+
+40
+00:05:58,800 --> 00:06:06,000
+in the example. Utilities with many flags 
+generally show all of the individual flags  
+
+41
+00:06:06,960 --> 00:06:12,560
+(that do not take 
+option-arguments) grouped, as in this example. 
+
+42
+00:06:14,656 --> 00:06:16,400
+Utilities with  
+
+43
+00:06:18,400 --> 00:06:23,480
+very complex arguments may be shown as follows.
+
+44
+00:06:26,035 --> 00:06:30,800
+4. Arguments separated by the '|' ('vertical bar')  
+
+45
+00:06:32,480 --> 00:06:35,528
+notation are mutually-exclusive.
+
+46
+00:06:36,560 --> 00:06:42,560
+Alternatively, mutually-exclusive options 
+and operands may be listed with multiple  
+
+47
+00:06:46,240 --> 00:06:47,840
+synopsis lines. 
+
+48
+00:06:47,840 --> 00:06:50,640
+Like this.
+
+49
+00:06:51,613 --> 00:07:06,160
+5. Ellipses ( "..." ) are used to denote that one 
+or more occurrences of an operand are allowed.
+

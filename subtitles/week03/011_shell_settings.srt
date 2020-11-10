@@ -1,0 +1,92 @@
+1
+00:00:05,200 --> 00:00:07,600
+The shell is customizable.
+
+2
+00:00:08,720 --> 00:00:16,880
+As you will see, most UNIX commands have 
+very short names -- just two characters  
+
+3
+00:00:16,880 --> 00:00:24,560
+for the most common commands. This is 
+because the developers wanted to shorten the  
+
+4
+00:00:25,280 --> 00:00:31,600
+printing time on TTYs, but are still very useful  
+
+5
+00:00:33,520 --> 00:00:47,760
+for the CLI work with nowadays. And we have a very 
+useful tool for making shorter commands from long  
+
+6
+00:00:47,760 --> 00:00:58,405
+sentences -- it's called aliases.
+
+7
+00:01:02,540 --> 00:01:11,840
+Et  voila - now you only have a two letter 
+command that runs the longer command.
+
+8
+00:01:16,960 --> 00:01:25,840
+And you can 'unalias' this: 
+
+9
+00:01:25,840 --> 00:01:28,118
+```
+unalias ll 
+
+10
+00:01:28,118 --> 00:01:29,520
+alias
+``` 
+
+11
+00:01:29,520 --> 00:01:37,520
+But after logging out of the shell session 
+or restarting the system, all these settings  
+
+12
+00:01:37,520 --> 00:01:41,280
+and variable settings will be lost.
+
+13
+00:01:42,880 --> 00:01:54,400
+But you can put these settings in init files. 
+These are common shell scripts where you  
+
+14
+00:01:56,880 --> 00:01:58,880
+may setup what you want:
+
+15
+00:02:00,080 --> 00:02:03,440
+`/etc/profile` -- system defaults
+
+16
+00:02:04,720 --> 00:02:06,720
+Files for the first shell  
+
+17
+00:02:06,720 --> 00:02:14,240
+session that starts at login:
+* for Bourne shell just .profile in home directory
+
+18
+00:02:14,240 --> 00:02:22,720
+* Bash: .bash_profile
+* С-Shell: .login
+
+19
+00:02:24,000 --> 00:02:29,760
+And initialization files for secondary shells:
+* /etc/bashrc -- bash resources
+
+20
+00:02:29,760 --> 00:02:40,640
+* .bashrc for Bash
+* .cshrc for С-Shells
+

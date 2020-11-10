@@ -1,0 +1,410 @@
+1
+00:00:07,109 --> 00:00:12,360
+Ok, we just logged in. But now we want to
+
+2
+00:00:12,360 --> 00:00:22,200
+try to determine which part of the UNIX-like
+universe we are in.
+
+3
+00:00:22,200 --> 00:00:37,000
+`uname` -- print system information, in most
+simple case -- 
+
+4
+00:00:37,000 --> 00:00:52,690
+just name of kernel. With "all" flag we will
+get more information. And for what needs can
+
+5
+00:00:52,690 --> 00:01:04,640
+such information be used, because simple curiosity?
+The answer is simple -- it can be used to
+
+6
+00:01:04,640 --> 00:01:12,450
+create portable applications or some kind
+of administrative scripts for various types
+
+7
+00:01:12,450 --> 00:01:19,700
+of UNIX-like systems. You can use it in your
+installation or shell configuration scripts
+
+8
+00:01:19,700 --> 00:01:27,470
+to select different binaries and system utilities
+according to your specific computer architecture
+
+9
+00:01:27,470 --> 00:01:30,310
+and OS.
+
+10
+00:01:30,310 --> 00:01:45,200
+This works well for good old UNIX systems
+that are very vendor dependent. But on Linux
+
+11
+00:01:45,200 --> 00:01:55,350
+systems, `uname` will only display the Linux
+kernel name, possibly with the kernel version.
+
+12
+00:01:55,350 --> 00:02:05,689
+And as we know, we will have many different
+Linux distributions, which can be very different
+
+13
+00:02:05,689 --> 00:02:13,820
+from each other. And how can we adapt to this
+diversity?
+
+14
+00:02:13,820 --> 00:02:25,410
+One of the possibilities is the `lsb_release`
+command:
+
+15
+00:02:25,410 --> 00:02:37,430
+`lsb_release` -- provides certain LSB (Linux
+Standard Base) and distribution-specific information.
+
+16
+00:02:37,430 --> 00:02:46,120
+The Linux Standard Base (LSB) is a joint project
+by several Linux distributions under the organizational
+
+17
+00:02:46,120 --> 00:02:53,960
+structure of the Linux Foundation to standardize
+the software system structure, including the
+
+18
+00:02:53,960 --> 00:03:05,069
+Filesystem Hierarchy Standard. The LSB is
+based on the POSIX specification, the Single
+
+19
+00:03:05,069 --> 00:03:12,520
+UNIX Specification, and several other
+open standards, but extends them in certain
+
+20
+00:03:12,520 --> 00:03:13,639
+areas.
+
+21
+00:03:13,639 --> 00:03:21,230
+Good. We get information about "where". Let's
+
+22
+00:03:21,230 --> 00:03:27,860
+try to figure out "when".
+
+23
+00:03:27,860 --> 00:03:42,010
+`date` -- print the system date and time.
+What time? The current time of our time zone.
+
+24
+00:03:42,010 --> 00:03:50,689
+We can check the time in a different time
+zone, for example, Greenwich Mean Time (GMT):
+
+25
+00:03:50,689 --> 00:03:53,930
+$ TZ=GMT date
+
+26
+00:03:53,930 --> 00:04:04,409
+ 
+We can also set the current computer time:
+
+27
+00:04:04,409 --> 00:04:09,680
+$ man date
+
+28
+00:04:09,680 --> 00:04:18,019
+Mounth, day, hours, minutes, may be year and seconds.
+
+29
+00:04:19,019 --> 00:04:32,539
+Also we can choose a different output format
+for time and date using the '+' option:
+
+30
+00:04:32,539 --> 00:04:39,199
+date +%F_%T_%Z
+
+31
+00:04:39,199 --> 00:04:44,460
+and use this command to convert from different
+
+32
+00:04:44,460 --> 00:04:59,589
+time representations using 
+the '--date' option. You can find more details
+
+33
+00:04:59,589 --> 00:05:02,729
+on the man page.
+
+34
+00:05:02,729 --> 00:05:07,979
+And of course we can see the calendar:
+
+35
+00:05:07,979 --> 00:05:09,949
+$ cal
+$ man cal
+
+36
+00:05:12,560 --> 00:05:23,619
+For example, the calendar for the first year
+of the UNIX epoch:
+
+37
+00:05:23,619 --> 00:05:28,840
+$ cal 1970
+
+38
+00:05:28,849 --> 00:05:43,009
+Okay - 'what', 'when', but what about 'who'?
+
+39
+00:05:43,009 --> 00:05:55,009
+As we discussed earlier - we know that users
+and groups are just some magic numbers. Let's
+
+40
+00:05:55,009 --> 00:06:02,419
+look at the user's info -- the command `id`.
+
+41
+00:06:02,419 --> 00:06:13,399
+id - print real and effective user and group
+IDs
+
+42
+00:06:13,399 --> 00:06:21,370
+But also we have yet another command -- `logname`:
+
+43
+00:06:21,370 --> 00:06:26,439
+It prints user´s login name
+
+44
+00:06:26,439 --> 00:06:31,020
+For what needs can we use this command if
+
+45
+00:06:31,020 --> 00:06:47,080
+we already have an `id` command? First of
+all: as far as we remember, we have different
+
+46
+00:06:47,080 --> 00:06:59,550
+users, moreover, different types of users.
+Let's look... This is a regular user session.
+
+47
+00:06:59,550 --> 00:07:17,160
+The username is "user". And we can see the same
+user's name in both 'id' and `logname` commands
+
+48
+00:07:17,169 --> 00:07:24,249
+And this is the session of the root user.
+
+49
+00:07:24,249 --> 00:07:31,760
+He, as we remember, is the superuser. And
+we see absolutely another result of the `id`
+
+50
+00:07:31,760 --> 00:07:32,860
+command.
+
+51
+00:07:32,860 --> 00:07:38,140
+$ id
+
+52
+00:07:38,140 --> 00:07:43,770
+We see information about 'root' superuser.
+
+53
+00:07:43,770 --> 00:07:58,489
+But  the `logname` will show the same result
+in both cases.
+
+54
+00:07:58,480 --> 00:08:08,229
+, just because we are logged in with the user
+named "user" in both sessions, and then switched
+
+55
+00:08:08,229 --> 00:08:21,460
+to superuser with the `sudo` or `su` command.
+This can be important in some cases, and you
+
+56
+00:08:21,460 --> 00:08:26,349
+can use this command to determine the real
+user ID.
+
+57
+00:08:26,349 --> 00:08:27,349
+## Multiuser environment
+
+58
+00:08:27,349 --> 00:08:36,580
+As we recall, a UNIX-like system is a multi-user
+environment, and we have many utilities for
+
+59
+00:08:36,580 --> 00:08:40,000
+working with such a system.
+
+60
+00:08:40,000 --> 00:08:59,009
+`who` -- show who is logged in.
+
+61
+00:09:01,259 --> 00:09:08,480
+And `finger` -- user information lookup program
+-- more informative command including user
+
+62
+00:09:08,480 --> 00:09:09,480
+downtime.
+
+63
+00:09:10,480 --> 00:09:20,110
+At this point, it can be understood that a
+particular user is still sitting at his workplace
+
+64
+00:09:20,110 --> 00:09:31,639
+or has left for coffee. Moreover, we can see
+the user's status on other computers. But
+
+65
+00:09:31,639 --> 00:09:38,410
+as a client-server application, it needs a
+server side on the computer you requested
+
+66
+00:09:38,410 --> 00:09:41,450
+and the ability to connect to it.
+
+67
+00:09:41,450 --> 00:09:52,899
+If you find the required user in the list
+of computer users, you can send him a message
+
+68
+00:09:52,899 --> 00:10:01,359
+manually or from the program using the `write`
+command:
+
+69
+00:10:01,359 --> 00:10:06,430
+man write
+
+70
+00:10:06,430 --> 00:10:10,980
+Just enter something and finish your message
+
+71
+00:10:10,980 --> 00:10:22,570
+with EOF (^D as we remember). In this command,
+we can select the terminal line to write.
+
+72
+00:10:24,520 --> 00:10:37,459
+And about terminal lines -- we can get our
+current terminal line 
+
+73
+00:10:37,459 --> 00:10:40,399
+using the `tty` command.
+
+74
+00:10:40,399 --> 00:10:41,620
+$ tty
+
+75
+00:10:41,620 --> 00:10:49,480
+It just print the file name of the terminal
+connected to standard input.
+
+76
+00:10:49,480 --> 00:11:06,449
+We also have `stty` command to print and change
+terminal line settings:
+
+77
+00:11:06,449 --> 00:11:08,259
+$ stty
+
+78
+00:11:08,259 --> 00:11:17,589
+With the option `-a | --all` we can get all
+
+79
+00:11:17,589 --> 00:11:24,279
+the current driver settings of this terminal
+line:
+
+80
+00:11:24,279 --> 00:11:28,019
+$ stty -a
+
+81
+00:11:28,019 --> 00:11:33,899
+And then we can change these settings with
+
+82
+00:11:33,899 --> 00:11:40,829
+this command. For example, the previously
+discussed setting of the Delete key to interrupt
+
+83
+00:11:40,829 --> 00:11:46,250
+a program on some older UNIX systems.
+
+84
+00:11:46,250 --> 00:11:53,170
+man stty
+
+85
+00:11:53,170 --> 00:12:06,320
+Another note about older UNIX systems is that
+`stty` on such systems may not have the '-F' (file)
+
+86
+00:12:06,320 --> 00:12:20,249
+option for choosing the specified DEVICE instead
+of stdin. But we still have the option to
+
+87
+00:12:20,249 --> 00:12:39,129
+select the device -- just by 
+redirecting stdin to another TTY device:
+
+88
+00:12:39,129 --> 00:12:44,199
+stty < /dev/tty0
+
+89
+00:12:44,199 --> 00:12:51,019
+It seems a little unusual, but it was a good
+
+90
+00:12:51,019 --> 00:12:54,050
+old UNIX developer's decision.
+

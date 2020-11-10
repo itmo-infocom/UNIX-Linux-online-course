@@ -1,0 +1,281 @@
+1
+00:00:06,560 --> 00:00:14,320
+A few words about keyboard shortcuts. They are 
+actually very useful for command line work.  
+
+2
+00:00:15,680 --> 00:00:17,440
+Let's take a look at them:
+
+3
+00:00:18,840 --> 00:00:28,640
+* erase – erase single character: [Backspace] 
+or [Ctrl]-[H], or [Ctrl]-[?], or [Delete] 
+
+4
+00:00:28,640 --> 00:00:40,880
+* werase – erase word: [Ctrl]-[W]
+* kill – erase complete line: [Ctrl]-[U].  
+
+5
+00:00:41,760 --> 00:00:48,960
+This can be very useful when you enter something 
+wrong on an invisible line, such as when  
+
+6
+00:00:48,960 --> 00:00:51,080
+entering a password.
+
+7
+00:00:52,560 --> 00:00:59,360
+* rprnt – renew the output: [Ctrl]-[R]
+* Kill current process – [Ctrl]-[C] or [Delete].
+
+8
+00:00:59,360 --> 00:01:07,840
+In fact, these strange settings for the [Delete] key  
+
+9
+00:01:09,200 --> 00:01:22,160
+were used by some older UNIX. And many were very 
+confused when trying to delete incorrectly entered  
+
+10
+00:01:22,160 --> 00:01:31,520
+characters, they killed the executing application.
+
+11
+00:01:31,520 --> 00:01:43,440
+[Ctrl]-[\] -- kill the current 
+process, but with a memory dump.  
+
+12
+00:01:45,120 --> 00:01:55,120
+Such a dump can be used to analyze the internal 
+state of programs by the debugger. It can be  
+
+13
+00:01:55,120 --> 00:02:03,600
+created in the system automatically during a 
+program crash, if you have configured your system  
+
+14
+00:02:04,160 --> 00:02:14,560
+accordingly, or like this -- by [Ctrl]-[\] 
+keystroke to analyze state, for example,  
+
+15
+00:02:14,560 --> 00:02:23,360
+a frozen program. More information about core 
+dump you can find in "Under the Hood -- Core  
+
+16
+00:02:23,360 --> 00:02:29,040
+dump" lecture.
+[Ctrl]-[S] -- stop a current process. 
+
+17
+00:02:29,040 --> 00:02:37,280
+and [Ctrl]-[Q] -- continue 
+a previously paused process.  
+
+18
+00:02:37,920 --> 00:02:50,080
+And if the program seems to be frozen, first 
+try pressing [Ctrl]-[Q] to resume the process.  
+
+19
+00:02:50,080 --> 00:02:55,360
+Perhaps you accidentally pressed [Ctrl]-[S].
+* eof – [Ctrl]-[D]. End of  
+
+20
+00:02:58,240 --> 00:03:03,840
+file mark. Can be used to 
+complete input of something. 
+
+21
+00:03:03,840 --> 00:03:15,760
+* susp – [Ctrl]-[Z]. As you probably know, this 
+is the EOF mark on Microsoft systems. But on  
+
+22
+00:03:15,760 --> 00:03:23,600
+UNIX-like systems, it stops the current process 
+and disconnects it from the current terminal line.  
+
+23
+00:03:24,480 --> 00:03:32,480
+After that, the execution of this process can be 
+continued in the foreground or in the background.
+
+24
+00:03:33,680 --> 00:03:44,400
+KSH and Bash keyboard shortcuts.
+* [ЕЅС]-[ЕЅС] or [Tab] – Auto-complete  
+
+25
+00:03:45,040 --> 00:03:56,000
+files and folder names. This is very useful for 
+dealing with UNIX-like file systems with very deep  
+
+26
+00:03:56,000 --> 00:04:05,280
+hierarchical nesting. As we will see later, for 
+example three levels of nesting is a common place  
+
+27
+00:04:05,280 --> 00:04:12,880
+for such systems. Of course, we can use file 
+management interfaces like graphical file managers  
+
+28
+00:04:12,880 --> 00:04:21,760
+or text file managers like Midnight Commander 
+(mc), reminiscent of classic Norton Commander.  
+
+29
+00:04:21,760 --> 00:04:29,360
+But as we can see, in most cases, the 
+autocompletion mechanism makes navigation in
+
+30
+00:04:30,480 --> 00:04:38,560
+the file system faster and can be easier 
+if you know what you are looking for.
+
+31
+00:04:39,840 --> 00:04:49,680
+To use this machinery, you just need to start 
+typing what you want (command name, file path  
+
+32
+00:04:49,680 --> 00:04:59,280
+or environment variable name), press [Tab] and 
+the shell will try to help you complete the word.  
+
+33
+00:05:08,800 --> 00:05:16,160
+If it finds an unambiguous match, the 
+shell will simply complete what it started.  
+
+34
+00:05:17,120 --> 00:05:23,840
+And if we have many variants,  
+
+35
+00:05:32,960 --> 00:05:42,960
+Shell will print them and wait for new characters 
+to appear from us to unambiguously start  
+
+36
+00:05:43,600 --> 00:05:44,729
+the line.
+
+37
+00:05:48,958 --> 00:05:50,880
+Yet another Shell keystrokes: 
+
+38
+00:05:50,880 --> 00:05:56,800
+* [Ctrl]-[P] – Go to the 
+previous command on "history" 
+
+39
+00:05:56,800 --> 00:06:04,080
+* [Ctrl]-[N] – Go to the next command on "history"
+* [Ctrl]-[F] – Move cursor forward one symbol 
+
+40
+00:06:04,080 --> 00:06:13,520
+* [Ctrl]-[B] – Move cursor backward one symbol
+* [Meta]-[F] – Move cursor forward one word 
+
+41
+00:06:13,520 --> 00:06:19,840
+* [Meta]-[B] – Move cursor backward one word
+* [Ctrl]-[A] – Go to the beginning of the line 
+
+42
+00:06:19,840 --> 00:06:25,200
+* [Ctrl]-[E] – Go to the end of the line
+* [Ctrl]-[L] – Clears the Screen,  
+
+43
+00:06:26,080 --> 00:06:33,280
+similar to the `clear` command
+* [Ctrl]-[R] – Let’s you  
+
+44
+00:06:33,280 --> 00:06:40,960
+search through previously used commands
+* [Ctrl]-[K] – Clear the line after the cursor
+
+45
+00:06:41,920 --> 00:06:48,480
+Looks more or less clear except for the Meta key.  
+
+46
+00:06:49,760 --> 00:06:58,640
+The Meta key was a modifier key on certain 
+keyboards, for example Sun Microsystems keyboards.  
+
+47
+00:06:59,440 --> 00:07:09,040
+And this key used in other programs -- 
+Emacs text editor for example. On keyboards that  
+
+48
+00:07:10,720 --> 00:07:19,760
+lack a physical Meta key (common PC keyboard 
+for example), its functionality may be invoked  
+
+49
+00:07:19,760 --> 00:07:25,120
+by other keys such as the Alt key or Escape.  
+
+50
+00:07:26,720 --> 00:07:44,000
+But keep in mind the main difference between such 
+keys -- the Alt key is also a key modifier and  
+
+51
+00:07:44,000 --> 00:07:58,000
+must be pressed at the same time as the modified 
+key, but ESC generally is a real ASCII character  
+
+52
+00:07:58,000 --> 00:08:11,840
+(27 / hex 0x1B / oct 033) and is sent sequentially 
+before the next key of the combination.
+
+53
+00:08:14,960 --> 00:08:22,080
+Another key point is that the origins 
+of these key combinations are different.  
+
+54
+00:08:22,080 --> 00:08:30,160
+The second is just the defaults for those 
+specific shell and can be changed using the  
+
+55
+00:08:30,160 --> 00:08:37,280
+shell settings. But the first one is the TTY 
+driver settings. And if we want to change  
+
+56
+00:08:38,400 --> 00:08:46,000
+such keyboard shortcuts, for example, so that 
+the Delete key does not interrupt the process,  
+
+57
+00:08:46,720 --> 00:08:53,840
+we can do this by asking the OS 
+kernel to change the parameter  
+
+58
+00:08:54,720 --> 00:09:07,840
+of the corresponding driver. As we will see 
+later, this can be done with the `stty` utility.
+

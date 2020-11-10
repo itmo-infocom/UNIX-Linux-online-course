@@ -1,0 +1,461 @@
+1
+00:00:06,160 --> 00:00:25,789
+The easiest way to get information about the
+use of a command is the -h option or --help
+
+2
+00:00:25,789 --> 00:00:31,240
+for GNU long options.
+
+3
+00:00:31,240 --> 00:00:40,870
+Also since its inception, UNIX has come with
+an large set of documentation.
+
+4
+00:00:40,870 --> 00:00:44,200
+Some information is often found in 
+
+5
+00:00:44,200 --> 00:01:10,720
+the `/usr/doc` or `/usr/local/doc` directories
+as text files.
+
+6
+00:01:10,720 --> 00:01:21,880
+But the cornerstone of the Unix help system
+is the `man` command.
+
+7
+00:01:21,880 --> 00:01:34,110
+And the "man" in this case is not about gender
+-- it is just an abbreviation for "manual".
+
+8
+00:01:34,110 --> 00:01:46,780
+Let's look to the manual about "manual".
+
+9
+00:01:46,780 --> 00:01:52,190
+The `man` command has been traditional on
+
+10
+00:01:52,190 --> 00:02:00,940
+UNIX since its inception, was created in the
+teletype era and still works great on all
+
+11
+00:02:00,940 --> 00:02:03,460
+types of equipment.
+
+12
+00:02:03,460 --> 00:02:18,170
+And in the synopsis of the `man` command,
+we can see two worlds, two UNIX utility systems:
+
+13
+00:02:18,170 --> 00:02:23,510
+BSD and SYSV.
+
+14
+00:02:23,510 --> 00:02:28,250
+And at first we can see the different command
+syntaxes.
+
+15
+00:02:32,180 --> 00:02:37,540
+Parts of the man page are more or less the
+same:
+
+16
+00:02:37,540 --> 00:02:47,640
+NAME, SYNOPSIS, DESCRIPTIONS, FILE, SEE ALSO,
+DIAGNOSTIC, BUGS
+
+17
+00:02:47,640 --> 00:02:55,700
+The '-s' option with some integer parameter
+of `man` command in the SYSV variant denotes
+
+18
+00:02:55,700 --> 00:03:10,060
+a section of real paper manuals supplied in
+the old days with the OS by vendor.
+
+19
+00:03:10,060 --> 00:03:18,980
+For GNU/BSD flavors, use only the section
+number.
+
+20
+00:03:18,980 --> 00:03:30,960
+Section numbers are also different, as you
+can see here.
+
+21
+00:03:30,960 --> 00:03:35,740
+ The first sections in both is just user commands.
+
+22
+00:03:35,740 --> 00:03:40,000
+The second -- system calls.
+
+23
+00:03:40,000 --> 00:03:45,000
+The third -- C-library functions.
+
+24
+00:03:45,000 --> 00:03:46,611
+And then we can see different numbers for different flavors.
+
+25
+00:03:58,940 --> 00:04:12,410
+Let's look for example to well known C-language
+function `printf` manual page.
+
+26
+00:04:15,400 --> 00:04:17,459
+But
+
+27
+00:04:17,459 --> 00:04:19,739
+`man printf`
+
+28
+00:04:19,739 --> 00:04:27,010
+shows us the `man` page for the shell command,
+not the C function.
+
+29
+00:04:27,010 --> 00:04:33,780
+To see the manual for the C-language `printf`
+function, we must run:
+
+30
+00:04:33,780 --> 00:04:36,069
+man 3 printf
+
+31
+00:04:36,069 --> 00:04:40,970
+To view a list of printf-related manual pages,
+
+32
+00:04:40,970 --> 00:05:00,730
+we must do:
+* `whatis printf` -- search the `whatis` database
+
+33
+00:05:00,730 --> 00:05:08,229
+(created by `makewhatis` utility) for complete
+words
+
+34
+00:05:08,229 --> 00:05:36,240
+* and `man -k` or `apropos printf` -- search the
+`whatis` database for strings related to "printf".
+
+35
+00:05:36,240 --> 00:05:43,090
+The databases should be created by the `makewhatis`
+program, which is usually started at night
+
+36
+00:05:43,090 --> 00:05:45,100
+by the `cron` service.
+
+37
+00:05:45,100 --> 00:05:54,240
+If you have a freshly installed system and
+want to run any command related to the `whatis`
+
+38
+00:05:54,240 --> 00:06:00,410
+database, you posibly need to start the `makewhatis`
+program manually.
+
+39
+00:06:00,410 --> 00:06:08,639
+OK -- let's look to real man page:
+
+40
+00:06:08,639 --> 00:06:18,650
+zless /usr/share/man/man1/man.1.gz
+
+41
+00:06:18,650 --> 00:06:30,550
+This is a `troff` format.
+
+42
+00:06:30,550 --> 00:06:39,360
+Troff(short for "typesetter roff") and nroff(newer
+"roff") is an implementation of a text formatting
+
+43
+00:06:39,360 --> 00:06:51,490
+program, in traditional for UNIX systems style
+-- using a plain text file with a some markup.
+
+44
+00:06:51,490 --> 00:07:01,220
+It is ideologically based on the RUNOFF MIT
+program, developed in 1964, and after a series
+
+45
+00:07:01,220 --> 00:07:12,350
+of source code losses and rewrites, a C-based
+implementation was re-implemented in 1975.
+
+46
+00:07:12,350 --> 00:07:21,600
+Under the name Troff, it was accepted for
+use on the UNIX system and, of course, into
+
+47
+00:07:21,600 --> 00:07:22,810
+the AT&T patent department.
+
+48
+00:07:25,240 --> 00:07:34,660
+The main advantage of this tool was portability
+and the ability to generate printouts for
+
+49
+00:07:34,660 --> 00:07:43,780
+various devices, from a common ASCII printer
+to high-quality typographic photosetters.
+
+50
+00:07:43,780 --> 00:07:50,990
+Creating new technologies such as PostScript
+printers simply adds the appropriate output
+
+51
+00:07:50,990 --> 00:07:56,760
+drivers for the markup renderer.
+
+52
+00:07:56,760 --> 00:08:18,270
+Compared to the now better known WYSIWYG (What
+You See Is What You Get) systems, such systems
+
+53
+00:08:18,270 --> 00:08:26,890
+have better portability between platforms
+and higher typing quality.
+
+54
+00:08:26,890 --> 00:08:35,229
+Moreover, such systems are more focused on
+the programmatic creation of printed documents
+
+55
+00:08:35,229 --> 00:08:40,709
+without human intervention.
+
+56
+00:08:40,709 --> 00:08:49,279
+Let's take a look at an example of manually
+rendering of the man page that was hidden under
+
+57
+00:08:49,279 --> 00:08:50,850
+the hood of the `man` command:
+
+58
+00:08:50,850 --> 00:08:53,480
+$ zcat /usr/share/man/man1/man.1.gz | tbl \
+| eqn -Tascii | nroff -man | less
+
+59
+00:08:54,480 --> 00:09:06,660
+It's just a programs pipeline in which we
+unpack the compressed TROFF source, go through
+
+60
+00:09:06,660 --> 00:09:17,639
+the TROFF preprocessor for tables and math
+equations, pass a `troff` variant named 'nroff'
+
+61
+00:09:17,639 --> 00:09:31,790
+to output a text terminal, and finally we may pass
+a text to pager/viewer named 'less' .
+
+62
+00:09:31,790 --> 00:09:32,939
+What is it viewer?
+
+63
+00:09:32,939 --> 00:09:41,880
+In the TTY interface, the `man` command seems
+like a good one -- when you run it, you get
+
+64
+00:09:41,880 --> 00:09:50,450
+paper manuals that you can combine into a
+book, put on a shelf, and reread as needed.
+
+65
+00:09:50,450 --> 00:09:59,209
+On a full-screen terminal -- before, Ctrl-S
+(stop)/ Ctrl-Q(repeat) was enough for viewing,
+
+66
+00:09:59,209 --> 00:10:16,190
+because at first the terminals were connected
+at low speed (9600 bits per second for ex.),
+
+67
+00:10:16,190 --> 00:10:27,860
+and now, in our faster times, they use special
+programs to looking something -- viewers.
+
+68
+00:10:27,860 --> 00:10:35,160
+And actually, when you run the `man` command,
+you see just a viewer interface, in most
+
+69
+00:10:35,160 --> 00:10:39,730
+cases it is `less`.
+
+70
+00:10:39,730 --> 00:10:48,630
+We will discuss viewers further, but in a
+nutshell, the most commonly used ot them the
+
+71
+00:10:48,630 --> 00:11:11,089
+`less` handles 
+standard PgUp/PgDown, Up/Down keys and exiting a program
+
+72
+00:11:11,089 --> 00:11:20,459
+by the 'q' key means 'quit'.
+
+73
+00:11:20,459 --> 00:11:22,040
+Well.
+
+74
+00:11:22,040 --> 00:11:30,630
+It looks great, but the man-sytle documentation
+representation has certain limitations: it
+
+75
+00:11:30,630 --> 00:11:39,099
+is only a textual representation without any
+useful functions invented after that time
+
+76
+00:11:39,099 --> 00:11:46,259
+-- for example, impossibility of using hypertext
+links.
+
+77
+00:11:46,259 --> 00:11:57,540
+To improve it, the GNU Project has created
+an information system that also works on all
+
+78
+00:11:57,540 --> 00:12:12,410
+types of alphanumeric terminals, but with
+hypertext support -- `info` system.
+
+79
+00:12:12,410 --> 00:12:20,470
+For many GNU utilities, the corresponding
+help files are in `info` format, and the `man`
+
+80
+00:12:20,470 --> 00:12:25,829
+pages recommend that you refer to `info`.
+
+81
+00:12:25,829 --> 00:12:38,440
+`Info` has its own user interface and the
+best way to learn it -- simply run the
+
+82
+00:12:38,440 --> 00:12:44,179
+`info info` command.
+
+83
+00:12:44,179 --> 00:12:54,639
+The internal source of "info" is the text
+markup files again in texinfo format.
+
+84
+00:12:54,639 --> 00:13:03,920
+From such files are generated text files for
+viewing on terminals, or also by the TeX
+
+85
+00:13:03,920 --> 00:13:11,399
+typesetting system generated documentation
+for printing.
+
+86
+00:13:11,399 --> 00:13:25,399
+TeX is another typesetting system (or "formatting
+system") that was developed and mostly written
+
+87
+00:13:25,399 --> 00:13:30,350
+in 1978 by Donald Knuth.
+
+88
+00:13:30,350 --> 00:13:49,829
+TeX and its LaTex extension are very popular
+in the scientific world as a means of typing
+
+89
+00:13:49,829 --> 00:13:53,019
+complex mathematical formulas.
+
+90
+00:13:53,019 --> 00:13:54,089
+OK.
+
+91
+00:13:54,089 --> 00:14:04,089
+But the inability to use graphics illustrations
+and any kind of multimedia context remained
+
+92
+00:14:04,089 --> 00:14:06,399
+relevant.
+
+93
+00:14:06,399 --> 00:14:13,750
+And in the past, almost every commercial UNIX
+system vendor created their own help system,
+
+94
+00:14:13,750 --> 00:14:22,060
+which includes both hypertext support and
+graphics for ex., and worked on the X Window
+
+95
+00:14:22,060 --> 00:14:24,389
+graphical System.
+
+96
+00:14:24,389 --> 00:14:36,660
+But now with the advent of HTML (yet another
+text markup language), such reference information
+
+97
+00:14:36,660 --> 00:14:46,600
+began to be provided in this format directly
+on the system or on WWW servers.
+
+98
+00:14:46,600 --> 00:14:59,949
+Often these HTML pages or print-ready PDF
+versions are simply generated from some content
+
+99
+00:14:59,949 --> 00:15:15,769
+oriented markup such as DocBook XML.
+
