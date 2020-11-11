@@ -1,0 +1,480 @@
+1
+00:00:06,480 --> 00:00:10,080
+We've discussed the users, and  
+
+2
+00:00:11,280 --> 00:00:20,720
+then it's appropriate to talk about another 
+of the three whales that UNIX-like systems  
+
+3
+00:00:21,440 --> 00:00:32,160
+rest on -- processes. We can get information 
+about the processes by running the  
+
+4
+00:00:33,600 --> 00:00:46,800
+`ps` (process status) command. In this case, we 
+again see two worlds, two systems -- SYSV and BSD: 
+
+5
+00:00:50,000 --> 00:00:52,640
+What about GNU?
+
+6
+00:00:52,640 --> 00:00:57,440
+man ps
+
+7
+00:00:57,440 --> 00:01:11,840
+As we can see, GNU `ps` supports both 
+sets of options with some GNU-specific long options.
+
+8
+00:01:12,720 --> 00:01:13,520
+By default  
+
+9
+00:01:19,680 --> 00:01:31,200
+`ps` without options shows only processes started 
+by me and connected to my current terminal line.
+
+10
+00:01:32,640 --> 00:01:40,840
+To get the status for all processes, we must use:
+*  
+
+11
+00:01:44,880 --> 00:02:04,000
+`ps -ef` for SYSV
+ and `ps ax` (may be without "dash")for BSD 
+
+12
+00:02:04,960 --> 00:02:10,320
+And we can get more information 
+about the processes using  
+
+13
+00:02:14,960 --> 00:02:18,200
+the "long" options:
+
+14
+00:02:21,680 --> 00:02:30,560
+* ps -l for SYSV
+* and may be just "l" for BSD
+
+15
+00:02:34,320 --> 00:02:40,246
+What information about the processes can we see?
+
+16
+00:02:40,246 --> 00:02:43,568
+$ ps ax | less
+
+17
+00:02:43,568 --> 00:02:55,040
+* UID -- effective user ID. A process can have 
+a different identifier than the user running the  
+
+18
+00:02:55,040 --> 00:03:04,800
+application because, as we will see later, this 
+is a mechanism in UNIX-like systems to change the  
+
+19
+00:03:05,360 --> 00:03:14,080
+identifier on the run of program.
+* PID -- a number representing  
+
+20
+00:03:14,080 --> 00:03:24,080
+the unique identifier of the process.
+* PPID -- parent process ID. Actually, We have a  
+
+21
+00:03:24,080 --> 00:03:32,800
+hierarchical system of processes, and each process 
+has its own parent. We can see this hierarchy  
+
+22
+00:03:34,640 --> 00:03:46,473
+for example by such options set:
+
+23
+00:03:46,473 --> 00:03:50,480
+$ ps axjf | less
+
+24
+00:03:50,480 --> 00:03:53,504
+or just by command:
+
+25
+00:03:53,504 --> 00:04:00,340
+$ pstree
+
+26
+00:04:00,340 --> 00:04:14,320
+* PRI -- priority of the process. Higher numbers 
+means lower priority. But, as we will discuss  
+
+27
+00:04:15,280 --> 00:04:23,040
+later, we cannot change the priority, 
+because this value is dynamically changed by  
+
+28
+00:04:23,040 --> 00:04:28,960
+the process scheduler. And we 
+can only send recommendations  
+
+29
+00:04:30,480 --> 00:04:44,320
+to the scheduler using the `nice` (NI) parameter:
+* NI -- can be set with `nice` and `renice`  
+
+30
+00:04:44,320 --> 00:04:53,120
+commands. More information about priorities and 
+nices you can find in "Under the Hood" -- Process  
+
+31
+00:04:53,120 --> 00:04:55,840
+scheduler lecture. 
+
+32
+00:04:55,840 --> 00:05:03,520
+* TTY -- controlling tty (terminal).
+* and CMD -- command.
+
+33
+00:05:06,400 --> 00:05:13,600
+And also a very useful (especially 
+if the system slows down) command  
+
+34
+00:05:16,880 --> 00:05:23,040
+`top`, which dynamically displays 
+information about processes,  
+
+35
+00:05:23,040 --> 00:05:29,920
+sorted accordingly by the use of system 
+resources -- memory and CPU time.
+
+36
+00:05:32,480 --> 00:05:41,000
+`nice` -- run a  
+
+37
+00:05:42,240 --> 00:05:47,994
+program with modified scheduling priority:
+
+38
+00:05:47,994 --> 00:05:49,440
+` man nice`
+
+39
+00:05:49,440 --> 00:06:01,360
+`Nice` value is just an integer. The smallest 
+number means the highest priority. The nice's  
+
+40
+00:06:01,360 --> 00:06:10,560
+range can be different on different systems and 
+you should look at the `man nice` on your system.  
+
+41
+00:06:11,280 --> 00:06:26,640
+In the case of Linux nice value -- between 
+-20 and 19. Only the superuser can increase  
+
+42
+00:06:26,640 --> 00:06:33,840
+the priority, the normal user can just 
+decrease the default, which can be seen  
+
+43
+00:06:37,200 --> 00:06:47,840
+by invoking the "nice" program with no arguments.
+
+44
+00:06:48,880 --> 00:06:54,000
+For example:
+
+45
+00:06:54,000 --> 00:07:19,200
+`nice -n 19 command args...`
+
+46
+00:07:19,200 --> 00:07:29,280
+means execution of the command with the lowest 
+priority. This can be useful for reducing  
+
+47
+00:07:29,280 --> 00:07:36,560
+the activity of non-interactive 
+applications for exmaple, such as the  
+
+48
+00:07:36,560 --> 00:07:43,840
+backup process, which can slow down 
+the interactive response of the system.
+
+49
+00:07:47,760 --> 00:08:00,240
+`renice` -- alter priority of running 
+processes by PID. In this case, you may not use  
+
+50
+00:08:02,880 --> 00:08:06,000
+the '-n' option -- just a 'nice' number.  
+
+51
+00:08:07,280 --> 00:08:12,840
+For example:
+ 
+
+52
+00:08:12,840 --> 00:08:23,040
+`renice 19 PID...`
+
+53
+00:08:23,040 --> 00:08:26,720
+by this way
+
+54
+00:08:26,720 --> 00:08:32,400
+At the Shell level, we can 
+use the `jobs` mechanism.
+
+55
+00:08:32,400 --> 00:08:41,200
+The easiest way to start a new 
+background job is to use the "ampersand" symbol. 
+
+56
+00:08:41,200 --> 00:08:41,840
+gedit &
+xterm -e top
+
+57
+00:08:54,400 --> 00:09:07,840
+Once the command is running, we can disconnect 
+from the terminal line and pause it by
+
+58
+00:09:10,880 --> 00:09:34,480
+pressing '^Z'. As we can see, `top` in `xterm` 
+stops now, just because `xterm` application is stopped.
+
+59
+00:09:35,120 --> 00:09:39,200
+We can see background and suspended jobs using the  
+
+60
+00:09:39,200 --> 00:09:42,328
+`jobs` command:
+
+61
+00:09:42,328 --> 00:09:47,760
+`jobs`
+
+62
+00:09:47,760 --> 00:09:55,280
+In the first position of the 
+jobs list, we see the job number.  
+
+63
+00:09:55,840 --> 00:10:03,840
+We can use this job number with 
+a `percent` sign in front of it.
+
+64
+00:10:04,960 --> 00:10:14,640
+A suspended task, we can switch it 
+to the background execution mode.  
+
+65
+00:10:15,600 --> 00:10:19,400
+By default -- the current job.
+
+66
+00:10:20,640 --> 00:10:22,880
+As we can see, the `top`
+
+67
+00:10:27,120 --> 00:10:32,520
+running again.
+
+68
+00:10:32,520 --> 00:10:38,880
+And we can reattach the background job to 
+the terminal line by bringing it  
+
+69
+00:10:38,880 --> 00:10:40,581
+to the foreground.
+
+70
+00:10:40,978 --> 00:10:41,920
+After that we can  
+
+71
+00:10:41,920 --> 00:10:46,720
+interrupt the foreground job by pressing '^C'.
+
+72
+00:10:46,720 --> 00:10:54,240
+`Xterm` killed now.
+
+73
+00:10:54,240 --> 00:10:56,320
+Another way to terminate a  
+
+74
+00:10:57,280 --> 00:11:02,384
+process is with the `kill` command.
+
+75
+00:11:09,360 --> 00:11:13,840
+Also you can kill  
+
+76
+00:11:17,440 --> 00:11:21,553
+the process by PID number:
+
+77
+00:11:22,207 --> 00:11:23,520
+But in  
+
+78
+00:11:25,040 --> 00:11:35,840
+some cases `kill` does not work -- for 
+example, if the process is frozen. But even so,  
+
+79
+00:11:35,840 --> 00:11:45,840
+we can kill the process, just because 
+`kill` is actually sending a signal to  
+
+80
+00:11:45,840 --> 00:11:56,960
+the process, and we just have to choose 
+a different signal. This is the list  
+
+81
+00:12:01,200 --> 00:12:02,160
+of signals: 
+
+82
+00:12:02,160 --> 00:12:03,433
+kill -l 
+
+83
+00:12:03,433 --> 00:12:08,240
+15) SIGTERM – generic signal used to cause program  
+
+84
+00:12:09,520 --> 00:12:19,440
+termination (default kill)
+2) SIGINT – “program interrupt”  
+
+85
+00:12:21,920 --> 00:12:26,720
+(INTR key -- usually Ctrl-C)
+9) SIGKILL  
+
+86
+00:12:29,040 --> 00:12:35,040
+– immediate program termination 
+(cannot be blocked, handled or ignored) 
+
+87
+00:12:36,640 --> 00:12:49,360
+1) SIGHUP – terminal line is disconnected (often 
+used for daemons config rereading, just because  
+
+88
+00:12:49,360 --> 00:12:55,760
+daemons not connected to TTYs)
+3) SIGQUIT –  
+
+89
+00:12:59,600 --> 00:13:08,000
+core dump process (QUIT key, 
+as we remeber -- usually C-\)
+
+90
+00:13:09,440 --> 00:13:18,480
+When you execute a Unix job in the 
+background ( using & or `bg` command),  
+
+91
+00:13:19,040 --> 00:13:30,080
+and logout from the session, your process 
+will get killed. We can avoid this using  
+
+92
+00:13:31,440 --> 00:13:34,640
+`nohup` command:
+
+93
+00:13:34,640 --> 00:13:41,600
+nohup – run a command immune to 
+hangups, with output to 'nohup.out' 
+
+94
+00:13:41,600 --> 00:13:48,560
+Another very useful program is the `screen` – it's  
+
+95
+00:13:48,560 --> 00:13:57,040
+screen manager with VT100/ANSI terminal emulation 
+which supports multi-screen sessions support  
+
+96
+00:13:59,360 --> 00:14:07,600
+with offline execution. In fact, you can run some 
+long running commands on multiple screen sessions  
+
+97
+00:14:07,600 --> 00:14:17,280
+and after disconnecting from this terminal line 
+with your hands or after breaking connecting. And  
+
+98
+00:14:17,280 --> 00:14:25,840
+then, you can reconnect to this screen and you 
+will see that all processes are still running.
+
+99
+00:14:28,720 --> 00:14:38,400
+And another possibility of offline executing commands 
+is later execution and scheduled commands. 
+
+100
+00:14:38,400 --> 00:14:47,200
+at, batch, atq, atrm -- for queue, examine  
+
+101
+00:14:48,480 --> 00:14:53,040
+and delete jobs for later execution
+
+102
+00:14:53,040 --> 00:15:01,920
+and for time-based job 
+scheduler `cron` we have the  
+
+103
+00:15:05,120 --> 00:15:06,680
+command
+
+104
+00:15:07,920 --> 00:15:16,320
+`crontab` -- which maintain system wide crontab 
+files or command's time tables for individual  
+
+105
+00:15:16,320 --> 00:15:21,345
+users.
+

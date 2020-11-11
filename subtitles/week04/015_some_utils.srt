@@ -119,7 +119,6 @@ $ TZ=GMT date
 
 26
 00:03:53,930 --> 00:04:04,409
- 
 We can also set the current computer time:
 
 27
@@ -255,10 +254,6 @@ This can be important in some cases, and you
 00:08:21,460 --> 00:08:26,349
 can use this command to determine the real
 user ID.
-
-57
-00:08:26,349 --> 00:08:27,349
-## Multiuser environment
 
 58
 00:08:27,349 --> 00:08:36,580
