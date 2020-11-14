@@ -1,0 +1,110 @@
+1
+00:00:06,190 --> 00:00:15,440
+To understand the relationship between priority
+and nice, we must look to the UNIX process
+
+2
+00:00:15,440 --> 00:00:17,620
+scheduler internals.
+
+3
+00:00:17,620 --> 00:00:27,820
+The main task of the scheduler is to regulate
+the access of processes to the main computing
+
+4
+00:00:27,820 --> 00:00:45,309
+resource -- the processor or processors in
+multi-processor system.
+
+5
+00:00:45,309 --> 00:01:00,140
+This is done by providing a so-called "time
+quantum" to the process for the time the processor
+
+6
+00:01:00,140 --> 00:01:01,679
+is using.
+
+7
+00:01:01,679 --> 00:01:12,860
+And then by the timer interrupt handler this
+process is popped after the end of the time
+
+8
+00:01:12,860 --> 00:01:22,000
+slice and is replaced by the next process
+from the LIFO queue.
+
+9
+00:01:43,000 --> 00:01:59,740
+Priorities are just LIFO queues 
+
+10
+00:01:59,740 --> 00:02:11,240
+and processes from higher priority queues
+use the processor more often.
+
+11
+00:02:11,240 --> 00:02:20,480
+But from time to time, some processes go into
+a "sleep" state, for example, to wait for I/O.
+
+12
+00:02:20,480 --> 00:02:31,530
+And when they wake up, it's wise to move
+them to a higher priority queue for fairer
+
+13
+00:02:31,530 --> 00:02:34,180
+compute resources allocation.
+
+14
+00:02:34,180 --> 00:02:45,870
+The scheduler does this work and for this
+reason the priority changes dynamically.
+
+15
+00:02:45,870 --> 00:02:56,330
+We can simply recommend relative prioritization
+to the scheduler with the `nice` command.
+
+16
+00:02:56,330 --> 00:03:02,930
+But the `nice` command only refers to CPU
+usage.
+
+17
+00:03:02,930 --> 00:03:19,280
+If we need to prioritize I/O access, we need
+to use 
+
+18
+00:03:19,280 --> 00:03:24,520
+the `ionice` utility:
+$ man ionice
+
+19
+00:03:24,520 --> 00:03:34,069
+As we can see, this command maintains a real-time
+scheduling class.
+
+20
+00:03:34,069 --> 00:03:43,020
+First of all, the RT system does not mean
+fast response, it means guaranteed response
+
+21
+00:03:43,020 --> 00:03:45,850
+within a given response time.
+
+22
+00:03:45,850 --> 00:03:53,650
+Some UNIX and Linux systems support this scheduling
+class for the CPU as well.
+
+23
+00:03:53,650 --> 00:04:04,060
+In most cases, they use a pre-emptive scheduling
+algorithm for this.
+

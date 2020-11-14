@@ -1,0 +1,239 @@
+1
+00:00:06,740 --> 00:00:16,410
+The format of text data at first glance seems
+to be quite simple and versatile -- in the
+
+2
+00:00:16,410 --> 00:00:26,360
+simplest case, we just have a set of bytes
+encoded by the standard ASCII character table.
+
+3
+00:00:26,360 --> 00:00:37,370
+But if you look at the C language specification
+of the `fopen` function in UNIX-like and MS
+
+4
+00:00:37,370 --> 00:00:43,730
+OSs, you will see an interesting difference.
+
+5
+00:00:43,730 --> 00:00:55,239
+On MS systems, you will find the translation
+mode for newlines:
+
+6
+00:00:55,239 --> 00:01:01,469
+* `t` -- Open in text (translated) mode.
+
+7
+00:01:01,469 --> 00:01:10,240
+* `b` -- Open in binary (untranslated) mode;
+translations involving carriage-return and
+
+8
+00:01:10,240 --> 00:01:14,680
+line feed characters are suppressed.
+
+9
+00:01:14,680 --> 00:01:20,130
+What does translation mean in this context?
+
+10
+00:01:20,130 --> 00:01:29,770
+In UNIX-like systems, there is no difference
+between text and binary data.
+
+11
+00:01:29,770 --> 00:01:38,430
+To understand this, we need to go back to
+the beginning -- the TTY interface.
+
+12
+00:01:38,430 --> 00:01:41,460
+Moreover -- to the good old typewriter.
+
+13
+00:01:41,460 --> 00:01:58,630
+The carriage return is the real part of the typewriter
+that is used to return the paper to the far
+
+14
+00:01:58,630 --> 00:02:10,110
+right so that the printing mechanism is aligned
+with the left side of the paper:
+
+15
+00:02:14,730 --> 00:02:25,050
+For electrically driven TTYs, a special ASCII
+code does this job -- carriage return is defined
+
+16
+00:02:25,050 --> 00:02:37,180
+as 13 decimal (or hex 0D), '\r' in C-language
+notation.
+
+17
+00:02:37,180 --> 00:02:46,140
+And another one is line feed -- 10 (or hexadecimal
+0A), '\n' in C-language notation.
+
+18
+00:02:46,140 --> 00:03:02,830
+Despite the fact that we only pressed ENTER,
+that is -- LF both UNIX and MS OS did it differently.
+
+19
+00:03:02,830 --> 00:03:17,110
+On UNIX, the device driver does this job -- if
+we send it an LF, but needs a CR for the correct
+
+20
+00:03:17,110 --> 00:03:27,319
+line ending, the driver will just add it to
+the device text stream.
+
+21
+00:03:27,319 --> 00:03:36,010
+Only the characters we typed on keyboard will
+be placed in the text file -- only LF will
+
+22
+00:03:36,010 --> 00:03:41,890
+be at the end of the line.
+
+23
+00:03:41,890 --> 00:03:51,930
+But on MS systems this work is done while
+working with text files.
+
+24
+00:03:51,930 --> 00:04:03,430
+If we work with this file type, the operating
+system will automatically add CR to the text
+
+25
+00:04:03,430 --> 00:04:06,930
+data before LF.
+
+26
+00:04:06,930 --> 00:04:32,700
+This may cause some subtle errors, and we
+have utilities such as `dos2unix` and `unix2dos`
+
+27
+00:04:32,700 --> 00:04:35,370
+to convert between these formats.
+
+28
+00:04:35,370 --> 00:04:46,540
+But in some cases, the problems plagued by
+MS design cannot be solved in an easy way.
+
+29
+00:04:46,540 --> 00:04:55,010
+A story from real life: a long time ago at
+the Physico-Technical Institute, our students,
+
+30
+00:04:55,010 --> 00:05:02,050
+while writing their master thesis, developed
+an image processing system for processing
+
+31
+00:05:02,050 --> 00:05:05,490
+images from a holographic interferometer.
+
+32
+00:05:05,490 --> 00:05:16,760
+This system was designed according to the
+KISS principle -- from very simple parts.
+
+33
+00:05:16,760 --> 00:05:25,260
+They have developed many different image filters
+for cleaning the picture, for extracting interferometric
+
+34
+00:05:25,260 --> 00:05:28,790
+lines, for building a density map.
+
+35
+00:05:28,790 --> 00:05:36,030
+All of these simple programs were combined
+by shell pipelines and simply sent the filtered
+
+36
+00:05:36,030 --> 00:05:44,440
+image data from one processing program to
+another via standard I/O streams.
+
+37
+00:05:44,440 --> 00:05:52,611
+This approach allowed a fairly simple mechanism
+for playing with set of filters and their
+
+38
+00:05:52,611 --> 00:05:56,320
+parameters and successfully writing master
+thesis.
+
+39
+00:05:56,320 --> 00:06:06,210
+But one day Indian clients asked us for our
+interferometer, but they needed a program
+
+40
+00:06:06,210 --> 00:06:08,040
+that would work on Windows.
+
+41
+00:06:08,040 --> 00:06:18,400
+Not a problem, us we know Microsoft OS'es
+inherited from Unix the mechanism for redirecting
+
+42
+00:06:18,400 --> 00:06:24,430
+I/O streams and combining them through program
+pipes.
+
+43
+00:06:24,430 --> 00:06:34,910
+We just recompiled the C source code on Windows
+and ran our scripts as batch files.
+
+44
+00:06:34,910 --> 00:06:38,440
+And nothing works...
+
+45
+00:06:38,440 --> 00:06:40,220
+Why?
+
+46
+00:06:40,220 --> 00:06:51,020
+We are looking for a problem and we see -- the
+OS works with standard I/O streams and pipelines
+
+47
+00:06:51,020 --> 00:06:53,190
+in text mode!
+
+48
+00:06:53,190 --> 00:07:00,770
+And inserts CR before the LF -- in the binary
+image data.
+
+49
+00:07:00,770 --> 00:07:03,800
+And all the data is broken.
+
+50
+00:07:03,800 --> 00:07:11,800
+For solve the problem, we had to rewrite the
+entire system in the standard Windows style
+
+51
+00:07:11,800 --> 00:07:15,180
+-- as a large monolithic application.
+

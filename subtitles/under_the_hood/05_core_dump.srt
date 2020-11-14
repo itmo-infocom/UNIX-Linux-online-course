@@ -1,0 +1,164 @@
+1
+00:00:05,200 --> 00:00:14,779
+Core dump consists of the recorded state of
+the working memory of a computer program at
+
+2
+00:00:14,779 --> 00:00:23,820
+a specific time, generally when the program
+has crashed or otherwise terminated abnormally.
+
+3
+00:00:23,820 --> 00:00:36,789
+The name comes from "magnetic core memory",
+the principal form of random access memory
+
+4
+00:00:36,789 --> 00:00:43,429
+from the 1950s to the 1970s.
+
+5
+00:00:43,429 --> 00:00:54,120
+The name has remained long after magnetic
+core technology became obsolete.
+
+6
+00:00:54,120 --> 00:01:03,769
+Modern operating systems typically generate
+a file containing an image of the memory belonging
+
+7
+00:01:03,769 --> 00:01:13,689
+to the crashed process, or the memory images
+of parts of the address space related to that
+
+8
+00:01:13,689 --> 00:01:20,950
+process, along with other information such
+as the values of processor registers, program
+
+9
+00:01:20,950 --> 00:01:34,039
+counter, system flags, and other information
+useful for determining the root cause of the
+
+10
+00:01:34,039 --> 00:01:35,100
+crash.
+
+11
+00:01:35,100 --> 00:01:43,570
+These files can be viewed as text, printed,
+or analysed with specialized tools such as
+
+12
+00:01:43,570 --> 00:01:52,319
+elfdump on Unix and Unix-like systems, objdump
+and kdump on Linux.
+
+13
+00:01:52,319 --> 00:02:08,369
+Interesting use case for core-dump is initialization
+of the 
+
+14
+00:02:08,369 --> 00:02:11,230
+TeX typesetting system.
+
+15
+00:02:11,230 --> 00:02:21,690
+On old computers from the 70s it took a long
+time to interpret TeX package macros, and
+
+16
+00:02:21,690 --> 00:02:34,640
+Donald Knuth, the creator of TeX, just developed
+a mechanism that would core dump the `initex`
+
+17
+00:02:34,640 --> 00:02:38,840
+program after this interpretation.
+
+18
+00:02:38,840 --> 00:02:46,350
+And then it just needs to undump the core
+dump by downloading directly to memory an
+
+19
+00:02:46,350 --> 00:02:48,690
+running to execution.
+
+20
+00:02:48,690 --> 00:02:54,670
+By this way we get the interpreted packages
+immediately.
+
+21
+00:02:56,290 --> 00:03:05,239
+And the most common use of a core dump is
+to view the debugger failure state, or for
+
+22
+00:03:05,239 --> 00:03:17,300
+example a frozen state, from which we core
+dumping the application with C-\ keystroke
+
+23
+00:03:17,300 --> 00:03:20,710
+or the SIGQUIT signal.
+
+24
+00:03:20,710 --> 00:03:30,490
+This analysis can be very useful for embedded
+systems where interactive debugging may not
+
+25
+00:03:30,490 --> 00:03:32,439
+be available.
+
+26
+00:03:32,439 --> 00:03:39,290
+By default, core dump is disabled on most
+systems.
+
+27
+00:03:39,290 --> 00:03:40,969
+But you can use the `ulimit` command in `bash`:
+
+28
+00:03:40,969 --> 00:03:49,360
+$ ulimit -c
+0
+
+29
+00:03:49,360 --> 00:03:54,900
+This means disabling the core dump.
+
+30
+00:03:54,900 --> 00:03:59,180
+And we may enable it:
+
+31
+00:03:59,180 --> 00:04:07,120
+$ ulimit -c unlimited
+$ ulimit -c
+unlimited
+
+32
+00:04:07,120 --> 00:04:47,260
+Also in Linux we have system wide config `/etc/security/limits.conf`
+in which we may set hard and soft limits for
+
+33
+00:04:47,260 --> 00:04:55,000
+user and groups, including the limits for
+core dump size:
+
+34
+00:04:55,000 --> 00:04:59,030
+$ cat /etc/security/limits.conf
+
+35
+00:04:59,030 --> 00:05:03,060
+$ man limits.conf
+

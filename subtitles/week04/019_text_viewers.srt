@@ -1,0 +1,310 @@
+1
+00:00:06,109 --> 00:00:10,690
+As we remember, UNIX was originally created
+to automate the work of the patent office.
+
+2
+00:00:10,690 --> 00:00:19,779
+For this reason, it has a rich set of tools
+for working with text data.
+
+3
+00:00:19,779 --> 00:00:24,680
+But what is text?
+
+4
+00:00:24,680 --> 00:00:37,300
+Generally it is just a collection of bytes
+encoded according to some encoding table,
+
+5
+00:00:37,300 --> 00:00:41,430
+in most simple case -- ASCII.
+
+6
+00:00:41,430 --> 00:00:53,149
+And in a text file, you will not see any special
+formatting like bold text, italics, images,
+
+7
+00:00:53,149 --> 00:00:58,239
+etc. -- just text data.
+
+8
+00:00:58,239 --> 00:01:11,640
+And this is the main communication format
+for UNIX utilities since the 1970s.
+
+9
+00:01:11,640 --> 00:01:19,190
+As you know, Microsoft operating systems have
+different modes of working with files - text
+
+10
+00:01:19,190 --> 00:01:20,190
+and binary.
+
+11
+00:01:20,190 --> 00:01:27,320
+In UNIX, all files are the same, and we have
+no difference between text and binary data.
+
+12
+00:01:27,320 --> 00:01:34,560
+We remember our "Under the Hood" --
+Text handling in Windows lecture.
+
+13
+00:01:34,560 --> 00:01:47,159
+The first creature that helps us work with
+text files is the "cat".
+
+14
+00:01:47,159 --> 00:01:58,479
+Not a real "cat", but just an abbreviation
+for concatenation.
+
+15
+00:01:58,479 --> 00:02:10,950
+With no arguments, `cat` simply copies standard
+input to standard output.
+
+16
+00:02:10,950 --> 00:02:24,950
+And as we understand it, we can just redirect
+the output to a file, and this will be the
+
+17
+00:02:24,950 --> 00:02:27,471
+easiest way to create a new file:
+
+18
+00:02:27,471 --> 00:02:38,480
+$ cat > file
+
+19
+00:02:38,480 --> 00:02:48,450
+When we add filenames as arguments to the
+`cat` command, this will be a real concatenation
+
+20
+00:02:48,450 --> 00:03:05,700
+-- they will all be sent to 
+
+21
+00:03:05,700 --> 00:03:07,430
+the output.
+
+22
+00:03:07,430 --> 00:03:23,190
+And if we redirect them to a file, we get
+all these files concatenated into an output
+
+23
+00:03:23,190 --> 00:03:24,190
+file.
+
+24
+00:03:25,430 --> 00:03:34,440
+If we can combine something, we must be able
+
+25
+00:03:34,440 --> 00:03:35,709
+to split it.
+
+26
+00:03:35,709 --> 00:03:43,760
+And we have two utilities for different types
+of spliting:
+
+27
+00:03:43,760 --> 00:03:47,810
+tee - read from standard input and write to
+
+28
+00:03:47,810 --> 00:04:03,430
+standard output and files which just arguments of this command
+
+29
+00:04:03,430 --> 00:04:34,150
+and split – split a file into 
+
+30
+00:04:34,150 --> 00:04:39,600
+fixed-size pieces from our file.
+
+31
+00:04:39,600 --> 00:04:43,300
+So -- text viewers.
+
+32
+00:04:43,319 --> 00:04:45,590
+What is it viewer?
+
+33
+00:04:45,590 --> 00:05:02,360
+As we remember in the TTY interface,  the `man`
+command just print something on papers.
+
+34
+00:05:02,370 --> 00:05:14,740
+On a full-screen terminals -- with slow connection speed we used Ctrl-S (stop)/ Ctrl-Q (repeat).
+
+35
+00:05:14,740 --> 00:05:27,589
+And now we need to use special programs named "viewers".
+
+36
+00:05:27,589 --> 00:05:38,589
+Unlike text editors, viewers does not need
+to read the entire file before starting, resulting
+
+37
+00:05:38,589 --> 00:05:51,140
+in faster load times with larger files.
+These programs just reads files.
+
+38
+00:05:51,140 --> 00:06:03,770
+Historically, the first viewer was the "more"
+pager developed for the BSD project in 1978
+
+39
+00:06:03,770 --> 00:06:11,729
+by Daniel Halbert, a graduate student at the
+University of California, Berkeley.
+
+40
+00:06:11,729 --> 00:06:14,769
+The command-syntax is:
+
+41
+00:06:14,769 --> 00:06:22,369
+$ man more
+more [options] [file_name]
+
+42
+00:06:22,369 --> 00:06:30,389
+If no file name is provided, `more` looks
+
+43
+00:06:30,389 --> 00:06:32,620
+for input from standard input.
+
+44
+00:06:32,620 --> 00:06:44,979
+Once `more` has obtained input (file or stdin),
+it displays as much as can fit on the current
+
+45
+00:06:44,979 --> 00:06:48,300
+screen and waits for user input.
+
+46
+00:06:48,300 --> 00:07:01,899
+The most common methods of navigating through
+a file are "Enter", which advances the output
+
+47
+00:07:01,899 --> 00:07:09,270
+by one line, and Space, which advances the
+output by one screen.
+
+48
+00:07:09,270 --> 00:07:17,669
+When `more` reaches the end of a file it exits.
+
+49
+00:07:17,669 --> 00:07:33,800
+You can exit from "more" by pressing the "q"
+key and the "h" key will display help.
+
+50
+00:07:33,800 --> 00:07:41,889
+In the `more` utility you can search with
+regular expressions using the 'slash' inside
+
+51
+00:07:41,889 --> 00:07:54,800
+viewing or 
+
+52
+00:07:54,800 --> 00:07:56,429
+the '+/' option in command line.
+
+53
+00:07:56,429 --> 00:08:02,280
+And you can search again by typing just a
+slash without regexp.
+
+54
+00:08:02,280 --> 00:08:12,659
+Regexp is a very important part of UNIX culture
+and is used in many other programs and programming
+
+55
+00:08:12,659 --> 00:08:14,760
+environments:
+
+56
+00:08:14,760 --> 00:08:23,760
+The regular expressions understand a lot of special symbols:
+
+57
+00:08:23,760 --> 00:08:28,480
+Dot means any single character.
+
+58
+00:08:28,480 --> 00:08:41,680
+Square brackets with some symbols inside it -- any single character in this character class.
+
+59
+00:08:41,680 --> 00:08:51,140
+And in this case -- any single character not in this character class.
+
+60
+00:08:51,140 --> 00:08:58,960
+The beginning of line.
+The end of line
+
+61
+00:08:58,960 --> 00:09:04,080
+Asterisk means repeating.
+
+62
+00:09:04,080 --> 00:09:15,320
+It means zero or more times repeating of something of this.
+
+63
+00:09:15,320 --> 00:09:18,620
+"Slash question" -- single character.
+
+64
+00:09:18,620 --> 00:09:28,220
+"Slash plus" -- one or more times repeated of something
+
+65
+00:09:28,220 --> 00:09:36,170
+The main limitation of the `more` utility
+is only forward movement in the text.
+
+66
+00:09:36,170 --> 00:09:44,810
+To solve this problem, an improved `more`
+called `less` was developed.
+
+67
+00:09:44,810 --> 00:09:53,930
+The `less` utility buffers standard input,
+and we can navigate forward and backward through
+
+68
+00:09:53,930 --> 00:10:03,019
+the buffer, for exmp. using the cursor and
+PgUp/PgDown keys.
+
+69
+00:10:03,019 --> 00:10:12,749
+A reverse search with a "question" mark is
+possible too.
+

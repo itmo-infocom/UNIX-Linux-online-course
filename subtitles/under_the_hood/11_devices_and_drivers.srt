@@ -1,0 +1,292 @@
+1
+00:00:06,230 --> 00:00:15,010
+A few words about devices and drivers. In
+the classic Unix driver model, devices belong
+
+2
+00:00:15,010 --> 00:00:26,070
+to one of three categories: character devices,
+block devices and network devices associated
+
+3
+00:00:26,070 --> 00:00:40,120
+driver types. Under Unix, drivers are code
+units linked into the kernel that run in privileged
+
+4
+00:00:40,120 --> 00:00:50,080
+kernel mode. Generally, driver code runs on
+behalf of a user-mode application. Access
+
+5
+00:00:50,080 --> 00:00:59,570
+to Unix drivers from user-mode applications
+is provided via the file system. In other
+
+6
+00:00:59,570 --> 00:01:09,900
+words, devices appear to the application
+as special device files that can be opened.
+
+7
+00:01:09,900 --> 00:01:17,890
+In the beginning, all drivers were built into
+a monolithic kernel, and every change in a
+
+8
+00:01:17,890 --> 00:01:32,010
+set of devices required a rebuild of the kernel.
+Then a mechanism for dynamically loading device
+
+9
+00:01:32,010 --> 00:01:41,770
+drivers was developed, which made reconfiguration
+possible with support for dynamically changing
+
+10
+00:01:41,770 --> 00:01:52,460
+a set of devices. Nowadays, almost all modern
+systems support this machinery -- we just
+
+11
+00:01:52,460 --> 00:02:01,770
+need to install a package with a new device
+driver and this device will be supported by
+
+12
+00:02:01,770 --> 00:02:04,150
+the system immediately.
+
+13
+00:02:04,150 --> 00:02:17,371
+As we remember, we can access the device via
+a pseudo-file in the '/dev' directory. And
+
+14
+00:02:17,371 --> 00:02:21,870
+these files will be special files:
+
+15
+00:02:21,870 --> 00:02:28,480
+$ ls -l /dev/null
+crw-rw-rw-. 1 root root 1, 3 Aug 28 19:06
+
+16
+00:02:28,480 --> 00:02:30,680
+/dev/null
+$ ls -l /dev/sda
+
+17
+00:02:30,680 --> 00:02:36,200
+brw-rw----. 1 root disk 8, 0 Aug 28 19:06
+/dev/sda
+
+18
+00:02:36,200 --> 00:02:43,799
+We see this in the first character of the
+
+19
+00:02:43,799 --> 00:02:50,379
+permissions field:
+* 'c' -- stands for character device
+
+20
+00:02:50,379 --> 00:02:52,930
+* and 'b' -- for block device.
+
+21
+00:02:52,930 --> 00:03:05,920
+We can work with both of them as with files,
+but on block device a file system can be created.
+
+22
+00:03:05,920 --> 00:03:18,200
+What about file size? In place of the "size"
+we see two strange numbers that have nothing
+
+23
+00:03:18,200 --> 00:03:26,640
+to do with, for example, the actual size of
+the device. To understand the meaning of these
+
+24
+00:03:26,640 --> 00:03:35,310
+numbers, we must take a quick look at the
+organization of the device subsystem in a
+
+25
+00:03:35,310 --> 00:03:37,370
+UNIX-like kernel.
+
+26
+00:03:37,370 --> 00:03:51,240
+From the very beginning, drivers in the UNIX
+kernel were placed in two special tables,
+
+27
+00:03:51,240 --> 00:04:23,590
+`cdevsw` and `bdevsw` -- character and block
+device switches. These tables have a separate
+
+28
+00:04:23,590 --> 00:04:46,940
+row for each device driver. And the first
+number of two (the so-called "major number")
+
+29
+00:04:46,940 --> 00:05:01,220
+is just a position in this table. Each driver
+places the initial entry points for standard
+
+30
+00:05:01,220 --> 00:05:36,340
+file functions in its own table row: `open`,
+`close`, `read`, `write`, `seek` and everything
+
+31
+00:05:36,340 --> 00:05:53,750
+that did not fit into these functions - into
+the `ioctl` (I/O control) function. To write
+
+32
+00:05:53,750 --> 00:05:59,220
+a new driver, you just need to implement such
+functions for your device.
+
+33
+00:05:59,220 --> 00:06:11,760
+OK. But what about the second number -- the
+so-called "minor number"?
+
+34
+00:06:11,760 --> 00:06:20,000
+Let's take a look at the '/dev' directory again:
+
+35
+00:06:20,000 --> 00:06:23,600
+$ ls -l /dev/zero
+crw-rw-rw-. 1 root root 1, 5 Aug 28 19:06 /dev/zero
+
+36
+00:06:23,600 --> 00:06:27,000
+$ ls -l /dev/mem
+crw-r-----. 1 root kmem 1, 1 Aug 28 19:06 /dev/mem
+
+37
+00:06:27,009 --> 00:06:33,310
+It looks interesting -- we have the same "major"
+
+38
+00:06:33,310 --> 00:06:47,530
+number for all devices '/dev/null', '/dev/zero'
+and even '/dev/mem'. This means that they
+
+39
+00:06:47,530 --> 00:06:59,950
+are all handled by the same driver. And one
+more thing:
+
+40
+00:06:59,950 --> 00:07:03,530
+$ ls -l /dev/sd*
+
+41
+00:07:03,530 --> 00:07:11,940
+As we can see, all hard disks with all partitions
+
+42
+00:07:11,940 --> 00:07:22,810
+are also handled by one driver. There is only
+one difference between these files: the "minor"
+
+43
+00:07:22,810 --> 00:07:32,150
+number. And this is just a parameter that
+is passed to the driver. By this minor number,
+
+44
+00:07:32,150 --> 00:07:41,090
+the driver understands which device we need
+-- '/dev/null', '/dev/zero' or '/dev/mem'",
+
+45
+00:07:41,090 --> 00:07:50,300
+or what hard disk or partition we are working
+with.
+
+46
+00:07:50,300 --> 00:08:11,020
+And in the old days, device special files in the
+'/dev' directory were created by the `mknod`
+
+47
+00:08:11,020 --> 00:08:23,300
+utility in the MAKEDEV script with fixed major
+and minor numbers. Today, all device files
+
+48
+00:08:23,300 --> 00:08:31,140
+are created automatically on the special device's
+file system.
+
+49
+00:08:31,140 --> 00:08:38,560
+But the `mknod` utility can be useful in some
+cases:
+
+50
+00:08:38,560 --> 00:08:39,560
+$ man mknod
+
+51
+00:08:39,560 --> 00:08:42,419
+As we can see, we can create special files
+
+52
+00:08:42,419 --> 00:08:55,930
+by choosing the device type: "c" for a character
+and "b" for block devices. But we also have
+
+53
+00:08:55,930 --> 00:09:07,980
+a very special file type 'p' for so called
+"named pipes". We can use it as shell's channels
+
+54
+00:09:07,980 --> 00:09:19,380
+for inter-process communications, but with entry-point into your file system hierarchy.
+
+55
+00:09:19,380 --> 00:09:39,000
+$ mknod /tmp/p p
+$ cat > /tmp/p
+123
+^D
+
+56
+00:09:39,000 --> 00:09:48,000
+$ cat /tmp/p
+qwe
+123
+
+57
+00:09:48,000 --> 00:09:55,300
+Send the data from one process
+
+58
+00:09:55,300 --> 00:10:01,100
+and get the data, this data
+
+59
+00:10:01,100 --> 00:10:09,260
+from another process by
+using this named pipe.
+
+60
+00:10:09,260 --> 00:10:16,640
+There are nothing the data really placed on the file system, on the real file.
+
+61
+00:10:16,640 --> 00:10:32,920
+It's just sending across the internal pipe's structures as common pipeline.
+

@@ -1,0 +1,149 @@
+1
+00:00:05,220 --> 00:00:18,930
+Numeric octal mode for file permissions settings
+may not seem very familiar to newbies, but
+
+2
+00:00:18,930 --> 00:00:24,770
+it can be very convenient if we understand
+the principle.
+
+3
+00:00:24,770 --> 00:00:39,860
+As you probably know, our widely used from 0 to 9
+numbering system is not the only one in the world.
+
+4
+00:00:39,879 --> 00:00:46,450
+It is base ten positional decimal system.
+
+5
+00:00:46,450 --> 00:00:53,970
+But we can use number systems with other bases.
+
+6
+00:00:53,970 --> 00:01:03,410
+For example, we know a binary system with
+only two digits in the base -- 0 and 1.
+
+7
+00:01:03,410 --> 00:01:17,620
+Or the hexadecimal system with numbers from
+0 to 9 and letters from A to F for the missing
+
+8
+00:01:17,620 --> 00:01:19,140
+6 numbers.
+
+9
+00:01:19,140 --> 00:01:31,370
+Or the Sumerian-Babylonian Sexagesimal number
+system with sixty in the base and we still
+
+10
+00:01:31,370 --> 00:01:35,909
+use it in time measuring for example.
+
+11
+00:01:35,909 --> 00:01:48,880
+The decimal system has historically been most
+widely used only because we have ten fingers
+
+12
+00:01:48,880 --> 00:01:52,730
+on our hands.
+
+13
+00:01:52,730 --> 00:01:59,500
+Binary representation of numbers is closest
+to computing equipment.
+
+14
+00:01:59,500 --> 00:02:09,860
+And hexadecimal is the most compact -- each
+byte is encoded with just two hexadecimal
+
+15
+00:02:09,860 --> 00:02:11,790
+numbers.
+
+16
+00:02:11,790 --> 00:02:18,870
+But what about octal numbering?
+
+17
+00:02:18,870 --> 00:02:30,550
+Oddly enough, but the octal numbering is closest
+to the human perception of computer data.
+
+18
+00:02:30,550 --> 00:02:43,960
+Octal numerals can be made from binary numerals
+by grouping consecutive binary digits into
+
+19
+00:02:43,960 --> 00:02:50,180
+groups of three (starting from the right).
+
+20
+00:02:50,180 --> 00:03:02,990
+We just need to sum the powers of two in the
+corresponding positions:
+
+21
+00:03:02,990 --> 00:03:23,180
+0) two to the zero power equals one
+1) two to the power of one equals two
+
+22
+00:03:23,180 --> 00:03:33,200
+2) and two to the power of two equals four
+
+23
+00:03:33,200 --> 00:03:45,540
+We just need to sum the powers of two in the
+sequential positions of the binary triplet,
+
+24
+00:03:45,540 --> 00:03:52,340
+where we see one.
+
+25
+00:03:52,340 --> 00:04:40,689
+For example, all zeros mean zero, and all
+ones mean one plus two plus four.
+
+26
+00:04:40,689 --> 00:04:42,819
+It's equal seven.
+
+27
+00:04:42,819 --> 00:04:54,499
+For file access rights, each three-bit group
+of rights (read, write, execute for user,
+
+28
+00:04:54,499 --> 00:05:00,710
+group and others) can be represented by one
+octal number.
+
+29
+00:05:00,710 --> 00:05:06,879
+For example:
+* All permissions for the owner and completely
+
+30
+00:05:06,879 --> 00:05:29,700
+denied access for everyone else -- 
+equals 700.
+
+31
+00:05:29,700 --> 00:06:00,079
+* Only owner and group can read and write,
+and everyone else can only read. This is -- 664.
+
+32
+00:06:00,079 --> 00:06:24,750
+* The same with execution permissions for
+all -- 775.
+

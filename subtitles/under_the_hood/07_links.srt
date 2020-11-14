@@ -1,0 +1,289 @@
+1
+00:00:06,140 --> 00:00:14,799
+To understand what these hard and soft links
+are, we need a brief introduction to the file
+
+2
+00:00:14,799 --> 00:00:19,670
+system structure of UNIX-like systems.
+
+3
+00:00:19,670 --> 00:00:24,869
+We have many different file systems on UNIX
+world.
+
+4
+00:00:24,869 --> 00:00:36,790
+But the basic idea of all of them has remained
+unchanged from the very beginning, since the
+
+5
+00:00:36,790 --> 00:00:39,390
+days of PDP7.
+
+6
+00:00:39,390 --> 00:00:52,969
+Typically, we can have 
+
+7
+00:00:52,969 --> 00:01:13,450
+a boot block at the beginning of a device
+or filesystem partition, then we have a so-called
+
+8
+00:01:13,450 --> 00:01:37,719
+superblock with filesystem metadata, and then
+a data space with data blocks that make up
+
+9
+00:01:37,719 --> 00:01:39,820
+the files.
+
+10
+00:01:39,820 --> 00:01:47,310
+The superblock is a very "high level" metadata
+structure for the filesystem, and is very
+
+11
+00:01:47,310 --> 00:01:49,490
+important for the filesystem.
+
+12
+00:01:49,490 --> 00:01:59,040
+And if the superblock of the partition is
+damaged, the corresponding file system cannot
+
+13
+00:01:59,040 --> 00:02:01,890
+be mounted by the operating system.
+
+14
+00:02:01,890 --> 00:02:12,760
+Therefore, it is saved in multiple backups
+for each file system on this drive.
+
+15
+00:02:12,760 --> 00:02:25,400
+The superblock includes some general information
+about the file system and some tables, such
+
+16
+00:02:25,400 --> 00:02:44,180
+as a list of free data blocks, possibly a
+list of bad blocks, and finally a list of
+
+17
+00:02:44,180 --> 00:02:48,560
+i-nodes.
+
+18
+00:02:48,560 --> 00:03:06,010
+Each i-node (or index-node) describes a separate
+file.
+
+19
+00:03:06,010 --> 00:03:20,260
+It includes metadata related to the file,
+such as ownership, access mode (read, write,
+
+20
+00:03:20,260 --> 00:03:23,780
+execute), and file type and size.
+
+21
+00:03:23,780 --> 00:03:39,330
+But i-node also includes a list of physical
+blocks holding the files content.
+
+22
+00:03:39,330 --> 00:03:57,459
+The size of the blocks supporting a single
+i-node is fixed and, when combined with the
+
+23
+00:03:57,459 --> 00:04:05,319
+data block size, determines the maximum file
+size on that file system.
+
+24
+00:04:05,319 --> 00:04:14,349
+When you create some filesystems, you can
+change the size of the i-node list and the
+
+25
+00:04:14,349 --> 00:04:22,130
+size of the data block, and use these options
+to configure the filesystem to handle less
+
+26
+00:04:22,130 --> 00:04:26,780
+larger files or more smaller files.
+
+27
+00:04:26,780 --> 00:04:45,800
+And about directories -- actually it's just
+a special kind of file 
+
+28
+00:04:45,800 --> 00:05:07,790
+that contains a sequence of names 
+and their associated i-nodes.
+
+29
+00:05:07,790 --> 00:05:28,410
+We can have multiple directory entries associated
+with one i-node and this is called a hard
+
+30
+00:05:28,410 --> 00:05:29,910
+link.
+
+31
+00:05:29,910 --> 00:05:35,780
+We can see this with the `ls` command with
+`-i` (i-node) option:
+
+32
+00:05:35,780 --> 00:05:36,900
+$ touch 1
+$ ls -l
+total 0
+-rwxrwxrwx 1 user user 0 Sep 4 20:02 1
+$ ln 1 2
+-rwxrwxrwx 1 user user 0 Sep 4 20:02 1
+$ ln 1 2
+$ ls -i
+50069589 1 50069589 2
+
+33
+00:05:37,460 --> 00:05:49,120
+As we can see, the 'a' and  'c' file related to the same i-node.
+
+34
+00:05:49,139 --> 00:05:53,160
+As we remember, changing any of the related
+
+35
+00:05:53,160 --> 00:05:58,320
+files changes the other file synchronously.
+
+36
+00:05:58,320 --> 00:06:06,280
+But this is interesting -- the mode change
+also occurs synchronously for both files:
+
+37
+00:06:06,280 --> 00:06:09,160
+$ ls -l
+total 0
+-rw-rw-r-- 2 user user 0 Sep 4 20:02 1
+-rw-rw-r-- 2 user user 0 Sep 4 20:02 2
+
+38
+00:06:09,160 --> 00:06:12,940
+$ chmod 777 2
+
+39
+00:06:12,940 --> 00:06:16,700
+$ ls -l
+total 0
+-rwxrwxrwx 2 user user 0 Sep 4 20:02 1
+-rwxrwxrwx 2 user user 0 Sep 4 20:02 2
+
+40
+00:06:16,700 --> 00:06:21,630
+Just because the file's metadata is located
+
+41
+00:06:21,630 --> 00:06:25,720
+in the single i-node.
+
+42
+00:06:25,720 --> 00:06:31,440
+Also, the i-node has a file link counter.
+
+43
+00:06:31,440 --> 00:06:43,850
+In the UNIX API, we actually don't have something
+like the `delete` system call -- just `unlink`.
+
+44
+00:06:43,850 --> 00:06:53,020
+And when we call the `rm` command, we just
+doing `unlink` and decrement the link count.
+
+45
+00:06:53,020 --> 00:07:04,240
+Only when the link count reaches zero are
+the data blocks associated with the file moved
+
+46
+00:07:04,240 --> 00:07:07,210
+to the free blocks list:
+
+47
+00:07:07,210 --> 00:07:13,080
+$ rm 2
+$ ls -l
+total 0
+-rwxrwxrwx 1 user user 0 Sep 4 20:02 1
+
+48
+00:07:13,080 --> 00:07:19,210
+As we can see link counter now is one.
+
+49
+00:07:19,210 --> 00:07:23,050
+It looks good, but unfortunately we cannot
+
+50
+00:07:23,050 --> 00:07:30,300
+establish hard links between different file
+systems, because it would be too difficult
+
+51
+00:07:30,300 --> 00:07:41,150
+to synchronize the metadata of these file
+systems.
+
+52
+00:07:41,150 --> 00:07:52,010
+And for that, a soft or symbolic link was
+designed in 4.2BSD.
+
+53
+00:07:52,010 --> 00:07:54,940
+How does a soft link look inside?
+
+54
+00:07:54,940 --> 00:07:55,940
+Let's look.
+
+55
+00:07:58,940 --> 00:08:17,430
+As we can see, this is just a special type
+of file. We can see the length 1 instead
+
+56
+00:08:17,430 --> 00:08:20,770
+9 of the source file.
+
+57
+00:08:20,770 --> 00:08:32,450
+And this means only one thing -- a string
+with the path to the linked file is simply
+
+58
+00:08:32,450 --> 00:08:36,490
+placed in this special file.
+
+59
+00:08:36,490 --> 00:08:41,810
+As a consequence, we have no restrictions
+on linking between file systems.
+
+60
+00:08:41,810 --> 00:08:52,760
+But if we delete the original file, we will
+lose access to it via this soft link.
+

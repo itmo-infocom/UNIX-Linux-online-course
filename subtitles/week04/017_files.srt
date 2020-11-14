@@ -1,0 +1,313 @@
+1
+00:00:05,440 --> 00:00:12,960
+Finally, let's discuss the third pillar 
+that holds the whole UNIX world -- files.
+
+2
+00:00:13,920 --> 00:00:23,520
+To simplify the work of users who 
+are not familiar to working with the  
+
+3
+00:00:23,520 --> 00:00:31,520
+command line, there are a number of free 
+file management interfaces, like for example,  
+
+4
+00:00:40,560 --> 00:00:46,800
+Midnight Commander (mc), 
+reminiscent of Norton Commander, or  
+
+5
+00:00:48,240 --> 00:00:54,480
+graphical file managers, more or 
+less looks like Windows Explorer.  
+
+6
+00:00:55,280 --> 00:01:05,360
+But we'll see how we can work with files 
+and directories from the CLI or scripts.
+
+7
+00:01:10,720 --> 00:01:25,840
+First, let's take a look at some of the symbols 
+that have special meaning in the file path: 
+
+8
+00:01:25,840 --> 00:01:32,720
+/ – root directory and directory separator 
+
+9
+00:01:32,720 --> 00:01:42,480
+. – current directory
+.. – parent directory 
+
+10
+00:01:44,480 --> 00:01:51,200
+~/ – home directory
+
+11
+00:01:51,200 --> 00:01:52,080
+As we can see,  
+
+12
+00:01:52,880 --> 00:02:04,800
+UNIX uses a "slash" as the directory 
+separator, and Windows uses a "backslash".  
+
+13
+00:02:07,760 --> 00:02:16,480
+This is interesting because early versions 
+of Microsoft's MSDOS operating systems  
+
+14
+00:02:18,400 --> 00:02:23,120
+did not support subdirectories 
+just because it was a clone of  
+
+15
+00:02:30,720 --> 00:02:45,200
+CP/M OS from Digital Research. It was a small 
+OS for 8-bit microcomputers without disk storage  
+
+16
+00:02:45,200 --> 00:02:56,320
+or with a small floppy disk. Usually there were 
+only a few dozen files on a floppy disks, and  
+
+17
+00:02:56,320 --> 00:03:04,240
+only a flat file system with one 
+directory per file system was supported.
+
+18
+00:03:04,240 --> 00:03:12,080
+And at first, Microsoft MSDOS operating 
+systems didn't support subdirectories.  
+
+19
+00:03:13,040 --> 00:03:22,640
+Only when developing its own "multiuser" 
+OS - the "Xenix" based on UNIX, Microsoft  
+
+20
+00:03:22,640 --> 00:03:34,800
+implemented a hierarchical file system and ported 
+it to the "single user" MSDOS. But at that point  
+
+21
+00:03:34,800 --> 00:03:47,280
+the forward slash was already taken -- it was 
+used as a standard CP/M command option marker,  
+
+22
+00:03:47,280 --> 00:03:54,880
+like a 'dash' in UNIX commands. And Microsoft 
+choose a 'backslash' as a directory marker.
+
+23
+00:03:56,080 --> 00:04:07,040
+OK. As we remember, we have a hierarchical 
+file system with a single root directory  
+
+24
+00:04:09,120 --> 00:04:17,360
+and for newbies, this file system 
+hierarchy can seem too complex.  
+
+25
+00:04:20,080 --> 00:04:25,200
+They say, "When we install 
+some software on Windows,  
+
+26
+00:04:25,200 --> 00:04:34,000
+we have separate directories for each product, 
+and it's too easy for us to find something, but  
+
+27
+00:04:35,040 --> 00:04:42,320
+on your system we don't know 
+where we can find anything."
+
+28
+00:04:42,320 --> 00:04:51,760
+But actually, in UNIX-like systems, we 
+have a very clear and stable standard  
+
+29
+00:04:52,640 --> 00:05:06,320
+for file system hierarchy, which is reflected, for 
+example, by corresponding Linux specification 
+
+30
+00:05:06,320 --> 00:05:08,320
+"Filesystem Hierarchy Standard".
+
+31
+00:05:11,440 --> 00:05:18,800
+In fact, we have three main levels 
+with a repeating directory structure.  
+
+32
+00:05:19,600 --> 00:05:26,880
+At the first level, we have 
+directories like this:
+
+33
+00:05:31,600 --> 00:05:38,720
+We have directory '/bin' with essential command binaries. We have a 'boot' 
+
+34
+00:05:38,720 --> 00:06:16,760
+with files for boot, for the bootloader.
+
+35
+00:05:44,200 --> 00:05:51,740
+We have '/dev' for device files.
+
+36
+00:05:51,740 --> 00:06:00,960
+We have '/etc' the host-specific system
+configuration files placed here.
+
+37
+00:06:00,960 --> 00:06:13,800
+We have a '/lib' for system shared libraries and kernel modules.
+
+38
+00:06:13,800 --> 00:06:26,860
+We have '/media' and '/mnt' directories
+for mount points of something.
+
+39
+00:06:26,860 --> 00:06:38,600
+We have '/opt'. Actually it's analog of 'Products' in Microsoft systems. 
+
+40
+00:06:38,600 --> 00:06:51,740
+In this directory we can see third-party programs installed in our system.
+
+41
+00:06:51,740 --> 00:06:57,600
+'/sbin' -- essential system administrator binries
+
+42
+00:06:57,600 --> 00:07:04,000
+'/tmp' -- directory for temporary files
+
+43
+00:07:04,000 --> 00:07:12,000
+'/usr' -- the secondary hierarchy
+
+44
+00:07:12,000 --> 00:07:17,200
+'/var' -- directory for variable data
+
+45
+00:07:17,200 --> 00:07:26,400
+And finally '/root' and '/home' -- home directories for 'root' super-user and other users.
+
+46
+00:07:26,400 --> 00:07:34,560
+In the  
+
+47
+00:07:34,560 --> 00:07:44,220
+'/usr' and '/usr/local' directories we 
+see again the similar directories.
+
+48
+00:07:44,222 --> 00:07:45,120
+And, as I said,  
+
+49
+00:07:49,120 --> 00:07:52,960
+devices in UNIX-like systems look like files,  
+
+50
+00:07:55,600 --> 00:08:01,320
+but as special files placed in a 
+special directory '/dev'.
+
+51
+00:08:01,320 --> 00:08:21,000
+For example: '/dev/null' which works on write discarding all
+and on write operation just reports succeed.
+
+52
+00:08:21,000 --> 00:08:27,200
+During the read just return EOF.
+
+53
+00:08:27,200 --> 00:08:40,520
+'/dev/zero' works like '/dev/null' to write, but on read returns only NULL characters.
+
+54
+00:08:40,520 --> 00:08:48,060
+We may use this file as a generator of zeros.
+
+55
+00:08:48,060 --> 00:08:53,300
+'/dev/mem' -- it's just the RAM of our computer
+
+56
+00:08:53,300 --> 00:08:58,360
+'/dev/tty' -- terminal lines
+
+57
+00:08:58,360 --> 00:09:09,520
+'/dev/sd' -- it's just our hard disks
+
+58
+00:09:09,520 --> 00:09:21,200
+And usually each such file is just a rabbit hole in 
+the OS kernel. When working with a pseudo-file  
+
+59
+00:09:21,200 --> 00:09:35,840
+in this directory, we see this device as a stream 
+of bytes and work with it as with a regular file.
+
+60
+00:09:35,840 --> 00:09:49,200
+More information you can find in "Under the Hood" lecture about device drivers. 
+
+61
+00:09:49,200 --> 00:10:03,840
+We may also have many other secret 
+paths to the kernel internals, such as /proc and  
+
+62
+00:10:07,440 --> 00:10:18,403
+/sys dirctories. For example, we can see:
+
+63
+00:10:18,403 --> 00:10:22,720
+$ less /proc/cpuinfo
+
+64
+00:10:22,720 --> 00:10:27,040
+the information about processors in our computer,  
+
+65
+00:10:27,040 --> 00:10:32,902
+including hardware "bugs"
+
+66
+00:10:32,902 --> 00:10:41,040
+$ less /proc/meminfo
+
+67
+00:10:41,040 --> 00:10:49,200
+Memory usage information 
+(including swap space) and even  
+
+68
+00:10:55,040 --> 00:11:00,043
+interrupts:
+
+69
+00:11:00,043 --> 00:11:01,804
+$ less /proc/interrupts
+

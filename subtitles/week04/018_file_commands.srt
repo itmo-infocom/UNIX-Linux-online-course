@@ -1,0 +1,424 @@
+1
+00:00:06,100 --> 00:00:13,250
+UNIX tools support a standard set of commands
+for working with files and directories:
+
+2
+00:00:13,250 --> 00:00:18,160
+* ls - list directory contents:
+
+3
+00:00:18,160 --> 00:00:21,570
+'$ man ls'
+
+4
+00:00:21,570 --> 00:00:36,180
+We can just specify files and directories
+as arguments and view the listing in different
+
+5
+00:00:36,180 --> 00:00:39,460
+ways according to the options.
+
+6
+00:00:39,460 --> 00:00:55,249
+Ok, let's take a look at our current directory -- home directory after login to the system.
+
+7
+00:00:55,249 --> 00:01:11,549
+It's just `ls` without arguments. As we remember,
+after authorization, we find ourselves in
+
+8
+00:01:11,549 --> 00:01:13,530
+the home directory.
+
+9
+00:01:13,530 --> 00:01:14,530
+'$ ls'
+
+10
+00:01:14,530 --> 00:01:29,750
+We see some directories, but we don't see,
+for example, shell startup files. No problem,
+
+11
+00:01:29,750 --> 00:01:32,500
+let's run:
+
+12
+00:01:32,500 --> 00:01:37,250
+'$ ls -a'
+
+13
+00:01:37,250 --> 00:01:49,369
+We can see the shell startup files and more
+-- the directories "dot" (current) and "double
+
+14
+00:01:49,369 --> 00:01:58,829
+dot" (upper level) are also visible. Because
+that means "all" files and directories, including
+
+15
+00:01:58,829 --> 00:02:09,460
+hidden ones. Hidden files in UNIX are just
+a naming convention -- names must begin with
+
+16
+00:02:09,460 --> 00:02:21,250
+a "dot". It is not an attribute as it is on
+Microsoft systems. Initially it was just a
+
+17
+00:02:21,250 --> 00:02:33,280
+trick in the `ls` utility to hide the current
+and top directories, and then it came to be
+
+18
+00:02:33,280 --> 00:02:39,800
+used as a naming convention to hide any file
+or directory.
+
+19
+00:02:39,800 --> 00:02:45,670
+Also we can see directory listing recursively:
+
+20
+00:02:45,670 --> 00:02:50,560
+'$ ls -R'
+
+21
+00:02:50,560 --> 00:02:57,150
+Another very important option is the "long
+list":
+
+22
+00:02:57,150 --> 00:03:00,300
+`$ ls -l`
+
+23
+00:03:00,300 --> 00:03:07,630
+We see a table with information about the
+
+24
+00:03:07,630 --> 00:03:17,100
+file/directory in the corresponding lines.
+- The first column is the file attribute.
+
+25
+00:03:17,100 --> 00:03:34,230
+The first letter is the file type: "dash"
+is a regular file, "d" is a directory, and
+
+26
+00:03:34,230 --> 00:03:45,100
+so on. Then we can see read, write, and execute
+permissions for three user groups: owner,
+
+27
+00:03:45,100 --> 00:03:59,790
+owner group, and others. Once again, we see
+the difference between UNIX and Microsoft.
+
+28
+00:03:59,790 --> 00:04:10,890
+In the first case executability is an attribute,
+in the second case it is just a naming convention:
+
+29
+00:04:10,890 --> 00:04:23,040
+'.com', '.exe', '.bat'.
+- The second -- Some mystery column "file's
+
+30
+00:04:23,040 --> 00:04:29,540
+link counter" that we will discuss later in
+relation to "links".
+
+31
+00:04:29,540 --> 00:04:44,910
+- Then we can see owner and owner group, size
+of file, time (by default -- time of modification)
+
+32
+00:04:44,910 --> 00:04:50,430
+and the name of file.
+
+33
+00:04:50,430 --> 00:05:02,900
+* `pwd` -- print name of current/working directory
+* `cd` -- change directory. Without arguments
+
+34
+00:05:02,900 --> 00:05:11,410
+-- to home firectory.
+* `cp` -- copy files and directories
+
+35
+00:05:11,410 --> 00:05:23,250
+`$ man cp`
+
+36
+00:05:23,250 --> 00:05:28,350
+Most interesting option is '-a|--archive'
+
+37
+00:05:28,350 --> 00:05:44,760
+with create recursive archive copy with preserving
+of permissions, timestamps, etc...
+
+38
+00:05:44,760 --> 00:05:58,810
+* `mv` -- move (rename) files and directories.
+* `rm` -- remove files or directories.
+
+39
+00:05:58,810 --> 00:06:06,669
+`rm -rf something...`
+
+40
+00:06:06,669 --> 00:06:11,140
+means recursive delete without asking for
+
+41
+00:06:11,140 --> 00:06:23,730
+confirmation.
+* `mkdir` -- make directories. If any parent
+
+42
+00:06:23,730 --> 00:06:27,490
+directory does not exist, you will receive
+an error message:
+
+43
+00:06:27,490 --> 00:06:39,040
+`$ mkdir a/b/c
+mkdir: cannot create directory 'a/b/c': No
+such file or directory`
+
+44
+00:06:39,040 --> 00:06:44,780
+To avoid this, we can use the `-p` option:
+
+45
+00:06:44,780 --> 00:06:49,690
+`$ mkdir -p a/b/c`
+
+46
+00:06:49,690 --> 00:07:00,220
+No error if directory existing, make parent directories
+
+47
+00:07:00,220 --> 00:07:10,190
+as needed.
+* `rmdir` -- remove empty directories. If
+
+48
+00:07:10,190 --> 00:07:20,540
+directory is not empty, you will receive an
+error message. Nowadays, running `rm -rf`
+
+49
+00:07:20,540 --> 00:07:28,060
+is sufficient in this case. But in the old
+days, when `rm` did not have a recursive option,
+
+50
+00:07:28,060 --> 00:07:35,940
+to clean up non-empty directories, you had
+to create a shell script with `rm`s in each
+
+51
+00:07:35,940 --> 00:07:52,000
+subdirectory and the corresponding `rmdir`s.
+* `ln` -- "link" make links between files. Links
+
+52
+00:07:52,000 --> 00:08:02,510
+are a very specific file type in UNIX and
+we will discuss them in more detail. If we
+
+53
+00:08:02,510 --> 00:08:08,300
+look at the `man` page for the `ln` command:
+
+54
+00:08:08,300 --> 00:08:09,500
+`$ man ln`
+
+55
+00:08:09,500 --> 00:08:27,930
+We see a command very similar to 'cp'. But
+let's take a closer look:
+
+56
+00:08:27,930 --> 00:08:59,800
+cat > a # Control-D -- End of File
+ln -s a b
+ln a c
+cat b; cat c
+
+57
+00:08:59,810 --> 00:09:09,339
+At the moment everything looks like a regular
+copy of the file, but let's try to change
+
+58
+00:09:09,339 --> 00:09:16,730
+something in the one of them:
+
+59
+00:09:16,730 --> 00:09:27,440
+cat >> c
+cat a; cat b
+
+60
+00:09:27,440 --> 00:09:35,420
+Wow, all the other linked files have changed
+
+61
+00:09:35,420 --> 00:09:44,370
+too! We are just looking at the same file
+from different points, and changing one of
+
+62
+00:09:44,370 --> 00:09:56,389
+them will change all the others. And in this
+they all seem to be alike. But let's try to
+
+63
+00:09:56,389 --> 00:09:58,769
+delete the original file:
+
+64
+00:09:58,769 --> 00:10:04,790
+rm a
+cat b; cat c
+
+65
+00:10:04,790 --> 00:10:10,829
+In the first case, we still see the contents
+
+66
+00:10:10,829 --> 00:10:19,200
+of the original file, but in the second case,
+we see an error message. Just because the
+
+67
+00:10:19,200 --> 00:10:31,040
+first is a so-called hard link and the second one
+is soft or symbolic link. We can see the difference
+
+68
+00:10:31,040 --> 00:10:40,850
+between the two in the long `ls` list:
+
+69
+00:10:40,850 --> 00:10:44,130
+$ ls -l ?
+
+70
+00:10:44,130 --> 00:10:56,639
+And we can restore access to the content for
+the symbolic link by simply recreating the
+
+71
+00:10:56,639 --> 00:10:59,470
+original file:
+
+72
+00:10:59,470 --> 00:11:09,069
+$ ln b a
+$ cat c
+
+73
+00:11:09,069 --> 00:11:13,189
+Another difference between them is the impossibility
+
+74
+00:11:13,189 --> 00:11:19,921
+of creating a hard link between different
+file systems and the possibility of such a
+
+75
+00:11:19,921 --> 00:11:31,680
+linking for soft links. For more details on
+internal linking, see the corresponding
+
+76
+00:11:31,680 --> 00:11:34,240
+"Under the Hood" lecture.
+
+77
+00:11:35,240 --> 00:11:48,079
+And finally, let's discuss file permissions.
+As we remember, we have read, write, and execute
+
+78
+00:11:48,079 --> 00:11:56,709
+permissions for the owner user, the owner
+group, and others. And we have the appropriate
+
+79
+00:11:56,709 --> 00:12:10,420
+command to change these permissions -- chmod:
+$ man chmod
+
+80
+00:12:10,420 --> 00:12:37,340
+Set or unset this permissions for such groups
+of users by symbolic modes.
+
+81
+00:12:37,340 --> 00:12:47,550
+As far as we understand, permissions are just
+a bitfield and in some cases it might be more
+
+82
+00:12:47,550 --> 00:12:53,980
+useful to set them in octal mode - see our
+"Under the Hood"
+
+83
+00:12:53,980 --> 00:12:57,329
+lecture for information on this.
+
+84
+00:12:57,329 --> 00:13:07,749
+You can also change the owner and group for
+a file or directory by command `chown`.
+
+85
+00:13:07,749 --> 00:13:22,240
+$ man chown
+So, you must set file owner and group owner for file or directory
+
+86
+00:13:22,240 --> 00:13:26,720
+Possibly -- recursive
+
+87
+00:13:26,720 --> 00:13:32,010
+But keep in mind - for security reasons, only
+
+88
+00:13:32,010 --> 00:13:41,610
+a privileged user (superuser root) can change
+the owner of a file. The common owner can
+
+89
+00:13:41,610 --> 00:13:50,719
+change the group of file to any group that
+owner is a member of.
+
+90
+00:13:50,719 --> 00:13:55,889
+By this command:
+$ chown :group file...
+or by
+
+91
+00:13:55,889 --> 00:14:01,049
+`chgrp group file...` command.
+
