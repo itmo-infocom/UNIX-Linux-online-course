@@ -1,0 +1,296 @@
+1
+00:00:06,529 --> 00:00:15,990
+In the world of TCP / IP Network, the classic
+Internet programs were first developed, which
+
+2
+00:00:15,990 --> 00:00:29,539
+in some cases are still relevant:
+* `telnet` - a user interface for the TELNET
+
+3
+00:00:29,539 --> 00:00:38,820
+protocol that supports a standard command
+line interface on the remote computer
+
+4
+00:00:38,820 --> 00:00:54,710
+* `ftp` - ARPANET file transfer program
+* and the `mail` - send and receive mail
+
+5
+00:00:54,710 --> 00:01:07,140
+As we can see, again we have a tool for remote
+execution and a tool for data transfer.
+
+6
+00:01:07,140 --> 00:01:16,420
+Generally, `telnet` just gives us a connection
+to the TELNET protocol server:
+
+7
+00:01:16,420 --> 00:01:18,520
+$ man telnet
+
+8
+00:01:18,520 --> 00:01:26,420
+It's just a CLI for another host and this
+
+9
+00:01:26,420 --> 00:01:35,270
+protocol still used for access to some hardware
+devices too.
+
+10
+00:01:35,270 --> 00:01:46,970
+Moreover, you can use it for debugging by
+connecting to other servers by choosing of
+
+11
+00:01:46,970 --> 00:01:58,530
+TCP server's port. Server which supports
+text-based protocols.
+
+12
+00:01:58,530 --> 00:02:08,720
+On modern systems, you can use the lighter
+"netcat" utility -- `nc`.
+
+13
+00:02:08,720 --> 00:02:12,349
+For example let's try to play with HTTP protocol:
+
+14
+00:02:12,349 --> 00:02:15,340
+$ telnet google.com 80
+...
+GET /index.html HTTP/1.1
+
+15
+00:02:15,349 --> 00:02:29,000
+So, we can see request on HTTP-protocol
+and response from server.
+
+16
+00:02:29,000 --> 00:02:40,880
+To switch to telnet command mode, we may press the "Ctrl-]". 
+
+17
+00:02:46,520 --> 00:02:52,120
+And now we can ask for help:
+telnet> h
+
+18
+00:02:52,120 --> 00:02:59,430
+And now we can exit, for example, if the program
+
+19
+00:02:59,430 --> 00:03:06,879
+on the other side is frozen.
+
+20
+00:03:06,879 --> 00:03:23,890
+FTP or File Transfer Protocol is another well-known
+part of the network world. world of the Internet.
+
+21
+00:03:23,890 --> 00:03:32,570
+It is still supported by some Internet servers
+and is also builtin into some devices.
+
+22
+00:03:32,570 --> 00:03:43,599
+We can access the FTP server through a regular
+web browser as well as through the `ftp` utility:
+
+23
+00:03:43,599 --> 00:03:44,599
+$ man ftp
+
+24
+00:03:44,599 --> 00:03:50,390
+In some cases, the latter variant is preferable,
+
+25
+00:03:50,390 --> 00:04:08,690
+because, for example, we may want to restore
+a file transfer or upload/download many files.
+
+26
+00:04:08,690 --> 00:04:24,510
+First, we have to login into the FTP server.
+
+27
+00:04:24,510 --> 00:04:27,759
+Let's try to do this as an anonymous user:
+
+28
+00:04:27,759 --> 00:04:33,580
+$ ftp ftp.funet.fi
+Name (ftp.funet.fi:user): ftp
+331 Any password will work
+Password:
+
+29
+00:04:33,590 --> 00:04:40,550
+In this case any password will work, but often
+
+30
+00:04:40,550 --> 00:04:48,980
+FTP-server wait something email address as
+a password.
+
+31
+00:04:48,980 --> 00:04:57,361
+FTP has its own command line interface where
+we can ask for help:
+
+32
+00:04:57,361 --> 00:05:03,000
+ftp> ?
+
+33
+00:05:03,000 --> 00:05:15,300
+We can first determine our current directory,
+by well known for as `pwd` command
+
+34
+00:05:15,300 --> 00:05:19,810
+and as we understand it, we have two current
+
+35
+00:05:19,810 --> 00:05:21,890
+directories: remote and local.
+
+36
+00:05:21,890 --> 00:05:30,570
+Remote directory we got by standard
+`pwd` command.
+
+37
+00:05:30,570 --> 00:05:46,520
+To get the current local directory we can use the
+same command preceded by an exclamation mark.
+
+38
+00:05:46,530 --> 00:06:01,900
+This means -- call this command on the 
+local computer. It's command from our local OS.
+
+39
+00:06:01,900 --> 00:06:04,750
+It's our local `pwd`.
+
+40
+00:06:04,750 --> 00:06:18,660
+You may change directory remotely by `cd` command
+and local directory by `lcd`.
+
+41
+00:06:18,660 --> 00:06:27,330
+We can get a list of remote directoriy using
+the well-known `ls` command.
+
+42
+00:06:27,330 --> 00:06:31,610
+And what about local `ls`?
+
+43
+00:06:31,610 --> 00:06:34,720
+Yes -- you just preced it by an exclamation mark.
+
+44
+00:06:34,720 --> 00:06:35,820
+This means -- run the program locally.
+
+45
+00:06:35,820 --> 00:06:48,150
+If you have sufficient permissions, you can
+download file 
+
+46
+00:06:48,150 --> 00:06:58,330
+by `get` command and upload by `put`, but
+only a single file.
+
+47
+00:06:58,330 --> 00:07:10,830
+If you want to work with multiple files, you
+will need to use the `mget`/`mput` commands.
+
+48
+00:07:10,830 --> 00:07:23,600
+In this case, it makes sense to disable the
+questions about confirming operations using
+
+49
+00:07:23,600 --> 00:07:30,340
+the `prompt` command.
+
+50
+00:07:30,340 --> 00:07:45,319
+Also switching to binary mode using the `bin`
+command (bianry) 
+
+51
+00:07:45,319 --> 00:07:48,759
+can be important for the Microsoft client system.
+
+52
+00:07:48,759 --> 00:07:58,009
+Otherwise, you may receive a corrupted file,
+because Microsoft loves CR/LF black magic
+
+53
+00:07:58,009 --> 00:08:02,889
+for text files transmutation.
+
+54
+00:08:02,889 --> 00:08:12,120
+We discussed this matter in "Under the Hood
+-- Text handling in Windows" lecture.
+
+55
+00:08:12,130 --> 00:08:20,380
+Finally, you can use the `reget` command to
+try to continue downloading the file after
+
+56
+00:08:20,380 --> 00:08:22,440
+an interrupted transfer.
+
+57
+00:08:22,440 --> 00:08:33,519
+And the `hash` command toggle the 'hash' printing
+for each transmitted data block, which can
+
+58
+00:08:33,519 --> 00:08:41,419
+be informative if the connection to the server
+is poor.
+
+59
+00:08:41,419 --> 00:08:50,839
+Another useful for scripting program is `mail`,
+which is a simple command line client for
+
+60
+00:08:50,839 --> 00:08:56,480
+sending or reading emails:
+
+61
+00:08:56,480 --> 00:09:08,240
+$ mail user@localhost
+Subject: test
+This is a test!
+.
+
+62
+00:09:08,259 --> 00:09:17,400
+This mail message must end with one 'dot' per
+line. That's all.
+
+63
+00:09:17,400 --> 00:09:24,800
+We send the email to user named `user` on the localhost.
+

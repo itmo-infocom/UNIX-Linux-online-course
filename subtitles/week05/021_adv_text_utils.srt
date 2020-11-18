@@ -1,0 +1,307 @@
+1
+00:00:06,109 --> 00:00:09,240
+If we are talking about text data, finding
+
+2
+00:00:09,240 --> 00:00:12,879
+some text is a common task.
+
+3
+00:00:12,879 --> 00:00:25,939
+And in fact, these are two separate tasks
+-- to find some text inside a file or text
+
+4
+00:00:25,939 --> 00:00:37,710
+stream and to find a file, for example, by
+name in some directories.
+
+5
+00:00:37,710 --> 00:00:55,580
+For the first task, we have the `grep` utility
+which print lines matching a pattern.
+
+6
+00:00:55,580 --> 00:00:57,980
+$ man grep
+
+7
+00:00:57,980 --> 00:01:09,350
+Both fixed strings and regular expressions
+
+8
+00:01:09,350 --> 00:01:12,060
+can be used as a pattern.
+
+9
+00:01:12,060 --> 00:01:14,860
+Also you can do recursive searching.
+
+10
+00:01:14,860 --> 00:01:26,159
+Another commonly used command is `find` -- search
+for files in a directory hierarchy.
+
+11
+00:01:26,159 --> 00:01:27,840
+man find
+
+12
+00:01:27,840 --> 00:01:40,760
+You must set the starting point -- the directory
+
+13
+00:01:40,760 --> 00:01:50,340
+to start the search or starting points if
+you are interested in several directories
+
+14
+00:01:50,340 --> 00:01:56,490
+and expressions with search criteria and actions.
+
+15
+00:01:56,490 --> 00:02:05,030
+You may search by name with using of standard
+shell matching patterns, by time of modification
+
+16
+00:02:05,030 --> 00:02:12,060
+or access, by size, by user and group, by
+permissins, file type, etc.
+
+17
+00:02:12,060 --> 00:02:21,920
+You can use logical operators such as "and",
+"or" and "not" in your expressions.
+
+18
+00:02:21,920 --> 00:02:29,340
+Also you can do some actions when you find
+something that matches the criteria.
+
+19
+00:02:29,340 --> 00:02:33,120
+The default action is `print`.
+
+20
+00:02:33,120 --> 00:02:43,200
+You can also use formatted printing, list
+of found files, delete them, and execute commands
+
+21
+00:02:43,200 --> 00:02:44,550
+with them.
+
+22
+00:02:44,550 --> 00:02:54,900
+In `exec` actions, you can use curly braces
+to insert the name of the found file.
+
+23
+00:02:54,900 --> 00:03:06,030
+But keep in mind -- you must end your command
+with a semicolon, and to avoid interpreting
+
+24
+00:03:06,030 --> 00:03:17,010
+this character by your Shell, you must escape
+it with a 'slash'.
+
+25
+00:03:17,010 --> 00:03:25,349
+Unfortunately, the main drawback of `find`
+is the long execution time if you are looking
+
+26
+00:03:25,349 --> 00:03:27,030
+in large deep directories.
+
+27
+00:03:27,030 --> 00:03:33,300
+And to speed up this process, you can use
+the `locate` utility.
+
+28
+00:03:33,300 --> 00:03:57,690
+It finds files by name from databases prepared
+by `updatedb` and does it incredibly fast.
+
+29
+00:03:57,690 --> 00:04:04,930
+But you have to understand -- `updatedb` is
+started automatically by the `cron` service
+
+30
+00:04:04,930 --> 00:04:06,190
+at night.
+
+31
+00:04:06,190 --> 00:04:13,760
+And if you only install the `lookup` toolkit
+or want to find something in the changed filesystem
+
+32
+00:04:13,760 --> 00:04:19,999
+at this time -- you have to update this database
+manually by running `updatedb`.
+
+33
+00:04:19,999 --> 00:04:22,840
+OK
+
+34
+00:04:22,840 --> 00:04:30,119
+Another operation that we often need is comparing
+files or directories.
+
+35
+00:04:30,119 --> 00:04:33,459
+And we have some tools for this.
+
+36
+00:04:33,459 --> 00:04:35,960
+$ man cmp
+
+37
+00:04:35,960 --> 00:04:44,150
+The `cmp` utility compares two files byte-by-byte
+
+38
+00:04:44,150 --> 00:04:48,129
+and reports the position from which we have
+a difference.
+
+39
+00:04:48,129 --> 00:04:52,669
+By this way we can compare binaries.
+
+40
+00:04:52,669 --> 00:04:59,659
+To compare text files `diff` utility can be
+used:
+
+41
+00:04:59,659 --> 00:05:00,659
+$ man diff
+
+42
+00:05:00,659 --> 00:05:02,849
+We can compare files, directories with the
+
+43
+00:05:02,849 --> 00:05:06,009
+`-r|--recursive` option.
+
+44
+00:05:06,009 --> 00:05:20,509
+We can get the output as a set of commands
+for the `ed` line editor or the `patch` utility.
+
+45
+00:05:20,509 --> 00:05:29,680
+This method of propagating changes was the
+first in the development of projects in the
+
+46
+00:05:29,680 --> 00:05:39,169
+UNIX ecosystem, just to reduce the amount
+of sending data, and is still useful today.
+
+47
+00:05:39,169 --> 00:05:56,979
+Another important action with text data is
+sorting, and we have the `sort` utility which
+
+48
+00:05:56,979 --> 00:05:59,879
+sort lines of text files:
+
+49
+00:05:59,879 --> 00:06:01,960
+$ man sort
+
+50
+00:06:01,960 --> 00:06:17,379
+To eliminate duplicate lines, we have the
+`uniq` utility, but first we have to sort
+
+51
+00:06:17,379 --> 00:06:22,399
+our text stream for unifiqation:
+
+52
+00:06:22,399 --> 00:06:34,569
+$ sort file | uniq
+
+53
+00:06:34,569 --> 00:06:43,369
+We may output the first/last part of files
+by `head` and `tail` utilities.
+
+54
+00:06:43,369 --> 00:06:55,430
+By default we see the first or last 10 lines
+of standard input, or each FILE from arguments
+
+55
+00:06:55,430 --> 00:06:57,729
+to standard output.
+
+56
+00:06:57,729 --> 00:07:07,329
+You can set another number of lines as an
+option:
+
+57
+00:07:07,329 --> 00:07:11,389
+$ tail -15
+
+58
+00:07:11,389 --> 00:07:16,610
+Also in `tail` you can use the `-f|--follow`
+
+59
+00:07:16,610 --> 00:07:21,979
+option to display the appended data as the
+file grows.
+
+60
+00:07:21,979 --> 00:07:27,469
+This is very useful for keeping track of log
+files.
+
+61
+00:07:27,469 --> 00:07:44,860
+More that, from text lines you can cut some
+fields, separated by some kind of separators
+
+62
+00:07:44,860 --> 00:07:48,410
+by `cut` utility.
+
+63
+00:07:48,410 --> 00:08:00,569
+Also you can join lines of two files on a
+common field by `join` utility and merge lines
+
+64
+00:08:00,569 --> 00:08:04,369
+of files by `paste`.
+
+65
+00:08:04,369 --> 00:08:08,309
+And finally, we have `awk`.
+
+66
+00:08:08,309 --> 00:08:13,039
+$ man awk
+
+67
+00:08:13,039 --> 00:08:33,070
+It's a scanning and templating language that can
+do this and other complex work on text files
+
+68
+00:08:33,070 --> 00:08:34,129
+or streams.
+

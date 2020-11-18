@@ -1,0 +1,219 @@
+1
+00:00:06,150 --> 00:00:07,150
+OK.
+
+2
+00:00:07,150 --> 00:00:11,490
+Let's look to some classical XWindow applications.
+
+3
+00:00:11,490 --> 00:00:19,260
+The first one as we know is a X server:
+
+4
+00:00:19,260 --> 00:00:24,320
+$ man Xserver
+
+5
+00:00:24,320 --> 00:00:29,399
+Most important options is:
+* `:displaynumber` -- default is 0
+
+6
+00:00:29,399 --> 00:00:44,660
+* `-fp fontPath` -- search path for fonts
+* `-s minutes` -- screen-saver timeout
+
+7
+00:00:44,660 --> 00:00:51,440
+which we set in minutes
+
+8
+00:00:51,440 --> 00:00:58,600
+And some interestng options that can help
+organize a local XWindow network with low-cost
+
+9
+00:00:58,600 --> 00:01:09,990
+X terminals and application servers:
+* `-query hostname` -- enables XDMCP and sends
+
+10
+00:01:09,990 --> 00:01:25,710
+Query packets to the specified hostname to
+the application server on
+which this or that display manager is running;
+
+11
+00:01:25,710 --> 00:01:38,979
+* `-broadcast` -- enables XDMCP and broadcasts
+BroadcastQuery packets to the network.
+
+12
+00:01:38,979 --> 00:01:47,580
+In this way, simple load balancing between
+application servers can be organized;
+
+13
+00:01:47,580 --> 00:01:56,640
+* `-indirect hostname` -- enables XDMCP and
+send IndirectQuery packets to the specified
+
+14
+00:01:56,640 --> 00:01:57,640
+hostname.
+
+15
+00:01:57,640 --> 00:02:07,790
+In this case, you will see a list of available
+application servers on your client that you can select.
+
+16
+00:02:09,019 --> 00:02:20,010
+After starting the X-server, it is possible
+to change some parameters of this server on the fly by `xset`
+
+17
+00:02:20,010 --> 00:02:21,010
+command:
+
+18
+00:02:21,010 --> 00:02:22,010
+$ man xset
+
+19
+00:02:22,010 --> 00:02:23,999
+-display display – you may set a display
+
+20
+00:02:23,999 --> 00:02:32,500
+q – you may get current settings
+
+21
+00:02:32,500 --> 00:02:46,680
+[+|-]fp[+|-|=] path,... – you can set the font path
+
+22
+00:02:46,680 --> 00:02:58,840
+s – you can change screen saver parameters
+
+23
+00:02:58,840 --> 00:03:00,400
+And many others.
+
+24
+00:03:00,400 --> 00:03:04,919
+As we discussed earlier, the main principle
+
+25
+00:03:04,919 --> 00:03:12,650
+of the X Window System is "Provide a mechanism,
+not a policy."
+
+26
+00:03:12,650 --> 00:03:28,930
+And the look and feel in X Window can be anything
+-- it is simply determined by the set of widgets
+
+27
+00:03:28,930 --> 00:03:35,299
+on which a particular application is built.
+
+28
+00:03:35,299 --> 00:03:42,639
+It is not a paradox, but the appearance of
+the original XWindow applications may seem
+
+29
+00:03:42,639 --> 00:03:51,859
+a little odd to modern users, as they are
+based on an ancient set of widgets from the
+
+30
+00:03:51,859 --> 00:03:53,650
+Athena project.
+
+31
+00:03:53,650 --> 00:04:11,019
+It looks "ugly" at now days, but they were
+often used in the period of X-Window history that
+
+32
+00:04:11,019 --> 00:04:25,259
+described as the "GUI wars", as a safe alternative
+to the competing Motif and Open Look toolkits.
+
+33
+00:04:25,259 --> 00:04:32,560
+Let's look at the well-known for us `xterm`
+application:
+
+34
+00:04:32,560 --> 00:04:39,780
+$ xterm
+
+35
+00:04:39,780 --> 00:04:46,020
+As we can see, these are very simple 2D graphics
+
+36
+00:04:46,020 --> 00:04:54,340
+with very unusual scrollbar behavior, which
+often discourages new users.
+
+37
+00:04:54,340 --> 00:05:04,960
+The general abstraction of a mouse pointer
+in an XWindow is a three-button device.
+
+38
+00:05:04,960 --> 00:05:15,449
+If you have a mouse with fewer buttons, the
+middle button is emulated, for example, by
+
+39
+00:05:15,449 --> 00:05:21,970
+simultaneously pressing the left and right
+buttons.
+
+40
+00:05:21,970 --> 00:05:45,409
+So here: pressing the left button on the scroll
+bar scrolls forward, the right button backward,
+
+41
+00:05:45,409 --> 00:05:53,030
+and the middle button scrolls to the selected
+position.
+
+42
+00:05:53,030 --> 00:05:55,990
+Yet another classic XWindow utilities:
+
+43
+00:05:55,990 --> 00:06:09,740
+xkill - kill a client by its X resource
+xdpyinfo - display information utility for X-Window
+
+44
+00:06:09,740 --> 00:06:12,560
+xwininfo - window information utility
+about selected window
+
+45
+00:06:18,620 --> 00:06:25,600
+xlsclients - list client applications running on display
+
+46
+00:06:25,600 --> 00:06:27,200
+and many others.
+
+47
+00:06:27,200 --> 00:06:34,200
+As we can see, we still support the same concept:
+
+48
+00:06:34,200 --> 00:06:42,600
+with the graphical application
+we can work from a command line.
+

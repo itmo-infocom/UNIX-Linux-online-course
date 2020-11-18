@@ -1,0 +1,179 @@
+1
+00:00:06,460 --> 00:00:07,460
+OK.
+
+2
+00:00:07,460 --> 00:00:11,340
+But what about modern Internet world?
+
+3
+00:00:11,340 --> 00:00:26,410
+The main problem with these classic `telnet`
+and `ftp` tools is insecurity: the user and
+
+4
+00:00:26,410 --> 00:00:38,030
+password are transmitted over the network
+in plain text and can be hijacked by an evil
+
+5
+00:00:38,030 --> 00:00:39,220
+hacker.
+
+6
+00:00:39,220 --> 00:00:51,040
+Today they have practically been replaced
+by the Secure Shell utilities.
+
+7
+00:00:51,040 --> 00:01:01,520
+Secure Shell provides secure, encrypted communication
+between untrusted hosts on an unsecured network.
+
+8
+00:01:01,520 --> 00:01:08,539
+And again we have a remote Shell and transfer
+tool:
+
+9
+00:01:08,539 --> 00:01:28,979
+* ssh - SSH client (for remote login and execution program)
+* and scp - secure copy (remote file copy program)
+
+10
+00:01:28,979 --> 00:01:32,109
+$ man ssh
+
+11
+00:01:32,109 --> 00:01:38,999
+In ssh, you must specify the host and can
+
+12
+00:01:38,999 --> 00:01:48,440
+set user and port.
+
+13
+00:01:48,440 --> 00:01:58,409
+If you don't set a user, by default you will
+try to log in with the same name as the local
+
+14
+00:01:58,409 --> 00:01:59,619
+user.
+
+15
+00:01:59,619 --> 00:02:12,760
+Alternatively, you can add the command if you
+want to run remotely directly to the command
+
+16
+00:02:12,760 --> 00:02:22,530
+line, without that ssh will just start an
+interactive shell session on the remote host.
+
+17
+00:02:22,530 --> 00:02:31,940
+`scp` copies files between hosts on a network.
+
+18
+00:02:31,940 --> 00:02:44,200
+It uses the same authentication and provides
+the same security as ssh, also data transfer
+
+19
+00:02:44,200 --> 00:02:46,750
+encrypted by ssh.
+
+20
+00:02:46,750 --> 00:03:18,760
+You also may choose a port, you can use compression
+while transferring by "-C" option.
+
+21
+00:03:18,760 --> 00:03:26,800
+Secure Shell utilities can be configured for
+passwordless authentication using certificates.
+
+22
+00:03:29,110 --> 00:03:40,870
+Finally, there are many tools that can be
+used to non-interactively access network resources
+
+23
+00:03:40,870 --> 00:03:42,810
+in scripts.
+
+24
+00:03:42,810 --> 00:03:53,160
+The first is the `lynx` text web browser.
+
+25
+00:03:53,160 --> 00:04:03,300
+With the "-dump" parameter, it dumps the text
+formatted output of the URL of the WEB resource
+
+26
+00:04:03,300 --> 00:04:09,750
+to standard output.
+
+27
+00:04:09,750 --> 00:04:20,570
+This output can then be used when processing
+the web page in a script.
+
+28
+00:04:20,570 --> 00:04:28,400
+Also we have non-interactive network downloaders
+-- `wget` and `curl`.
+
+29
+00:04:28,400 --> 00:04:35,689
+These tools can be used to download and mirror
+online resources offline.
+
+30
+00:04:35,689 --> 00:04:44,729
+`lftp` -- sophisticated file transfer program
+with different access methods - FTP, FTPS,
+
+31
+00:04:44,729 --> 00:04:50,740
+HTTP, HTTPS, HFTP, FISH, SFTP and file.
+
+32
+00:04:50,740 --> 00:04:58,770
+And finally `rsync` — remote (and local)
+file-copying tool which reduces the amount
+
+33
+00:04:58,770 --> 00:05:06,039
+of data sent over the network by sending only
+the differences between the source files and
+
+34
+00:05:06,039 --> 00:05:12,229
+the existing files in the destination.
+
+35
+00:05:12,229 --> 00:05:21,120
+Rsync is widely used for backups and mirroring
+and as an improved copy command for everyday
+
+36
+00:05:21,120 --> 00:05:22,120
+use.
+
+37
+00:05:22,120 --> 00:05:30,139
+There are two different ways for rsync to
+contact a remote system: using a remote-shell
+
+38
+00:05:30,139 --> 00:05:42,199
+program as the transport (such as ssh or rsh)
+or contacting an rsync daemon directly via
+
+39
+00:05:42,199 --> 00:05:43,199
+TCP.
+

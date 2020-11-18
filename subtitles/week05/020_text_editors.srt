@@ -1,0 +1,507 @@
+1
+00:00:06,300 --> 00:00:07,300
+OK.
+
+2
+00:00:07,300 --> 00:00:17,520
+We can create a file using the `cat` utility
+and view the file using a viewer, for example -- `less`.
+
+3
+00:00:17,520 --> 00:00:29,210
+But what if we need to change something, especially
+if we only have a TTY interface?
+
+4
+00:00:29,210 --> 00:00:43,550
+And it is possible -- we have a so-called
+line editor named `ed`.
+
+5
+00:00:43,550 --> 00:00:50,740
+The only interface for such an editor is the
+command line.
+
+6
+00:00:50,740 --> 00:00:59,480
+We have some machinery for
+choose a position in a file
+
+7
+00:00:59,480 --> 00:01:01,480
+and some commands for working
+with a text data in our file.
+
+8
+00:01:10,319 --> 00:01:14,800
+So let's try to edit new file.
+
+9
+00:01:14,801 --> 00:01:24,030
+At first -- we will insert some lines by command
+`insert`:
+
+10
+00:01:24,030 --> 00:01:34,740
+i
+1 2
+3 4
+.
+
+11
+00:01:34,749 --> 00:01:42,530
+and we must end our input with just one 'dot'
+
+12
+00:01:42,530 --> 00:01:51,250
+at the beginning of line.
+
+13
+00:01:52,250 --> 00:01:55,030
+Let's take a look at our file, moving to the
+
+14
+00:01:55,030 --> 00:01:56,740
+first line:
+
+15
+00:01:56,740 --> 00:02:00,430
+1
+1 2
+
+16
+00:02:00,430 --> 00:02:02,890
+3 4
+
+17
+00:02:02,890 --> 00:02:03,890
+?
+
+18
+00:02:03,890 --> 00:02:05,350
+Seems good.
+
+19
+00:02:05,350 --> 00:02:16,360
+Now we can add something to the end by the
+`add` command:
+
+20
+00:02:16,360 --> 00:02:18,060
+a
+
+21
+00:02:18,060 --> 00:02:21,450
+5 6
+.
+
+22
+00:02:21,450 --> 00:02:26,540
+1
+1 2
+3 4
+5 6
+?
+
+23
+00:02:26,540 --> 00:02:34,320
+And let's look again
+
+24
+00:02:34,320 --> 00:02:42,060
+OK -- we have 3 lines in the file now.
+
+25
+00:02:42,060 --> 00:02:53,100
+And finally -- let's try to make a magic pass:
+
+26
+00:02:53,100 --> 00:03:22,340
+1,$s/\(.\) \(.\)/\2 \1/
+1
+2 1
+4 3
+6 5
+?
+
+27
+00:03:22,340 --> 00:03:38,660
+This means: from the first to the last line,
+replace the lines where we have two separate
+
+28
+00:03:38,660 --> 00:03:56,070
+letters separated by a space and exchanging
+those letters with places.
+
+29
+00:03:56,070 --> 00:04:01,240
+And finally let's 'write' and 'quit':
+
+30
+00:04:01,240 --> 00:04:05,760
+w
+12
+q
+
+31
+00:04:05,760 --> 00:04:06,999
+Let's check the result:
+
+32
+00:04:06,999 --> 00:04:09,620
+$ cat tst
+2 1
+
+33
+00:04:09,620 --> 00:04:12,240
+4 3
+6 5
+
+34
+00:04:12,240 --> 00:04:13,240
+OK
+
+35
+00:04:13,240 --> 00:04:23,711
+But for what purposes can we use a line editor
+now that we have full-screen editors with
+
+36
+00:04:23,711 --> 00:04:26,790
+a user-friendly interfaces?
+
+37
+00:04:26,790 --> 00:04:38,300
+Of course, you can imagine a situation where
+your full-screen environment is broken and
+
+38
+00:04:38,300 --> 00:04:45,100
+only the line editor will be the salvation for you.
+
+39
+00:04:45,100 --> 00:04:48,970
+And actually I had such situations in my life.
+
+40
+00:04:48,970 --> 00:05:02,960
+But the main use case for `ed` is for automatic
+editing which may be used in scripts.
+
+41
+00:05:02,960 --> 00:05:13,240
+Anything you need to change in the text data
+can be done with this editor, including sophisticated
+
+42
+00:05:13,240 --> 00:05:17,360
+regexp search and replace.
+
+43
+00:05:17,360 --> 00:05:28,350
+Moreover, we have a `sed` -- stream editor,
+for editing text data in pipelines:
+
+44
+00:05:28,350 --> 00:05:36,040
+$ sed 's/\(.\) \(.\)/\2 \1/' < tst
+
+45
+00:05:36,040 --> 00:05:45,280
+1 2
+3 4
+5 6
+
+46
+00:05:45,280 --> 00:05:52,419
+As you can see, the original file does not
+change, all changes are simply sent to standard
+
+47
+00:05:52,419 --> 00:05:53,419
+output and we can redirect it to another file:
+
+48
+00:05:53,419 --> 00:06:00,720
+$ cat tst
+2 1
+4 3
+6 5
+
+49
+00:06:00,730 --> 00:06:08,639
+But UNIX-like systems also have full-screen
+
+50
+00:06:08,639 --> 00:06:15,350
+editors, which can also be confusing for beginners.
+
+51
+00:06:15,350 --> 00:06:19,240
+The first is the `vi` editor.
+
+52
+00:06:19,240 --> 00:06:32,970
+It was developed by Berkeley student Bill
+Joy for BSD initially as a visual mode for
+
+53
+00:06:32,970 --> 00:06:35,669
+a line editor.
+
+54
+00:06:35,669 --> 00:06:43,330
+It is a very fast and lightweight editor that
+is part of the Single Unix Specification and
+
+55
+00:06:43,330 --> 00:06:47,350
+the POSIX, which found on every UNIX-like
+system.
+
+56
+00:06:47,350 --> 00:06:56,860
+The VI editor works on all types of terminals
+and generally requires only a conventional
+
+57
+00:06:56,860 --> 00:06:59,729
+letter keyboard.
+
+58
+00:06:59,729 --> 00:07:11,620
+You can work with it without the arrow keys,
+PgUp/Down or anything similar.
+
+59
+00:07:11,620 --> 00:07:22,210
+There are actually very small keyboards optimized
+for `vi` produced by some vendors.
+
+60
+00:07:22,210 --> 00:07:36,520
+But to work on it, you need to understand
+the basic concept of this editor: it can be
+
+61
+00:07:36,520 --> 00:07:38,810
+in three states.
+
+62
+00:07:38,810 --> 00:07:53,740
+Immediately after launch, we find ourselves
+in the usual command mode and can switch to
+
+63
+00:07:53,740 --> 00:08:05,300
+editing mode, for example, by pressing the
+`Insert` or `i` key.
+
+64
+00:08:05,300 --> 00:08:14,980
+As we can see, the mode status in the lower
+left corner has changed to '-- INSERT --', and
+
+65
+00:08:14,980 --> 00:08:27,440
+now we can edit our file.
+
+66
+00:08:27,440 --> 00:08:43,909
+Pressing `Insert` again will change the state
+mode to '-- REPLACE --' 
+
+67
+00:08:43,909 --> 00:08:45,679
+and vice versa.
+
+68
+00:08:45,679 --> 00:08:53,119
+Exit the editing mode by pressing ESC.
+
+69
+00:08:53,119 --> 00:09:07,569
+The third mode can be accessed by pressing
+the "colon" key in command mode.
+
+70
+00:09:07,569 --> 00:09:13,369
+This is the well-known for us `ed` mode.
+
+71
+00:09:13,369 --> 00:09:22,010
+In this mode, we can use the normal `ed` line
+editor commands and finish them with ENTER.
+
+72
+00:09:22,010 --> 00:09:34,899
+In command mode, you can find something with
+regex by "slash" and "question" marks, as
+
+73
+00:09:34,899 --> 00:09:37,029
+in the `less` viewer.
+
+74
+00:09:37,029 --> 00:09:54,189
+In improved VI (vim), you can use very useful
+visual mode by pressing V.
+
+75
+00:09:54,189 --> 00:10:05,610
+After that you can delete the selection with
+'d' key or just copy it with 'y' (yank).
+
+76
+00:10:05,610 --> 00:10:11,850
+Then you can paste it anywhere with 'p' (paste).
+
+77
+00:10:11,850 --> 00:10:35,430
+Moreover, you can use Ctrl-V for selecting 
+of vertical boxes.
+
+78
+00:10:35,430 --> 00:10:46,110
+To exit visual mode, simply press ESC.
+
+79
+00:10:46,110 --> 00:10:58,509
+Also you may look to `vimtutor` -- a guide
+to Vim that may be useful for beginners.
+
+80
+00:10:58,509 --> 00:11:05,100
+And the second most common editor is `emacs`.
+
+81
+00:11:05,100 --> 00:11:14,709
+This Richard Stallman's editor was the starting
+point for the GNU Project, along with GCC
+
+82
+00:11:14,709 --> 00:11:17,240
+and UNIX-like utilities.
+
+83
+00:11:17,240 --> 00:11:22,899
+EMACS means, for example, "Editing MACroS".
+
+84
+00:11:22,899 --> 00:11:34,910
+An apocryphal hacker koan alleges that the
+program was named after Emack & Bolio's, a
+
+85
+00:11:34,910 --> 00:11:39,180
+popular Cambridge ice cream store.
+
+86
+00:11:39,180 --> 00:11:52,019
+But overall it is a really very powerful editor
+with macro extensions, allowing the user to
+
+87
+00:11:52,019 --> 00:11:58,579
+override any keystrokes to launch the editor
+functions.
+
+88
+00:11:58,579 --> 00:12:13,350
+But unlike other editors that support macro-extensions,
+in Emacs they are implemented using the LISP
+
+89
+00:12:13,350 --> 00:12:16,360
+programming language embedded on editor.
+
+90
+00:12:16,360 --> 00:12:25,910
+At the time, LISP was very popular in artificial
+intelligence in the United States, and Stallman,
+
+91
+00:12:25,910 --> 00:12:36,049
+who worked at the MIT Artificial Intelligence
+Lab, chose it as the editor extension language.
+
+92
+00:12:36,049 --> 00:12:46,220
+This implementation allows many LISP-based
+applications to be developed, including a
+
+93
+00:12:46,220 --> 00:12:54,309
+user-friendly interface for developers in
+various programming languages.
+
+94
+00:12:54,309 --> 00:13:01,920
+Usually `Emacs` is a text editor with a simple
+graphical interface.
+
+95
+00:13:01,920 --> 00:13:10,399
+But it can be run in only-text environment
+too.
+
+96
+00:13:10,399 --> 00:13:15,399
+The most commonly used keystrokes are:
+
+97
+00:13:15,399 --> 00:13:24,009
+C-c C-x – exit
+C-h t – tutorial
+
+98
+00:13:24,009 --> 00:13:27,089
+C-h i – info
+
+99
+00:13:27,089 --> 00:13:42,689
+If you feel overwhelmed by the difficulty
+of `Emacs`, you can consult a personal psychoanalyst:
+
+100
+00:13:42,689 --> 00:13:45,149
+M-x doctor
+
+101
+00:13:45,149 --> 00:13:50,430
+It would spoil the fun and hurt your recovery
+
+102
+00:13:50,430 --> 00:13:56,079
+to say too much here about how the doctor
+works.
+
+103
+00:13:56,079 --> 00:14:06,359
+But when you're ready, you may try to find
+the well-known Turing-test related AI program
+
+104
+00:14:06,359 --> 00:14:11,370
+ELIZA on WikiPedia.
+
+105
+00:14:11,370 --> 00:14:20,429
+Also in the UNIX/Linux world, there are many
+other editors that may be more convenient
+
+106
+00:14:20,429 --> 00:14:30,839
+for you, such as:
+* joe, nano, mcedit -- simple text editors
+
+107
+00:14:30,839 --> 00:14:38,420
+or
+* gedit, kate -- text editors from Gnome and KDE
+
+108
+00:14:38,420 --> 00:14:42,959
+GUI projects
+
