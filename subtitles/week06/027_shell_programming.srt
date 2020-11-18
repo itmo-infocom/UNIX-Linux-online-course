@@ -1,0 +1,310 @@
+1
+00:00:06,759 --> 00:00:13,559
+Now it's time to start programming, Shell
+programming.
+
+2
+00:00:13,559 --> 00:00:22,570
+As far as we understand, the shell works like
+a normal program and has several options that
+
+3
+00:00:22,570 --> 00:00:27,550
+can be useful for debugging:
+
+4
+00:00:27,550 --> 00:00:39,660
+-v Print shell input lines as they are read.
+
+5
+00:00:39,660 --> 00:00:48,530
+-x Print commands and their arguments as they
+are executed.
+
+6
+00:00:48,530 --> 00:01:04,439
+and finally "-c" and some STRING -- read and execute commands
+from STRING after processing the options, then exit.
+
+7
+00:01:04,439 --> 00:01:11,460
+If your shell is Bash, you may get some help by such commands:
+
+8
+00:01:11,460 --> 00:01:14,400
+bash -c help
+bash -c 'help set'
+
+9
+00:01:14,400 --> 00:01:25,200
+And, of course, you may read a manual page about your shell
+
+10
+00:01:25,200 --> 00:01:35,540
+Let's follow the good tradition started by
+the classic book of Kernighan and Ritchie
+
+11
+00:01:35,540 --> 00:01:40,730
+"The C Programming Language" and write a standard
+program "Hello World":
+
+12
+00:01:40,730 --> 00:01:58,460
+$ cat > hello
+echo Hello word
+^D
+
+13
+00:01:58,470 --> 00:02:07,460
+We complete the input with the EOF (Ctrl-D character).
+
+14
+00:02:07,479 --> 00:02:10,289
+Let's try to run now:
+
+15
+00:02:10,289 --> 00:02:16,889
+$ sh hello
+Hello word
+
+16
+00:02:16,889 --> 00:02:18,540
+Good.
+
+17
+00:02:18,540 --> 00:02:25,290
+And now let's turn our script into a real
+executable program:
+
+18
+00:02:25,290 --> 00:02:31,379
+$ chmod +x hello
+
+19
+00:02:31,379 --> 00:02:39,480
+$ ./hello
+Hello word
+
+20
+00:02:39,489 --> 00:02:47,230
+Excellent!
+Now we will talk about the arguments.
+
+21
+00:02:47,230 --> 00:02:52,830
+Let's look at our first positional parameter:
+
+22
+00:02:52,830 --> 00:03:07,930
+$ vi hello
+echo Hello $1
+
+23
+00:03:07,930 --> 00:03:13,970
+$ ./hello
+Hello
+
+24
+00:03:13,970 --> 00:03:18,749
+We called our script without parameters and
+
+25
+00:03:18,749 --> 00:03:21,260
+got nothing.
+
+26
+00:03:21,260 --> 00:03:24,549
+Let's add some parameter:
+
+27
+00:03:24,549 --> 00:03:31,310
+$ ./hello world
+Hello world
+
+28
+00:03:31,310 --> 00:03:35,849
+But for several parameters it does not work:
+
+29
+00:03:35,849 --> 00:03:43,280
+$ ./hello world and universe
+Hello world
+
+30
+00:03:43,299 --> 00:03:44,919
+Let's fix it:
+
+31
+00:03:44,919 --> 00:03:49,659
+$ vi hello
+echo Hello $*
+
+32
+00:03:49,659 --> 00:03:59,139
+$ ./hello world and universe
+Hello world and universe
+
+33
+00:03:59,139 --> 00:04:00,329
+Excellent!
+
+34
+00:04:00,329 --> 00:04:15,559
+As we can see, there is some difference between
+different shells in the use of some special
+
+35
+00:04:15,559 --> 00:04:22,260
+variable names associated with script parameters.
+
+36
+00:04:22,260 --> 00:04:31,540
+We have different styles of parameters in Bourne-Shell, C-Shell.
+
+37
+00:04:31,540 --> 00:04:38,660
+The main advantage of the latest shells over the
+
+38
+00:04:38,660 --> 00:04:53,260
+classic Bourne Shell shell is the ability
+to use more than 9 parameters.
+
+39
+00:04:53,260 --> 00:05:03,150
+Because in the Bourne Shell we have only one
+digit for the parameter number.
+
+40
+00:05:03,150 --> 00:05:10,170
+In newer shells, we can use longer numbers
+in square brackets.
+
+41
+00:05:10,170 --> 00:05:27,170
+A very important thing in the UNIX world is
+the zero-numbered positional parameter.
+
+42
+00:05:27,170 --> 00:05:32,930
+Let's try to look at this:
+
+43
+00:05:32,930 --> 00:05:40,930
+$ vi hello
+echo \$0: $0
+
+44
+00:05:40,930 --> 00:05:50,520
+$ ./hello
+echo Hello $*
+$0: ./hello
+Hello
+
+45
+00:05:50,530 --> 00:05:55,510
+Zero parameter is just the name of the script.
+
+46
+00:05:55,510 --> 00:06:17,080
+And if you are familiar with the C language,
+you probably know -- the same is in argv[0].
+
+47
+00:06:17,080 --> 00:06:22,990
+For what needs can such a parameter be used?
+
+48
+00:06:22,990 --> 00:06:39,780
+The most obvious answer seems to be to write
+a nice error message about using of our script
+
+49
+00:07:23,120 --> 00:07:27,700
+We got some help about calling of our program.
+
+50
+00:07:27,710 --> 00:07:34,740
+But on UNIX-like systems we can use a very
+
+51
+00:07:34,740 --> 00:07:39,670
+interesting trick -- linking files.
+
+52
+00:07:39,670 --> 00:07:52,090
+Take a look at this super-nano-notebook.
+
+53
+00:07:52,090 --> 00:08:08,210
+It runs on OpenWRT, a Linux distribution that
+you can find on your home internet router,
+
+54
+00:08:08,210 --> 00:08:09,210
+for example.
+
+55
+00:08:09,210 --> 00:08:17,460
+We have a fully functional set of Linux utilities,
+but if we take a closer look, we can see that
+
+56
+00:08:17,460 --> 00:08:28,580
+all common UNIX utilities are just symbolic
+links to a single "busybox" binary.
+
+57
+00:08:28,580 --> 00:08:34,440
+# ls -l /bin
+
+58
+00:08:34,440 --> 00:08:38,460
+Busybox just looks at the name it is running
+
+59
+00:08:38,460 --> 00:08:46,070
+under and performs the appropriate functions
+from the busybox library.
+
+60
+00:08:46,070 --> 00:08:53,980
+This technique can reduce the memory consumption
+of the embedded system.
+
+61
+00:08:53,980 --> 00:08:59,120
+Let's try to use this feature on our script:
+
+62
+00:08:59,120 --> 00:09:02,760
+$ vi hello
+
+63
+00:09:02,760 --> 00:09:24,600
+if [ $# -lt 1 ]
+then
+        echo Usage: $0 who...
+        exit
+fi
+echo $0 $*!
+
+64
+00:09:24,600 --> 00:09:35,520
+$ ln -sf hello bye
+
+65
+00:09:35,520 --> 00:09:42,800
+$ /hello world
+./hello world
+
+66
+00:09:42,800 --> 00:09:46,140
+$ ./bye bye
+./bye bye
+
+67
+00:09:46,140 --> 00:09:46,640
+Voilà!
+

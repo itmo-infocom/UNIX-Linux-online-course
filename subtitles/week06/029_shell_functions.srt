@@ -1,0 +1,146 @@
+1
+00:00:07,460 --> 00:00:09,460
+So, functions.
+
+2
+00:00:12,429 --> 00:00:20,060
+This defines a function named "name".
+
+3
+00:00:20,060 --> 00:00:27,060
+The reserved word `function` is optional.
+
+4
+00:00:27,060 --> 00:00:33,310
+And we can `return` some exit code from the
+function.
+
+5
+00:00:35,850 --> 00:00:41,240
+Arguments in the function are treated in the
+
+6
+00:00:41,240 --> 00:00:46,370
+standard way as dollar with positional parameter
+number.
+
+7
+00:00:46,370 --> 00:00:55,720
+From the point of view of an external observer,
+the function looks exactly the same as a regular
+
+8
+00:00:55,720 --> 00:01:04,290
+command, which you can run from
+the command line and script.
+
+9
+00:01:04,290 --> 00:01:16,009
+And as we remember, some Shell libraring is
+possible.
+
+10
+00:01:47,770 --> 00:01:49,209
+So, Let's check.
+
+11
+00:01:53,060 --> 00:01:57,760
+So, we can see our function's definition 
+
+12
+00:02:08,220 --> 00:02:15,340
+And now we will use it in our script.
+
+13
+00:02:25,060 --> 00:02:28,000
+OK. It's works.
+
+14
+00:02:28,000 --> 00:02:35,200
+And finally -- a lot of useful functions
+
+15
+00:02:35,200 --> 00:02:39,300
+embedded in Shell:
+
+16
+00:02:39,300 --> 00:02:44,280
+basename – strip directory and suffix from
+filenames
+
+17
+00:02:44,280 --> 00:02:49,510
+dirname – strip non-directory suffix from
+file name
+
+18
+00:02:49,510 --> 00:02:52,720
+echo – display a line of text
+
+19
+00:02:52,720 --> 00:02:56,880
+eval – execute expression by the shell
+
+20
+00:02:56,890 --> 00:03:04,100
+exec – replace the shell by command
+
+21
+00:03:04,100 --> 00:03:13,100
+read – read string from stdin to variable
+
+22
+00:03:13,100 --> 00:03:14,840
+shift – shift parameters which may used in loops
+
+23
+00:03:14,849 --> 00:03:24,510
+sleep – 
+delay execution for a specified amount of
+
+24
+00:03:24,510 --> 00:03:27,099
+time
+
+25
+00:03:27,099 --> 00:03:36,319
+And it would be helpful to be able to understand
+what exactly we are running when we call the
+
+26
+00:03:36,319 --> 00:03:37,590
+command.
+
+27
+00:03:37,590 --> 00:03:42,650
+And we have the following commands:
+
+28
+00:03:42,650 --> 00:03:45,150
+`which` and `type`.
+
+29
+00:03:45,150 --> 00:03:46,150
+Let's try to run:
+
+30
+00:03:55,230 --> 00:03:59,800
+Why are the results so different?
+
+31
+00:03:59,800 --> 00:04:12,180
+Just because the first is a built-in function of our Shell
+and the other is a real command:
+
+32
+00:04:23,380 --> 00:04:28,430
+For an external binary, the results are the
+
+33
+00:04:28,430 --> 00:04:29,430
+similar.
+
+34
+00:04:34,160 --> 00:04:35,040
+OK
+
