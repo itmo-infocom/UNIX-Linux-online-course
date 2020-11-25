@@ -1,0 +1,281 @@
+1
+00:00:06,170 --> 00:00:13,180
+By installing the system on your computer,
+you become more or less an administrator and
+
+2
+00:00:13,180 --> 00:00:17,250
+you need to have some basic administration
+skills.
+
+3
+00:00:17,250 --> 00:00:23,550
+The most important tasks:
+* Users and groups management;
+
+4
+00:00:23,550 --> 00:00:32,349
+* Working with repositories and packages;
+* Devices and drivers handling;
+
+5
+00:00:32,349 --> 00:00:40,640
+* File systems configuring;
+* Archiving and backups;
+
+6
+00:00:40,640 --> 00:00:43,420
+* Network administration.
+
+7
+00:00:43,420 --> 00:00:53,220
+Typically, system administration in different
+UNIX-like systems is the most different part
+
+8
+00:00:53,220 --> 00:01:03,260
+of the system, although the general approaches
+to administration are more or less the same
+
+9
+00:01:03,260 --> 00:01:05,710
+everywhere.
+
+10
+00:01:05,710 --> 00:01:19,750
+On some systems, you have tools that can help
+you perform some of the administrative tasks.
+
+11
+00:01:19,750 --> 00:01:25,630
+For example:
+* gnome-control-center in systems with GNOME UI
+
+12
+00:01:25,630 --> 00:01:41,960
+* in RHEL: simple text config -- `setup`, GUI-configs
+
+13
+00:01:41,960 --> 00:01:50,369
+-- `system-config-something...`
+* commercial systems provide their own more
+
+14
+00:01:50,369 --> 00:01:56,270
+or less administrator-friendly tools
+
+15
+00:01:56,270 --> 00:02:05,009
+As we understand it, we need superuser rights
+to perform such tasks.
+
+16
+00:02:05,009 --> 00:02:14,960
+Some systems may require stricter restrictions
+where system administration tasks can be decoupled
+
+17
+00:02:14,960 --> 00:02:25,920
+from those of a security officer using mandatory
+access control (MAC) systems, such as those
+
+18
+00:02:25,920 --> 00:02:38,569
+developed by the National Security Agency
+(NSA) SELinux subsystem in the Linux kernel.
+
+19
+00:02:38,569 --> 00:02:42,260
+Let's take a look at the RH `setup` tool:
+
+20
+00:03:00,120 --> 00:03:14,000
+We need to authenticate as "root" superuser.
+We must know the password of superuser "root".
+
+21
+00:03:14,000 --> 00:03:23,847
+$ setup
+
+22
+00:03:26,200 --> 00:03:35,900
+We have to enter the root password and after
+that we can do some simple settings:
+
+23
+00:03:35,900 --> 00:03:38,389
+* Authentication configuration
+
+24
+00:03:38,389 --> 00:03:39,569
+* System services
+
+25
+00:03:39,569 --> 00:03:53,099
+But when we run some other programs, the
+systems may asks for the user's password, not 'root'.
+
+26
+00:03:53,099 --> 00:03:58,419
+This is because these programs use different
+machinery for increasing privileges:
+
+27
+00:03:59,340 --> 00:04:17,829
+A more general way is to just switch to the
+"root" superuser, and the first way to do
+
+28
+00:04:17,829 --> 00:04:21,210
+this is with the `su` command:
+
+29
+00:04:21,210 --> 00:04:22,350
+$ man su
+
+30
+00:04:22,350 --> 00:04:32,990
+`su` -- run a command with substitute user
+and group ID, by default -- to 'root' superuser.
+
+31
+00:04:32,990 --> 00:04:41,200
+For such users switching, we need to say the
+password of this user.
+
+32
+00:04:41,200 --> 00:04:48,921
+When called without arguments `su` defaults
+to running an interactive shell as 'root'.
+
+33
+00:04:48,921 --> 00:05:01,380
+A very important option is just a 'dash',
+it's mean -- starts the shell as login shell
+
+34
+00:05:01,380 --> 00:05:05,570
+with an environment similar to a real login.
+
+35
+00:05:05,570 --> 00:05:17,820
+After switching to superuser "root" your prompt
+will change from a 'dollar' sign to a 'hash'
+
+36
+00:05:17,820 --> 00:05:19,380
+sign.
+
+37
+00:05:24,040 --> 00:05:40,600
+But the `logname` still show the real user ID
+by which we login in our system.
+
+38
+00:05:40,600 --> 00:05:52,590
+In BSD systems, for security reasons, only
+users in the 'wheel' group (group 0) can use
+
+39
+00:05:52,590 --> 00:05:59,340
+`su` as 'root', even if you know the 'root'
+password.
+
+40
+00:05:59,340 --> 00:06:13,060
+In many UNIXes and Linuxes the Plugin Authentication
+Module (PAM) is now being used to fine tune
+
+41
+00:06:13,060 --> 00:06:15,930
+the privilege change.
+
+42
+00:06:15,930 --> 00:06:28,660
+The settings for this subsystem are located in 
+
+43
+00:06:28,660 --> 00:06:32,420
+the /etc/pam.d/ directory.
+
+44
+00:06:32,430 --> 00:06:39,280
+And one of the applications whose config files
+
+45
+00:06:39,280 --> 00:06:52,560
+we can find in this directory is the `sudo`
+command.
+
+46
+00:06:52,560 --> 00:07:19,360
+The default PAM security policy allows users
+configured appropriately in '/etc/sudoers'
+
+47
+00:07:19,360 --> 00:07:23,480
+config file to run commands with 'root' privileges.
+
+48
+00:07:23,480 --> 00:07:34,040
+In this case you don't need to know the
+password of 'root' user to do this.
+
+49
+00:07:34,040 --> 00:07:53,780
+Also, by default only one command is executed
+by `sudo`, instead of `su` where we have
+
+50
+00:07:53,780 --> 00:08:06,510
+to use the '-c' option to 
+run one command.
+
+51
+00:08:06,510 --> 00:08:18,070
+This reduces the chances of an unexpected
+error for an inexperienced user.
+
+52
+00:08:18,070 --> 00:08:24,070
+And this is, for example, the default policy
+for Ubuntu systems.
+
+53
+00:08:24,070 --> 00:08:30,940
+When Ubuntu is installed, a standard root
+account is created, but no password is assigned
+
+54
+00:08:30,940 --> 00:08:32,310
+to it.
+
+55
+00:08:32,310 --> 00:08:40,029
+You cannot login as "root" until you assign
+a password for the "root" account.
+
+56
+00:08:40,029 --> 00:08:45,279
+Only `sudo` may be used with such default
+settings.
+
+57
+00:08:45,279 --> 00:08:56,779
+To allow a regular user to run `sudo` this
+way on RH based systems such as Fedora, RHEL,
+
+58
+00:08:56,779 --> 00:09:10,110
+CentOS, or our NauLinux, you must add this user
+to the 'wheel' group (as in BSD).
+
+59
+00:09:10,110 --> 00:09:20,180
+And the easiest way to get a 'root' shell
+session like in `su` with `sudo` in Ubuntu
+
+60
+00:09:31,500 --> 00:09:40,329
+is to just run it `sudo -i` (this means interactive).
+

@@ -1,0 +1,494 @@
+1
+00:00:06,180 --> 00:00:13,680
+As we remember, users are one of the three
+pillars on which the UNIX world stands.
+
+2
+00:00:13,680 --> 00:00:21,600
+You can use some graphical interfaces to manage
+users and groups, but simple CLI utilities
+
+3
+00:00:21,600 --> 00:00:24,340
+are often more convenient.
+
+4
+00:00:24,340 --> 00:00:33,000
+There are:
+* `adduser` or `useradd` -- create a new user
+
+5
+00:00:33,000 --> 00:00:41,590
+or update default new user information
+* `groupadd` -- create a new group
+
+6
+00:00:41,590 --> 00:00:50,370
+* and `passwd` -- update user’s authentication
+tokens
+
+7
+00:00:50,370 --> 00:01:02,230
+To create a new user, we (as 'root') simply
+have to run the program `adduser` and set
+
+8
+00:01:02,230 --> 00:01:07,329
+a password with `passwd`.
+
+9
+00:01:07,329 --> 00:01:17,170
+The `passwd` command is not so simple and
+you can look into "Under the hood -- special
+
+10
+00:01:17,170 --> 00:01:24,240
+permission bits" about `passwd` s-bit
+lecture.
+
+11
+00:01:24,240 --> 00:01:36,890
+But, `adduser` is also black magic -- actually,
+all data related to users and groups is placed
+
+12
+00:01:36,890 --> 00:01:46,460
+in common text files that can only be modified
+with ordinary text editors:
+
+13
+00:01:46,460 --> 00:01:50,920
+$ less /etc/passwd
+
+14
+00:01:50,920 --> 00:01:58,579
+The file format is quite simple - one line
+
+15
+00:01:58,579 --> 00:02:05,680
+per user with colon-separated fields:
+
+16
+00:02:05,680 --> 00:02:20,170
+$ man 5 passwd
+
+17
+00:02:20,170 --> 00:02:27,440
+The fields, in order from left to right, are:
+
+18
+00:02:28,930 --> 00:02:39,749
+User name: the string a user would typein
+when logging into the operating system: the
+
+19
+00:02:39,749 --> 00:02:40,749
+logname.
+
+20
+00:02:40,749 --> 00:02:48,040
+Must be unique across users listed in the
+file.
+
+21
+00:02:48,040 --> 00:02:49,409
+2nd field is
+
+22
+00:02:49,409 --> 00:02:58,389
+the Information used to validate a user's password;
+And at the very beginning, the password data
+
+23
+00:02:58,389 --> 00:03:11,269
+was actually placed in this field.
+
+24
+00:03:11,269 --> 00:03:20,790
+But we can read this file as a regular user,
+this is a design requirement.
+
+25
+00:03:20,790 --> 00:03:34,469
+Did users have the ability to read passwords
+of other users at this time?
+
+26
+00:03:34,469 --> 00:03:37,120
+Not.
+
+27
+00:03:37,120 --> 00:03:45,450
+In Robert Morris and Ken Thompson's classic
+article “Password Security: A Case History”
+
+28
+00:03:45,450 --> 00:03:58,259
+about the UNIX password system, Morris described
+a real-life incident he himself saw:
+
+29
+00:03:58,259 --> 00:04:02,599
+"Perhaps the most memorable such occasion occurred
+
+30
+00:04:02,599 --> 00:04:13,109
+in the early 1960s when a system administrator
+on the CTSS system at MIT was editing the
+
+31
+00:04:13,109 --> 00:04:22,060
+password file and another system administrator
+was editing the daily message that is printed
+
+32
+00:04:22,060 --> 00:04:26,150
+on everyone’s terminal on login.
+
+33
+00:04:26,150 --> 00:04:35,639
+Due to a software design error, the temporary
+editor files of the two users were interchanged
+
+34
+00:04:35,639 --> 00:04:48,640
+and thus, for a time, the password file was
+printed on every terminal when it was logged in."
+
+35
+00:04:48,650 --> 00:04:53,740
+And the main idea of UNIX passwords is not
+
+36
+00:04:53,740 --> 00:04:59,009
+to believe that you can simply hide them.
+
+37
+00:04:59,009 --> 00:05:06,660
+Better not to save passwords in the system
+at all.
+
+38
+00:05:06,660 --> 00:05:18,520
+Actually, when creating a password, a random
+code was simply generated (the so-called SALT
+
+39
+00:05:18,520 --> 00:05:34,540
+code), and then from this code and password
+with a one-way `crypt` procedure based on
+
+40
+00:05:34,540 --> 00:05:35,540
+the DES algorithm:
+
+41
+00:05:35,540 --> 00:05:36,540
+$ man crypt
+
+42
+00:05:36,540 --> 00:05:48,969
+And 
+the result of this operation cannot be decrypted
+
+43
+00:05:48,969 --> 00:06:01,590
+(actually, we received some kind of hash)
+-- when entering the system, the system receives
+
+44
+00:06:01,590 --> 00:06:09,590
+SALT from the password field, encrypts it
+with the entered password, and simply compares
+
+45
+00:06:09,590 --> 00:06:14,310
+it with the contents of the password field.
+
+46
+00:06:14,310 --> 00:06:29,680
+In most modern uses, this field is actually
+set 
+
+47
+00:06:29,680 --> 00:06:42,789
+to "x" (or "*", or some other indicator) with
+the actual password information being stored
+
+48
+00:06:42,789 --> 00:06:50,289
+in a separate shadow password file.
+
+49
+00:06:50,289 --> 00:06:55,379
+The 3rd.
+
+50
+00:06:55,379 --> 00:07:01,720
+User identifier number, used by the operating
+system for internal purposes.
+
+51
+00:07:01,720 --> 00:07:05,639
+It need not be unique.
+
+52
+00:07:05,639 --> 00:07:20,380
+Moreover, a superuser is simply a user with
+a zero user ID, and actually you can have
+
+53
+00:07:20,380 --> 00:07:26,330
+multiple superusers in addition to the traditional
+“root” superuser.
+
+54
+00:07:26,330 --> 00:07:36,650
+For example, you can create some superuser
+with UID 0 and a name like "halt" and with
+
+55
+00:07:36,650 --> 00:07:44,850
+the command "shutdown" as a shell for the
+user, and provide a password for that user
+
+56
+00:07:44,850 --> 00:07:58,219
+to someone who needs to shutdown the system
+at night.
+
+57
+00:07:58,219 --> 00:08:05,719
+4th
+
+58
+00:08:05,719 --> 00:08:16,789
+Group identifier number, which identifies
+the primary group of the user; all files that
+
+59
+00:08:16,789 --> 00:08:23,559
+are created by this user may initially be
+accessible to this group.
+
+60
+00:08:23,559 --> 00:08:41,419
+You can change this default during the current
+session with the command `newgrp`.
+
+61
+00:08:47,889 --> 00:08:57,780
+Gecos field, commentary that describes the
+person or account.
+
+62
+00:08:57,780 --> 00:09:08,899
+Some early Unix systems at Bell Labs used
+GE/Honeywell mainframe computers with General
+
+63
+00:09:08,899 --> 00:09:15,370
+Comprehensive Operating System (GCOS) for
+print spooling and various other services,
+
+64
+00:09:15,370 --> 00:09:23,980
+so this field was added to carry information
+on a user's GECOS identity.
+
+65
+00:09:23,980 --> 00:09:33,079
+Typically, now this is a set of comma-separated
+values including the user's full name and
+
+66
+00:09:33,079 --> 00:09:41,850
+contact details which may be used by some
+commands for example by mail user agent.
+
+67
+00:09:43,070 --> 00:09:49,790
+Path to the user's home directory.
+
+68
+00:09:51,610 --> 00:09:59,050
+And the program that is started every time the user
+logs into the system.
+
+69
+00:09:59,050 --> 00:10:13,310
+For an interactive user, this is usually one
+of the system's command line interpreters
+
+70
+00:10:13,310 --> 00:10:15,580
+(shells).
+
+71
+00:10:15,580 --> 00:10:31,100
+For pseudo-users who do not need
+interactive sessions, this could be `nologin`
+
+72
+00:10:31,100 --> 00:10:40,740
+or just `false` executables, which will exit
+immediately upon startup.
+
+73
+00:10:40,740 --> 00:10:50,310
+The description of the groups is also placed
+in a text file:
+
+74
+00:10:50,310 --> 00:10:56,970
+$ less /etc/group
+
+75
+00:10:56,970 --> 00:10:59,810
+In this file, we see a similar format:
+
+76
+00:10:59,810 --> 00:11:01,670
+$ man 5 group
+
+77
+00:11:01,660 --> 00:11:05,880
+group_name -- the name of the group.
+
+78
+00:11:05,880 --> 00:11:11,790
+password -- the password field that has never
+been used
+
+79
+00:11:14,230 --> 00:11:19,590
+GID -- the numeric group ID.
+
+80
+00:11:19,590 --> 00:11:29,630
+and users_list -- a list of the usernames that
+are members of this group, separated by commas.
+
+81
+00:11:29,630 --> 00:11:38,670
+And finally, a file with real data regarding passwords:
+
+82
+00:11:38,670 --> 00:11:49,390
+$ ls -l /etc/shadow
+
+83
+00:11:49,390 --> 00:11:54,850
+As we can see, only the superuser has access
+to this file.
+
+84
+00:11:54,850 --> 00:12:08,980
+The transfer of password hashes from `/etc/passwd`
+to this file was carried out to prevent brute-force
+
+85
+00:12:08,980 --> 00:12:18,610
+attacks using modern computing equipment,
+which is now becoming cheaper and cheaper.
+
+86
+00:12:18,610 --> 00:12:30,800
+And we can see the hashes of the passwords
+in the second field of the records for each
+
+87
+00:12:30,800 --> 00:12:32,640
+user:
+
+88
+00:12:32,640 --> 00:12:38,160
+$ man 5 shadow
+
+89
+00:12:38,160 --> 00:12:53,220
+A password field which starts with an exclamation
+mark or asterisk
+
+90
+00:12:53,220 --> 00:12:55,839
+means that the password is locked.
+
+91
+00:12:55,839 --> 00:13:03,190
+The rest of the characters in the string represent
+the password field before the password was
+
+92
+00:13:03,190 --> 00:13:11,760
+locked, and you can simply remove the exclamation
+mark to unlock it.
+
+93
+00:13:11,760 --> 00:13:40,290
+On a multiuser system with many administrators,
+it is advisable to use the `vipw` and `vigr`
+
+94
+00:13:40,290 --> 00:13:46,819
+commands for editing password and group files
+to avoid conflicts, when multiple administrators
+
+95
+00:13:46,819 --> 00:13:49,970
+are editing the same file at the same time:
+
+96
+00:13:51,339 --> 00:13:57,200
+This file-based machinery for handling of
+user accounts is not hardcoded.
+
+97
+00:13:57,200 --> 00:14:06,380
+You can switch to network authentication services
+such as LDAP or Winbind using the `setup`
+
+98
+00:14:06,380 --> 00:14:07,380
+utility.
+
+99
+00:14:09,250 --> 00:14:16,230
+or simply by editing the text configuration
+file `/etc/nsswitch.conf`.
+
+100
+00:14:22,010 --> 00:14:30,300
+Other security related settings on Linux systems
+
+101
+00:14:30,300 --> 00:14:55,670
+can be done in 
+the `/etc/security` and PAM configuration (/etc/pam.d/)
+
+102
+00:14:55,670 --> 00:14:58,100
+directories.
+
+103
+00:14:58,109 --> 00:15:00,290
+As we can see, the UNIX system administration
+
+104
+00:15:00,290 --> 00:15:12,110
+paradigm does not hide the details from the
+user, everything can be configured by hands
+
+105
+00:15:12,110 --> 00:15:14,069
+or scripts.
+
+106
+00:15:14,069 --> 00:15:22,410
+For beginners, such systems simply provide
+more or less user-firendly tools and wizards
+
+107
+00:15:22,410 --> 00:15:27,300
+to lower the barrier to entry.
+

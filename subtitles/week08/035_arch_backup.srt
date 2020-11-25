@@ -1,0 +1,275 @@
+1
+00:00:05,120 --> 00:00:18,039
+So, now let's discuss the backup and archiving.
+
+2
+00:00:18,039 --> 00:00:42,800
+Historically the first Unix archiver utility,
+also known as `ar`, developed at 1971
+
+3
+00:00:42,800 --> 00:00:59,450
+in AT&T that maintains groups of files as
+a single archive. Today, `ar` is generally
+
+4
+00:00:59,450 --> 00:01:09,760
+used only to create and update static library
+files (which internally are simply archive
+
+5
+00:01:09,760 --> 00:01:22,430
+with object files, which compiled from source
+files). That libraries the link editor or
+
+6
+00:01:22,430 --> 00:01:35,210
+linker uses. An implementation of `ar` is
+included as one of the GNU Binutils.
+
+7
+00:01:35,210 --> 00:01:45,360
+But the most widely used archiving tools are
+`tar` and `cpio`.
+
+8
+00:01:45,360 --> 00:02:05,160
+The `tar` is a "tape archiver" originally
+developed in AT&T at end of 70s for storing
+
+9
+00:02:05,160 --> 00:02:19,480
+data on magnetic tapes. It saves many files
+together into a single tape or disk archive,
+
+10
+00:02:19,480 --> 00:02:26,510
+and can restore individual files from the
+archive:
+
+11
+00:02:27,980 --> 00:02:32,310
+Basic operations with a tar archive:
+
+12
+00:02:32,310 --> 00:02:41,490
+* 'c' -- create archive
+* 't' -- list files in archive
+
+13
+00:02:41,490 --> 00:02:49,020
+* and 'x' -- extract files from archive
+
+14
+00:02:49,020 --> 00:02:55,050
+Useful options:
+* 'v' -- verbose
+
+15
+00:02:55,050 --> 00:03:15,480
+* 'f' -- file or device file for archive.
+"Dash" in this case used as name of file
+means standard input or output.
+
+16
+00:03:15,480 --> 00:03:23,830
+The GNU version also supports compressing/decompressing
+archives:
+
+17
+00:03:23,830 --> 00:03:32,620
+* -a, --auto-compress -- use archive suffix
+to determine the compression program
+
+18
+00:03:32,620 --> 00:04:06,420
+* -Z, --compress, --uncompress -- the oldest
+UNIX `compress` program, archive suffix 
+
+19
+00:04:06,420 --> 00:04:14,330
+is `.tar.Z`
+* -z, --gzip, --gunzip, --ungzip -- archive
+
+20
+00:04:14,330 --> 00:04:25,129
+suffix 
+is `.tar.gz` or just `.tgz`
+
+21
+00:04:25,129 --> 00:05:07,770
+* -j, --bzip2 -- archive suffix is `.tar.bz2`
+or `.tbz2` or just `.tbz`
+
+22
+00:05:07,770 --> 00:05:37,080
+* -J, --xz -- 
+archive suffix is `.tar.xz` or '.txz'
+
+23
+00:05:37,099 --> 00:05:46,169
+For standard classical UNIX `tar`, external compression/decompression
+
+24
+00:05:46,169 --> 00:05:58,529
+programs should be used by this way:
+
+25
+00:05:58,529 --> 00:06:33,520
+tar create archive to stdout, some files, gzip -c to some archive.
+
+26
+00:06:33,520 --> 00:06:43,800
+For looking in our compressed archive we may use such command.
+
+27
+00:07:05,240 --> 00:07:40,610
+And for getting some files from this archive:
+
+28
+00:07:40,610 --> 00:07:59,039
+The main problem with compressed archives is if
+you have some corruption in the middle of the archive
+
+29
+00:07:59,039 --> 00:08:13,270
+file, you will lose all content from the tail.
+Just because this format is focused on storing
+
+30
+00:08:13,270 --> 00:08:37,260
+on tape and all the metadata about files stored
+sequentially, not in some central directory.
+
+31
+00:08:37,260 --> 00:08:44,620
+And if you want to improve the reliability
+of your data, it makes sense to compress the
+
+32
+00:08:44,620 --> 00:08:59,960
+files separately and put them in an uncompressed
+archive.
+
+33
+00:08:59,960 --> 00:09:12,000
+So, another widely used archiving tool is `cpio`:
+
+34
+00:09:12,010 --> 00:09:22,810
+Basic operations with it:
+* -o|--create
+
+35
+00:09:22,810 --> 00:09:33,770
+* -t|--list: Print a table of contents of
+the input.
+
+36
+00:09:33,770 --> 00:09:47,350
+* -i|--extract
+* and also -p|--pass-through is so-called
+
+37
+00:09:47,350 --> 00:09:54,100
+copy-pass mode, `cpio` copies files from one
+directory tree to another, combining the copy-out
+
+38
+00:09:54,100 --> 00:10:02,380
+and copy-in steps without actually using an
+archive.
+
+39
+00:10:02,380 --> 00:10:09,570
+Unlike `tar`, which works with files, `cpio`
+works with stdin/stdout.
+
+40
+00:10:09,570 --> 00:10:28,080
+This is good, but such an archive may contain
+some special files that are not properly processed.
+
+41
+00:10:28,080 --> 00:10:42,180
+For example, you can get hard links split
+across multiple files. And for real backup
+
+42
+00:10:42,180 --> 00:10:49,080
+in UNIX-like systems, special programs have
+been developed that know about the internal
+
+43
+00:10:49,080 --> 00:11:03,279
+structure of the file system, for example:
+* dump/restore -- ext2/3/4 filesystem backup/retore.
+
+44
+00:11:03,279 --> 00:11:25,660
+* and xfsdump/xfsrestore -- XFS filesystems backup/retore.
+
+45
+00:11:25,670 --> 00:11:41,551
+The main arguments are: the list of files and
+directories for dump and '-f' for dump_file. But
+
+46
+00:11:41,551 --> 00:11:57,640
+we can also choose the "dump level", which
+is just an integer. A level 0, full backup,
+
+47
+00:11:57,640 --> 00:12:09,940
+specified by -0 guarantees the entire file
+system is copied. A level number above 0,
+
+48
+00:12:09,940 --> 00:12:21,680
+is so-called "incremental backup", tells `dump`
+to copy all files new or modified since the
+
+49
+00:12:21,680 --> 00:12:32,140
+last dump of a lower level. The default level
+is 0 (full backup).
+
+50
+00:12:32,140 --> 00:12:42,040
+And this makes it possible to implement various
+"backup strategies". For example, you can
+
+51
+00:12:42,040 --> 00:12:49,120
+create a full backup at the end of the week
+and then make incremental backups every day
+
+52
+00:12:49,120 --> 00:12:59,410
+of the week. Then at the end of the week for
+new full backup, you can use the oldest backup
+
+53
+00:12:59,410 --> 00:13:06,170
+storage from the full backup pool. This way,
+you will have weekly full backups for a specific
+
+54
+00:13:06,170 --> 00:13:12,360
+period and daily saved states in incremental
+backups for a week or two.
+
+55
+00:13:12,360 --> 00:13:19,990
+And then you can extract the full dump or
+individual files or directories from the saved
+
+56
+00:13:19,990 --> 00:13:26,130
+dump using the `restore` utility.
+
+57
+00:13:30,370 --> 00:13:37,560
+You can also do this interactively with `-i`
+option.
+

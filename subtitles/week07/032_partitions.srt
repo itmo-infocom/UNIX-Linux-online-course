@@ -1,0 +1,209 @@
+1
+00:00:06,049 --> 00:00:17,870
+As storage systems grow, they need to be separated
+to store different data. And for this the
+
+2
+00:00:17,870 --> 00:00:26,429
+partitioning was invented. There are different
+partition schemes developed by different vendors
+
+3
+00:00:26,429 --> 00:00:30,230
+like IBM, Apple, Microsoft, etc.
+
+4
+00:00:30,230 --> 00:00:44,190
+In common PCs 
+the Master Boot Record (MBR) partitioning
+
+5
+00:00:44,190 --> 00:00:59,309
+scheme, widely used since the early 1980s,
+imposed limitations for use of modern hardware.
+
+6
+00:00:59,309 --> 00:01:13,010
+A major deficiency is the limited size of
+32 bits for block addresses and related information.
+
+7
+00:01:13,010 --> 00:01:27,990
+For hard disks with 512-byte sector, the
+MBR partition table entries allow a maximum
+
+8
+00:01:27,990 --> 00:01:41,880
+size of 2 TiB. Also, the standard partitioning
+scheme only supports 4 primary partitions,
+
+9
+00:01:41,880 --> 00:01:52,020
+and as the disk space increases, it will become
+necessary to implement such complex solutions
+
+10
+00:01:52,020 --> 00:01:57,020
+as extended and logical partitions.
+
+11
+00:01:57,020 --> 00:02:16,360
+In the late 1990s, Intel developed a new partition
+table format as part of what eventually became
+
+12
+00:02:16,360 --> 00:02:46,990
+the Unified Extensible Firmware Interface
+(UEFI). As of 2010, the GUID Partition Table
+
+13
+00:02:46,990 --> 00:03:10,480
+(GPT) from a subset of the UEFI specification.
+GPT uses 64 bits for logical block addresses,
+
+14
+00:03:10,480 --> 00:03:22,430
+allowing a ZB disk size. Number of partitions
+-- depends on the space allocated for the
+
+15
+00:03:22,430 --> 00:03:34,099
+partition table. By default, the GPT contains
+space to define 128 partitions.
+
+16
+00:03:34,099 --> 00:03:45,550
+Different systems use different naming schemes
+for devices and partitions. Modern Linux,
+
+17
+00:03:45,550 --> 00:04:09,140
+for example, has special `/dev/sd` files for
+SCSI or Serial ATA (SATA) devices with a naming
+
+18
+00:04:09,140 --> 00:04:11,600
+schema like this:
+
+19
+00:04:11,600 --> 00:04:23,610
+The letter "a" stands for the first device
+on the bus, and the numbers are the partitions.
+
+20
+00:04:23,610 --> 00:04:37,940
+We can also access disk devices by disk labels.
+
+21
+00:04:53,420 --> 00:05:06,849
+BSD disklabels, which also used on many commersial
+UNIXes, traditionally contain 8 entries for
+
+22
+00:05:06,849 --> 00:05:17,849
+describing partitions. These are, by convention,
+labeled alphabetically, from 'a' to 'h'. Some
+
+23
+00:05:17,849 --> 00:05:29,210
+BSD variants have since increased this to
+16 partitions, labeled from 'a' to 'p'.
+
+24
+00:05:29,210 --> 00:05:38,570
+Also by convention, 'a', 'b', and
+'c' in BSD have fixed meanings:
+
+25
+00:05:38,570 --> 00:05:47,240
+* 'a' is the "root" partition, the volume
+from which the operating system is bootstrapped.
+
+26
+00:05:47,240 --> 00:05:53,839
+* 'b' is the "swap" partition;
+* 'c' overlaps all of the other partitions
+
+27
+00:05:53,839 --> 00:06:06,490
+and describes the entire disk. Its start and
+length are fixed. On systems where the disklabel
+
+28
+00:06:06,490 --> 00:06:14,960
+co-exists with another partitioning scheme
+(such as on PC hardware), partition 'c' may
+
+29
+00:06:14,960 --> 00:06:26,669
+actually only extend to an area of disk allocated
+to the BSD operating system, and partition
+
+30
+00:06:26,669 --> 00:06:32,800
+'d' is used to cover the whole physical disk.
+
+31
+00:06:32,800 --> 00:06:43,499
+On Linux, MBR related tools are:
+
+32
+00:06:46,200 --> 00:06:54,600
+* `fdisk` -- the most useful operations:
+
+33
+00:06:54,600 --> 00:07:00,200
+'m' -- print this help menu
+
+34
+00:07:00,200 --> 00:07:05,520
+'p' -- print the partition table
+
+35
+00:07:05,520 --> 00:07:09,780
+'n' -- add a new partition
+
+36
+00:07:09,789 --> 00:07:20,620
+'t' -- change a partition's system id
+for different types of partitions,
+
+37
+00:07:20,620 --> 00:07:32,200
+for different file systems, or swapping areas,
+or something like this we have different types
+
+38
+00:07:32,200 --> 00:07:37,400
+'d' -- delete of partition
+
+39
+00:07:37,400 --> 00:07:40,400
+'q' -- quit without saving changes
+
+40
+00:07:40,400 --> 00:07:48,400
+and finally 'w' -- write table to disk and exit.
+
+41
+00:07:48,400 --> 00:08:03,800
+Also we have
+
+42
+00:08:03,800 --> 00:08:16,560
+* `cfdisk` -- is a fullscreen program, text-based variant,
+user-friendly variant of `fdisk`.
+
+43
+00:08:16,560 --> 00:08:33,320
+* and `sfdisk` -- non-interactive variant of `fdisk`, it's useful for scripting.
+
+44
+00:08:33,320 --> 00:08:51,000
+Partition management program that support GPT
+is a `parted`. 
+
+45
+00:08:51,000 --> 00:09:02,250
+And also we have `gparted` as graphical variant of `parted`.
+

@@ -1,0 +1,268 @@
+1
+00:00:05,080 --> 00:00:15,360
+As we recall, we have the `passwd` utility
+that any user can call to change the password.
+
+2
+00:00:15,360 --> 00:00:31,130
+But on the other hand, we did not have permissions
+not only to write to the file in which the
+
+3
+00:00:31,130 --> 00:00:46,400
+password hashes are `/etc/shadow`, but also
+to read.
+
+4
+00:00:46,400 --> 00:00:52,549
+How can a simple user change his password?
+
+5
+00:00:52,549 --> 00:01:02,760
+Actually on UNIX-like systems, there is a special
+trick for this.
+
+6
+00:01:02,760 --> 00:01:08,030
+Let's take a look at the permissions of the
+`passwd` utility:
+
+7
+00:01:08,030 --> 00:01:10,490
+$ ls -l /bin/passwd
+
+8
+00:01:17,870 --> 00:01:22,540
+At the place of execution permissions for
+
+9
+00:01:22,540 --> 00:01:30,670
+the owner, we see the letter 's' instead of
+'x'.
+
+10
+00:01:30,670 --> 00:01:43,200
+Actually it is just a special kind of executable
+permission that can be set for owner and group.
+
+11
+00:01:43,200 --> 00:01:58,550
+But when we run such files, our initial UID
+or GID is changed to the ID of the file.
+
+12
+00:01:58,550 --> 00:02:09,140
+The process will start with a new effective
+UID or GID equal to the file parameter.
+
+13
+00:02:09,140 --> 00:02:20,160
+And if we run the `passwd` command, we become
+the` root` super-user while this program is running.
+
+14
+00:02:20,160 --> 00:02:27,610
+In this state, we can read and write to `/etc/shadow`.
+
+15
+00:02:27,610 --> 00:02:42,319
+We can set or unset suid and sgid on symbolic
+mode using the 's' character.
+
+16
+00:02:42,319 --> 00:02:47,890
+In the binary mode
+of the file, it looks like this:
+
+17
+00:02:47,890 --> 00:02:56,880
+$ stat -c "%a %A %n" /bin/passwd
+
+18
+00:02:56,880 --> 00:03:10,360
+4755 -rwsr-xr-x /bin/passwd
+$ stat -c "%a %A %n" /bin/crontab
+
+19
+00:03:10,360 --> 00:03:14,850
+2755 -rwxr-sr-x /bin/crontab
+
+20
+00:03:14,850 --> 00:03:31,000
+Another question -- do you have any ideas
+about the implementation of the, for example, `ps` utility?
+
+21
+00:03:31,000 --> 00:03:49,020
+Actually it seems pretty simple - we just
+need to open the special file '/dev/mem',
+
+22
+00:03:49,020 --> 00:04:05,989
+read the current process table from it (from memory)
+and pretty print it to stdout.
+
+23
+00:04:05,989 --> 00:04:13,670
+But for this we do not have permission to
+read memory:
+
+24
+00:04:13,670 --> 00:04:14,670
+$ ls -l /dev/mem
+
+25
+00:04:14,670 --> 00:04:16,630
+crw-r----- 1 root kmem 1, 1 Sep 1 21:39 /dev/mem
+
+26
+00:04:16,630 --> 00:04:26,490
+And in the beginning the `ps` utility had
+the `s` bit for such reading.
+
+27
+00:04:26,490 --> 00:04:29,490
+But what about today?
+
+28
+00:04:29,490 --> 00:04:32,699
+$ ls -l /bin/ps
+
+29
+00:04:32,699 --> 00:04:42,349
+-rwxr-xr-x 1 root root 137688 Feb 27 2020
+/bin/ps
+
+30
+00:04:42,349 --> 00:04:47,340
+We don't have a setuid bit right now.
+
+31
+00:04:47,340 --> 00:04:48,340
+Why?
+
+32
+00:04:48,340 --> 00:04:59,520
+Because on most UNIX-like systems we have
+a special `/proc` filesystem, which is just
+
+33
+00:04:59,520 --> 00:05:04,249
+a rabbit hole for the kernel.
+
+34
+00:05:04,249 --> 00:05:15,190
+It was implemented by Tom J. Killian for
+UNIX 8th Edition in 1984.
+
+35
+00:05:15,190 --> 00:05:21,789
+All processes can be seen as subdirectories
+in the `/proc` directory.
+
+36
+00:05:21,789 --> 00:05:31,560
+All processes can be thought of as subdirectories
+in `/proc`, and we do not need the suid bit
+
+37
+00:05:31,560 --> 00:05:37,249
+to read process-related data from them.
+
+38
+00:05:37,249 --> 00:05:46,819
+Such a complex revision of the system kernel
+brings us `ps` without the suid bit, which
+
+39
+00:05:46,819 --> 00:05:50,780
+is not so little.
+
+40
+00:05:50,780 --> 00:05:57,050
+Because every bit of 'suid' is a potential
+hole in our security, and it is the daily
+
+41
+00:05:57,050 --> 00:06:10,500
+job of the sysadmin to look for new 's' bits
+in executable files.
+
+42
+00:06:10,500 --> 00:06:16,539
+For automatic daily monitoring of such a task,
+the `logwatch` utility may be useful.
+
+43
+00:06:16,539 --> 00:06:25,659
+Finally, the first bit of special permissions
+is a sticky bit.
+
+44
+00:06:25,659 --> 00:06:32,069
+Let's take a look at the permissions for temporary
+files directory -- `/tmp`:
+
+45
+00:06:32,069 --> 00:06:34,090
+$ ls -l /
+
+46
+00:06:34,090 --> 00:06:42,169
+drwxrwxrwt 25 root root 20480 Sep 6 21:23 tmp
+
+47
+00:06:43,180 --> 00:06:49,000
+So we can see the executable permissions for
+
+48
+00:06:49,000 --> 00:06:52,779
+the owner and group.
+
+49
+00:06:52,779 --> 00:07:00,389
+By the way, what does "executable" mean for
+a directory?
+
+50
+00:07:00,389 --> 00:07:11,090
+Strange, but this permission means - you can
+change to this directory, for example, with
+
+51
+00:07:11,090 --> 00:07:13,409
+the command `cd`.
+
+52
+00:07:13,409 --> 00:07:21,419
+And also we see permission 't' for directory
+'/tmp'.
+
+53
+00:07:21,419 --> 00:07:31,869
+Generally `/tmp` directory is a publicly accessible
+-- all users have all permissions to it.
+
+54
+00:07:31,869 --> 00:07:45,479
+Of course, they cannot modify files or directories
+owned by others if we do not have such permissions,
+
+55
+00:07:45,479 --> 00:07:59,009
+but they can delete them, because everyone
+has all the permissions to changing of that
+
+56
+00:07:59,009 --> 00:08:00,409
+directory.
+
+57
+00:08:00,409 --> 00:08:13,729
+And the file permission 1000 or 't' in character
+mode means -- only the owner of something
+
+58
+00:08:13,729 --> 00:08:18,149
+can delete it in a directory with this bit.
+

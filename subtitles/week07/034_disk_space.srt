@@ -1,0 +1,179 @@
+1
+00:00:06,220 --> 00:00:11,670
+Another important thing for your filesystem
+is the availability of data space.
+
+2
+00:00:11,670 --> 00:00:17,949
+In case your file system is full, it's wise
+to analyze disk usage.
+
+3
+00:00:17,949 --> 00:00:27,369
+On many systems some graphical disk analysis
+program will run and you can detect problems
+
+4
+00:00:27,369 --> 00:00:29,189
+visually.
+
+5
+00:00:29,189 --> 00:00:39,990
+But we can also do this job using command
+line tools that can help you automate some
+
+6
+00:00:39,990 --> 00:00:43,700
+of the admin tasks.
+
+7
+00:00:43,700 --> 00:01:01,060
+The main tool for reporting file system disk
+space usage is the `df` utility.
+
+8
+00:01:01,079 --> 00:01:12,330
+The most useful option is the "-h, --human-readable"
+
+9
+00:01:12,330 --> 00:01:20,140
+for human readable print sizes in kilobytes,
+megabytes, gigabytes, and so on.
+
+10
+00:01:20,140 --> 00:01:37,140
+For a more accurate analysis, you can use
+the `du` utility to estimate the file space
+
+11
+00:01:37,140 --> 00:01:40,479
+usage of directories and files.
+
+12
+00:01:41,720 --> 00:01:49,310
+So, we can get the size of some directory:
+
+13
+00:01:59,590 --> 00:02:04,909
+And the most commonly used options are "-k",
+
+14
+00:02:04,909 --> 00:02:16,220
+which displays sizes in kilobytes, and "-x",
+which means that it will scan only this file
+
+15
+00:02:16,220 --> 00:02:28,890
+system and skip directories on other file
+systems which may be mounted on sub-directories
+of this directory.
+
+16
+00:02:28,890 --> 00:02:36,500
+Let's take a look at an example of using the
+command line tools to find the largest directories
+
+17
+00:02:36,500 --> 00:02:37,780
+and files:
+
+18
+00:02:41,970 --> 00:02:54,550
+We examine the directory '/tmp', perform a
+numeric sorting of the sizes of directories
+
+19
+00:02:54,550 --> 00:03:06,680
+and files, and redirect the result to the
+viewer `less` for analysis.
+
+20
+00:03:06,680 --> 00:03:18,610
+And after finding the largest files and directories,
+we can clean up our file system and before
+
+21
+00:03:18,610 --> 00:03:22,480
+this archive and back up some data.
+
+22
+00:03:22,480 --> 00:03:44,390
+The easiest way is to simply copy using the
+`cp -a` command to some external drive, or
+
+23
+00:03:44,390 --> 00:04:12,250
+using `scp -rC` or `rsync -avz` to a remote
+host.
+
+24
+00:04:12,250 --> 00:04:26,600
+Also, using the `cp` or` scp` commands, you
+can just copy any partition or the entire
+
+25
+00:04:26,600 --> 00:04:33,280
+disk, because for us they are just files.
+
+26
+00:04:33,280 --> 00:04:47,060
+But a more efficient way to do this is with
+the `dd` (disk dump) command:
+
+27
+00:04:47,060 --> 00:04:49,060
+$ man dd
+
+28
+00:04:49,060 --> 00:04:57,970
+By default, it just copies stdin to stdout,
+
+29
+00:04:57,970 --> 00:05:08,690
+perhaps with some re-coding if we ask.
+
+30
+00:05:08,690 --> 00:05:24,500
+But the most interesting options for us are:
+'if' -- input file, 'of' -- output file, 'bs'
+
+31
+00:05:24,500 --> 00:05:32,110
+-- block size, 'count', 'seek' and 'skip'.
+
+32
+00:05:32,110 --> 00:05:39,320
+With a combination of these options, we can
+select the input and output files, choose
+
+33
+00:05:39,320 --> 00:05:49,150
+the block size to increase speed of I/O, the
+number of blocks we want to copy, and seek/skip
+
+34
+00:05:49,150 --> 00:05:52,680
+on output/input.
+
+35
+00:05:52,680 --> 00:06:06,150
+Thus, we can cut and paste any fragment from
+one file or device to another.
+
+36
+00:06:06,150 --> 00:06:19,260
+Also we can use 
+the `od` (octal dump) command to low-level
+
+37
+00:06:19,260 --> 00:06:24,169
+view of a file or device in different formats.
+
+38
+00:06:25,860 --> 00:06:37,890
+For example -- let's look to our hard drive:
+
+39
+00:06:37,890 --> 00:06:39,699
+# od -bc /dev/sda1 | less
+

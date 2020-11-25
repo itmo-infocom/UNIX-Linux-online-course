@@ -1,0 +1,148 @@
+1
+00:00:06,000 --> 00:00:09,920
+As we remember, we have a 
+hardware mechanism for defining  
+
+2
+00:00:09,920 --> 00:00:22,000
+a virtual set of instructions -- interrupts.
+We discussed it in "Under the Hood" -- kernel as a set of interrupt  handlers lecture
+
+3
+00:00:22,000 --> 00:00:31,760
+But we  also have some machinery for memory virtualization  
+
+4
+00:00:32,560 --> 00:00:43,040
+at the hardware level -- so-called
+Memory Management Unit (MMU).
+
+5
+00:00:43,040 --> 00:00:50,480
+Modern MMUs typically divide the virtual  
+
+6
+00:00:54,000 --> 00:01:01,120
+address space (the range of 
+addresses used by the processor)  
+
+7
+00:01:04,240 --> 00:01:23,440
+into pages, each having a size which is 
+a power of 2, usually a few kilobytes,  
+
+8
+00:01:24,240 --> 00:01:39,840
+but they may be much larger. 
+The bottom bits of the address  
+
+9
+00:01:47,120 --> 00:02:10,880
+(the offset within a page) are left unchanged. But the 
+upper address bits are the virtual page numbers.
+
+10
+00:02:15,440 --> 00:02:27,560
+Most MMUs use an in-memory table of items called a  
+
+11
+00:02:32,800 --> 00:02:35,840
+"page table",  
+
+12
+00:02:41,200 --> 00:03:03,840
+containing one "page table entry" (PTE) 
+per page, to map virtual page numbers  
+
+13
+00:03:11,280 --> 00:03:23,920
+to physical page numbers in main memory.  
+
+14
+00:03:31,040 --> 00:03:34,080
+This mapping does for  
+
+15
+00:03:35,680 --> 00:03:45,840
+processes, for dynamic libraries that are 
+loaded by such a process. But actually,  
+
+16
+00:03:56,720 --> 00:04:02,480
+these are pages from physical memory, to which  
+
+17
+00:04:03,280 --> 00:04:13,840
+the loaded dynamic library is shared 
+by all the processes that use it.  
+
+18
+00:04:24,480 --> 00:04:30,960
+This reduces the total amount 
+of memory used by processes.
+
+19
+00:04:33,200 --> 00:04:46,320
+Sometimes the PTE denies access to a virtual 
+page, possibly because no physical RAM has  
+
+20
+00:04:46,320 --> 00:04:58,480
+been allocated for this virtual page. In 
+this case, the MMU signals a page failure  
+
+21
+00:05:00,800 --> 00:05:23,280
+via a CPU hardware interrupt. The operating system 
+(OS) then handles the situation, perhaps trying to  
+
+22
+00:05:23,280 --> 00:05:34,800
+find a spare RAM frame and configure a new PTE 
+to match it to the requested virtual address.  
+
+23
+00:05:37,040 --> 00:05:47,920
+If there is no free RAM, you may need to 
+select an existing page (known as "victim")  
+
+24
+00:05:48,720 --> 00:05:58,640
+using some replacement algorithm and save it to 
+disk (a process called "paging" or "swapping").  
+
+25
+00:05:59,600 --> 00:06:09,680
+When the process scheduler tries to resume 
+the replaced process on the CPU, pages  
+
+26
+00:06:10,240 --> 00:06:24,400
+swapped out to disk again will be reloaded 
+from disk to memory by a page fault interrupt.
+
+27
+00:06:25,440 --> 00:06:36,080
+Also the MMU may generate illegal access error 
+conditions or invalid page faults upon illegal  
+
+28
+00:06:36,080 --> 00:06:45,840
+or non-existing memory accesses, respectively, 
+leading to segmentation fault or bus error  
+
+29
+00:06:45,840 --> 00:06:54,800
+conditions when handled by the operating 
+system. In this case, the OS can create a  
+
+30
+00:06:54,800 --> 00:07:02,320
+core dump with a memory image of the process 
+for further debugging and crash analysis.  
+
+31
+00:07:05,680 --> 00:07:16,480
+More information you can find in our "Under the Hood" lecture
+about the Core dump.
+
