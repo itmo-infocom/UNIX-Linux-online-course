@@ -1,0 +1,346 @@
+1
+00:00:05,120 --> 00:00:10,000
+All right. But how does our system get started?  
+
+2
+00:00:11,680 --> 00:00:21,040
+In fact, when you turnon the computer, 
+a special piece of code is launched,  
+
+3
+00:00:23,680 --> 00:00:37,760
+built into the hardware -- firmware. There 
+are many such firmwares: legacy PC BIOS, UEFI,  
+
+4
+00:00:37,760 --> 00:00:44,720
+Uboot, OpenBoot, Coreboot, etc. The firmware 
+reads the main bootloader from disk:  
+
+5
+00:00:46,480 --> 00:00:53,120
+BIOS from MBR, UEFI from EFI 
+system partition, and so on.
+
+6
+00:00:54,080 --> 00:01:03,760
+Then the secondary bootloader started. This loader 
+can be more or less complex and customizable.  
+
+7
+00:01:03,760 --> 00:01:23,040
+The most commonly used Linux bootloaders 
+currently are lightweight boot systems like
+
+8
+00:01:23,600 --> 00:01:37,040
+SYSLINUX for FAT file system, 
+ISOLINUX for ISO images,  
+
+9
+00:01:38,320 --> 00:01:52,400
+which is mainly used to boot installation 
+or live images, and the general purpose  
+
+10
+00:01:52,400 --> 00:01:58,160
+Grub bootloader.
+
+11
+00:01:58,160 --> 00:02:06,480
+Usually Grub is installed during system 
+installation, including configuring the  
+
+12
+00:02:06,480 --> 00:02:14,320
+boot of other operating systems installed 
+on your computer. But in some cases MS  
+
+13
+00:02:14,960 --> 00:02:21,840
+Windows on a dualboot computer can 
+reinstall the bootloader without asking you,  
+
+14
+00:02:23,360 --> 00:02:31,200
+in which case you may lose your 
+boot settings. To restore it,  
+
+15
+00:02:31,840 --> 00:02:49,840
+you need to boot from the installation 
+media in repair mode and run  
+
+16
+00:02:53,120 --> 00:02:58,400
+the `grub2-install` program for 
+your system storage. For example by this way:
+
+17
+00:02:58,400 --> 00:03:02,800
+# grub2-install /dev/sda
+
+18
+00:03:02,800 --> 00:03:17,840
+After the kernel is loaded, a special 
+process called `init` is started.  
+
+19
+00:03:33,120 --> 00:03:46,960
+In original UNIX, as well as 
+BSD `init`, just run the script  
+
+20
+00:03:51,840 --> 00:03:59,840
+`/etc/rc`, which completely determines 
+the further behavior of the system.
+
+21
+00:04:00,960 --> 00:04:08,400
+A different `init` machinery is 
+implemented for SYSV systems.  
+
+22
+00:04:08,400 --> 00:04:17,280
+On such systems, you can invoke the 
+`init` program at any time by setting the  
+
+23
+00:04:18,800 --> 00:04:34,700
+runlevel as a parameter. Runlevels defined 
+in the `init` configuration is located in the  
+
+24
+00:04:34,700 --> 00:04:38,720
+'/etc/inittab' file
+
+25
+00:04:38,720 --> 00:04:41,600
+Each line in the  
+
+26
+00:04:41,600 --> 00:04:50,400
+`inittab` file consists of four colon-delimited  
+
+27
+00:04:50,400 --> 00:04:57,200
+fields and describes:
+* what processes to start, monitor,  
+
+28
+00:04:57,200 --> 00:05:05,600
+and restart if they terminate
+* what actions to take when  
+
+29
+00:05:06,720 --> 00:05:13,360
+the system enters a new runlevel
+* the default runlevel
+
+30
+00:05:14,160 --> 00:05:16,640
+Inittab's fields: 
+
+31
+00:05:19,440 --> 00:05:26,880
+* id (identification code) – consists  
+
+32
+00:05:28,000 --> 00:05:34,400
+of a sequence of one to four 
+characters that identifies  
+
+33
+00:05:35,120 --> 00:05:42,720
+its function.
+* runlevels – lists the  
+
+34
+00:05:42,720 --> 00:05:52,560
+run levels to which this entry applies.
+* action – specific codes in this field tell  
+
+35
+00:05:53,440 --> 00:05:59,440
+init how to treat the process. 
+Possible values include: initdefault,  
+
+36
+00:06:01,040 --> 00:06:07,600
+sysinit, boot, bootwait, wait, and respawn.
+* process – defines  
+
+37
+00:06:08,880 --> 00:06:11,120
+the command or script to execute.
+
+38
+00:06:13,440 --> 00:06:15,280
+The line 'initdefault'  
+
+39
+00:06:17,200 --> 00:06:27,520
+defines the default runlevel. Different systems 
+define different init level hierarchies, but some  
+
+40
+00:06:27,520 --> 00:06:34,000
+of them have the same meaning:
+* Runlevel 0 is halt. 
+
+41
+00:06:34,000 --> 00:06:44,560
+* Runlevel 6 is reboot.
+* Runlevel 1 is single-user. 
+
+42
+00:06:44,560 --> 00:06:59,040
+* and runlevels from 2 to 5 are most often 
+some multiuser runlevels.
+
+43
+00:06:59,040 --> 00:07:10,000
+Most often, the executable scripts in 
+`inittab` are just some `rc` scripts  
+
+44
+00:07:10,000 --> 00:07:15,840
+that go through the appropriate  
+
+45
+00:07:19,120 --> 00:07:43,840
+`/etc/rc<runlevel>.d/` directories and 
+run the stop scripts first, starting with  
+
+46
+00:07:47,360 --> 00:08:02,960
+a big K (kill) with a 'stop' parameter, and then 
+starting the scripts that start with large S  
+
+47
+00:08:06,000 --> 00:08:08,432
+with a 'start' parameter:
+
+48
+00:08:09,440 --> 00:08:16,640
+And, as we can see, this script  
+
+49
+00:08:22,480 --> 00:08:30,800
+is simply symbolic links to 
+scripts from `/etc/init.d/`,  
+
+50
+00:08:32,560 --> 00:08:39,840
+moreover, the Kill scripts and the Start 
+scripts can be linked to the same file.  
+
+51
+00:08:40,800 --> 00:08:46,880
+If we look at them, we will see -- there are 
+just scripts that do something according to the  
+
+52
+00:08:46,880 --> 00:08:54,840
+`start` or `stop` parameter:
+$ less /etc/init.d/network
+
+53
+00:09:08,720 --> 00:09:13,600
+Start, stop.
+
+54
+00:09:13,600 --> 00:09:21,600
+And if you want to implement your own service 
+script, you just have to support the 'start'  
+
+55
+00:09:21,600 --> 00:09:29,760
+and 'stop' parameters on this. To configure your 
+own policy for stopping and starting services at  
+
+56
+00:09:30,640 --> 00:09:37,680
+any level, you simply have to link the 
+scripts which you need from `/etc/init.d/`  
+
+57
+00:09:38,400 --> 00:09:44,560
+to the appropriate runlevel directories. 
+The order in which scripts are run  
+
+58
+00:09:44,560 --> 00:09:49,840
+is determined by the numbers at 
+the beginning of the filenames.
+
+59
+00:09:51,120 --> 00:10:07,920
+Some commands that can help you with this work:
+* `service` - run or stop a System V service script 
+
+60
+00:10:07,920 --> 00:10:18,400
+* `setup` and `chkconfig` - updates and queries 
+runlevel information for system services
+
+61
+00:10:20,080 --> 00:10:29,440
+But now the most commonly used Linux distributions 
+now use `systemd` instead of such systems.  
+
+62
+00:10:30,160 --> 00:10:38,640
+The main advantage of this system is faster 
+parallel launch of services at system startup,  
+
+63
+00:10:38,640 --> 00:10:48,000
+as well as unification of services and work with 
+devices. These utilities and scripts are still  
+
+64
+00:10:49,280 --> 00:10:59,840
+present for compatibility, 
+but now the main tool is  
+
+65
+00:11:03,680 --> 00:11:04,434
+`systemctl`
+
+66
+00:11:06,880 --> 00:11:13,840
+We can list system services, 
+start, stop and get their status,  
+
+67
+00:11:14,720 --> 00:11:20,560
+enable and disable them to 
+automatically start at boot time.
+
+68
+00:11:21,120 --> 00:11:28,720
+To find out the log messages about 
+boot startup and system operation,  
+
+69
+00:11:29,520 --> 00:11:34,520
+we can look at the system log files. For example:
+
+70
+00:11:42,000 --> 00:12:04,160
+*  `/var/log/messages` -- in RH-like Linuxes
+* or `/var/log/syslog` -- on Debian and Ubuntu
+
+71
+00:12:06,000 --> 00:12:20,160
+In modern Linuxes based on `systemd` we have a  
+
+72
+00:12:20,160 --> 00:12:28,560
+`journalctl`  
+
+73
+00:12:28,560 --> 00:12:36,400
+command to work with the `systemd` journal system.
+

@@ -1,0 +1,289 @@
+1
+00:00:06,320 --> 00:00:16,480
+Well. Now let's talk about installing software. 
+An initial set of software is installed  
+
+2
+00:00:17,280 --> 00:00:25,040
+during system installation, and installed 
+software packages are updated by system  
+
+3
+00:00:25,040 --> 00:00:38,400
+services when newer versions are published to the 
+distribution sites. But let's take a deeper look.
+
+4
+00:00:42,480 --> 00:00:57,840
+From the First Research Edition (November 
+3, 1971) in which the PDP-7 Unix was  
+
+5
+00:00:58,480 --> 00:01:09,520
+rewritten on the PDP-11 processor, UNIX documented 
+the "User Maintained Programs" guidelines  
+
+6
+00:01:11,440 --> 00:01:20,320
+by organizing third-party code as 
+so-called "packages" or "ports".
+
+7
+00:01:22,000 --> 00:01:30,480
+The two first Berkeley distributions introduced to 
+the user community third-party software packages  
+
+8
+00:01:30,480 --> 00:01:35,600
+targeting Unix. Over the years packages  
+
+9
+00:01:38,080 --> 00:01:44,800
+proliferated and got distributed, 
+initially through USENET newsgroups and  
+
+10
+00:01:44,800 --> 00:01:54,240
+later over the Internet in the form of ports 
+to a specific operating system distributions.  
+
+11
+00:01:56,720 --> 00:02:04,800
+The established filesystem directory 
+hierarchy, provided a template  
+
+12
+00:02:05,840 --> 00:02:13,920
+for laying out the source code, the 
+documentation, and the manual pages. In addition,  
+
+13
+00:02:13,920 --> 00:02:25,040
+the use of `make` utility provided a common way 
+for expressing compilation and deployment rules.
+
+14
+00:02:25,920 --> 00:02:33,760
+And now if we are talking about free 
+and open source, the most general way is  
+
+15
+00:02:35,680 --> 00:02:45,200
+compiling from source. Many projects 
+just require downloading the source,  
+
+16
+00:02:46,720 --> 00:02:56,480
+running the `configure` script, and 
+running `make install`. This command reads  
+
+17
+00:02:56,480 --> 00:03:05,920
+an instruction from a file named "Makefile" and 
+installs the software into the target directory,  
+
+18
+00:03:07,120 --> 00:03:17,840
+by default `/usr/local`. You can change this 
+and other settings during configuration.
+
+19
+00:03:20,240 --> 00:03:32,800
+Sounds good, but in most cases we may have 
+problems uninstalling and updating installed  
+
+20
+00:03:32,800 --> 00:03:44,720
+software, because in most cases such actions may 
+not be so simple, and the rule of “uninstall”  
+
+21
+00:03:44,720 --> 00:03:52,560
+mostly is not implemented in the Makefiles. 
+And to perform a complete set of actions  
+
+22
+00:03:53,760 --> 00:04:04,960
+with the software, a special type of files called 
+software packages developed and also some software  
+
+23
+00:04:06,160 --> 00:04:16,240
+were developed to manage them. They differ 
+on different systems and distributions.
+
+24
+00:04:16,880 --> 00:04:24,480
+BSD UNIX packaging has been extended 
+to the FreeBSD `ports` machinery,  
+
+25
+00:04:24,480 --> 00:04:32,080
+which provides a mechanism for compiling 
+and installing third-party packages  
+
+26
+00:04:32,080 --> 00:04:41,840
+and their dependencies. The 
+main package Linux utilities are  
+
+27
+00:04:45,600 --> 00:04:51,920
+`rpm` (RH Package Manager) for RH-like systems and  
+
+28
+00:04:55,520 --> 00:05:09,840
+`dpkg` for Debian-based distributions: 
+
+29
+00:05:13,520 --> 00:05:22,480
+A package is just a file that you 
+can install, remove, and update.  
+
+30
+00:05:23,280 --> 00:05:32,400
+But when we have many packages with a complex 
+system of dependencies between them, it  
+
+31
+00:05:33,600 --> 00:05:42,080
+can be too difficult to handle the full set of 
+dependent packages during package manipulation.
+
+32
+00:05:43,120 --> 00:05:53,520
+To solve this problem, so-called "repositories" 
+have been developed, which collect many packages,  
+
+33
+00:05:54,240 --> 00:06:00,320
+resolve dependencies between them and put 
+information about this in metadata files.  
+
+34
+00:06:02,080 --> 00:06:06,240
+Such repositories are hosted on the servers  
+
+35
+00:06:06,240 --> 00:06:13,040
+of the respective projects, and we 
+can access them via the Internet.
+
+36
+00:06:14,480 --> 00:06:29,280
+The main tools for working with repositories are:
+* `yum` -- Yellowdog Updater Modified for  
+
+37
+00:06:31,040 --> 00:06:32,720
+RPM repositories,  
+
+38
+00:06:34,080 --> 00:06:40,000
+now replaced with `dnf` package manager.
+* and  
+
+39
+00:06:44,320 --> 00:06:50,080
+`apt` -- package manager for 
+Debian-based repositories. 
+
+40
+00:06:50,080 --> 00:06:57,840
+As we can see, using these tools, we can perform 
+the same actions as with `rpm` and `dpkg`:  
+
+41
+00:07:00,000 --> 00:07:02,560
+install, remove  
+
+42
+00:07:07,040 --> 00:07:08,720
+and update packages  
+
+43
+00:07:13,360 --> 00:07:18,880
+with dependencies. We can also 
+get information about packages  
+
+44
+00:07:22,800 --> 00:07:26,800
+and package groups in the 
+repositories, get a list of  
+
+45
+00:07:26,800 --> 00:07:32,960
+packages, search for packages by name 
+or by files included in the package.
+
+46
+00:07:34,480 --> 00:07:42,240
+Also may be useful `yumdownloader` -- program 
+for downloading RPMs from Yum repositories.
+
+47
+00:07:43,200 --> 00:08:03,280
+You can find descriptions of the repositories in:
+* `/etc/yum.repos.d/` directory in RH-like  
+
+48
+00:08:03,280 --> 00:08:11,840
+systems
+* and  
+
+49
+00:08:23,920 --> 00:08:28,560
+`/etc/apt/sources.list` -- 
+in Debian-based distributions
+
+50
+00:08:31,920 --> 00:08:42,400
+To find out about the correlation between 
+package-related programs, you can see the "Table  
+
+51
+00:08:42,400 --> 00:08:51,040
+of equivalent commands for package management 
+on both Ubuntu/Debian and Red Hat/Fedora  
+
+52
+00:08:51,040 --> 00:08:51,600
+systems".
+
+53
+00:08:52,240 --> 00:08:55,040
+Also our "Under the hood -- Devices and  
+
+54
+00:08:56,320 --> 00:09:07,280
+drivers" lecture may be of interest
+to you about device drivers handling.
+
+55
+00:09:07,280 --> 00:09:16,160
+OK. And many programming languages 
+and development frameworks  
+
+56
+00:09:16,160 --> 00:09:22,720
+have their own package 
+systems and repositories like  
+
+57
+00:09:27,200 --> 00:09:28,080
+CPAN,  
+
+58
+00:09:35,040 --> 00:09:35,840
+PyPi,  
+
+59
+00:09:41,680 --> 00:09:58,240
+NPM, etc. Also in recent years, forms of 
+product distribution such as static binaries,  
+
+60
+00:09:58,240 --> 00:10:08,960
+docker containers, or pre-configured virtual 
+machines have become increasingly popular too.
+

@@ -1,0 +1,334 @@
+1
+00:00:05,400 --> 00:00:09,820
+And now we are ready to do some kind of development
+project.
+
+2
+00:00:09,820 --> 00:00:15,299
+We already have a "hello world" application.
+
+3
+00:00:15,299 --> 00:00:25,710
+And now we will try to implement the next
+traditional program for novice developers
+
+4
+00:00:25,710 --> 00:00:28,320
+-- a calculator.
+
+5
+00:00:28,320 --> 00:00:37,320
+As a result, we will get a network client-server
+application with a graphical user interface
+
+6
+00:00:37,320 --> 00:00:41,170
+localized into Russian language.
+
+7
+00:00:41,170 --> 00:00:49,980
+We can find the code for this project on github.
+
+8
+00:00:49,980 --> 00:01:05,479
+Github and for example GitLab supports hosting for software
+development and version control with Git.
+
+9
+00:01:05,479 --> 00:01:18,619
+Version control (also known as revision control,
+source control, or source code management)
+
+10
+00:01:18,619 --> 00:01:32,429
+is a class of systems for managing changes
+to computer programs, documents, large web
+
+11
+00:01:32,429 --> 00:01:38,100
+sites, or other collections of information.
+
+12
+00:01:38,100 --> 00:01:44,740
+Version control is a component of software
+configuration management.
+
+13
+00:01:44,740 --> 00:01:58,169
+The first generation VCS were intended to
+track changes for individual files and checked-out
+
+14
+00:01:58,169 --> 00:02:05,270
+files could only be edited locally by one
+user at a time.
+
+15
+00:02:05,270 --> 00:02:17,950
+They were built on the assumption that all
+users would log into the same shared Unix
+
+16
+00:02:17,950 --> 00:02:24,700
+host with their own accounts.
+
+17
+00:02:24,700 --> 00:02:38,599
+The second generation VCS introduced networking
+which led to centralized repositories that
+
+18
+00:02:38,599 --> 00:02:46,180
+contained the 'official' versions of their
+projects.
+
+19
+00:02:46,180 --> 00:02:56,930
+This was good progress, since it allowed multiple
+users to checkout and work with the code at
+
+20
+00:02:56,930 --> 00:03:09,640
+the same time, but they would all be committing
+back to the single point of failure -- the
+
+21
+00:03:09,640 --> 00:03:11,590
+central repository.
+
+22
+00:03:11,590 --> 00:03:19,640
+Furthermore, network access was required to
+make commits.
+
+23
+00:03:19,640 --> 00:03:25,050
+The third generation is distributed VCS.
+
+24
+00:03:25,050 --> 00:03:40,349
+In distributed VCS, all copies of the repository
+are created equal -- generally there is no
+
+25
+00:03:40,349 --> 00:03:43,439
+central copy of the repository.
+
+26
+00:03:43,439 --> 00:03:54,939
+This opens the path for commits, branches,
+and merges to be created locally without network
+
+27
+00:03:54,939 --> 00:03:59,330
+access and pushed to other repositories as
+needed.
+
+28
+00:03:59,330 --> 00:04:15,500
+There are many VCS systems developed and used
+on UNIX-like systems: SCCS, RCS, CVS, SVN,
+
+29
+00:04:15,500 --> 00:04:22,510
+Mercurial, Bazzar, etc., and Git is now the
+most popular.
+
+30
+00:04:22,510 --> 00:04:29,880
+Git is a distributed version-control system
+for tracking changes in source code during
+
+31
+00:04:29,880 --> 00:04:31,300
+software development.
+
+32
+00:04:31,300 --> 00:04:45,770
+It was created by Linus Torvalds in 2005 for
+development of the Linux kernel.
+
+33
+00:04:45,770 --> 00:04:55,050
+The basic tool for working with Git repositories
+
+34
+00:04:55,050 --> 00:04:56,050
+is the `git` utility.
+
+35
+00:05:02,710 --> 00:05:04,400
+First we have to `clone` our repository:
+
+36
+00:05:04,400 --> 00:05:27,780
+$ git clone https://github.com/itmo-infocom/calc_examples
+$ ls calc_examples/
+
+37
+00:05:27,780 --> 00:05:36,150
+Ok - we now have our own local copy.
+
+38
+00:05:36,150 --> 00:05:38,339
+Let's go inside:
+
+39
+00:05:38,339 --> 00:05:42,069
+$ cd calc_examples/
+
+40
+00:05:42,069 --> 00:05:51,129
+Now let's take a look at the tags that indicate
+different stages of development:
+
+41
+00:05:51,129 --> 00:05:52,289
+$ git tag
+
+42
+00:05:52,289 --> 00:05:56,640
+Example_1
+...
+Example_9
+
+43
+00:05:56,640 --> 00:06:01,319
+And let's move on to the initial stage now:
+
+44
+00:06:01,319 --> 00:06:12,500
+$ git checkout Example_1
+$ ls
+
+45
+00:06:12,509 --> 00:06:29,039
+As we can see, most of the files have disappeared
+and now we only have a README and a Makefile.
+
+46
+00:06:29,039 --> 00:06:33,480
+Let's take a look at the README:
+
+47
+00:06:33,480 --> 00:06:42,660
+$ cat README.md
+
+48
+00:06:42,670 --> 00:06:45,630
+and at the Makefile:
+
+49
+00:06:45,630 --> 00:06:52,000
+$ cat Makefile
+
+50
+00:06:52,009 --> 00:07:09,800
+A Makefile is a file containing a set of directives
+used by a `make` utility -- build automation tool to
+
+51
+00:07:09,800 --> 00:07:14,820
+generate a target/goal.
+
+52
+00:07:14,820 --> 00:07:25,860
+`Make` is the oldest and most widely used
+dependency-tracking tool for building software
+
+53
+00:07:25,860 --> 00:07:27,030
+projects.
+
+54
+00:07:27,030 --> 00:07:37,449
+It is used to build large projects such as
+the Linux kernel with tens of millions of
+
+55
+00:07:37,449 --> 00:07:39,390
+source code lines.
+
+56
+00:07:39,390 --> 00:07:49,330
+Usually, using `make` is pretty simple: you
+just run `make` with no arguments:
+
+57
+00:07:52,509 --> 00:08:02,500
+In this case, the utility tries to find a
+
+58
+00:08:02,500 --> 00:08:10,600
+`makefile` that starts with a lowercase letter
+and then with a capital letter.
+
+59
+00:08:10,600 --> 00:08:19,090
+Usually the `Makefile` with an uppercase letter
+is placed in the project, the lowercase version
+
+60
+00:08:19,090 --> 00:08:27,270
+is often used for some local changes while
+testing and customizing the Makefile of an
+
+61
+00:08:27,270 --> 00:08:29,690
+upstream project.
+
+62
+00:08:29,690 --> 00:08:37,130
+The makefile format is pretty simple -- It's
+just a lot of rules for building projects:
+
+63
+00:08:37,130 --> 00:08:38,130
+$ cat Makefile
+
+64
+00:08:38,130 --> 00:08:46,850
+In the first position we see the "target",
+
+65
+00:08:46,850 --> 00:08:56,090
+after the semicolon, dependencies can be placed,
+which are just other targets.
+
+66
+00:08:56,090 --> 00:09:06,340
+Lines following the description of targets
+and dependencies which start with a TAB character,
+
+67
+00:09:06,340 --> 00:09:15,010
+there are commands that must be executed to
+complete this target.
+
+68
+00:09:15,010 --> 00:09:24,870
+If the dependencies are files, make checks
+the modification times of those files and
+
+69
+00:09:24,870 --> 00:09:34,270
+recursively rebuilds those dependency targets.
+
+70
+00:09:34,270 --> 00:09:43,000
+The current Makefile just includes a few targets
+for working with the Git repository.
+
+71
+00:09:43,000 --> 00:09:46,560
+The first will start by default.
+
+72
+00:09:46,560 --> 00:09:55,480
+If we want to run another target, we must
+pass it as a parameter when running the `make`
+
+73
+00:09:55,480 --> 00:09:55,980
+utility.
+
