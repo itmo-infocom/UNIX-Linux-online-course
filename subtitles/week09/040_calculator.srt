@@ -1,0 +1,168 @@
+1
+00:00:06,160 --> 00:00:08,240
+OK, let's take a step forward:
+
+2
+00:00:08,240 --> 00:00:12,420
+$ git checkout Example_2
+
+3
+00:00:18,160 --> 00:00:23,670
+We see some changes in the README:
+
+4
+00:00:23,670 --> 00:00:28,490
+$ cat README.md
+
+5
+00:00:29,490 --> 00:00:38,000
+and in our repository -- we can see the `calc`
+script:
+
+6
+00:00:40,940 --> 00:00:48,010
+This means -- we can mark some stages of our
+development with tags.
+
+7
+00:00:48,010 --> 00:00:54,129
+And then, using the `checkout` operation,
+we can switch between them at any time.
+
+8
+00:00:54,129 --> 00:00:56,520
+OK -- let's look at our calculator:
+
+9
+00:00:56,520 --> 00:00:59,850
+$ cat calc
+
+10
+00:01:02,910 --> 00:01:09,270
+Wow -- looks pretty simple!
+
+11
+00:01:09,270 --> 00:01:17,600
+We jus call the `expr` program with the arguments
+passed to our script.
+
+12
+00:01:17,600 --> 00:01:24,729
+And as we can see, `expr` is just an expression
+evaluator:
+
+13
+00:01:24,729 --> 00:01:28,849
+$ man expr
+
+14
+00:01:28,849 --> 00:01:36,310
+And this is the usual way of UNIX development
+
+15
+00:01:36,310 --> 00:01:47,130
+-- not reinvent the wheel, but just take parts
+of them and glue them with a Shell.
+
+16
+00:01:47,130 --> 00:01:50,759
+OK -- let's try to test:
+
+17
+00:01:50,759 --> 00:01:59,660
+$ ./calc 1 + 2
+3
+
+18
+00:01:59,660 --> 00:02:05,860
+We understand that the expression is just
+
+19
+00:02:05,860 --> 00:02:16,380
+the arguments of the `expr` command and we
+must separate them with spaces.
+
+20
+00:02:16,380 --> 00:02:22,660
+$ ./calc 5 - 7
+-2
+
+21
+00:02:22,660 --> 00:02:31,040
+$ ./calc 6 / 3
+2
+
+22
+00:02:33,140 --> 00:02:39,290
+Looks good -- let's try divide:
+
+23
+00:02:39,290 --> 00:02:44,410
+$ ./calc 6 / 3
+2
+
+24
+00:02:44,410 --> 00:02:53,390
+$ ./calc 6 / 0
+expr: division by zero
+
+25
+00:02:53,390 --> 00:02:58,510
+$ ./calc 7 / 3
+2
+
+26
+00:02:58,510 --> 00:03:05,069
+OK, got it - `expr` performs integer operations
+
+27
+00:03:05,069 --> 00:03:13,690
+and we have to use another operation for the
+remainder of the division:
+
+28
+00:03:13,690 --> 00:03:18,800
+$ ./calc 7 % 3
+1
+
+29
+00:03:20,500 --> 00:03:22,200
+But:
+
+30
+00:03:22,200 --> 00:03:32,420
+$ ./calc 2 * 2
+expr: syntax error
+
+31
+00:03:35,540 --> 00:03:45,380
+What's wrong? So, it's our first troubleshooting lesson.
+
+32
+00:03:45,380 --> 00:03:46,540
+Let's try to debug:
+
+33
+00:03:46,540 --> 00:04:00,060
+$ sh -x ./calc 2 * 2
++ expr 2 Makefile README.md calc 2
+expr: syntax error
+
+34
+00:04:00,069 --> 00:04:11,629
+Oh yeah -- the asterisk are just special Shell
+matching characters, in this case meaning
+
+35
+00:04:11,629 --> 00:04:16,190
+-- all files in the current directory!
+
+36
+00:04:16,190 --> 00:04:23,060
+And it is replaced by all files from the current
+directory.
+
+37
+00:04:23,060 --> 00:04:24,500
+We need to fix it.
+

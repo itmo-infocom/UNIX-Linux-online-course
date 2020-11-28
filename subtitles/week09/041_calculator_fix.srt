@@ -1,0 +1,216 @@
+1
+00:00:07,120 --> 00:00:10,200
+Let's move on to the next tag:
+
+2
+00:00:10,200 --> 00:00:26,100
+$ git checkout Example_3
+$ git diff Example_2 Example_3
+
+3
+00:00:26,100 --> 00:00:39,309
+As you can see, the files have changed: README
+
+4
+00:00:39,309 --> 00:00:45,469
+and our script `calc`.
+
+5
+00:00:45,469 --> 00:00:47,920
+Let's take a look at `calc`:
+
+6
+00:00:47,920 --> 00:00:56,360
+$ cat calc
+
+7
+00:00:56,379 --> 00:01:01,859
+It looks more complicated -- let's analyze
+
+8
+00:01:01,859 --> 00:01:03,339
+the changes.
+
+9
+00:01:03,339 --> 00:01:18,840
+So the main idea behind the fixes is to read
+the expression from stdin, not from the script
+
+10
+00:01:18,840 --> 00:01:26,330
+parameters, and modify it to avoid the Shell
+matching mechanism.
+
+11
+00:01:26,330 --> 00:01:27,690
+OK.
+
+12
+00:01:27,690 --> 00:01:39,970
+On the third line, we define a FILE variable
+with a unique name to store temporary data
+
+13
+00:01:39,970 --> 00:01:42,280
+for evaluating `expr`.
+
+14
+00:01:42,280 --> 00:01:53,610
+The uniqueness is guaranteed by a special
+double dollar environment variable that indicates
+
+15
+00:01:53,610 --> 00:01:57,530
+the PID of the current process.
+
+16
+00:01:57,530 --> 00:02:09,280
+On the fifth line, we read the expression
+from stdin into the EXPR variable.
+
+17
+00:02:09,280 --> 00:02:19,650
+We then edit it on the fly with the `sed`
+stream editor.
+
+18
+00:02:19,650 --> 00:02:36,450
+By the `sed` command, we insert spaces between
+numbers and signs of arithmetic operations,
+
+19
+00:02:36,450 --> 00:02:45,519
+we do the escaping with the slash character
+before the asterisk and brackets.
+
+20
+00:02:45,519 --> 00:02:55,680
+Finally, before the expression, insert the
+`expr` command and redirect the output from
+
+21
+00:02:55,680 --> 00:03:04,610
+`sed` to a temporary file defined at the beginning
+of the script.
+
+22
+00:03:04,610 --> 00:03:19,080
+We then run our temporary script with `sh`,
+getting the exit status from the special variable
+
+23
+00:03:19,080 --> 00:03:32,139
+"dollar question" into "EXIT_STATUS" variable,
+deleting the temporary file, and exiting with
+
+24
+00:03:32,139 --> 00:03:37,140
+the parameters stored in "EXIT_STATUS".
+
+25
+00:03:37,140 --> 00:03:50,450
+We need such a complex construction because
+`rm -rf` will return a success status regardless
+
+26
+00:03:50,450 --> 00:03:55,950
+of the result of evaluating the expression.
+
+27
+00:03:55,950 --> 00:04:02,779
+OK -- let's check our fixes:
+
+28
+00:04:02,779 --> 00:04:08,520
+$ ./calc
+2*2
+4
+
+29
+00:04:08,529 --> 00:04:12,379
+It works!
+
+30
+00:04:12,379 --> 00:04:23,150
+And we don't even need to insert spaces between
+parts of our expression.
+
+31
+00:04:23,150 --> 00:04:29,309
+Let's check -- maybe something else was broken
+by our corrections?
+
+32
+00:04:29,309 --> 00:04:30,550
+$ ./calc
+
+33
+00:04:30,550 --> 00:04:33,029
+1+2
+3
+
+34
+00:04:33,029 --> 00:04:35,520
+$ ./calc
+5-7
+-2
+
+35
+00:04:35,520 --> 00:04:38,000
+$ ./calc
+6/3
+2
+
+36
+00:04:40,490 --> 00:04:42,970
+$ ./calc
+7/3
+2
+
+37
+00:04:42,970 --> 00:04:45,449
+$ ./calc
+7%3
+1
+
+38
+00:04:55,389 --> 00:04:56,629
+$ ./calc
+6/0
+expr: division by zero
+
+39
+00:04:56,629 --> 00:04:59,540
+$ echo $?
+2
+
+40
+00:04:59,540 --> 00:05:14,280
+So, looks good.
+We got expected error -- the division by zero!
+
+41
+00:05:14,280 --> 00:05:30,550
+Of course, we can implement a simpler solution in the 
+
+42
+00:05:30,550 --> 00:05:47,069
+sixth line with `sed` black magic just write:
+
+43
+00:05:47,069 --> 00:06:11,539
+echo $(($EXPR)) > $FILE
+
+44
+00:06:11,539 --> 00:06:16,780
+But we wrote a script that still works with
+
+45
+00:06:16,780 --> 00:06:27,569
+older shells that may not support such constructs,
+and we also looked at how to use non-interactive
+
+46
+00:06:27,569 --> 00:06:29,629
+editing in scripts.
+
