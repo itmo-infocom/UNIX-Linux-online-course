@@ -1,0 +1,155 @@
+1
+00:00:05,000 --> 00:00:07,080
+$ git checkout Example_9
+Ok.
+
+2
+00:00:07,080 --> 00:00:13,629
+Let's delete this file -- in the next example
+we already have it:
+
+3
+00:00:13,629 --> 00:00:15,280
+$ rm calc_ui.pot
+
+4
+00:00:15,280 --> 00:00:35,880
+$ git checkout Example_9
+
+5
+00:00:35,890 --> 00:00:43,170
+As we can see, we just made a translation
+
+6
+00:00:43,170 --> 00:00:53,739
+into Russian of the corresponding PO file
+and added installation steps to the Makefile.
+
+7
+00:00:53,739 --> 00:01:03,719
+Let's look at the PO file with Russian translation:
+
+8
+00:01:03,719 --> 00:01:14,479
+$ cat calc_ui-ru.po
+
+9
+00:01:14,479 --> 00:01:30,730
+First we have the metadata and then the pairs
+of translation strings: `msgid` with the source
+
+10
+00:01:30,730 --> 00:01:34,869
+and `msgstr` with the translation.
+
+11
+00:01:34,869 --> 00:01:42,759
+This is not a best translation strategy because
+some messages in one language
+
+12
+00:01:42,759 --> 00:01:50,340
+may have different meanings in other languages
+in a different context.
+
+13
+00:01:50,340 --> 00:02:02,880
+And in larger software projects like Firefox
+or Open/LibreOffice, other localization engines
+
+14
+00:02:02,880 --> 00:02:12,320
+have been used in which each line from the
+user interface has its own unique identifier
+
+15
+00:02:12,320 --> 00:02:15,769
+and translation for each one.
+
+16
+00:02:15,769 --> 00:02:24,420
+And to simplify and unify the translation
+process, they use such complex tools as specialized
+
+17
+00:02:24,420 --> 00:02:29,610
+editors with support for the translation memory
+mechanism, for ex.
+
+18
+00:02:29,610 --> 00:02:40,440
+But `gettext` is widely used in the UNIX-like
+world, and that's enough for our purposes.
+
+19
+00:02:40,440 --> 00:02:44,439
+Let's compile and install our translation
+now:
+
+20
+00:02:44,439 --> 00:02:46,660
+$ sudo make install
+
+21
+00:02:53,240 --> 00:03:07,340
+As we can see, we compile our translation file
+
+22
+00:03:07,340 --> 00:03:21,780
+`calc_ui-ru.po` into `calc_ui-ru.mo`
+and install the resulting binary localization
+
+23
+00:03:21,780 --> 00:03:28,579
+file into the LC_MESSAGES locale directory.
+
+24
+00:03:28,579 --> 00:03:34,899
+Let's check the result:
+
+25
+00:03:34,899 --> 00:03:45,810
+$ LANG=ru_RU.UTF-8 calc_ui
+
+26
+00:03:45,810 --> 00:03:51,270
+Great!
+
+27
+00:03:51,270 --> 00:03:54,250
+We have a calculator in Russian now!
+
+28
+00:03:54,250 --> 00:04:03,160
+Let's switch to English again:
+
+29
+00:04:03,160 --> 00:04:21,360
+$ LANG=en_US.UTF-8 calc_ui
+
+30
+00:04:21,360 --> 00:04:29,040
+In works.
+
+31
+00:04:29,040 --> 00:04:49,030
+For other languages, we still have the same
+interface 
+
+32
+00:04:49,030 --> 00:04:55,030
+because we didn't translate the messages for
+them:
+
+33
+00:04:55,030 --> 00:04:56,210
+$ LANG=zh_CN.UTF-8 calc_ui
+
+34
+00:04:56,210 --> 00:05:01,650
+And maybe it's a good time to translate our
+
+35
+00:05:01,650 --> 00:05:05,600
+application into your favorite language...
+

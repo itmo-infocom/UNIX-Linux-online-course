@@ -1,0 +1,192 @@
+1
+00:00:06,370 --> 00:00:12,830
+Ok, we have a working network service, and
+it's time to change our user interface to
+
+2
+00:00:12,830 --> 00:00:17,929
+network communication with it.
+
+3
+00:00:17,929 --> 00:00:23,439
+$ git checkout Example_7
+
+4
+00:00:23,439 --> 00:00:32,619
+$ git diff Example_6 Example_7 | less
+
+5
+00:00:32,619 --> 00:00:46,320
+The main changes are made in the `calc_ui`
+script.
+
+6
+00:00:46,320 --> 00:00:56,559
+At the beginning of the script, as you can
+see, added some default definitions: HOST,
+
+7
+00:00:56,559 --> 00:01:04,979
+PORT for calc-server connection and CALC script
+name.
+
+8
+00:01:04,979 --> 00:01:14,790
+Then we can see added support for configuration
+files.
+
+9
+00:01:14,790 --> 00:01:21,820
+First, we check the user's personal configuration
+in the home directory -- this is a hidden
+
+10
+00:01:21,820 --> 00:01:25,320
+file starting with a "dot" calc.conf.
+
+11
+00:01:25,320 --> 00:01:35,690
+If such a file exists, we load it as a Shell
+library file.
+
+12
+00:01:35,690 --> 00:01:45,230
+If we do not find this file, we check the
+system-wide configuration `/etc/calc.conf`
+
+13
+00:01:45,230 --> 00:01:49,660
+and load it if it exists.
+
+14
+00:01:49,660 --> 00:01:59,180
+You can put your own connection variable definitions
+in these files.
+
+15
+00:01:59,180 --> 00:02:09,020
+We see a new `help` function for displaying
+of help message and some logic for processing
+
+16
+00:02:09,020 --> 00:02:11,720
+script's parameters.
+
+17
+00:02:11,720 --> 00:02:34,439
+We now handle the `--help` parameter and the
+optional host/port positional parameters.
+
+18
+00:02:34,439 --> 00:02:48,349
+As we can see, we can only set the host or
+both the host and port using the script arguments.
+
+19
+00:02:48,349 --> 00:02:59,480
+And finally -- we check the name of the script
+by stripping it with the `basename` function
+
+20
+00:02:59,480 --> 00:03:03,109
+from the current path to the script.
+
+21
+00:03:03,109 --> 00:03:18,519
+If the script is called `ncalc_ui`, we change
+the CALC variable to `netcat` with the host
+
+22
+00:03:18,519 --> 00:03:21,359
+access parameters.
+
+23
+00:03:21,359 --> 00:03:28,629
+If such parameters are not specified, we display
+an error message.
+
+24
+00:03:28,629 --> 00:03:42,419
+In the line where we called the `calc` script,
+we replace it with the CALC variable.
+
+25
+00:03:42,419 --> 00:03:53,980
+That's it -- we just changed the UI file without
+changing the main logic.
+
+26
+00:03:53,980 --> 00:03:55,939
+Let's install it:
+
+27
+00:03:55,939 --> 00:04:04,829
+$ sudo make install
+
+28
+00:04:37,819 --> 00:04:49,400
+As we can see, there is a symbolic link from
+`calc_ui` to `ncalc_ui`.
+
+29
+00:04:49,400 --> 00:04:50,840
+OK.
+
+30
+00:04:50,840 --> 00:04:55,680
+Let's test it:
+
+31
+00:04:55,680 --> 00:04:59,699
+$ ncalc_ui
+
+32
+00:04:59,699 --> 00:05:07,759
+It works!
+
+33
+00:05:07,759 --> 00:05:18,310
+But maybe we're wrong and this is just our
+old local calculator?
+
+34
+00:05:18,310 --> 00:05:50,099
+Let's check by stoping the `xinetd` service:
+
+35
+00:05:50,099 --> 00:06:33,599
+# systemctl stop xinetd
+
+36
+00:06:33,599 --> 00:06:38,190
+Our calculation ended with an error.
+
+37
+00:06:38,190 --> 00:06:48,169
+And what about a non-networked `calc_ui`?
+
+38
+00:06:48,169 --> 00:06:54,849
+$ calc_ui
+
+39
+00:06:54,849 --> 00:06:56,770
+Still works.
+
+40
+00:06:56,770 --> 00:07:07,699
+Let's run `xinetd` again:
+
+41
+00:07:07,699 --> 00:07:18,469
+# systemctl start xinetd
+
+42
+00:07:18,469 --> 00:07:21,590
+Networked `ncalc_ui` works again!
+
+43
+00:07:21,590 --> 00:07:30,080
+Quod erat demonstrandum -- the networked version
+of the calculator created!
+

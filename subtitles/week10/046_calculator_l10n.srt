@@ -1,0 +1,352 @@
+1
+00:00:05,440 --> 00:00:09,220
+$ git checkout Example_8
+What is it "localize"?
+
+2
+00:00:09,230 --> 00:00:15,850
+The locale is the primary mechanism for supporting
+the native languages in UNIX-like systems,
+
+3
+00:00:15,850 --> 00:00:48,559
+and we have a few strange abbreviations that
+describe it: I18N, L10N, and even M17N.
+
+4
+00:00:48,559 --> 00:00:51,360
+What does this mean?
+
+5
+00:00:51,360 --> 00:01:02,420
+This means that English does not like long
+words, but the terminology associated with
+
+6
+00:01:02,420 --> 00:01:07,780
+supporting native languages is too many letters.
+
+7
+00:01:07,780 --> 00:01:21,870
+Such as -- Multilingualization for application
+software consisting of 17 letters between
+
+8
+00:01:21,870 --> 00:01:26,990
+"M" and "N" and abbreviated to M17N.
+
+9
+00:01:26,990 --> 00:01:41,740
+M17N is performed in 2 stages:
+* Internationalization (18 letters between
+
+10
+00:01:41,740 --> 00:01:54,180
+"I" and "N" -- I18N): To make a software potentially
+handle multiple locales.
+
+11
+00:01:54,180 --> 00:02:04,330
+* Localization (10 letters between "L" and
+"N" -- L10N): To make a software handle an
+
+12
+00:02:04,330 --> 00:02:07,280
+specific locale.
+
+13
+00:02:07,280 --> 00:02:09,140
+OK.
+
+14
+00:02:09,140 --> 00:02:19,789
+Let's take a look at our current locale settings:
+
+15
+00:02:19,789 --> 00:02:22,230
+$ locale
+
+16
+00:02:22,230 --> 00:02:25,680
+As we can see, there are lot of environment
+
+17
+00:02:25,680 --> 00:02:33,981
+variables associated with this:
+* LANG and LC_ALL -- General language setting.
+
+18
+00:02:33,981 --> 00:02:41,890
+These settings can be separated to:
+* LC_CTYPE -- Controls the behavior of character
+
+19
+00:02:41,890 --> 00:02:44,129
+handling functions.
+
+20
+00:02:44,129 --> 00:02:52,819
+* LC_TIME -- Specifies date and time formats,
+including month names, days of the week, and
+
+21
+00:02:52,819 --> 00:02:57,680
+common full and abbreviated representations.
+
+22
+00:02:57,680 --> 00:03:06,430
+* LC_MONETARY -- Specifies monetary formats,
+including the currency symbol for the locale,
+
+23
+00:03:06,430 --> 00:03:19,919
+thousands separator, sign position, the number
+of fractional digits, and so forth.
+
+24
+00:03:19,919 --> 00:03:28,370
+* LC_NUMERIC -- Specifies the decimal delimiter
+(or radix character), the thousands separator,
+
+25
+00:03:28,370 --> 00:03:31,819
+and the grouping.
+
+26
+00:03:31,819 --> 00:03:41,110
+* LC_COLLATE -- Specifies a collation order
+and regular expression definition for the
+
+27
+00:03:41,110 --> 00:03:43,889
+locale.
+
+28
+00:03:43,889 --> 00:03:53,609
+* LC_MESSAGES -- Specifies the language in
+which the localized messages are written,
+
+29
+00:03:53,609 --> 00:04:10,099
+and affirmative and negative responses of
+the locale ("yes" and "no" strings and expressions).
+
+30
+00:04:10,099 --> 00:04:21,540
+* LC_LTYPE -- Specifies the layout engine
+that provides information about language rendering.
+
+31
+00:04:21,540 --> 00:04:28,290
+Language rendering (or text rendering) depends
+on the shape and direction attributes of a
+
+32
+00:04:28,290 --> 00:04:29,290
+script.
+
+33
+00:04:29,290 --> 00:04:37,630
+In the C programming language, the locale
+name C “specifies the minimal environment
+
+34
+00:04:37,630 --> 00:04:56,530
+for C translation” (C99 -- the
+principle has been the same since at least
+
+35
+00:04:56,530 --> 00:04:57,620
+the 1980s).
+
+36
+00:04:57,620 --> 00:05:08,620
+As most operating systems are written in C,
+especially the Unix-inspired ones where locales
+
+37
+00:05:08,620 --> 00:05:21,950
+are set through the LANG and LC_<something> environment
+variables, C ends up being the name of a “safe”
+
+38
+00:05:21,950 --> 00:05:23,660
+locale everywhere.
+
+39
+00:05:23,660 --> 00:05:36,260
+On POSIX platforms such as Unix, Linux and
+others, locale identifiers are defined by
+
+40
+00:05:36,260 --> 00:05:47,510
+ISO standard and consists from: `[language[_territory][.codeset][@modifier]]`.
+
+41
+00:05:47,510 --> 00:06:18,210
+For example, Australian English dialect 
+using the UTF-8 encoding 
+
+42
+00:06:18,210 --> 00:06:20,650
+is en_AU.UTF-8.
+
+43
+00:06:20,650 --> 00:06:36,200
+As we can see, our application already has
+l10n.
+
+44
+00:06:36,200 --> 00:06:45,840
+$ LANG=C calc_ui
+
+45
+00:06:45,840 --> 00:06:55,470
+$ LANG=en_US.UTF-8 calc_ui
+
+46
+00:06:55,470 --> 00:07:07,000
+As we can see, our application looks the same
+in base C or American English locales.
+
+47
+00:07:07,000 --> 00:07:19,960
+In Russian we see the Russian title and buttons:
+
+48
+00:07:19,960 --> 00:07:27,450
+$ LANG=ru_RU.UTF-8 calc_ui
+
+49
+00:07:27,450 --> 00:08:00,000
+In Continental Simplified 
+
+50
+00:08:00,000 --> 00:08:29,410
+$ LANG=zh_CN.UTF-8 calc_ui
+
+51
+00:08:29,410 --> 00:08:37,700
+and Traditional Taiwanese Chinese, we can
+see different hieroglyphs sets on the title:
+
+52
+00:08:37,700 --> 00:08:39,940
+$ LANG=zh_TW.UTF-8 calc_ui
+
+53
+00:08:39,959 --> 00:08:53,149
+And for 
+
+54
+00:08:53,149 --> 00:08:59,639
+the Arabic language, the title is written
+from right to left:
+
+55
+00:08:59,639 --> 00:09:01,899
+$ LANG=ar_SY.UTF-8 calc_ui
+
+56
+00:09:01,899 --> 00:09:09,529
+Looks good, but this is just a basic localization
+
+57
+00:09:09,529 --> 00:09:16,589
+of the `zenity` utility used by `gdialog`.
+
+58
+00:09:16,589 --> 00:09:21,020
+We need to translate our text strings in the
+program.
+
+59
+00:09:21,020 --> 00:09:39,560
+And for that we can use the standard `gettext`
+machinery that was first implemented by Sun
+
+60
+00:09:39,560 --> 00:09:42,920
+Microsystems in 1993.
+
+61
+00:09:42,920 --> 00:09:48,329
+To work with this, we need a `gettext` utilities
+set:
+
+62
+00:09:48,329 --> 00:09:52,060
+# yum install gettext
+# apt install gettext
+
+63
+00:09:52,069 --> 00:10:08,809
+We have a utility `gettext` that translates
+the text messages passed to it as arguments
+
+64
+00:10:08,809 --> 00:10:14,509
+according to the settings of the locale's
+environment variables:
+
+65
+00:10:14,509 --> 00:10:16,029
+$ man gettext
+
+66
+00:10:16,029 --> 00:10:19,580
+As we can see, for this we just need to add
+
+67
+00:10:19,580 --> 00:10:29,899
+a call to the `gettext` utility in all places
+where we used a text string as a parameter
+
+68
+00:10:29,899 --> 00:10:41,880
+to `gettext`, and insert the result of execution
+into command lines by quoting the command
+
+69
+00:10:41,880 --> 00:10:56,779
+with "back apostrophes":
+
+70
+00:10:56,779 --> 00:11:03,400
+$ git diff Example_7 Example_8
+
+71
+00:11:03,400 --> 00:11:09,399
+Just three lines changed.
+
+72
+00:11:09,399 --> 00:11:28,999
+And now we can fetch the `gettext` strings from
+the source using the `xgettext` utility:
+
+73
+00:11:28,999 --> 00:11:43,800
+$ make calc_ui.pot
+xgettext -o calc_ui.pot -L Shell calc_ui
+
+74
+00:11:43,800 --> 00:11:56,989
+We got the portable object template file `calc_ui.pot`
+that we will use as a basis for translation:
+
+75
+00:11:56,989 --> 00:11:59,299
+$ cat calc_ui.pot
+
+76
+00:12:00,299 --> 00:12:09,279
+For exmaple to Russian language:
+
+77
+00:12:09,279 --> 00:12:21,279
+$ msginit --locale=ru --input=calc_ui.pot
+
+78
+00:12:21,279 --> 00:12:29,279
+$ cat ru.po
+
